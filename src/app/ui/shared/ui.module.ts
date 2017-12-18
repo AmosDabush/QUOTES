@@ -10,6 +10,8 @@ import { NavService } from './nav.service';
 
 import { UserLoginComponent } from '../user-login/user-login.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { UserProfile1Component } from '../user-profile1/user-profile1.component';
+
 import { UserFormComponent } from '../user-form/user-form.component';
 import { TopNavComponent } from '../top-nav/top-nav.component';
 import { FooterNavComponent } from '../footer-nav/footer-nav.component';
@@ -28,6 +30,7 @@ import { NotificationMessageComponent } from '../notification-message/notificati
   declarations: [
     UserLoginComponent,
     UserProfileComponent,
+    UserProfile1Component,
     TopNavComponent,
     FooterNavComponent,
     UserFormComponent,
@@ -38,6 +41,7 @@ import { NotificationMessageComponent } from '../notification-message/notificati
     TopNavComponent,
     FooterNavComponent,
     UserProfileComponent,
+    UserProfile1Component,
     NotificationMessageComponent,
   ],
 })
