@@ -1,0 +1,20 @@
+
+.box > div {
+    text-align: center;
+    text-shadow: 1px 1px #fa9000;
+    background-image: url("PF-004.png"),url("PFHD.jpg");
+    background-attachment: local,fixed;
+    background-repeat: no-repeat,no-repeat;
+    background-clip: border-box,border-box;    
+    border-radius: 15px;
+    margin-top: 5px;
+
+}
+
+.box {
+    // background-image: url("PFHD.jpg");
+    // background-attachment: local,fixed; 
+    // border-radius: 5px;
+    // margin-top: 5px;
+
+}

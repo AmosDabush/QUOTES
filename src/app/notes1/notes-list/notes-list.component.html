@@ -1,16 +1,18 @@
-<h1>Quote-Me app</h1>
-<p>This is a very basic demo .</p>
+<h1>Quote-Me app | Feed |</h1>
+<p>The Feed show will now the 3 latest Quotes...</p>
 
+<hr>
+<div  class="box" *ngFor="let note of notes | async">
+  <note-detail [note]="note"><hr></note-detail>   
+</div>
 <input [(ngModel)]="content" placeholder="Add your own quote" class="input">
-
 
 <button class="button is-success" (click)="createNote()" [disabled]="content?.length < 2 || content?.length > 200">
   Add Quote
 </button>
-  <hr>
 
-<div class="box" *ngFor="let note of notes | async">
-  <note-detail [note]="note"></note-detail>
-</div>
+
+
+
 
 

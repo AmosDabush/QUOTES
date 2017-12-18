@@ -18,6 +18,9 @@ import { ItemModule } from './items/shared/item.module';
 import { UploadModule } from './uploads/shared/upload.module';
 import { UiModule } from './ui/shared/ui.module';
 import { NotesModule } from './notes/notes.module';
+import { Notes1Module } from './notes1/notes.module';
+
+
 ///// End FireStarter
 
 import { environment } from '../environments/environment';
@@ -39,6 +42,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     ItemModule,
     UiModule,
     NotesModule,
+    Notes1Module,
     AngularFireModule.initializeApp(firebaseConfig),
   ],
   bootstrap: [

@@ -20,8 +20,8 @@ export class NoteService {
   noteDocument:   AngularFirestoreDocument<Node>;
 
   constructor(private afs: AngularFirestore) {
-    //this.notesCollection = this.afs.collection('notes', (ref) => ref.orderBy('time', 'desc').limit(0));
-    this.notesCollection = this.afs.collection('notes', (ref) => ref.orderBy('time', 'desc'));
+    this.notesCollection = this.afs.collection('notes', (ref) => ref.orderBy('time', 'desc').limit(3));
+    // this.notesCollection = this.afs.collection('notes', (ref) => ref.orderBy('time', 'desc'));
   }
 
   getData(): Observable<Note[]> {
