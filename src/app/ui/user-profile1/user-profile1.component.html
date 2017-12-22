@@ -21,8 +21,15 @@
    <div class="box">
     <p class="text-truncate">UID: {{ user.uid }}</p>
     <p class="text-truncate">EMail: {{ user.email }}</p>
-    <p class="text-truncate">Discription: {{ user.description }}</p>
-    <!--FIX THIS !!!!--><button class="button" (click)="user.description='my new discription...'">Add</button>  <!--FIX THIS !!!!-->
+    <p class="text-truncate">Discription: {{ user.discription }}</p>
+    <!--FIX THIS !!!!<button class="button" (click)="addt();">Add</button>  FIX THIS !!!!-->
+
+
+    <div class="button">
+      <span class="button is-small is-danger" (click)='updateDicription(user.uid,dicription);'>Add Discription123 </span>
+    <p><textarea cols="90" rows="1"  [(ngModel)] = "dicription" placeholder=" add here your new dicription..."></textarea></p>
+    </div>
+
     </div>
     <button class="button" (click)="logout()">Logout</button>
   </div>

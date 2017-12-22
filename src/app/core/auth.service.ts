@@ -14,6 +14,7 @@ interface User {
   email?: string | null;
   photoURL?: string;
   displayName?: string;
+  discription?: string;
 }
 
 @Injectable()
@@ -124,7 +125,7 @@ export class AuthService {
   }
 
   // Sets user data to firestore after succesful login
-  private updateUserData(user: User) {
+   private updateUserData(user: User) {
 
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 
@@ -133,7 +134,30 @@ export class AuthService {
       email: user.email || null,
       displayName: user.displayName || 'nameless user',
       photoURL: user.photoURL || 'https://png.icons8.com/puffin-bird/win10/1600',
+      discription:"this is a aowesome dicription232"
     };
     return userRef.set(data);
   }
+
+
+
+  // // Sets user data to firestore after succesful login
+  //  public updateUserData2(user:User,newDiscription:string) {
+  //             console.log('xxxxxxvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvxxxxxxxxxx');
+
+  //   const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+
+  //   const data: User = {
+  //     uid: user.uid,
+  //     email: user.email || null,
+  //     displayName: user.displayName || 'nameless user',
+  //     photoURL: user.photoURL || 'https://png.icons8.com/puffin-bird/win10/1600',
+  //     discription:newDiscription
+  //   };
+  //   return userRef.set(data);
+  // }
+
+
+
+
 }

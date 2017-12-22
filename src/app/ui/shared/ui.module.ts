@@ -18,6 +18,10 @@ import { FooterNavComponent } from '../footer-nav/footer-nav.component';
 import { ReadmePageComponent } from '../readme-page/readme-page.component';
 import { NotificationMessageComponent } from '../notification-message/notification-message.component';
 
+// import { SubscriberPageComponent } from '../../subscriber-page/subscriber-page.component';
+// import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -36,6 +40,7 @@ import { NotificationMessageComponent } from '../notification-message/notificati
     UserFormComponent,
     ReadmePageComponent,
     NotificationMessageComponent,
+    // SubscriberPageComponent,
   ],
   exports: [
     TopNavComponent,
@@ -43,6 +48,7 @@ import { NotificationMessageComponent } from '../notification-message/notificati
     UserProfileComponent,
     UserProfile1Component,
     NotificationMessageComponent,
+    // SubscriberPageComponent,
   ],
 })
 export class UiModule { }

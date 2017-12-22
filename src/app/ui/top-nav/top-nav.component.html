@@ -15,7 +15,7 @@
 
   <!-- This "nav-menu" is hidden on mobile -->
   <!-- Add the modifier "is-active" to display it on mobile -->
-  <div class="nav-right nav-menu is-active" [ngClass]="{'is-active': show}">
+  <div class="nav-right nav-menu is-active" [ngClass]="{'is-active':show }">
     <a class="nav-item" routerLink="/login">
       Login
     </a>
@@ -31,6 +31,12 @@
     <a class="nav-item" routerLink="/items">
       To-Do List
      </a>
+      <a class="nav-item" routerLink="/users">
+      Users-list
+     </a>
+         <!--<a class="nav-item" routerLink="/users">
+      Users
+     </a>-->
     <!--<a class="nav-item" routerLink="/uploads">
       File Uploads
     </a>-->

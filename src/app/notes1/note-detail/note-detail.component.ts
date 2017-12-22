@@ -23,6 +23,23 @@ export class NoteDetailComponent {
       console.error('Note missing ID!');
     }
   }
+ addHeartToNote2(val: number) {
+    if (this.note.id) {
+      this.noteService.updateNote(this.note.id, { hearts: val + 1 });
+    } else {
+      console.error('Note missing ID!');
+    }
+  }
+
+
+
+  uc1() {
+    if (this.note.id) {
+      this.noteService.updateNote(this.note.id, { content: "val + 1 "});
+    } else {
+      console.error('Note missing ID!');
+    }
+  }
 
   deleteNote(id: string) {
     this.noteService.deleteNote(id);

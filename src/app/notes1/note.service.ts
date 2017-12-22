@@ -29,7 +29,7 @@ export class NoteService {
   }
 
   getSnapshot(): Observable<Note[]> {
-    // ['added', 'modified', 'removed']
+    ['added', 'modified', 'removed']
     return this.notesCollection.snapshotChanges().map((actions) => {
       return actions.map((a) => {
         const data = a.payload.doc.data() as Note;

@@ -1,0 +1,23 @@
+<h1>Quote-Me app | Users list |</h1>
+<!--<p>The Feed show will now the 3 latest Quotes...</p>-->
+
+<hr>
+<div   *ngFor="let user of users | async">
+   <div  *ngIf="(user.displayName != 'nameless user')">
+     
+      <user-detail class="box" [user]="user"><hr></user-detail>   
+  </div>
+
+</div>
+
+<!--<input [(ngModel)]="content" placeholder="Add your own quote" class="input">-->
+
+<!--<button class="button is-success" (click)="createNote()" [disabled]="content?.length < 2 || content?.length > 200">
+  Add Quote
+</button>-->
+
+
+
+
+
+
