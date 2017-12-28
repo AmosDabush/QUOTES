@@ -1,0 +1,12 @@
+<div>
+  <h3>{{ note.content }}</h3>
+  <span class="button is-small is-info" (click)='addHeartToNote(note.hearts)'>
+    Heart <i class="fa fa-heart"></i>
+  </span>
+  <span class="button is-small is-danger" (click)='deleteNote(note?.id)'>Delete</span>
+  <p>This note has been hearted {{ note.hearts || 0 }} times.</p>
+  <p>{{ note.time | date: 'medium' }}</p>
+  <p>id : {{ note.id  }}</p>
+  <!--<span class="button is-small is-danger" (click)='uc1();'>upp</span>-->
+
+</div>

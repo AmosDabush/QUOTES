@@ -1,15 +1,26 @@
 <h1>Quote-Me app | Feed |</h1>
-<p>The Feed show will now the 3 latest Quotes...</p>
+<p>The Feed will show quotes frome all users quotes collections...</p>
 
-<hr>
-<div  class="box" *ngFor="let note of notes | async">
-  <note-detail [note]="note"><hr></note-detail>   
-</div>
 <input [(ngModel)]="content" placeholder="Add your own quote" class="input">
-
 <button class="button is-success" (click)="createNote()" [disabled]="content?.length < 2 || content?.length > 200">
   Add Quote
 </button>
+<hr>
+<!--<div  class="box" *ngFor="let note of notes | async">
+  <note-detail [note]="note"><hr></note-detail>   
+</div>-->
+
+
+<div  *ngFor="let notes of noteslist2 ">
+  <!--<h1>{{notes}}</h1>-->
+  <div  class="box" *ngFor="let note of notes | async">
+  <note-detail [note]="note"><hr></note-detail>  <br> 
+</div>
+  <!--<note-detail [note]="note"><hr></note-detail>   -->
+</div>
+<br>
+
+
 
 
 

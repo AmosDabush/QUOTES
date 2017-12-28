@@ -1,0 +1,22 @@
+<h1>Quote-Me app | My-Quotes |</h1>
+<!--<p></p>-->
+<hr>
+
+<!--<div  class="box" *ngFor="let user of users | async">
+  <h3>{{ user.displayName | json}}<br>{{ user.uid | json}}</h3>
+</div>-->
+
+<div  class="box" *ngFor="let note of notes | async">
+  <note-detail [note]="note"><hr></note-detail>   
+</div>
+
+<input [(ngModel)]="content" placeholder="Add your own quote" class="input">
+<button class="button is-success" (click)="createNote()" [disabled]="content?.length < 2 || content?.length > 200">
+  Add Quote
+</button>
+
+
+
+
+
+

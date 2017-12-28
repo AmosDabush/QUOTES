@@ -3,6 +3,4 @@ export interface Note {
   hearts: number;
   id?: string;
   time: number;
-  authorId?:string;
-  authorName?:string;
 }

@@ -17,32 +17,38 @@ export class NoteDetailComponent {
   constructor(private noteService: NoteService) { }
 
   addHeartToNote(val: number) {
-    if (this.note.id) {
-      this.noteService.updateNote(this.note.id, { hearts: val + 1 });
+    if (this.note.id&&this.note.authorId) {
+            console.log("this.note.authorId"+this.note.authorId)
+
+      this.noteService.updateNote(this.note.id, { hearts: val + 1 },this.note.authorId);
     } else {
       console.error('Note missing ID!');
     }
   }
- addHeartToNote2(val: number) {
-    if (this.note.id) {
-      this.noteService.updateNote(this.note.id, { hearts: val + 1 });
-    } else {
-      console.error('Note missing ID!');
-    }
-  }
+//  addHeartToNote2(val: number) {
+//     if (this.note.id) {
+//       console.log("this.note.authorId"+this.note.authorId)
+//       this.noteService.updateNote(this.note.id, { hearts: val + 1 },this.note.authorId);
+//     } else {
+//       console.error('Note missing ID!');
+//     }
+//   }
 
 
 
   uc1() {
-    if (this.note.id) {
-      this.noteService.updateNote(this.note.id, { content: "val + 1 "});
+    if (this.note.id&&this.note.authorId) {
+      this.noteService.updateNote(this.note.id, { content: "val + 1 "},this.note.authorId);
     } else {
       console.error('Note missing ID!');
     }
   }
 
   deleteNote(id: string) {
-    this.noteService.deleteNote(id);
+    if (id && this.note.authorId)
+        this.noteService.deleteNote(id,this.note.authorId);
+    else 
+      console.error('Note missing ID!');
   }
 
 }

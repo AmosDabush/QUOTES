@@ -12,6 +12,10 @@ import { UserLoginComponent } from '../user-login/user-login.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { UserProfile1Component } from '../user-profile1/user-profile1.component';
 
+import {NoteDetailComponent} from '../notes/note-detail/note-detail.component'
+import {NotesListComponent} from '../notes/notes-list/notes-list.component'
+// import {NoteService} from '../user-profile1/notes/note.service'
+
 import { UserFormComponent } from '../user-form/user-form.component';
 import { TopNavComponent } from '../top-nav/top-nav.component';
 import { FooterNavComponent } from '../footer-nav/footer-nav.component';
@@ -40,6 +44,8 @@ import { NotificationMessageComponent } from '../notification-message/notificati
     UserFormComponent,
     ReadmePageComponent,
     NotificationMessageComponent,
+    NoteDetailComponent,
+    NotesListComponent,
     // SubscriberPageComponent,
   ],
   exports: [
@@ -48,6 +54,8 @@ import { NotificationMessageComponent } from '../notification-message/notificati
     UserProfileComponent,
     UserProfile1Component,
     NotificationMessageComponent,
+     NoteDetailComponent,
+    NotesListComponent,
     // SubscriberPageComponent,
   ],
 })

@@ -22,11 +22,13 @@
     <p class="text-truncate">UID: {{ user.uid }}</p>
     <p class="text-truncate">EMail: {{ user.email }}</p>
     <p class="text-truncate">Discription: {{ user.discription }}</p>
-    <!--FIX THIS !!!!<button class="button" (click)="addt();">Add</button>  FIX THIS !!!!-->
+        <p class="text-truncate">Notes: {{ user.notes}}</p>
 
+    <!--FIX THIS !!!!<button class="button" (click)="addt();">Add</button>  FIX THIS !!!!-->
+      <!--<notes-list></notes-list>-->
 
     <div class="button">
-      <span class="button is-small is-danger" (click)='updateDicription(user.uid,dicription);'>Add Discription123 </span>
+      <span class="button is-small is-danger" (click)='updateDicription(user.uid,dicription);'>Add Discription</span>
     <p><textarea cols="90" rows="1"  [(ngModel)] = "dicription" placeholder=" add here your new dicription..."></textarea></p>
     </div>
 

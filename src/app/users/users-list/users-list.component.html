@@ -4,7 +4,6 @@
 <hr>
 <div   *ngFor="let user of users | async">
    <div  *ngIf="(user.displayName != 'nameless user')">
-     
       <user-detail class="box" [user]="user"><hr></user-detail>   
   </div>
 

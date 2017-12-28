@@ -7,6 +7,8 @@ import { ReadmePageComponent } from './ui/readme-page/readme-page.component';
 import { NotesListComponent } from './notes/notes-list/notes-list.component';
 import { Notes1ListComponent } from './notes1/notes-list/notes-list.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
+import { NotesPListComponent } from './notesP/notes-list/notes-list.component';
+// import { FeedListComponent} from './feed/notes-list/notes-list.component';
 
 import { UserProfile1Component } from './ui/user-profile1/user-profile1.component';
 // import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
@@ -22,8 +24,9 @@ const routes: Routes = [
   { path: 'items', component: ItemsListComponent, canActivate: [AuthGuard] },
   { path: 'notes', component: NotesListComponent,  canActivate: [AuthGuard] },
   { path: 'notes1', component: Notes1ListComponent,  canActivate: [AuthGuard] },
+  { path: 'notesP', component: NotesPListComponent,  canActivate: [AuthGuard] },
+    // { path: 'feed', component: FeedListComponent,  canActivate: [AuthGuard] },
   { path: 'users', component: UsersListComponent,  canActivate: [AuthGuard] },
-
   { path: 'userprofile1', component: UserProfile1Component,  canActivate: [AuthGuard] },
   // { path: 'subscriber', component: SubscriberPageComponent,  canActivate: [AuthGuard] },
   // { path: 'users', component: UsersListComponent,  canActivate: [AuthGuard] },

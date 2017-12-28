@@ -15,8 +15,11 @@ import { switchMap } from 'rxjs/operators';
 import { UsersModule } from '../../users/users.module';
 import { UserService } from '../../users/user.service';
 import { UserDetailComponent } from '../../users/user-detail/user-detail.component';
+import { Note } from '../../notes/note-model';
+// import { Note } from './notes/note-model';
+// import { NoteDetailComponent } from '../../notes/note-detail/note-detail.component';
 
-
+// import { NotesListComponent } from '../../notes/notes-list/notes-list.component'
 
 interface User {
   uid?: string;
@@ -43,6 +46,8 @@ export class UserProfile1Component {
               private router: Router,
               private userService:UserService,
               private UsersModule:UsersModule,
+              // private NotesListComponent:NotesListComponent,
+
               // private UserDetailComponent:UserDetailComponent,
               // private notify: NotifyService
               ) {
@@ -55,6 +60,8 @@ export class UserProfile1Component {
           return Observable.of(null);
         }
       });
+
+      
     }
 
   logout() {

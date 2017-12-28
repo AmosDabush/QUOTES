@@ -19,6 +19,9 @@ import { UploadModule } from './uploads/shared/upload.module';
 import { UiModule } from './ui/shared/ui.module';
 import { NotesModule } from './notes/notes.module';
 import { Notes1Module } from './notes1/notes.module';
+import { NotesPModule } from './notesP/notes.module';
+// import { FeedModule } from './feed/notes.module';
+
 import { UsersModule } from './users/users.module';
 
 // import { UsersModule } from './users/user.module';
@@ -46,6 +49,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     UiModule,
     NotesModule,
     Notes1Module,
+    NotesPModule,
+    // FeedModule,
     UsersModule,
     AngularFireModule.initializeApp(firebaseConfig),
   ],

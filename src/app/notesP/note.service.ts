@@ -29,8 +29,8 @@ interface NewUser {
 export class NoteService {
   user;
   userIds;
-  currentUserUid="";
-  currentUserName="";
+  currentUserUid=""
+  currentUserName=""
   notesCollection: AngularFirestoreCollection<Note>;
   noteDocument:   AngularFirestoreDocument<Node>;
   usersCollection: AngularFirestoreCollection<User>;
@@ -57,6 +57,10 @@ export class NoteService {
 
   }
 
+
+
+
+
   getSnapshotU(): Observable<User[]> {
     ['added', 'modified', 'removed']
     return this.usersCollection.snapshotChanges().map((actions) => {
@@ -68,6 +72,9 @@ export class NoteService {
     });
     
   }
+
+
+
 
 
   getData(): Observable<Note[]> {
@@ -85,28 +92,11 @@ export class NoteService {
     });
   }
 
-  getSnapshotN(uid:string): Observable<Note[]> {
-    ['added', 'modified', 'removed']
-        this.notesCollection = this.afs.collection(`users/${uid}/notes/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
-
-    return this.notesCollection.snapshotChanges().map((actions) => {
-      return actions.map((a) => {
-        const data = a.payload.doc.data() as Note;
-        
-        return { id: a.payload.doc.id, content: data.content, hearts: data.hearts, time: data.time,authorId:data.authorId ,authorName:data.authorName};
-      });
-    });
-  }
-
-
-
-  getNote(id: string,uid: string) {
-    console.log("uid : "+uid)
-    return this.afs.doc<Note>(`users/${uid}/notes/${id}`);
+  getNote(id: string) {
+    return this.afs.doc<Note>(`users/${this.currentUserUid}/notes/${id}`);
   }
 
   create(content: string) {
-    this.notesCollection = this.afs.collection(`users/${this.currentUserUid}/notes/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
     const note = {
       content,
       hearts: 0,
@@ -117,11 +107,11 @@ export class NoteService {
     return this.notesCollection.add(note);
   }
 
-  updateNote(id: string, data: Partial<Note>,uid: string) {
-    return this.getNote(id,uid).update(data);
+  updateNote(id: string, data: Partial<Note>) {
+    return this.getNote(id).update(data);
   }
 
-  deleteNote(id: string,uid: string) {
-    return this.getNote(id,uid).delete();
+  deleteNote(id: string) {
+    return this.getNote(id).delete();
   }
 }
