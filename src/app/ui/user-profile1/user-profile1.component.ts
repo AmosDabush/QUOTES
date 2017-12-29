@@ -46,6 +46,7 @@ export class UserProfile1Component {
               private router: Router,
               private userService:UserService,
               private UsersModule:UsersModule,
+              // private route: ActivatedRoute,
               // private NotesListComponent:NotesListComponent,
 
               // private UserDetailComponent:UserDetailComponent,
@@ -63,6 +64,13 @@ export class UserProfile1Component {
 
       
     }
+
+// ngOnInit() {
+//     this.route.params.subscribe(params => {
+//        this.post = this.db.object('/posts/' + params['postId'])
+//     });
+// }
+
 
   logout() {
     this.auth.signOut();

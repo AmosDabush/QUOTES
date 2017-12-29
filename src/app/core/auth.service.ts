@@ -135,7 +135,7 @@ export class AuthService {
       email: user.email || null,
       displayName: user.displayName || 'nameless user',
       photoURL: user.photoURL || 'https://png.icons8.com/puffin-bird/win10/1600',
-      discription:"this is a aowesome dicription232",
+      discription:"a place for a aowesome dicription...",
           roles: {} 
     };
     return userRef.set(data);

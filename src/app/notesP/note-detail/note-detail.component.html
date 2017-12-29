@@ -1,12 +1,15 @@
 <div>
+  <div class="picbox">
+  <img class="card-img-top" [src]="note.authorPhotoURL" width=50px>
+   <h3 style="  display:-webkit-inline-flex;">{{ note.authorName }} </h3>
+   <p style="display: block;">{{ note.time | date: 'medium' }}</p>
+  </div>
+  
   <h3>{{ note.content }}</h3>
-  <span class="button is-small is-info" (click)='addHeartToNote(note.hearts)'>
-    Heart <i class="fa fa-heart"></i>
-  </span>
-  <span class="button is-small is-danger" (click)='deleteNote(note?.id)'>Delete</span>
-  <p>This note has been hearted {{ note.hearts || 0 }} times.</p>
-  <p>{{ note.time | date: 'medium' }}</p>
-  <p>id : {{ note.id  }}</p>
-  <!--<span class="button is-small is-danger" (click)='uc1();'>upp</span>-->
-
+  <!--<span class="button is-small is-info" (click)='addHeartToNote(note.hearts)'>
+    Heart  <i class="fa fa-heart"> {{ note.hearts || 0 }}</i> 
+  </span>-->
+  <span class="button is-small is-danger" (click)='deleteNote(note?.id)'>Delete</span> 
+  <!--<p>This note has been hearted {{ note.hearts || 0 }} times.</p>-->
+    <!--<p>id : {{ note.id  }}</p>-->
 </div>

@@ -17,7 +17,8 @@ export class UserDetailComponent {
   @Input()
   user: User;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService
+              ) { }
 
 //   addHeartToUser(val: number) {
 //     if (this.user.id) {

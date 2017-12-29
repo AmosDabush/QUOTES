@@ -31,6 +31,7 @@ export class NoteService {
   userIds;
   currentUserUid=""
   currentUserName=""
+  currentUserPhotoURL=""
   notesCollection: AngularFirestoreCollection<Note>;
   noteDocument:   AngularFirestoreDocument<Node>;
   usersCollection: AngularFirestoreCollection<User>;
@@ -46,6 +47,8 @@ export class NoteService {
        this.currentUserUid=this.afAuth.auth.currentUser.uid;
        if(this.afAuth.auth.currentUser.displayName)
             this.currentUserName=this.afAuth.auth.currentUser.displayName;
+       if(this.afAuth.auth.currentUser.photoURL)
+            this.currentUserPhotoURL=this.afAuth.auth.currentUser.photoURL;     
     }
     else
         console.error("NULL ID")   
@@ -87,8 +90,8 @@ export class NoteService {
       return actions.map((a) => {
         const data = a.payload.doc.data() as Note;
         
-        return { id: a.payload.doc.id, content: data.content, hearts: data.hearts, time: data.time };
-      });
+        return { id: a.payload.doc.id, content: data.content, hearts: data.hearts, 
+          time: data.time,authorId:data.authorId ,authorName:data.authorName,authorPhotoURL:data.authorPhotoURL};      });
     });
   }
 
@@ -103,6 +106,7 @@ export class NoteService {
       time: new Date().getTime(),
       authorName:this.currentUserName,
       authorId:this.currentUserUid,
+      authorPhotoURL:this.currentUserPhotoURL,
     };
     return this.notesCollection.add(note);
   }

@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute} from '@angular/router';
 
-import { NoteService } from '../note.service';
+import { NoteService } from '../../notes1/note.service';
 
-import { Note } from '../note-model';
+import { Note } from '../../notes1/note-model';
 
 import { AppRoutingModule } from '../../app-routing.module';
 
@@ -18,7 +19,9 @@ export class NoteDetailComponent {
   @Input()
   note: Note;
 
-  constructor(private noteService: NoteService) { }
+  constructor(private noteService: NoteService,
+              private route:ActivatedRoute,
+              ) { }
 
   addHeartToNote(val: number) {
     if (this.note.id&&this.note.authorId) {

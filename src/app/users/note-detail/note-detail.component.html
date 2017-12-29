@@ -1,7 +1,7 @@
 <div>
   <div class="picbox">
 
-  <a routerLink="/users/{{note.authorId}}">
+  <a onClick="history.go(0)" VALUE="Refresh">
   <img class="card-img-top" [src]="note.authorPhotoURL" width=50px>
   <p style="font-weight:bolder;display:-webkit-inline-flex;">{{ note.authorName }} </p>
   </a>

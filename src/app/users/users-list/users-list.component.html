@@ -2,12 +2,22 @@
 <!--<p>The Feed show will now the 3 latest Quotes...</p>-->
 
 <hr>
-<div   *ngFor="let user of users | async">
-   <div  *ngIf="(user.displayName != 'nameless user')">
+<!--<div   *ngFor="let user of users | async">-->
+   <!--<div  *ngIf="(user.displayName != 'nameless user')">-->
+     <div *ngIf="user | async as user">
       <user-detail class="box" [user]="user"><hr></user-detail>   
   </div>
 
+
+<div  class="box" *ngFor="let note of notes | async">
+  <note-detail [note]="note"><hr></note-detail>   
+  <!--<h1> {{note|json}}</h1>-->
 </div>
+
+
+
+
+<!--</div>-->
 
 <!--<input [(ngModel)]="content" placeholder="Add your own quote" class="input">-->
 

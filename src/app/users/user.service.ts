@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 import { User } from './user-model';
-import { Note } from '../notes/note-model'
+import { Note } from '../notes1/note-model'
 
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
@@ -45,6 +45,29 @@ export class UserService {
     });
     
   }
+
+
+
+  getSnapshotN(uid:string): Observable<Note[]> {
+    ['added', 'modified', 'removed']
+        this.notesCollection = this.afs.collection(`users/${uid}/notes/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
+
+    return this.notesCollection.snapshotChanges().map((actions) => {
+      return actions.map((a) => {
+        const data = a.payload.doc.data() as Note;
+        
+        return { id: a.payload.doc.id, content: data.content, hearts: data.hearts, 
+          time: data.time,authorId:data.authorId ,authorName:data.authorName,authorPhotoURL:data.authorPhotoURL};
+      });
+    });
+  }
+
+
+
+
+
+
+
 
   getUser(id: string) {
     return this.afs.doc<User>(`users/${id}`);

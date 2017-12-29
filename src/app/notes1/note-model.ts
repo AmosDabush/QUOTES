@@ -5,4 +5,6 @@ export interface Note {
   time: number;
   authorId?:string;
   authorName?:string;
+  authorPhotoURL?:string;
+
 }

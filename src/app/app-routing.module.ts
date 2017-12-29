@@ -26,8 +26,9 @@ const routes: Routes = [
   { path: 'notes1', component: Notes1ListComponent,  canActivate: [AuthGuard] },
   { path: 'notesP', component: NotesPListComponent,  canActivate: [AuthGuard] },
     // { path: 'feed', component: FeedListComponent,  canActivate: [AuthGuard] },
-  { path: 'users', component: UsersListComponent,  canActivate: [AuthGuard] },
+  { path: 'users/:id', component: UsersListComponent,  canActivate: [AuthGuard] },
   { path: 'userprofile1', component: UserProfile1Component,  canActivate: [AuthGuard] },
+
   // { path: 'subscriber', component: SubscriberPageComponent,  canActivate: [AuthGuard] },
   // { path: 'users', component: UsersListComponent,  canActivate: [AuthGuard] },
 

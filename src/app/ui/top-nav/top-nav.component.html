@@ -5,36 +5,30 @@
     </a>
   </div>
 
-  <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
-  <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
-  <span class="nav-left nav-toggle" (click)="toggleCollapse()" [ngClass]="{'is-active': show}">
-    <span></span>
-    <span></span>
-    <span></span>
-  </span>
+   
 
   <!-- This "nav-menu" is hidden on mobile -->
   <!-- Add the modifier "is-active" to display it on mobile -->
-  <div class="nav-right nav-menu is-active" [ngClass]="{'is-active':show }">
-    <a class="nav-item" routerLink="/login">
+  <div class="nav-right nav-left nav-menu is-active" [ngClass]="{'is-active':show }">
+    <a class="nav-item" routerLink="/login" (click)="toggleCollapse()">
       Login
     </a>
-    <a class="nav-item" routerLink="/notesP">
+    <a class="nav-item" routerLink="/notesP" (click)="toggleCollapse()">
       My-Quotes
      </a>
-    <a class="nav-item" routerLink="/notes1">
+    <a class="nav-item" routerLink="/notes1" (click)="toggleCollapse()">
       Feed
     </a>
-    <a class="nav-item" routerLink="/userprofile1">
+    <a class="nav-item" routerLink="/userprofile1" (click)="toggleCollapse()">
       Profile
     </a>
-    <!--<a class="nav-item" routerLink="/items">
+    <!--<a class="nav-item" routerLink="/items" (click)="toggleCollapse()">
       To-Do List
      </a>-->
-      <a class="nav-item" routerLink="/users">
+      <!--<a class="nav-item" routerLink="/users" (click)="toggleCollapse()">
       Users-list
-     </a>
-    <a class="nav-item" routerLink="/notes">
+     </a>-->
+    <a class="nav-item" routerLink="/notes" (click)="toggleCollapse()">
     anonymous-Quotes
     </a>
 
@@ -48,4 +42,16 @@
       File Uploads
     </a>-->
   </div>
+
+
+
+    <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
+  <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
+  <span class="nav-left nav-toggle" (click)="toggleCollapse()" [ngClass]="{'is-active': show}">
+    <span></span>
+    <span></span>
+    <span></span>
+  </span>
+
+
 </nav>

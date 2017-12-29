@@ -8,6 +8,9 @@ import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from '../../core/auth.service';
 
+import { AppRoutingModule } from '../../app-routing.module';
+
+
 @Component({
   selector: 'notes-list',
   templateUrl: './notes-list.component.html',

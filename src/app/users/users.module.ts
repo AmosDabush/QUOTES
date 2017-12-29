@@ -11,17 +11,27 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
+import { Note } from '../notes1/note-model';
+import { NoteDetailComponent } from './note-detail/note-detail.component';
+import { NoteService } from '../notes1/note.service';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     SharedModule,
     AngularFirestoreModule.enablePersistence(),
+    
   ],
   declarations: [
     UsersListComponent,
     UserDetailComponent,
+    NoteDetailComponent,
   ],
-  providers: [UserService],
+  providers: [
+      UserService,
+      NoteService,
+  ],
+  
 })
 export class UsersModule { }
