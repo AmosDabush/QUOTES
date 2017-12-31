@@ -20,11 +20,8 @@ import { UiModule } from './ui/shared/ui.module';
 import { NotesModule } from './notes/notes.module';
 import { Notes1Module } from './notes1/notes.module';
 import { NotesPModule } from './notesP/notes.module';
-// import { FeedModule } from './feed/notes.module';
-
 import { UsersModule } from './users/users.module';
-
-// import { UsersModule } from './users/user.module';
+import { FriendsModule } from './friends/users.module';
 
 
 ///// End FireStarter
@@ -52,6 +49,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     NotesPModule,
     // FeedModule,
     UsersModule,
+    FriendsModule,
     AngularFireModule.initializeApp(firebaseConfig),
   ],
   bootstrap: [

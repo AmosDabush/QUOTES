@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import { User } from './user-model';
 import { Note } from '../notes1/note-model'
+import { Friend } from './friend-model';
 
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
@@ -16,20 +17,15 @@ interface NewUser {
   displayName?: string;
   discription?: string;
 }
-interface Friend {
-  id: string;
-}
-
 
 @Injectable()
 export class UserService {
 
-  friendsCollection: AngularFirestoreCollection<Friend>;
   usersCollection: AngularFirestoreCollection<User>;
   userDocument:   AngularFirestoreDocument<Node>;
   notesCollection: AngularFirestoreCollection<Note>;
+  friendsCollection: AngularFirestoreCollection<string>;
   currentUserUid="";
-
 
   constructor(private afs: AngularFirestore,
               private afAuth: AngularFireAuth
@@ -41,8 +37,10 @@ export class UserService {
     }
     else
         console.error("NULL ID")   
-      this.friendsCollection = this.afs.collection(`users/${this.currentUserUid}/friends/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
-      this.usersCollection = this.afs.collection('users/', (ref) => ref);
+
+
+    this.usersCollection = this.afs.collection('users/', (ref) => ref);
+    this.friendsCollection = this.afs.collection(`users/${this.currentUserUid}/friends/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
     // this.notesCollection = this.afs.collection('users/j2sPtwf6BpgjcbqNoZCD38oZaSP2/notes/', (ref) => ref);
     // this.usersCollection = this.afs.collection('users', (ref) => ref.orderBy('time', 'desc'));
   
@@ -84,13 +82,9 @@ export class UserService {
   getSnapshotF(): Observable<any[]> {
     ['added', 'modified', 'removed']
     this.friendsCollection = this.afs.collection(`users/${this.currentUserUid}/friends/`);
-    console.log("Observable");
+
     return this.friendsCollection.snapshotChanges().map((actions) => {
-          console.log("Observable2");
-
       return actions.map((a) => {
-            console.log("Observable3");
-
         const data = a.payload.doc.data() as any;
         return { id: a.payload.doc.id,fid: data.id };
       });
@@ -98,8 +92,28 @@ export class UserService {
   }
 
 
+  // getSnapshotF(): Observable<string> {
+  //   // ['added', 'modified', 'removed']
+  //   console.log("here!!!getSnapshot()")
+
+  //   return this.friendsCollection.snapshotChanges().map((actions) => {
+  //         console.log("here!!!getSnapshot(2)")
+  //     return actions.map((a) => {
+  //                 // console.log("here!!!getSnapshot(3)")
+
+  //       const data = a.payload.doc.data() as string;
+  //       console.log('id:'+ a.payload.doc.id + ',fid:'+ data.id)
+  //       return { id: a.payload.doc.id, fid: data.id};
+  //     });
+  //   });
+  // }
 
 
+
+
+  getFriend(id: string) {
+    return this.afs.doc<Friend>(`users/${this.currentUserUid}/friends/${id}`);
+  }
 
   getUser(id: string) {
     return this.afs.doc<User>(`users/${id}`);
@@ -116,21 +130,14 @@ export class UserService {
     return this.getUser(id).delete();
   }
 
-  follow(fid: string) {
-       const friend = {
-       id:fid,
-    };
-     return this.friendsCollection.doc(fid).set(friend);
+
+  unFollow(id: string) {
+  return this.getFriend(id).delete();
+
   }
 
-
-  // create(content: string) {
-  //   const user = {
-  //     content,
-  //     hearts: 0,
-  //     time: new Date().getTime(),
-  //   };
-  //   return this.usersCollection.add(user);
+  // follow(content: string) {
+  //   return this.friendsCollection.add(content);
   // }
 
 }

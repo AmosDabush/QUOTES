@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from '../app-routing.module';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -13,6 +14,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 @NgModule({
   imports: [
+    AppRoutingModule,
     CommonModule,
     FormsModule,
     SharedModule,

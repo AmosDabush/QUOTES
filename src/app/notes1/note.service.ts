@@ -55,7 +55,7 @@ export class NoteService {
         console.error("NULL ID")   
         
     console.log('uuu : '+this.currentUserUid)
-    this.notesCollection = this.afs.collection(`users/${this.currentUserUid}/notes/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
+    this.notesCollection = this.afs.collection(`users/${this.currentUserUid}/notes/`, (ref) => ref.orderBy('time', 'asc')/*.limit()*/ );
     this.usersCollection = this.afs.collection('users/', (ref) => ref);
 
 

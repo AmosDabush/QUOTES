@@ -1,0 +1,19 @@
+<!--<h1>Quote-Me app | Users list |</h1>-->
+<!--<p>The Feed show will now the 3 latest Quotes...</p>-->
+
+<hr>
+
+  <div *ngFor="let friend of friends | async">   
+      <div  *ngFor="let user of users | async">
+          <div  *ngIf="(user.uid == friend.fid)">
+              <user-detail class="box" [user]="user"><hr></user-detail>   
+          </div> 
+    </div> 
+  </div>
+
+
+
+
+
+
+ 

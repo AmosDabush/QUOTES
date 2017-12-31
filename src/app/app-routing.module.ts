@@ -9,6 +9,7 @@ import { Notes1ListComponent } from './notes1/notes-list/notes-list.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
 import { NotesPListComponent } from './notesP/notes-list/notes-list.component';
 // import { FeedListComponent} from './feed/notes-list/notes-list.component';
+import { FriendsListComponent } from './friends/friends-list/friends-list.component';
 
 import { UserProfile1Component } from './ui/user-profile1/user-profile1.component';
 // import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
@@ -27,6 +28,8 @@ const routes: Routes = [
   { path: 'notesP', component: NotesPListComponent,  canActivate: [AuthGuard] },
     // { path: 'feed', component: FeedListComponent,  canActivate: [AuthGuard] },
   { path: 'users/:id', component: UsersListComponent,  canActivate: [AuthGuard] },
+  // { path: 'friends/:id', component: UsersListComponent,  canActivate: [AuthGuard] },
+  { path: 'friends', component: FriendsListComponent,  canActivate: [AuthGuard] },
   { path: 'userprofile1', component: UserProfile1Component,  canActivate: [AuthGuard] },
 
   // { path: 'subscriber', component: SubscriberPageComponent,  canActivate: [AuthGuard] },

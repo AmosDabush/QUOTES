@@ -14,29 +14,27 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { AuthService } from '../../core/auth.service';
+import { AppRoutingModule } from '../../app-routing.module';
 
 @Component({
-  selector: 'users-list',
-  templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.scss'],
+  selector: 'friends-list',
+  templateUrl: './friends-list.component.html',
+  styleUrls: ['./friends-list.component.scss'],
 })
-export class UsersListComponent implements OnInit {
+export class FriendsListComponent implements OnInit {
 
   users: Observable<User[]>;
   content: string;
   notes: Observable<Note[]>;
     user: Observable<User | null>;
   friends:Observable<Friend[]>;
-  friendsList:Array<string>
-  isFrind:string;
   constructor(private userService: UserService,
               public auth: AuthService,
               private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
               // private router: Router,
-              // private UsersModule:UsersModule,
               private route: ActivatedRoute,
-              // private noteService: NoteService 
+              // private noteService: NoteService
               
               ) { }
 
@@ -45,28 +43,25 @@ export class UsersListComponent implements OnInit {
     this.users = this.userService.getSnapshot();
     //  this.notes = this.userService.getSnapshot2();
     this.friends =this.userService.getSnapshotF();
-    // this.friendsList=new Array<string>();
+    // this.route.params.subscribe(params => {
+    //   console.log(params)
+    //    this.user =this.afs.doc<User>('users/'+ params['id']).valueChanges();
+    //     this.notes = this.userService.getSnapshotN(params['id']);
 
-
-    this.route.params.subscribe(params => {
-      console.log(params)
-       this.user =this.afs.doc<User>('users/'+ params['id']).valueChanges();
-        this.notes = this.userService.getSnapshotN(params['id']);
-
-    });
+    // });
    
     // this.user = this.afs.doc<User>(`users/AaGQUVyi4yfL2lYm6EcfepDvMLP2`).valueChanges();
        
       
 
-    // this.user = this.afAuth.authState
-    //   .switchMap((user) => {
-    //     if (user) {
-    //       return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-    //     } else {
-    //       return Observable.of(null);
-    //     }
-    //   });
+    this.user = this.afAuth.authState
+      .switchMap((user) => {
+        if (user) {
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+        } else {
+          return Observable.of(null);
+        }
+      });
 
 
 
