@@ -23,7 +23,23 @@ export class UserProfileComponent {
 
 
 
-
+clear(){
+     var authenticatedWin =  document.getElementById('authenticated');
+     var closeB = document.getElementById('closeB');
+     var openB = document.getElementById('openB');
+        if (typeof authenticatedWin !== "undefined" && authenticatedWin) { 
+            if(authenticatedWin.style.display !== 'none'  && closeB && openB){
+                authenticatedWin.style.display = 'none'
+                closeB.style.display = 'none';
+                openB.style.display = 'inline';
+              }
+            else if(closeB && openB) {
+                authenticatedWin.style.display = 'inline'
+                closeB.style.display = 'inline';
+                openB.style.display = 'none';
+            }
+      }
+}
 
 
 

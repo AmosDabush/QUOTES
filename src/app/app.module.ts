@@ -31,12 +31,20 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 export const firebaseConfig = environment.firebaseConfig;
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+/////Desktop/Push Notifications Module
+
+import { PushNotificationsModule } from 'ng-push';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
+    PushNotificationsModule,
     BrowserModule,
     FormsModule,
     AppRoutingModule,
@@ -51,7 +59,10 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     UsersModule,
     FriendsModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
   ],
+  providers: [],
   bootstrap: [
     AppComponent,
   ],

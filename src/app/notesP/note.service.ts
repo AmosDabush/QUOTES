@@ -11,6 +11,8 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../core/auth.service';
 
+import { PushNotificationsService } from 'ng-push'
+
 interface NewNote {
   content: string;
   hearts: 0;
@@ -40,7 +42,8 @@ export class NoteService {
   constructor(private afs: AngularFirestore,
               public auth: AuthService,
               private userService: UserService,
-              private afAuth: AngularFireAuth) 
+              private afAuth: AngularFireAuth,
+              private _pushNotifications: PushNotificationsService,) 
   {
 
   if(this.afAuth.auth.currentUser){
@@ -53,10 +56,13 @@ export class NoteService {
     else
         console.error("NULL ID")   
         
-    console.log('uuu : '+this.currentUserUid)
     this.notesCollection = this.afs.collection(`users/${this.currentUserUid}/notes/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
     this.usersCollection = this.afs.collection('users/', (ref) => ref);
-
+    
+  //   this._pushNotifications.create('Test', {body: 'something'}).subscribe(
+  //           res => console.log(res),
+  //           err => console.log(err)
+  //       )
 
   }
 

@@ -4,6 +4,10 @@
 <input [(ngModel)]="content" placeholder="Add your own quote" class="input">
 
 
+<button class="button is-success" (click)="createNote2()">
+  test
+</button>
+
 <button class="button is-success" (click)="createNote()" [disabled]="content?.length < 2 || content?.length > 200">
   Add Quote
 </button>

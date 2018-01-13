@@ -55,7 +55,7 @@ friendC():Array<String>{
       this.friends.forEach(friend => {
       friend.forEach(f => {
        this.frindsList.push(f.id)
-       console.log(this.frindsList)
+      //  console.log(this.frindsList)
         // return this.frindsList;
       });
     });return this.frindsList;
@@ -71,15 +71,6 @@ friendC():Array<String>{
 //       console.error('User missing ID!');
 //     }
 //   }
-//  addHeartToUser2(val: number) {
-//     if (this.user.id) {
-//       this.userService.updateUser(this.user.id, { hearts: val + 1 });
-//     } else {
-//       console.error('User missing ID!');
-//     }
-//   }
-
-
 
   updateDicription(dis:string) {
     if (this.user.uid) {
@@ -112,7 +103,7 @@ friendC():Array<String>{
         var unfollow = document.getElementById('unfollowB');
         if (typeof unfollow !== "undefined"&& unfollow !== null ) {unfollow.style.display = 'inline';}
        
-        console.log('+friend :'+id )
+        // console.log('+friend :'+id )
         this.userService.follow(id);
   }
 
@@ -130,35 +121,4 @@ unFollow(id: string) {
         return this.getFriend(id).delete();
   }
 
-
-
-// friendCheck(uid:string){
-//             // console.log("friend ID : ")
-// // this.friends =this.userService.getSnapshotF();
-
-//           // console.log("friend ID2 : ")
-//     this.userService.getSnapshotF().forEach(friend => {
-//         // console.log("friend ID3 : "+uid+"=="+friend.id)
-//         friend.forEach(element => {
-//           if(element.id==uid){
-//             console.log("======element.id==uid======")
-//             document.getElementById('followB').style.display = 'none';
-//             return true;
-//           }
-//         });
-        
-        
-        
-        // if(friend[0].id==uid){
-        //     console.log("friend ID3 : "+uid+"=true="+friend.id)
-        //       var follow =  document.getElementById('followB');
-        //       if (typeof follow !== "undefined" && follow !== null) {
-        //             follow.style.display = 'none';
-        //       }
-        //     return true;
-        //   }
-    // });
-    // return false;
-
-// }
 }

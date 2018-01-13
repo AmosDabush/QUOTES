@@ -49,7 +49,7 @@ export class UsersListComponent implements OnInit {
 
 
     this.route.params.subscribe(params => {
-      console.log(params)
+      // console.log(params)
        this.user =this.afs.doc<User>('users/'+ params['id']).valueChanges();
         this.notes = this.userService.getSnapshotN(params['id']);
 

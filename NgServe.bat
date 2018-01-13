@@ -1,1 +1,2 @@
 ng serve
+@pause

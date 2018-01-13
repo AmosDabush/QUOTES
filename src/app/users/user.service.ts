@@ -41,8 +41,9 @@ export class UserService {
     }
     else
         console.error("NULL ID")   
-      this.friendsCollection = this.afs.collection(`users/${this.currentUserUid}/friends/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
-      this.usersCollection = this.afs.collection('users/', (ref) => ref);
+
+    this.friendsCollection = this.afs.collection(`users/${this.currentUserUid}/friends/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
+    this.usersCollection = this.afs.collection('users/', (ref) => ref);
     // this.notesCollection = this.afs.collection('users/j2sPtwf6BpgjcbqNoZCD38oZaSP2/notes/', (ref) => ref);
     // this.usersCollection = this.afs.collection('users', (ref) => ref.orderBy('time', 'desc'));
   
@@ -84,13 +85,9 @@ export class UserService {
   getSnapshotF(): Observable<any[]> {
     ['added', 'modified', 'removed']
     this.friendsCollection = this.afs.collection(`users/${this.currentUserUid}/friends/`);
-    console.log("Observable");
+
     return this.friendsCollection.snapshotChanges().map((actions) => {
-          console.log("Observable2");
-
       return actions.map((a) => {
-            console.log("Observable3");
-
         const data = a.payload.doc.data() as any;
         return { id: a.payload.doc.id,fid: data.id };
       });

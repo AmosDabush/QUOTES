@@ -1,5 +1,5 @@
 <div>
-    <div class="box" routerLink="/users/{{user.uid}}">
+    <div class="box">
     <a routerLink="/users/{{user.uid}}">
       <h3> {{ user.displayName }}</h3>
       <img class="card-img-top ,box" [src]="user.photoURL" width="70">
@@ -11,19 +11,4 @@
     <button class="button is-small is-danger" (click)="UnfollowUser(user.uid)" >UnFollow</button>
 
     </div>
- 
-
-
-
-<!--<div class="button">
-  <span class="button is-small is-danger" (click)='updateEmail(newEmail);'>Add Email </span>
-<p><textarea cols="90" rows="1"  [(ngModel)] = "newEmail" placeholder=" add here your new dicription..."></textarea></p>
-</div>-->
-
-
-<!--<div class="button">
-  <span class="button is-small is-danger" (click)='updateDicription(value);'>Add Discription </span>
-<p><textarea cols="90" rows="1"  [(ngModel)] = "value" placeholder=" add here your new dicription..."></textarea></p>
-</div>-->
-
 </div>
