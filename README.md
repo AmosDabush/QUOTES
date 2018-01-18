@@ -7,8 +7,7 @@
 
 ## Features
 
-- Angular 5.0
-- Firebase Auth with Custom Data in Firestore
+
 
 
 
