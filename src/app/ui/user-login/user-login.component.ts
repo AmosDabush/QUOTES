@@ -47,7 +47,13 @@ export class UserLoginComponent {
 
   private afterSignIn() {
     // Do after login stuff here, such router redirects, toast messages, etc.
-    this.router.navigate(['/notes1']);
+    
+    setTimeout(() => 
+{
+    this.router.navigate(['notes1']);
+},
+1050);
+    // this.router.navigate(['/notes1']);
   }
 
 }

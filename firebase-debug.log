@@ -1,0 +1,22 @@
+[debug] [2018-01-25T02:48:22.785Z] ----------------------------------------------------------------------
+[debug] [2018-01-25T02:48:22.788Z] Command:       c:\program files\nodejs\node.exe C:\Users\Amos\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy --only functions
+[debug] [2018-01-25T02:48:22.788Z] CLI Version:   3.16.0
+[debug] [2018-01-25T02:48:22.788Z] Platform:      win32
+[debug] [2018-01-25T02:48:22.789Z] Node Version:  v6.10.0
+[debug] [2018-01-25T02:48:22.789Z] Time:          Thu Jan 25 2018 04:48:22 GMT+0200 (Jerusalem Standard Time)
+[debug] [2018-01-25T02:48:22.789Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-01-25T02:48:22.817Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-01-25T02:48:22.818Z] > authorizing via signed-in user
+[debug] [2018-01-25T02:48:22.820Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-01-25T02:48:22.821Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/yKWoVVyZW7JqB44bDCUQ0fNkwBkNJXkbXtdRpM_-ii5cjpIa3aHmzP8widLhLPo8',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Thu Jan 25 2018 04:48:22 GMT+0200 (Jerusalem Standard Time)
+[debug] [2018-01-25T02:48:23.245Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-25T02:48:23.273Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/quote-me-d966f  
+  
+ Thu Jan 25 2018 04:48:23 GMT+0200 (Jerusalem Standard Time)
