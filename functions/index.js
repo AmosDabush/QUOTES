@@ -195,24 +195,25 @@ exports.notifyUser4 = functions.https.onRequest((req, res) => {
 //good===============================================================================================
 
 exports.notifyUser5 = functions.https.onRequest((req, res) => {
-    let currentHour = new Date().getHours();
-    let currentDay = new Date().getDay();
-    let currentList = 'list-' + currentDay + '-' + currentHour;
-    // let tmpArry = [];
-    var contentD = "";
+    let d=new Date()
+    let currentHour = d.getHours()+2;
+    if (currentHour <10)currentHour = '0' + currentHour;
+    let currentDay = d.getDay()+1;
+    let tmpArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
+    let currentList = tmpArr[currentDay-1] + '-' + currentHour+':00';
+    console.log(currentList)
+    var contentD = "";
     let tokens = "";
     const db = admin.firestore()
-    // Get a new write batch
-    var batch = db.batch();
     let userRef = "";
     // ref to the parent document   
-    const notificationList = db.collection('notificationList').doc("Nlist-1-00");
+    const notificationList = db.collection('notificationList').doc(currentList);
     return notificationList.get()
         .then(snapshot => snapshot.data())
         .then(obj => {
             obj.list.forEach(id => { //for each user in this notification list
-                console.log('id:' + id);
+                console.log('notification list id:' + id);
                 userRef = db.collection('users').doc(id);
                 return new Promise(function() {
                     updateLastQuote2(userRef);
@@ -227,8 +228,6 @@ function updateLastQuote(content, userRef) {
     userRef.update({
         lastNotifyQuote: content
     });
-    //   tmpArry.push(content);
-
 }
 
 function updateLastQuote2(userRef) {
@@ -242,13 +241,10 @@ function updateLastQuote2(userRef) {
             const usersRef = db.collection('users'); //all users ref
             usersRef.get().then((querySnapshot) => {
                 querySnapshot.forEach((otherUser) => { //for each user from all users
-                    // console.log(otherUser.id, " => ", otherUser.data().displayName);
                     let userQuotes = db.collection('users').doc(otherUser.id).collection('notes') //.orderBy('random')//.limit(1);
                     return userQuotes.get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
-                            // console.log(doc.id, " => ", doc.data().content);
                             tmpArry.push(doc.data().content);
-                            // console.log(tmpArry);
                             return new Promise(function() {
                                 updateLastQuote(doc.data().content, userRef);
                             });
@@ -276,21 +272,16 @@ function notifyUserT(userRef) {
             if (!tokens.length) {
                 throw new Error('User: +' + user.displayName + '-' + id + ' does not have any tokens!')
             }
-           
-            // console.log('contentDzzzzzzzzzz: ' + user.displayName + '-' + user.lastNotifyQuote)
-             var rand = tmpArry[Math.floor(Math.random() * tmpArry.length)];       
-                        
-                            console.log('1----------------------------------------');
-                            console.log(tmpArry);
-                            console.log('rand: '+rand);
-
-                            console.log('-----------------------------------------');
+            var rand = tmpArry[Math.floor(Math.random() * tmpArry.length)];       
             // Message details for end user
             let payload = {
                 notification: {
                     title: 'Quote-Me!',
                     body: `${user.lastNotifyQuote}`,
                     // body: `${rand}`,
+                    click_action: "https://quote-me-d966f.firebaseapp.com/",
+                    // "sound": "default",
+                    // "color": "#53c4bc",
                     icon: './assets/images/icons/PF-004.png'
                 }
             }

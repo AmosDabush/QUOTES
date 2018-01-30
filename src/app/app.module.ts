@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-///// Start FireStarter
 
 // Core
 import { CoreModule } from './core/core.module';
@@ -14,7 +13,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
 // Feature Modules
-import { ItemModule } from './items/shared/item.module';
+// import { ItemModule } from './items/shared/item.module';
 import { UploadModule } from './uploads/shared/upload.module';
 import { UiModule } from './ui/shared/ui.module';
 import { NotesModule } from './notes/notes.module';
@@ -24,7 +23,6 @@ import { UsersModule } from './users/users.module';
 import { FriendsModule } from './friends/users.module';
 
 
-///// End FireStarter
 
 import { environment } from '../environments/environment';
 
@@ -50,7 +48,7 @@ import { PushNotificationsModule } from 'ng-push';
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    ItemModule,
+    // ItemModule,
     UiModule,
     NotesModule,
     Notes1Module,

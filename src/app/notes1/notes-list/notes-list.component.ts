@@ -26,7 +26,7 @@ export class Notes1ListComponent implements OnInit {
   noteslist2: Array<Observable<Note[]>>;
 
   constructor(private noteService: NoteService) { }
-
+  //init
   ngOnInit() {
     this.notes = this.noteService.getSnapshot();
     this.noteslist2=new Array<Observable<Note[]>>();
@@ -41,7 +41,7 @@ export class Notes1ListComponent implements OnInit {
      });  
     });
   }
-
+  //create new Note
   createNote() {
     this.noteService.create(this.content);
     this.content = '';

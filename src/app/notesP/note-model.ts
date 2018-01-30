@@ -6,4 +6,6 @@ export interface Note {
   authorId?:string;
   authorName?:string;
   authorPhotoURL?:string;
+  heartsList?:Array<String>,
+  heartsListNames?:Array<String>
 }

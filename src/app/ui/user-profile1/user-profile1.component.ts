@@ -89,8 +89,8 @@ tmp={
   d:'',
   h:''
 }
-
-hours = '00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 '.split(' ');
+selectedDevice = 'two';
+hours = '00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23'.split(' ');
 days = 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(' ');
 
   onChange(newValue,F) {
@@ -147,6 +147,12 @@ clear(){
 }
 
 
+ // sorting array
+ sortStrings(a: any, b: any) {
+    a = a.toLowerCase();
+    b = b.toLowerCase();
+    return a > b ? 1 : (a < b ? -1 : 0);
+}
 
 addToList() {
     if (this.user) {
@@ -154,11 +160,10 @@ addToList() {
         alert('missing info') 
         return  
   }
-      let tmpArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+      // let tmpArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
       console.log(this.currentUserUid)
-      let Clist = "Nlist-"+(tmpArr.indexOf(this.tmp.d)+1)+'-'+this.tmp.h; 
-      if(Clist=="list-1-00")
-          Clist="list-1-000"
+      let Clist =(this.tmp.d)+'-'+this.tmp.h+':00'; 
+
 
       console.log(Clist);
       let subList=[this.currentUserUid];
@@ -189,10 +194,11 @@ addToList() {
          if(!user.Notilist)
             this.afs.doc<User>(`users/${this.currentUserUid}`).update({Notilist:subList2});
         else if(user.Notilist.indexOf(Clist) == -1){
+
             console.log(user.Notilist)
             user.Notilist.push(Clist)
             console.log(user.Notilist)
-            return this.afs.doc<User>(`users/${this.currentUserUid}`).update({Notilist:user.Notilist});
+            return this.afs.doc<User>(`users/${this.currentUserUid}`).update({Notilist:user.Notilist.sort(this.sortStrings)});
 
       }
       else{console.log("allrady in list")}
@@ -203,6 +209,7 @@ addToList() {
       console.error('User missing ID!');
     }
   }
+
 
 DelFromList(i) {
     if (this.user) {

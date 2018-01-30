@@ -82,9 +82,16 @@ export class NoteService {
     
   }
 
+  getNote2(id: string,uid: string) {
+    return this.afs.doc<Note>(`users/${uid}/notes/${id}`);
+  }
 
 
 
+
+  updateNote2(id: string, data: Partial<Note>,uid: string) {
+    return this.getNote2(id,uid).update(data);
+  }
 
   getData(): Observable<Note[]> {
     return this.notesCollection.valueChanges();
@@ -96,7 +103,7 @@ export class NoteService {
       return actions.map((a) => {
         const data = a.payload.doc.data() as Note;
         
-        return { id: a.payload.doc.id, content: data.content, hearts: data.hearts, 
+        return { id: a.payload.doc.id, content: data.content, hearts: data.hearts, heartsList: data.heartsList,heartsListNames: data.heartsListNames,
           time: data.time,authorId:data.authorId ,authorName:data.authorName,authorPhotoURL:data.authorPhotoURL};      });
     });
   }
@@ -113,6 +120,8 @@ export class NoteService {
       authorName:this.currentUserName,
       authorId:this.currentUserUid,
       authorPhotoURL:this.currentUserPhotoURL,
+      heartsList:[],
+
     };
     return this.notesCollection.add(note);
   }
@@ -124,4 +133,14 @@ export class NoteService {
   deleteNote(id: string) {
     return this.getNote(id).delete();
   }
+
+
+  getCurrentUid() {
+      return (this.currentUserUid);
+  }
+
+    getCurrentName():String {
+       return (this.currentUserName);
+  }
+
 }

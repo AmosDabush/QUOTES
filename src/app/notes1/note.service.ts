@@ -62,6 +62,9 @@ export class NoteService {
 
   }
 
+
+/*get snapshotChanges for all necessary users for the current feed*/
+
   getSnapshotU(): Observable<User[]> {
     ['added', 'modified', 'removed']
     return this.usersCollection.snapshotChanges().map((actions) => {
@@ -88,17 +91,16 @@ export class NoteService {
     });
   }
 
+
+/*get snapshotChanges for all necessary notes for the current feed*/
   getSnapshotN(uid:string): Observable<Note[]> {
     ['added', 'modified', 'removed']
     this.notesCollection = this.afs.collection(`users/${uid}/notes/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
-    let i=0;
+    // let i=0;
     return this.notesCollection.snapshotChanges().map((actions) => {
       return actions.map((a) => {
         const data = a.payload.doc.data() as Note;
-        // if(i==Math.floor(Math.random() * 5) + 1   )
-        //     this.pushNotification(data.content);
-        //     i++;
-        return { id: a.payload.doc.id, content: data.content, hearts: data.hearts, 
+        return { id: a.payload.doc.id, content: data.content, hearts: data.hearts, heartsList: data.heartsList,heartsListNames: data.heartsListNames,
           time: data.time,authorId:data.authorId ,authorName:data.authorName,authorPhotoURL:data.authorPhotoURL};
       });
     });
@@ -110,6 +112,15 @@ export class NoteService {
     return this.afs.doc<Note>(`users/${uid}/notes/${id}`);
   }
 
+  getCurrentUid() {
+      return (this.currentUserUid);
+  }
+
+  getCurrentName():String {
+       return (this.currentUserName);
+  }
+
+  /*create new note*/
   create(content: string) {
     this.notesCollection = this.afs.collection(`users/${this.currentUserUid}/notes/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
     const note = {
@@ -132,6 +143,7 @@ export class NoteService {
     return this.getNote(id,uid).delete();
   }
 
+  /*pushNotification*/
   pushNotification(data:string){
    this._pushNotifications.requestPermission()
    this._pushNotifications.create('Quote-Me', {body: data, dir:'auto',icon: "https://quote-me-d966f.firebaseapp.com/assets/images/icons/PF-004.png"}).subscribe(

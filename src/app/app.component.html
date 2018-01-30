@@ -3,11 +3,10 @@
 
   <div class="content columns">
     <aside class="column is-2 is-offset-1">
-      <!--<loading-spinner></loading-spinner>-->
       <user-profile></user-profile >
       <!--<notes-list2></notes-list2>-->
     </aside>
-<!--<footer-nav></footer-nav>-->
+    
     <main class="column is-8">
       <notification-message></notification-message>
 
@@ -18,14 +17,9 @@
     <h1>   {{ message.notification.body }}</h1>
 </div>
 
-<!--
-<div  *ngIf="msg.currentMessage | async as message" class="notification is-dark slideInRight">
-    <img [src]="message.notification.icon" width="100px">
-    <h1>{{ message.notification.title }}</h1>
-    <p>{{ message.notification.body }}</p>
-</div>-->
       <router-outlet></router-outlet>
     </main>
+    
   </div>
 
 </div>

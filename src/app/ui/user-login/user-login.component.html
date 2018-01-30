@@ -1,3 +1,4 @@
+
 <div *ngIf="!(auth.user | async); else alreadyLoggedIn">
 
   <h3>Social Login</h3>
@@ -15,16 +16,16 @@
     </button>
 
     <button (click)="signInWithTwitter()" class="button  btn-social btn-twitter" >
-      <i class="fa fa-twitter fa-lg"></i> Connect Twitter
+      <i class=" fab fa-twitter fa fa-twitter fa-lg"></i> Connect Twitter
     </button>
 
     <!--<hr>-->
 
-    <h3>Anonymous Login</h3>
+    <!--<h3>Anonymous Login</h3>-->
 
-      <button (click)="signInAnonymously()" class="button button-info">
+      <!--<button (click)="signInAnonymously()" class="button button-info">
         <i class="fa fa-user-secret fa-lg"></i> Connect Anonymously
-      </button>
+      </button>-->
 
     <hr>
 
