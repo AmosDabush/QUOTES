@@ -3,7 +3,7 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angula
 
 import { AuthService } from '../../core/auth.service';
 
-type UserFields = 'email' | 'password';
+type UserFields = 'email' | 'password'| 'displayName';
 type FormErrors = { [u in UserFields]: string };
 
 @Component({
@@ -17,10 +17,15 @@ export class UserFormComponent implements OnInit {
   newUser = true; // to toggle login or signup form
   passReset = false; // set to true when password reset is triggered
   formErrors: FormErrors = {
+    'displayName': '',
     'email': '',
     'password': '',
   };
   validationMessages = {
+      'displayName': {
+        'required': 'displayName is required.',
+        'minlength': 'displayName must be at least 6 characters long.',
+        'maxlength': 'displayName cannot be more than 20 characters long.',    },
     'email': {
       'required': 'Email is required.',
       'email': 'Email must be a valid email',
@@ -44,7 +49,7 @@ export class UserFormComponent implements OnInit {
   }
 
   signup() {
-    this.auth.emailSignUp(this.userForm.value['email'], this.userForm.value['password']);
+    this.auth.emailSignUp(this.userForm.value['email'], this.userForm.value['password'], this.userForm.value['displayName']);
   }
 
   login() {
@@ -67,6 +72,11 @@ export class UserFormComponent implements OnInit {
         Validators.minLength(8),
         Validators.maxLength(25),
       ]],
+      'displayName': ['', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(20),
+      ]],
     });
 
     this.userForm.valueChanges.subscribe((data) => this.onValueChanged(data));
@@ -78,7 +88,7 @@ export class UserFormComponent implements OnInit {
     if (!this.userForm) { return; }
     const form = this.userForm;
     for (const field in this.formErrors) {
-      if (Object.prototype.hasOwnProperty.call(this.formErrors, field) && (field === 'email' || field === 'password')) {
+      if (Object.prototype.hasOwnProperty.call(this.formErrors, field) && (field === 'email' || field === 'password'|| field === 'displayName')) {
         // clear previous error message (if any)
         this.formErrors[field] = '';
         const control = form.get(field);

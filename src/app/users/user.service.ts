@@ -108,7 +108,9 @@ export class UserService {
   updateUser(id: string, data: Partial<User>) {
     return this.getUser(id).update(data);
   }
-
+  updateUserPic(id: string, data: Partial<User>) {
+    return this.getUser(id).update(data);
+  }
   deleteUser(id: string) {
     return this.getUser(id).delete();
   }

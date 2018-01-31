@@ -8,7 +8,7 @@ module.exports = {
     root: 'src/',
     plugins: [
         new SWPrecacheWebpackPlugin({
-          cacheId: 'firestarter',
+          cacheId: 'quote-me',
           filename: 'service-worker.js',
           staticFileGlobs: [
             'src/index.html',

@@ -20,11 +20,31 @@ export class UploadFormComponent {
       this.selectedFiles = ($event.target as HTMLInputElement).files;
   }
 
-  uploadSingle() {
-    const file = this.selectedFiles;
-    if (file && file.length === 1) {
+  uploadSingle1() {
+    const onChanged = (e) => {
+     const file =  e.currentTarget.file;
+    // const file = this.selectedFiles;
+    if (file && file.length === 1 && file.type.match('image.*')) {
       this.currentUpload = new Upload(file.item(0));
       this.upSvc.pushUpload(this.currentUpload);
+    } else {
+      console.error('No file found!');
+    }
+  }
+  }
+
+
+  uploadSingle() {
+
+    
+    const file = this.selectedFiles;
+    if (file && file.length === 1) {
+          if (file.item(0).type.match('image.*')) {console.log('pic')
+            this.currentUpload = new Upload(file.item(0));
+            this.upSvc.pushUpload(this.currentUpload);
+          } else {
+          alert('only img file can e uploaded!');
+        }
     } else {
       console.error('No file found!');
     }

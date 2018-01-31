@@ -17,4 +17,3 @@
 
 And finally `ng serve`
 
-## Apps Using FireStarter in Production

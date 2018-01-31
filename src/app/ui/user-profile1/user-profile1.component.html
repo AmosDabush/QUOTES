@@ -1,4 +1,4 @@
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">-->
 
 
 
@@ -20,7 +20,7 @@
   <div *ngIf="auth.user | async as user">
     <div class="box">
     <h3> {{ user.displayName }}</h3>
-    <img class="card-img-top ,box" [src]="user.photoURL" width="150">
+    <a routerLink="/uploads" title="Change profile picture"><img class="card-img-top ,box" [src]="user.photoURL" width="150"></a>
     <div>
         <button class="button is-danger is-small" (click)="logout()" title='LogOut'>Logout</button>
     </div>

@@ -5,19 +5,18 @@
 
 
 <div class="box">
-  <h3>Single File Upload</h3>
-
+  <h3>Change Profile Picture</h3>
   <label>
-    <input type="file" class="button" (change)="detectFiles($event)">
+    <input  type="file"  (onChange)="detectFiles(event)" class="button" (change)="detectFiles($event)" accept="image/*">
   </label>
-  <button class="button is-primary"
+  <button  class="button is-primary"
     [disabled]="!selectedFiles"
-    (click)="uploadSingle()">
-    Upload Single
+    (click)="uploadSingle()" accept="image/*">
+    Upload Picture
   </button>
 
   <hr>
-
+<!--
   <h3>Multiple File Upload</h3>
 
   <label>
@@ -27,5 +26,5 @@
     [disabled]="!selectedFiles"
     (click)="uploadMulti()">
     Upload Multiple
-  </button>
+  </button>-->
 </div>

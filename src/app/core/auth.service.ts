@@ -87,11 +87,11 @@ export class AuthService {
 
     //// Email/Password Auth ////
 
-    emailSignUp(email: string, password: string) {
+    emailSignUp(email: string, password: string,displayName:string) {
         return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
             .then((user) => {
                 this.notify.update('Welcome to Quote-Me!!', 'success');
-                return this.updateUserData(user); // if using firestore
+                return this.updateUserData2(user,displayName); // if using firestore
             })
             .catch((error) => this.handleError(error));
     }
@@ -100,7 +100,9 @@ export class AuthService {
         return this.afAuth.auth.signInWithEmailAndPassword(email, password)
             .then((user) => {
                 this.notify.update('Welcome to Quote-Me!!', 'success')
+                // return this.updateUserData(user); // if using firestore
                 return this.updateUserData(user); // if using firestore
+
             })
             .catch((error) => this.handleError(error));
     }
@@ -152,7 +154,7 @@ export class AuthService {
         userRefC.forEach(exsist => {
             if (!exsist) {
                 console.log("new  ")
-                return userRef.set(data); //TO-DO!  if exsist then update 
+                return userRef.set(data); //if exsist then update 
             } else {
                 console.log("User allredy exsist  ")
                 return userRef.update(dataUpdate); //TO-DO!  if exsist then update 
@@ -165,7 +167,44 @@ export class AuthService {
 
     }
 
+    // Sets user data to firestore after succesful login
+    private updateUserData2(user: User,displayName:string) {
 
+        const userRef: AngularFirestoreDocument < User > = this.afs.doc(`users/${user.uid}`);
+        const userRefC = this.afs.doc(`users/${user.uid}`).valueChanges();
+
+
+
+        const data: User = {
+            uid: user.uid,
+            email: user.email || null,
+            displayName: displayName || 'nameless user',
+            photoURL: user.photoURL || 'https://png.icons8.com/puffin-bird/win10/1600',
+            discription: "a place for a aowesome dicription...",
+        };
+        const dataUpdate: User = {
+            uid: user.uid,
+            email: user.email || null,
+            displayName: displayName || 'nameless user',
+            // photoURL: user.photoURL || 'https://png.icons8.com/puffin-bird/win10/1600',
+
+        };
+        //chack if User allredy exsist 
+        userRefC.forEach(exsist => {
+            if (!exsist) {
+                console.log("new  ")
+                return userRef.set(data); //if exsist then update 
+            } else {
+                console.log("User allredy exsist  ")
+                return userRef.update(dataUpdate); //TO-DO!  if exsist then update 
+
+            }
+        });
+
+
+
+
+    }
 
 
 }

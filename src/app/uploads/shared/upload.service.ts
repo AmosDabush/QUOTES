@@ -3,6 +3,10 @@ import { Upload } from './upload';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
+import { UsersModule } from '../../users/users.module';
+import { UserService } from '../../users/user.service';
+// import { AuthService } from '../core/auth.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Injectable()
 export class UploadService {
@@ -10,8 +14,30 @@ export class UploadService {
   basePath = 'uploads';
   uploadsRef: AngularFireList<Upload>;
   uploads: Observable<Upload[]>;
+  currentUserUid="";
+  currentUserName="";
+  currentUserPhotoURL=""
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase,
+              // public auth: AuthService,
+              private userService: UserService,
+              private afAuth: AngularFireAuth,) { 
+
+
+                  
+  if(this.afAuth.auth.currentUser){
+       this.currentUserUid=this.afAuth.auth.currentUser.uid;
+       if(this.afAuth.auth.currentUser.displayName)
+            this.currentUserName=this.afAuth.auth.currentUser.displayName;
+       if(this.afAuth.auth.currentUser.photoURL)
+            this.currentUserPhotoURL=this.afAuth.auth.currentUser.photoURL;
+    }
+    else
+        console.error("NULL ID")   
+              }
+  
+
+
 
   getUploads() {
     this.uploads = this.db.list(this.basePath).snapshotChanges().map((actions) => {
@@ -52,6 +78,9 @@ export class UploadService {
         if (uploadTask.snapshot.downloadURL) {
           upload.url = uploadTask.snapshot.downloadURL;
           upload.name = upload.file.name;
+          console.log("upload.url")     
+               console.log(upload.url)
+          this.userService.updateUser(this.currentUserUid, { photoURL: upload.url })
           this.saveFileData(upload);
           return;
         } else {

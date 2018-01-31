@@ -4,6 +4,15 @@
   <p class="button is-small" (click)="toggleForm()">Already Registered?</p>
   <hr>
 
+  <label for="displayName">displayName</label>
+  <input type="displayName" id="displayName" class="input"
+         formControlName="displayName" required >
+
+  <div *ngIf="formErrors.displayName" class="notification is-danger">
+    {{ formErrors.displayName }}
+  </div>
+
+
   <label for="email">Email</label>
   <input type="email" id="email" class="input"
          formControlName="email" required >
