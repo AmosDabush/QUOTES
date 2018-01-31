@@ -28,7 +28,7 @@ interface NewUser {
 
 
 @Injectable()
-export class NoteService {
+export class FeedService {
   user;
   userIds;
   currentUserUid="";

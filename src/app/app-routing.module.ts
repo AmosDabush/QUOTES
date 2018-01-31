@@ -5,9 +5,9 @@ import { UserLoginComponent } from './ui/user-login/user-login.component';
 // import { ItemsListComponent } from './items/items-list/items-list.component';
 import { ReadmePageComponent } from './ui/readme-page/readme-page.component';
 import { NotesListComponent } from './notes/notes-list/notes-list.component';
-import { Notes1ListComponent } from './notes1/notes-list/notes-list.component';
+import { FeedListComponent } from './feed/notes-list/notes-list.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
-import { NotesPListComponent } from './notesP/notes-list/notes-list.component';
+import { NotesPListComponent } from './myquotes/notes-list/notes-list.component';
 // import { FeedListComponent} from './feed/notes-list/notes-list.component';
 import { FriendsListComponent } from './friends/friends-list/friends-list.component';
 
@@ -24,8 +24,8 @@ const routes: Routes = [
   { path: 'login', component: UserLoginComponent },
   // { path: 'items', component: ItemsListComponent, canActivate: [AuthGuard] },
   { path: 'notes', component: NotesListComponent,  canActivate: [AuthGuard] },
-  { path: 'notes1', component: Notes1ListComponent,  canActivate: [AuthGuard] },
-  { path: 'notesP', component: NotesPListComponent,  canActivate: [AuthGuard] },
+  { path: 'feed', component: FeedListComponent,  canActivate: [AuthGuard] },
+  { path: 'myquotes', component: NotesPListComponent,  canActivate: [AuthGuard] },
   { path: 'users/:id', component: UsersListComponent,  canActivate: [AuthGuard] },
   { path: 'friends', component: FriendsListComponent,  canActivate: [AuthGuard] },
   { path: 'userprofile1', component: UserProfile1Component,  canActivate: [AuthGuard] },

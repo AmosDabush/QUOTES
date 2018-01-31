@@ -4,7 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { User } from './user-model';
-import { Note } from '../notes1/note-model'
+import { Note } from '../feed/note-model'
 
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';

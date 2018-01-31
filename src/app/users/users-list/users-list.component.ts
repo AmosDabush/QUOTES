@@ -5,9 +5,9 @@ import { UserService } from '../user.service';
 
 import { Friend } from '../friend-model';
 import { User } from '../user-model';
-import { Note } from '../../notes1/note-model';
-import { NoteDetailComponent } from '../../notes1/note-detail/note-detail.component';
-import { NoteService } from '../../notes1/note.service';
+import { Note } from '../../feed/note-model';
+import { NoteDetailComponent } from '../../feed/note-detail/note-detail.component';
+import { FeedService } from '../../feed/feed.service';
 
 import { Observable } from 'rxjs/Observable';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';

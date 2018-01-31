@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 
-import { NoteService } from '../../notes1/note.service';
+import { FeedService } from '../../feed/feed.service';
 
-import { Note } from '../../notes1/note-model';
+import { Note } from '../../feed/note-model';
 
 import { AppRoutingModule } from '../../app-routing.module';
 
@@ -19,7 +19,7 @@ export class NoteDetailComponent {
   @Input()
   note: Note;
  
-  constructor(private noteService: NoteService,
+  constructor(private noteService: FeedService,
               private route:ActivatedRoute,
               ) { }
 

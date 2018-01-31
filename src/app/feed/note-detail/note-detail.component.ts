@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { NoteService } from '../note.service';
+import { FeedService } from '../feed.service';
 
 import { Note } from '../note-model';
 
@@ -18,7 +18,7 @@ export class NoteDetailComponent {
   @Input()
   note: Note;
 
-  constructor(private noteService: NoteService) { }
+  constructor(private noteService: FeedService) { }
 
 
   /*add +1 hart to a quote ,add Uid and Uname of the user for the Heart-list*/

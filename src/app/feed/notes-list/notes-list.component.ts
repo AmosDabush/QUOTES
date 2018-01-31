@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NoteService } from '../note.service';
+import { FeedService } from '../feed.service';
 
 import { Note } from '../note-model';
 
@@ -16,7 +16,7 @@ import { AppRoutingModule } from '../../app-routing.module';
   templateUrl: './notes-list.component.html',
   styleUrls: ['./notes-list.component.scss'],
 })
-export class Notes1ListComponent implements OnInit {
+export class FeedListComponent implements OnInit {
 
   notes: Observable<Note[]>;
   content: string;
@@ -25,7 +25,7 @@ export class Notes1ListComponent implements OnInit {
   notes2: Observable<Note[]>;
   noteslist2: Array<Observable<Note[]>>;
 
-  constructor(private noteService: NoteService) { }
+  constructor(private noteService: FeedService) { }
   //init
   ngOnInit() {
     this.notes = this.noteService.getSnapshot();

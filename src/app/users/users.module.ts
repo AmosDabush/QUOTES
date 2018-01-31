@@ -11,9 +11,9 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
-import { Note } from '../notes1/note-model';
+import { Note } from '../feed/note-model';
 import { NoteDetailComponent } from './note-detail/note-detail.component';
-import { NoteService } from '../notes1/note.service';
+import { FeedService } from '../feed/feed.service';
 
 @NgModule({
   imports: [
@@ -30,7 +30,7 @@ import { NoteService } from '../notes1/note.service';
   ],
   providers: [
       UserService,
-      NoteService,
+      FeedService,
   ],
   
 })

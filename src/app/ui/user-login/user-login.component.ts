@@ -50,10 +50,10 @@ export class UserLoginComponent {
     
     setTimeout(() => 
 {
-    this.router.navigate(['notes1']);
+    this.router.navigate(['feed']);
 },
 1050);
-    // this.router.navigate(['/notes1']);
+    // this.router.navigate(['/feed']);
   }
 
 }

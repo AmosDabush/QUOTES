@@ -1,12 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 
-import { NoteService } from '../../notes1/note.service';
-
-import { Note } from '../../notes1/note-model';
-
+import { FeedService } from '../../feed/feed.service';
+import { Note } from '../../feed/note-model';
 import { AppRoutingModule } from '../../app-routing.module';
-
 
 
 @Component({
@@ -19,7 +16,7 @@ export class NoteDetailComponent {
   @Input()
   note: Note;
 
-  constructor(private noteService: NoteService,
+  constructor(private noteService: FeedService,
               private route:ActivatedRoute,
               ) { }
 
@@ -52,13 +49,8 @@ addToHeartlist(Nid,authorId,val){
       const CNote = this.noteService.getNote(Nid,authorId)
       const CUid=this.noteService.getCurrentUid();
       const CName=this.noteService.getCurrentName();
-      console.log(CName)
       let subList2=[CUid];
-      console.log(CUid)
       CNote.valueChanges().take(1).forEach(n => {
-        // console.log(n)
-        // console.log(n.heartsList)
-
          if(!n.heartsList||!n.heartsListNames)
             //  this.afs.doc<Note>(`users/${authorId}/notes/${Nid}`);
           this.noteService.updateNote(Nid, { hearts: val + 1 ,heartsList:[CUid],heartsListNames:[CName]},authorId);

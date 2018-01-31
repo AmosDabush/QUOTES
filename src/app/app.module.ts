@@ -1,38 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 
 // Core
 import { CoreModule } from './core/core.module';
-
 // Shared/Widget
 import { SharedModule } from './shared/shared.module';
-
 // Feature Modules
-// import { ItemModule } from './items/shared/item.module';
 import { UploadModule } from './uploads/shared/upload.module';
 import { UiModule } from './ui/shared/ui.module';
 import { NotesModule } from './notes/notes.module';
-import { Notes1Module } from './notes1/notes.module';
-import { NotesPModule } from './notesP/notes.module';
+import { FeedModule } from './feed/notes.module';
+import { NotesPModule } from './myquotes/notes.module';
 import { UsersModule } from './users/users.module';
 import { FriendsModule } from './friends/users.module';
 
-
-
 import { environment } from '../environments/environment';
-
 import { AngularFireModule } from 'angularfire2';
 export const firebaseConfig = environment.firebaseConfig;
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-
-/////Desktop/Push Notifications Module
-
+//Desktop/Push Notifications Module
 import { PushNotificationsModule } from 'ng-push';
 
 
@@ -48,12 +39,10 @@ import { PushNotificationsModule } from 'ng-push';
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    // ItemModule,
     UiModule,
     NotesModule,
-    Notes1Module,
+    FeedModule,
     NotesPModule,
-    // FeedModule,
     UsersModule,
     FriendsModule,
     AngularFireModule.initializeApp(firebaseConfig),
