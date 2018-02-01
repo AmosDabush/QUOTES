@@ -8,6 +8,7 @@ import { NotifyService } from './notify.service';
 import { Observable } from 'rxjs/Observable';
 import { map, take, tap } from 'rxjs/operators';
 
+//prevent users from accessing areas that they’re not allowed to access
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private auth: AuthService, private router: Router, private notify: NotifyService) {}

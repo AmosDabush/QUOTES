@@ -22,7 +22,7 @@ export class UserProfileComponent {
   }
 
 
-
+// open or close the mini profile component
 clear(){
      var authenticatedWin =  document.getElementById('authenticated');
      var closeB = document.getElementById('closeB');
@@ -40,10 +40,6 @@ clear(){
             }
       }
 }
-
-
-
-
 
 
 }

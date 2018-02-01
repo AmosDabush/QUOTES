@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-// import { NotifyService } from './notify.service';
 
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators';
@@ -16,10 +15,7 @@ import { UsersModule } from '../../users/users.module';
 import { UserService } from '../../users/user.service';
 import { UserDetailComponent } from '../../users/user-detail/user-detail.component';
 import { Note } from '../../notes/note-model';
-// import { Note } from './notes/note-model';
-// import { NoteDetailComponent } from '../../notes/note-detail/note-detail.component';
 
-// import { NotesListComponent } from '../../notes/notes-list/notes-list.component'
 
 interface User {
   uid?: string;
@@ -49,13 +45,7 @@ export class UserProfile1Component {
               private afs: AngularFirestore,
               private router: Router,
               private userService:UserService,
-              private UsersModule:UsersModule,
-              // private route: ActivatedRoute,
-              // private NotesListComponent:NotesListComponent,
-
-              // private UserDetailComponent:UserDetailComponent,
-              // private notify: NotifyService
-              ) {
+              private UsersModule:UsersModule,) {
 
     this.user = this.afAuth.authState
       .switchMap((user) => {
@@ -72,12 +62,6 @@ export class UserProfile1Component {
     else
         console.error("NULL ID")   
     }
-
-// ngOnInit() {
-//     this.route.params.subscribe(params => {
-//        this.post = this.db.object('/posts/' + params['postId'])
-//     });
-// }
 
 
   logout() {
@@ -104,19 +88,6 @@ days = 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(' ');
 
 }
 
-  // addt() {
-  //   console.log('teeeet');
-  //       this.user = this.afAuth.authState
-  //     .switchMap((user) => {
-  //       if (user) {
-  //         return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-  //       } else {
-  //         return Observable.of(null);
-  //       }
-  //     });
-  // }
-
-
   updateDicription(uid:string,discription:string) {
     if (this.user) {
       if (discription==null){discription=''}
@@ -127,7 +98,7 @@ days = 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(' ');
   }
 
 
-
+//open or close notification settings
 clear(){
      var authenticatedWin =  document.getElementById('list');
      var closeBList = document.getElementById('closeBList');
@@ -154,20 +125,15 @@ clear(){
     return a > b ? 1 : (a < b ? -1 : 0);
 }
 
+//add user to the right notification list
 addToList() {
     if (this.user) {
       if(this.tmp.d=="" || this.tmp.h == "" ){
         alert('missing info') 
         return  
   }
-      // let tmpArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-      console.log(this.currentUserUid)
       let Clist =(this.tmp.d)+'-'+this.tmp.h+':00'; 
-
-
-      console.log(Clist);
       let subList=[this.currentUserUid];
-     
       const listRef= this.afs.doc<Nlist>(`notificationList/${Clist}`).valueChanges().take(1);
       listRef.forEach(list => {
         console.log(list)
@@ -210,7 +176,7 @@ addToList() {
     }
   }
 
-
+//delete user from the selected notification list
 DelFromList(i) {
     if (this.user) {
       console.log(i);

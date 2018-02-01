@@ -9,8 +9,6 @@ import { Friend } from './friend-model';
 
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
-
-
 interface NewUser {
     uid: string;
     email ? : string | null;
@@ -29,9 +27,7 @@ export class UserService {
     currentUserUid = "";
 
     constructor(private afs: AngularFirestore,
-        private afAuth: AngularFireAuth
-    ) {
-
+        private afAuth: AngularFireAuth) {
 
         if (this.afAuth.auth.currentUser) {
             this.currentUserUid = this.afAuth.auth.currentUser.uid;
@@ -41,15 +37,13 @@ export class UserService {
 
         this.usersCollection = this.afs.collection('users/', (ref) => ref);
         this.friendsCollection = this.afs.collection(`users/${this.currentUserUid}/friends/`, (ref) => ref.orderBy('time', 'desc') /*.limit()*/ );
-        // this.notesCollection = this.afs.collection('users/j2sPtwf6BpgjcbqNoZCD38oZaSP2/notes/', (ref) => ref);
-        // this.usersCollection = this.afs.collection('users', (ref) => ref.orderBy('time', 'desc'));
-
     }
 
     getData(): Observable < User[] > {
         return this.usersCollection.valueChanges();
     }
 
+    //get current user data  Snapshots 
     getSnapshot(): Observable < User[] > {
         ['added', 'modified', 'removed']
         return this.usersCollection.snapshotChanges().map((actions) => {
@@ -68,8 +62,7 @@ export class UserService {
 
     }
 
-
-
+    //get Snapshots of all the notes of this current user friend
     getSnapshotN(uid: string): Observable < Note[] > {
         ['added', 'modified', 'removed']
         this.notesCollection = this.afs.collection(`users/${uid}/notes/`, (ref) => ref.orderBy('time', 'desc') /*.limit()*/ );
@@ -94,7 +87,7 @@ export class UserService {
     }
 
 
-
+    //get Snapshots of all the current user friends
     getSnapshotF(): Observable < any[] > {
         ['added', 'modified', 'removed']
         this.friendsCollection = this.afs.collection(`users/${this.currentUserUid}/friends/`);
@@ -111,25 +104,6 @@ export class UserService {
     }
 
 
-    // getSnapshotF(): Observable<string> {
-    //   // ['added', 'modified', 'removed']
-    //   console.log("here!!!getSnapshot()")
-
-    //   return this.friendsCollection.snapshotChanges().map((actions) => {
-    //         console.log("here!!!getSnapshot(2)")
-    //     return actions.map((a) => {
-    //                 // console.log("here!!!getSnapshot(3)")
-
-    //       const data = a.payload.doc.data() as string;
-    //       console.log('id:'+ a.payload.doc.id + ',fid:'+ data.id)
-    //       return { id: a.payload.doc.id, fid: data.id};
-    //     });
-    //   });
-    // }
-
-
-
-
     getFriend(id: string) {
         return this.afs.doc < Friend > (`users/${this.currentUserUid}/friends/${id}`);
     }
@@ -137,6 +111,7 @@ export class UserService {
     getUser(id: string) {
         return this.afs.doc < User > (`users/${id}`);
     }
+    
     getNote(uid: string) {
         return this.afs.collection(`users/${uid}/notes/`, (ref) => ref);
     }

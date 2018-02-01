@@ -32,27 +32,12 @@ export class FriendsListComponent implements OnInit {
               public auth: AuthService,
               private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
-              // private router: Router,
-              private route: ActivatedRoute,
-              // private noteService: NoteService
-              
+              private route: ActivatedRoute,    
               ) { }
 
   ngOnInit() {
-    // this.users = this.userService.getData()
     this.users = this.userService.getSnapshot();
-    //  this.notes = this.userService.getSnapshot2();
     this.friends =this.userService.getSnapshotF();
-    // this.route.params.subscribe(params => {
-    //   console.log(params)
-    //    this.user =this.afs.doc<User>('users/'+ params['id']).valueChanges();
-    //     this.notes = this.userService.getSnapshotN(params['id']);
-
-    // });
-   
-    // this.user = this.afs.doc<User>(`users/AaGQUVyi4yfL2lYm6EcfepDvMLP2`).valueChanges();
-       
-      
 
     this.user = this.afAuth.authState
       .switchMap((user) => {
@@ -63,13 +48,6 @@ export class FriendsListComponent implements OnInit {
         }
       });
 
-
-
   }
-
-  // createUser() {
-  //   this.userService.create(this.content);
-  //   this.content = '';
-  // }
 
 }

@@ -1,100 +1,88 @@
-  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">-->
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">-->
 
 
 
-<div class="box" >
-  <div *ngIf="auth.user | async; then authenticated else guest">
-          <!-- template will replace this div -->
-  </div>
+<div class="box">
+    <div *ngIf="auth.user | async; then authenticated else guest">
+        <!-- template will replace this div -->
+    </div>
 </div>
 
 <!-- User NOT logged in -->
 <ng-template #guest class="box">
-  <h3> GUEST</h3>
-  <p class="card-text">Login to get started...</p>
-  <button class="button" routerLink="/login">Login</button>
+    <h3> GUEST</h3>
+    <p class="card-text">Login to get started...</p>
+    <button class="button" routerLink="/login">Login</button>
 </ng-template>
 
 <!-- User logged in -->
 <ng-template #authenticated>
-  <div *ngIf="auth.user | async as user">
+    <div *ngIf="auth.user | async as user">
+        <div class="box">
+            <h3> {{ user.displayName }}</h3>
+            <a routerLink="/uploads" title="Change profile picture"><img class="card-img-top ,box" [src]="user.photoURL" width="150"></a>
+            <div>
+                <button class="button is-danger is-small" (click)="logout()" title='LogOut'>Logout</button>
+            </div>
+        </div>
+        <div class="box">
+            <p class="text-truncate">EMail: {{ user.email }}</p>
+            <p class="text-truncate">Discription: {{ user.discription }}</p>
+            <p class="text-truncate">Quotes:<a routerLink="/myquotes" title="open your quote collection"> My-Quotes</a></p>
+
+
+
+
+            <div class="field is-grouped">
+                <span class="button is-small is-success" (click)='updateDicription(user.uid,dicription);' title='add your dicription'>Add Discription</span>&#160;
+                <p><textarea cols="20" rows="1" [(ngModel)]="dicription" placeholder="add your dicription"></textarea></p>
+            </div>
+
+
+        </div>
+    </div>
+
     <div class="box">
-    <h3> {{ user.displayName }}</h3>
-    <a routerLink="/uploads" title="Change profile picture"><img class="card-img-top ,box" [src]="user.photoURL" width="150"></a>
-    <div>
-        <button class="button is-danger is-small" (click)="logout()" title='LogOut'>Logout</button>
-    </div>
-    </div>
-   <div class="box">
-    <!--<p class="text-truncate">UID: {{ user.uid }}</p>-->
-    <p class="text-truncate">EMail: {{ user.email }}</p>
-    <p class="text-truncate">Discription: {{ user.discription }}</p>
-         <p class="text-truncate">Quotes:<a routerLink="/myquotes" title="open your quote collection"> My-Quotes</a></p>
+        <div class="level-right">
+            <button id='closeBList' class="level-item delete button is-small is-danger" (click)="clear()" title="Close Notification-Menu" style="display: none"></button>
+        </div>
 
-    <!--FIX THIS !!!!<button class="button" (click)="addt();">Add</button>  FIX THIS !!!!-->
-      <!--<notes-list></notes-list>-->
+        <div id="title">
+            <button id='openBList' class="button is-small is-warning" (click)="clear()" title="Open Notification-Menu">Open Notification Setings</button>
 
 
+        </div>
+        <div id="list" style="display: none">
+            <h1 style='margin-top:-1em' class="title is-4 " id='list'>&#160;&#160;&#160;Notification Setings:</h1>
 
-
-
-
-    <div class="field is-grouped" >
-      <span class="button is-small is-success" (click)='updateDicription(user.uid,dicription);' title='add your dicription'>Add Discription</span>&#160;
-    <p><textarea cols="20" rows="1"  [(ngModel)] = "dicription" placeholder="add your dicription"></textarea></p>
-    </div>
-
-    
-  </div>
-</div>
-
-<div class="box" >
-    <div class="level-right"  >
-    <button id='closeBList' class="level-item delete button is-small is-danger" (click)="clear()" title="Close Notification-Menu" style="display: none" ></button>
-    <!--<h1 class="title is-4">Notification Setings:</h1>-->
-    </div>
-
-<div id="title">
-    <!--<h1 class="title is-4">Notification Setings:</h1>-->
-        <button id='openBList' class="button is-small is-warning" (click)="clear()" title="Open Notification-Menu" >Open Notification Setings</button>
-
-
-</div>
-          <div id="list" style="display: none">
-      <h1 style='margin-top:-1em'class="title is-4 " id='list'>&#160;&#160;&#160;Notification Setings:</h1>
-
-<div class="field">
-  <div class="control">
-    <div class="select is-primary">
-    <select ngModel="selectedDays" (ngModelChange)="onChange($event,'D')" id="selectedDays" name="selectedDays">
+            <div class="field">
+                <div class="control">
+                    <div class="select is-primary">
+                        <select ngModel="selectedDays" (ngModelChange)="onChange($event,'D')" id="selectedDays" name="selectedDays">
                   <option value="selectedDays" hidden disabled >-day-</option> 
     <option [value]="i" *ngFor="let i of days">{{i}}</option>
       </select>
-    </div>
-    <div class="select is-primary">
-    <select  id="hoursSelect"  (ngModelChange)="onChange($event,'H')" name="hoursSelect" ngModel="hoursSelect">
+                    </div>
+                    <div class="select is-primary">
+                        <select id="hoursSelect" (ngModelChange)="onChange($event,'H')" name="hoursSelect" ngModel="hoursSelect">
             <option value="hoursSelect" hidden disabled>-hour-</option>
     <option [value]="i" *ngFor="let i of hours">{{i}}:00</option>
       </select>
-    </div>
-            <button class="button is-bold is-primary" (click)="addToList()">addToList</button>
-  </div>
-</div>
+                    </div>
+                    <button class="button is-bold is-primary" (click)="addToList()">addToList</button>
+                </div>
+            </div>
 
-  <div *ngIf="auth.user | async as user">
-                 <div  *ngFor="let i of user.Notilist"> Every {{i}} 
+            <div *ngIf="auth.user | async as user">
+                <div *ngFor="let i of user.Notilist"> Every {{i}}
                     <button class="button is-outlined is-danger is-rounded fa fa-times is-small" (click)="DelFromList(i)" title="Delete this date">Delete</button>
-                 </div>
-           </div>
-    </div>    
-    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
 
-  
+
 </ng-template>
-
-
-
-

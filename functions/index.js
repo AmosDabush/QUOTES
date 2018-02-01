@@ -9,7 +9,7 @@ admin.initializeApp(functions.config().firebase);
 
 
 
-
+// send Fsm notification to users in the right notification list
 exports.notifyUser5 = functions.https.onRequest((req, res) => {
     let d=new Date()
     let currentHour = d.getHours()+2;
@@ -23,7 +23,7 @@ exports.notifyUser5 = functions.https.onRequest((req, res) => {
     let tokens = "";
     const db = admin.firestore()
     let userRef = "";
-    // ref to the parent document   
+    // ref to the right notification list  
     const notificationList = db.collection('notificationList').doc(currentList);
     return notificationList.get()
         .then(snapshot => snapshot.data())
@@ -39,13 +39,14 @@ exports.notifyUser5 = functions.https.onRequest((req, res) => {
         .catch(err => console.log(err))
 });
 
-
+//update the current notification quote as the last quote the user recive
 function updateLastQuote(content, userRef) {
     userRef.update({
         lastNotifyQuote: content
     });
 }
 
+//update the current notification quote as the last quote the user recive
 function updateLastQuote2(userRef) {
     const db = admin.firestore()
     var contentD = "";
@@ -77,6 +78,8 @@ function updateLastQuote2(userRef) {
         .catch(err => console.log(err))
 }
 
+
+// get users tokens and send notifications payload
 function notifyUserT(userRef) {
     console.log("notifyUserT userRef.id:" + userRef.id);
     let tokens = "";

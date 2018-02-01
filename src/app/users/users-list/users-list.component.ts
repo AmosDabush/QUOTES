@@ -33,21 +33,15 @@ export class UsersListComponent implements OnInit {
               public auth: AuthService,
               private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
-              // private router: Router,
-              // private UsersModule:UsersModule,
               private route: ActivatedRoute,
-              // private noteService: NoteService 
               
               ) { }
-
+              
+  //show the selected user prifile
   ngOnInit() {
-    // this.users = this.userService.getData()
     this.users = this.userService.getSnapshot();
-    //  this.notes = this.userService.getSnapshot2();
     this.friends =this.userService.getSnapshotF();
-    // this.friendsList=new Array<string>();
-
-
+    //get right user data by url params
     this.route.params.subscribe(params => {
       // console.log(params)
        this.user =this.afs.doc<User>('users/'+ params['id']).valueChanges();
@@ -55,26 +49,6 @@ export class UsersListComponent implements OnInit {
 
     });
    
-    // this.user = this.afs.doc<User>(`users/AaGQUVyi4yfL2lYm6EcfepDvMLP2`).valueChanges();
-       
-      
-
-    // this.user = this.afAuth.authState
-    //   .switchMap((user) => {
-    //     if (user) {
-    //       return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-    //     } else {
-    //       return Observable.of(null);
-    //     }
-    //   });
-
-
-
   }
-
-  // createUser() {
-  //   this.userService.create(this.content);
-  //   this.content = '';
-  // }
 
 }

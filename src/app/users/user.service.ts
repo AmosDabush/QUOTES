@@ -44,8 +44,6 @@ export class UserService {
 
     this.friendsCollection = this.afs.collection(`users/${this.currentUserUid}/friends/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
     this.usersCollection = this.afs.collection('users/', (ref) => ref);
-    // this.notesCollection = this.afs.collection('users/j2sPtwf6BpgjcbqNoZCD38oZaSP2/notes/', (ref) => ref);
-    // this.usersCollection = this.afs.collection('users', (ref) => ref.orderBy('time', 'desc'));
   
 }
 
@@ -53,6 +51,7 @@ export class UserService {
     return this.usersCollection.valueChanges();
   }
 
+    //get current user data  Snapshots 
   getSnapshot(): Observable<User[]> {
     ['added', 'modified', 'removed']
     return this.usersCollection.snapshotChanges().map((actions) => {
@@ -63,9 +62,7 @@ export class UserService {
     });
     
   }
-
-
-
+//get Snapshots of all the notes of this current user friend
   getSnapshotN(uid:string): Observable<Note[]> {
     ['added', 'modified', 'removed']
         this.notesCollection = this.afs.collection(`users/${uid}/notes/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
@@ -80,8 +77,7 @@ export class UserService {
     });
   }
 
-
-
+//get Snapshots of all the current user friends
   getSnapshotF(): Observable<any[]> {
     ['added', 'modified', 'removed']
     this.friendsCollection = this.afs.collection(`users/${this.currentUserUid}/friends/`);
@@ -93,9 +89,6 @@ export class UserService {
       });
     });
   }
-
-
-
 
 
   getUser(id: string) {
@@ -122,14 +115,5 @@ export class UserService {
      return this.friendsCollection.doc(fid).set(friend);
   }
 
-
-  // create(content: string) {
-  //   const user = {
-  //     content,
-  //     hearts: 0,
-  //     time: new Date().getTime(),
-  //   };
-  //   return this.usersCollection.add(user);
-  // }
 
 }

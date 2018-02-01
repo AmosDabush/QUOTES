@@ -41,36 +41,24 @@ export class UserDetailComponent {
  
  ngOnInit() {
     this.friends =this.userService.getSnapshotF();
-      this.frindsList=new Array<String>();
+    this.frindsList=new Array<String>();
     this.frindsList2=this.friendC();
     
 
 }
 
+//get all currentUser friends
 friendC():Array<String>{
-
       this.friends =this.userService.getSnapshotF();
       this.frindsList=new Array<String>();
-      
       this.friends.forEach(friend => {
       friend.forEach(f => {
        this.frindsList.push(f.id)
-      //  console.log(this.frindsList)
-        // return this.frindsList;
+ 
       });
     });return this.frindsList;
 }
 
-
-
-
-//   addHeartToUser(val: number) {
-//     if (this.user.id) {
-//       this.userService.updateUser(this.user.id, { hearts: val + 1 });
-//     } else {
-//       console.error('User missing ID!');
-//     }
-//   }
 
   updateDicription(dis:string) {
     if (this.user.uid) {
@@ -90,8 +78,6 @@ friendC():Array<String>{
       console.error('User missing ID!');
     }
   }
-
-
 
   deleteUser(id: string) {
     this.userService.deleteUser(id);

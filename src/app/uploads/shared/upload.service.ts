@@ -36,9 +36,6 @@ export class UploadService {
         console.error("NULL ID")   
               }
   
-
-
-
   getUploads() {
     this.uploads = this.db.list(this.basePath).snapshotChanges().map((actions) => {
       return actions.map((a) => {
@@ -58,7 +55,7 @@ export class UploadService {
     .catch((error) => console.log(error));
   }
 
-  // Executes the file uploading to firebase https://firebase.google.com/docs/storage/web/upload-files
+  // Executes the file uploading to firebase
   pushUpload(upload: Upload) {
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
