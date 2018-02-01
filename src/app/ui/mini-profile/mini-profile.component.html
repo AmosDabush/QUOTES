@@ -24,8 +24,8 @@
         <h3 class="title is-5 is-bold">Hello, {{ user.displayName }}</h3>
         <img class="card-img-top" [src]="user.photoURL" width=50px>
       </a>
-      <p class="text-truncate">UID: {{ user.uid }}</p>
-      <p class="text-truncate">Notes:<a routerLink="/myquotes" title="open your quote collection"> My-Quotes</a></p>
+      <p class="text-truncate">email: {{ user.email }}</p>
+      <p class="text-truncate">Quotes:<a routerLink="/myquotes" title="open your quote collection"> My-Quotes</a></p>
 
       <button class="button is-small is-danger " (click)="logout()">Logout</button>
     </div>

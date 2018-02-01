@@ -12,7 +12,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { Note } from '../feed/note-model';
-import { NoteDetailComponent } from './note-detail/note-detail.component';
+// import { NoteDetailComponent } from '../feed/note-detail/note-detail.component';
 import { FeedService } from '../feed/feed.service';
 import { AppRoutingModule } from '../app-routing.module';
 
@@ -28,7 +28,6 @@ import { AppRoutingModule } from '../app-routing.module';
   declarations: [
     FriendsListComponent,
     UserDetailComponent,
-    NoteDetailComponent,
   ],
   providers: [
       UserService,

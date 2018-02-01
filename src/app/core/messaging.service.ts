@@ -8,7 +8,8 @@ import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 // import * as firebase from 'firebase/app';
 import '../utils/rxjs.operators';
-
+  
+// push Notify users 
 @Injectable()
 export class MessagingService {
 
@@ -20,8 +21,6 @@ export class MessagingService {
   constructor(private afs: AngularFirestore) {
 
   }
-
-  
 
   // get permission to send messages
   getPermission(user) {
