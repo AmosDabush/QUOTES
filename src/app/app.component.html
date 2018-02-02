@@ -10,14 +10,17 @@
     <main class="column is-8">
       <notification-message></notification-message>
 
-<div id='fcmNotification' *ngIf="msg.currentMessage | async as message" class="notification  slideInRight">
-    <button id='closeB' class="delete button is-small is-danger" (click)="msg.clear()" style="display: inline-flex"></button>
-    <h3>{{ message.notification.title }}</h3>
-    <img [src]="message.notification.icon" width="100px">
-    <h1>   {{ message.notification.body }}</h1>
-</div>
+      <div id='fcmNotification' *ngIf="msg.currentMessage | async as message" class="notification  slideInRight">
+          <button id='closeB' class="delete button is-small is-danger" (click)="msg.clear()" style="display: inline-flex"></button>
+          <h3>{{ message.notification.title }}</h3>
+          <img [src]="message.notification.icon" width="100px">
+          <h1>   {{ message.notification.body }}</h1>
+      </div>
 
       <router-outlet></router-outlet>
+      
+      <footer-nav> </footer-nav>
+
     </main>
     
   </div>

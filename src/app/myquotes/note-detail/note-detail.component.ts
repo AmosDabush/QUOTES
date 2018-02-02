@@ -75,7 +75,7 @@ export class NoteDetailComponent {
         }
     }
     mouseLeave(div: string) {
-        this.wait(600)
+        this.wait(300)
         var likes = document.getElementById(div);
         if (typeof likes !== "undefined" && likes) {
             likes.style.display = 'none'
