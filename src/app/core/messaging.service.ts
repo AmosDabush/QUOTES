@@ -32,7 +32,7 @@ export class MessagingService {
       return m.getToken()
     })
     .then(token => {
-      console.log(token)
+      // console.log(token)
       this.saveToken(user, token)
     })
     .catch((err) => {
@@ -71,7 +71,7 @@ export class MessagingService {
   private saveToken(user, token): void {
     
       const currentTokens = user.fcmTokens || { }
-      console.log(currentTokens, token)
+      // console.log(currentTokens, token)
 
       // If token does not exist in firestore, update db
       if (!currentTokens[token]) {

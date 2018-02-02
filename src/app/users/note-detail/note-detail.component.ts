@@ -42,9 +42,7 @@ export class NoteDetailComponent {
         const CName = this.noteService.getCurrentName();
         let subList2 = [CUid];
         CNote.valueChanges().take(1).forEach(n => {
-            // console.log(n)
-            // console.log(n.heartsList)
-
+        
             if (!n.heartsList || !n.heartsListNames)
                 //  this.afs.doc<Note>(`users/${authorId}/notes/${Nid}`);
                 this.noteService.updateNote(Nid, {

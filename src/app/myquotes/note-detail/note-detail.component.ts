@@ -37,11 +37,8 @@ export class NoteDetailComponent {
         const CNote = this.noteService.getNote2(Nid, authorId)
         const CUid = this.noteService.getCurrentUid();
         const CName = this.noteService.getCurrentName();
-        console.log(CName)
         let subList2 = [CUid];
-        console.log(CUid)
         CNote.valueChanges().take(1).forEach(n => {
-
 
             if (!n.heartsList || !n.heartsListNames)
                 this.noteService.updateNote2(Nid, {
