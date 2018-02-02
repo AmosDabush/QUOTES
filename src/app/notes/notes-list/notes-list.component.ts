@@ -32,9 +32,7 @@ export class NotesListComponent implements OnInit {
   }
 
   createNote2(){
-          const docRef = this.afs.collection('notificationList').doc('SVZjOeqeIl0JiLqVRfPU');
-     
-      this.itemsRef = this.afs.collection('notificationList').doc('SVZjOeqeIl0JiLqVRfPU');
+    this.itemsRef = this.afs.collection('notificationList').doc('SVZjOeqeIl0JiLqVRfPU');
      
     // ['added', 'modified', 'removed']
      this.itemsRef.snapshotChanges().forEach((a) => {

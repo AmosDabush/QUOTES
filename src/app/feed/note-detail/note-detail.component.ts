@@ -24,7 +24,7 @@ export class NoteDetailComponent {
     /*add +1 hart to a quote ,add Uid and Uname of the user for the Heart-list*/
     addHeartToNote(val: number) {
         if (this.note.id && this.note.authorId) {
-            console.log("this.note.authorId" + this.note.authorId)
+            // console.log("this.note.authorId" + this.note.authorId)
             // this.noteService.updateNote(this.note.id, { hearts: val + 1 },this.note.authorId);
             this.addToHeartlist(this.note.id, this.note.authorId, val)
         } else {
@@ -81,17 +81,15 @@ export class NoteDetailComponent {
     }
 
 
-    //open Uname hears List while hover 
+    //open User names hears List while hover 
     mouseEnter(div: string) {
-        console.log(div)
         var likes = document.getElementById(div);
         if (typeof likes !== "undefined" && likes) {
             likes.style.display = 'inline'
         }
     }
-    //close Uname hearts List while hover 
+    //close User names hearts List while hover 
     mouseLeave(div: string) {
-        console.log('out' + div)
         var likes = document.getElementById(div);
         if (typeof likes !== "undefined" && likes) {
             likes.style.display = 'none'

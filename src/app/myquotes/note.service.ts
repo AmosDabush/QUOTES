@@ -12,7 +12,6 @@ import { map } from 'rxjs/operators';
 import { AuthService } from '../core/auth.service';
 
 import { PushNotificationsService } from 'ng-push'
-
 interface NewNote {
     content: string;
     hearts: 0;
@@ -118,14 +117,27 @@ export class NoteService {
         return this.afs.doc < Note > (`users/${this.currentUserUid}/notes/${id}`);
     }
 
+    /*create new note call this.createNote with the right prameters*/
     create(content: string) {
+        const itemsRef = < any > this.afs.doc(`users/${this.currentUserUid}`).valueChanges();
+
+        return itemsRef
+            .take(1)
+            .toPromise().then((data) => {
+                this.createNote(data.photoURL, data.displayName, content)
+            });
+    }
+
+
+    /*create new note*/
+    createNote(PhotoURL, displayName, content: string) {
         const note = {
             content,
             hearts: 0,
             time: new Date().getTime(),
-            authorName: this.currentUserName,
+            authorName: displayName,
             authorId: this.currentUserUid,
-            authorPhotoURL: this.currentUserPhotoURL,
+            authorPhotoURL: PhotoURL,
             heartsList: [],
 
         };

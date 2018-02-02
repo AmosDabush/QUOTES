@@ -153,11 +153,10 @@ export class AuthService {
         //chack if User allredy exsist 
         userRefC.forEach(exsist => {
             if (!exsist) {
-                console.log("new  ")
-                return userRef.set(data); //if exsist then update 
+                return userRef.set(data); //new user - if !exsist then set
             } else {
                 console.log("User allredy exsist  ")
-                return userRef.update(dataUpdate); //TO-DO!  if exsist then update 
+                return userRef.update(dataUpdate); //User exsist exsist then update data 
 
             }
         });
@@ -192,17 +191,12 @@ export class AuthService {
         //chack if User allredy exsist 
         userRefC.forEach(exsist => {
             if (!exsist) {
-                console.log("new  ")
-                return userRef.set(data); //if exsist then update 
+                return userRef.set(data); //new user - if !exsist then set
             } else {
                 console.log("User allredy exsist  ")
-                return userRef.update(dataUpdate); //TO-DO!  if exsist then update 
-
+                return userRef.update(dataUpdate); //User exsist exsist then update data
             }
         });
-
-
-
 
     }
 
