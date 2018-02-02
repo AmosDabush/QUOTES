@@ -1,55 +1,91 @@
 
-<nav class="navbar-brand "  role="navigation" aria-label="main navigation">
 
-  <div class="">
+
+<div class="navbar  is-transparent">
+  <div class="navbar-brand">
     <a class="navbar-item navbar-start" routerLink="/">
       <img src="assets\images\icons\PF-004.png" width="" height=""  alt="Quotes-Me app" style="display: grid"/> Quotes-Me
     </a>
+   
+    <div class="navbar-burger burger is-boxed" (click)="toggleCollapse()"  [ngClass]="{'is-active': show}">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 
-   
-    <div class="navbar-brand navbar-end" [ngClass]="{'is-active':show }">
 
   <!-- This "nav-menu" is hidden on mobile -->
-  <!-- Add the modifier "is-active" to display it on mobile -->
-  <div class="navbar-menu " [ngClass]="{'is-active':show }">
-    <!--<a class="navbar-item" routerLink="/login" (click)="toggleCollapse()">
-      Login
-    </a>-->
+  <!-- Add the modifier "[ngClass]="{'is-active':show }" to display it on mobile -->
+  <div class="navbar-menu"  >
+    <div class="navbar-start">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link" >
+          Menu
+        </a>
+        <div class="navbar-dropdown is-boxed">
+       <span class="navbar-item" routerLink="/userprofile1" (click)="toggleCollapse()">
+      Profile
+    </span>
     <a class="navbar-item" routerLink="/myquotes" (click)="toggleCollapse()">
       My-Quotes
+     </a>
+       <a class="navbar-item " routerLink="/friends" (click)="toggleCollapse()">
+      friends-list
      </a>
     <a class="navbar-item" routerLink="/feed" (click)="toggleCollapse()">
       Feed
     </a>
-    <a class="navbar-item" routerLink="/userprofile1" (click)="toggleCollapse()">
-      Profile
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div id="navbarExampleTransparentExample" class="navbar-menu navbar-end" [ngClass]="{'is-active':show }" >
+      <div class="navbar-item">
+        <!--<div class="field is-grouped">-->
+          <p class="control">
+            <a class="navbar-item" routerLink="/userprofile1" (click)="toggleCollapse()">
+              Profile
+            </a>
+          </p>
+              <p class="control">
+        <a class="navbar-item" routerLink="/myquotes" (click)="toggleCollapse()">
+      My-Quotes
+     </a>
+          </p>
+          <p class="control">
+     <a class="navbar-item " routerLink="/friends" (click)="toggleCollapse()">
+      Friends-List
+     </a>
+          </p>
+          <p class="control">  
+               <a class="navbar-item" routerLink="/feed" (click)="toggleCollapse()">
+      Feed
     </a>
+          </p>
+     <p class="control">
+            <a class="navbar-item" routerLink="/">
+              Home
+            </a>
     <!--<a class="nav-item" routerLink="/items" (click)="toggleCollapse()">
       To-Do List
      </a>-->
       <!--<a class="nav-item" routerLink="/users" (click)="toggleCollapse()">
       Users-list
      </a>-->
-     <a class="navbar-item " routerLink="/friends" (click)="toggleCollapse()">
-      friends-list
-     </a>
     <!--<a class="nav-item" routerLink="/notes" (click)="toggleCollapse()">
     anonymous-Quotes
     </a>-->
+    <!--<a class="navbar-item" routerLink="/login" (click)="toggleCollapse()">
+      Login
+    </a>-->
+          </p>
 
-  </div>
-
-
+        <!--</div>-->
+      </div>
+    </div>
 </div>
-  <div class=" navbar-burger navbar-end">
 
-    <button class="button navbar-burger navbar-end" (click)="toggleCollapse()" [ngClass]="{'is-active': show}">
-      <span class="navbar-end"></span>
-      <span class="navbar-end"></span>
-      <span class="navbar-end"></span>
-    </button>
-</div>
+<nav>
 </nav>
-
-

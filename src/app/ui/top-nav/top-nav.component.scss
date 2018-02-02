@@ -5,16 +5,16 @@ nav {
   padding: 0 5vw;
   padding-right: 60px;
   // display: -webkit-inline-box;
-margin: auto;
-    width: 99%;
+  margin: auto;
+  width: 99%;
     // padding: 10px;
 
-  .nav-item {
+  navbar-item {
     color: gray;
     font-weight: normal;
     transition: color 0.3s ease;
     &:hover {
-      font-color: #1c90f3;
+      color: #1c90f3;
     }
   }
 }
