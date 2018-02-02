@@ -1,28 +1,28 @@
-<div>
-  <div class="picbox">
 
-  <!--<a onClick="history.go(0)" VALUE="Refresh">-->
-  <img class="card-img-top" [src]="note.authorPhotoURL" width=50px>
-  <p style="font-weight:bolder;display:-webkit-inline-flex;">{{ note.authorName }}</p>
-  <!--</a>-->
-  <p style="display:block;">{{ note.time | date: 'medium' }}</p>
-  </div>
-  
-  <h4 style="font-weight:bold;">{{ note.content }}</h4>
-    
+<div>
+    <div class="picbox">
+
+        <!--<a routerLink="/users/{{note.authorId}}">-->
+            <img class="card-img-top" [src]="note.authorPhotoURL" width=50px>
+            <p style="font-weight:bolder;display:-webkit-inline-flex;">{{ note.authorName }} </p>
+        <!--</a>-->
+        <p style="display:block;">{{ note.time | date: 'medium' }}</p>
+    </div>
+
+    <h4 style="font-weight:bold;">{{ note.content }}</h4>
+
     <div (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
         <span class="button is-small is-info" (click)='addHeartToNote(note.hearts)'>
           Heart  <i class="fa fa-heart"> {{ note.hearts || 0 }}</i> 
         </span>
-        <div *ngIf="note.heartsListNames">
-            <div class="box" id="{{note.id}}" style="display : none">
-                <span *ngFor="let n of note.heartsListNames" style="display : -webkit-inline-box">    
-                      {{n}},
+        <div *ngIf="note.heartsListNames" >
+            <div id="{{note.id}}" style="overflow: scroll; display : none">
+                <span  *ngFor="let n of note.heartsListNames; let i = index; " style="display : -webkit-inline-box; ">  
+                      <div *ngIf="i<this.likeShowNum">{{n}},</div>
+                      <div class="button is-small" (click)="this.likeShowNum =this.likeShowNum + 2" *ngIf="i==this.likeShowNum">{{note.hearts-i}} more...</div>
                 </span>
             </div>
         </div>
     </div>
-  <!--<span class="button is-small is-danger" (click)='deleteNote(note?.id)'>Delete</span>-->
-  <!--<p>This note has been hearted {{ note.hearts || 0 }} times.</p>-->
-    <!--<p>id : {{ note.id  }}</p>-->
+
 </div>

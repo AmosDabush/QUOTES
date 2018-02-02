@@ -1,29 +1,32 @@
 
+
 <div>
-  <div class="picbox">
-  <a routerLink="/userprofile1">
-  <img class="card-img-top" [src]="note.authorPhotoURL" width=50px>
-  <p style="font-weight:bolder;display:-webkit-inline-flex;">{{ note.authorName }} </p>
-  </a>
-  <p style="display:block;">{{ note.time | date: 'medium' }}</p>
-  </div>
-  
-  <h4 style="font-weight:bold;">{{ note.content }}</h4>
+    <div class="picbox">
+
+        <a routerLink="/users/{{note.authorId}}">
+            <img class="card-img-top" [src]="note.authorPhotoURL" width=50px>
+            <p style="font-weight:bolder;display:-webkit-inline-flex;">{{ note.authorName }} </p>
+        </a>
+        <p style="display:block;">{{ note.time | date: 'medium' }}</p>
+    </div>
+
+    <h4 style="font-weight:bold;">{{ note.content }}</h4>
+
+    
   <span class="button is-small is-danger" (click)='deleteNote(note?.id)'>Delete</span> 
-   
+
     <span (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
         <span class="button is-small is-info" (click)='addHeartToNote(note.hearts)'>
           Heart  <i class="fa fa-heart"> {{ note.hearts || 0 }}</i> 
         </span>
-        <div *ngIf="note.heartsListNames">
-            <div class="box" id="{{note.id}}" style="display:none">
-                
-                     <span  *ngFor="let n of note.heartsListNames; let i = index" style="display : -webkit-inline-box; ">    
-                      <span  *ngIf="i<3">{{n}},</span>
-                      <span *ngIf="i==3">{{note.hearts-i}} more...</span>
-                </span>
+        <div *ngIf="note.heartsListNames" >
+            <div id="{{note.id}}" style="overflow: scroll; display : none">
+                <div  *ngFor="let n of note.heartsListNames; let i = index; " style="display : -webkit-inline-box; ">  
+                      <div *ngIf="i<this.likeShowNum">{{n}},</div>
+                      <div class="button is-small" (click)="this.likeShowNum =this.likeShowNum + 2" *ngIf="i==this.likeShowNum">{{note.hearts-i}} more...</div>
+                </div>
             </div>
         </div>
     </span>
-    
+
 </div>

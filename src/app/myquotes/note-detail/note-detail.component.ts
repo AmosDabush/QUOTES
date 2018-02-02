@@ -15,8 +15,8 @@ export class NoteDetailComponent {
     @
     Input()
     note: Note;
-
-    constructor(private noteService: NoteService) {}
+    likeShowNum;
+    constructor(private noteService: NoteService) {this.likeShowNum=3}
 
     //add Heart To a Note (aka like)
     addHeartToNote(val: number) {
@@ -71,10 +71,11 @@ export class NoteDetailComponent {
     mouseEnter(div: string) {
         var likes = document.getElementById(div);
         if (typeof likes !== "undefined" && likes) {
-            likes.style.display = 'inline'
+            likes.style.display = 'inline-table'
         }
     }
     mouseLeave(div: string) {
+        this.wait(600)
         var likes = document.getElementById(div);
         if (typeof likes !== "undefined" && likes) {
             likes.style.display = 'none'
@@ -82,5 +83,12 @@ export class NoteDetailComponent {
         }
     }
 
+wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
 
 }

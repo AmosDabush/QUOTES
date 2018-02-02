@@ -17,10 +17,8 @@ export class NoteDetailComponent {
 
     @Input()
     note: Note;
-
-    constructor(private noteService: FeedService) {}
-
-
+    likeShowNum ;
+    constructor(private noteService: FeedService) {this.likeShowNum=3;}
     /*add +1 hart to a quote ,add Uid and Uname of the user for the Heart-list*/
     addHeartToNote(val: number) {
         if (this.note.id && this.note.authorId) {
@@ -32,10 +30,8 @@ export class NoteDetailComponent {
         }
     }
 
-
     //addHeartToNote sub-method
     addToHeartlist(Nid, authorId, val) {
-
         //add to notificationList
         // const CNote = this.afs.doc<Note>(`users/'${authorId}'/notes/'${Nid}'`).valueChanges().take(1);
         const CNote = this.noteService.getNote(Nid, authorId)

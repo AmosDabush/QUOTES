@@ -18,10 +18,11 @@ export class NoteDetailComponent {
 
     @Input()
     note: Note;
-
+    likeShowNum;
+    
     constructor(private noteService: FeedService,
         private route: ActivatedRoute,
-    ) {}
+    ) {this.likeShowNum=3}
 
     //add Heart To a Note (aka like)
     addHeartToNote(val: number) {

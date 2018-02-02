@@ -15,10 +15,10 @@
           Heart  <i class="fa fa-heart"> {{ note.hearts || 0 }}</i> 
         </span>
         <div *ngIf="note.heartsListNames" >
-            <div class="box" id="{{note.id}}" style="overflow: scroll; display : none">
-                <span  *ngFor="let n of note.heartsListNames; let i = index; " style="display : -webkit-inline-box; ">    
-                      <div *ngIf="i<3">{{n}},</div>
-                      <div class=" is-small" *ngIf="i==3">{{note.hearts-i}} more...</div>
+            <div id="{{note.id}}" style="overflow: scroll; display : none">
+                <span  *ngFor="let n of note.heartsListNames; let i = index; " style="display : -webkit-inline-box; ">  
+                      <div *ngIf="i<this.likeShowNum">{{n}},</div>
+                      <div class="button is-small" (click)="this.likeShowNum =this.likeShowNum + 2" *ngIf="i==this.likeShowNum">{{note.hearts-i}} more...</div>
                 </span>
             </div>
         </div>
