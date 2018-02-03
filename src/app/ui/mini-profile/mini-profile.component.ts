@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 import { AuthService } from '../../core/auth.service';
-
 import { UsersModule } from '../../users/users.module';
 import { UserService } from '../../users/user.service';
 import { UserDetailComponent } from '../../users/user-detail/user-detail.component';
+import { NotifyService } from '../../core/notify.service';
 
 
 
@@ -15,11 +15,16 @@ import { UserDetailComponent } from '../../users/user-detail/user-detail.compone
 })
 export class UserProfileComponent {
 
-  constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService,
+          private notify: NotifyService) { }
 
-  logout() {
-    this.auth.signOut();
-  }
+logout() {
+  var res = confirm("are you sure you want to logout?");
+  if (res == true) {
+      this.auth.signOut();  
+      this.notify.clear()
+     }
+    }
 
 
 // open or close the mini profile component

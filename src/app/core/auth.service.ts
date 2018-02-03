@@ -130,6 +130,7 @@ export class AuthService {
 
     // Sets user data to firestore after succesful login
     private updateUserData(user: User) {
+    
 
         const userRef: AngularFirestoreDocument < User > = this.afs.doc(`users/${user.uid}`);
         const userRefC = this.afs.doc(`users/${user.uid}`).valueChanges();
@@ -168,7 +169,7 @@ export class AuthService {
 
     // Sets user data to firestore after succesful login
     private updateUserData2(user: User,displayName:string) {
-
+        
         const userRef: AngularFirestoreDocument < User > = this.afs.doc(`users/${user.uid}`);
         const userRefC = this.afs.doc(`users/${user.uid}`).valueChanges();
 
@@ -197,7 +198,6 @@ export class AuthService {
                 return userRef.update(dataUpdate); //User exsist exsist then update data
             }
         });
-
     }
 
 

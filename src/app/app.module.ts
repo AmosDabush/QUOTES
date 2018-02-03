@@ -48,6 +48,7 @@ import { PushNotificationsModule } from 'ng-push';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    
   ],
   providers: [],
   bootstrap: [

@@ -20,8 +20,16 @@ nav {
 }
 .card-img-top{
   border-radius: 45%;
+  display: inherit;
 }
 
 img[src=""] {
     display: none;
 }
+
+
+.authenticated{
+  border-radius: 45%;
+  display: -webkit-inline-box;
+}
+

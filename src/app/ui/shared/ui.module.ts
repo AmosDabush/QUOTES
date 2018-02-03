@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '../../shared/shared.module';
 import { NavService } from './nav.service';
 import { UserLoginComponent } from '../user-login/user-login.component';
+import { NavProfileComponent } from '../nav-profile/nav-profile.component';
+
 import { UserProfileComponent } from '../mini-profile/mini-profile.component';
 import { UserProfile1Component } from '../user-profile1/user-profile1.component';
 import { UserFormComponent } from '../user-form/user-form.component';
@@ -28,6 +30,7 @@ import { NotificationMessageComponent } from '../notification-message/notificati
   ],
   declarations: [
     UserLoginComponent,
+    NavProfileComponent,
     UserProfileComponent,
     UserProfile1Component,
     TopNavComponent,

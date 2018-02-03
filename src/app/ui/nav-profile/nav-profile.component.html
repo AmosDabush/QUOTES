@@ -1,0 +1,24 @@
+
+<div class="" >
+  <div *ngIf="auth.user | async; then authenticated else guest">
+          <!-- template will replace this div -->
+  </div>
+</div>
+
+<!-- User NOT logged in -->
+<ng-template #guest class="box">
+     <a class="navbar-link">
+        GUEST
+    </a>
+</ng-template>
+
+<!-- User logged in -->
+<ng-template #authenticated>
+  
+    <div id="authenticatedNav" *ngIf="auth.user | async as user">
+        <a id="navAuth" class="navbar-link">
+        <img class="card-img-top" [src]="user.photoURL" > &nbsp; {{ user.displayName }}
+        </a>
+      <!--</a>-->
+    </div>
+</ng-template>

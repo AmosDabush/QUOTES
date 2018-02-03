@@ -1,6 +1,7 @@
+
 <div class="navbar  is-transparent">
     <div class="navbar-brand">
-        <a class="navbar-item navbar-start" routerLink="/">
+        <a class="navbar-item navbar-start" routerLink="/">&nbsp;	&nbsp;	
         <img src="assets\images\icons\PF-004.png" width="" height=""  alt="Quotes-Me app" style="display: grid"/> Quotes-Me
         </a>
         <div class="navbar-burger burger is-boxed" (click)="toggleCollapse()" [ngClass]="{'is-active': show}">
@@ -13,9 +14,10 @@
 <!-- Add the modifier "[ngClass]="{'is-active':show }" to display it on mobile -->
 <div class="navbar-menu">
     <div class="navbar-start">
-        <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-            Menu
+        <div  class="navbar-item has-dropdown is-hoverable">
+            
+            <a id="navAuth" class="navbar-item navbar-start">
+                <nav-profile></nav-profile>
             </a>
             <div class="navbar-dropdown is-boxed">
                 <a class="navbar-item" routerLink="/userprofile1" (click)="toggleCollapse()">
@@ -30,6 +32,12 @@
                 <a class="navbar-item" routerLink="/feed" (click)="toggleCollapse()">
                 Feed
                 </a>
+                <div id="authenticatedNav" *ngIf="auth.user | async as user;else other_content ">
+                    <a class="navbar-item" routerLink="/" (click)="logout()" style="color:red">
+                        Log-out
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>
@@ -73,9 +81,16 @@
             <!--<a class="navbar-item" routerLink="/login" (click)="toggleCollapse()">
                 Login
                 </a>-->
-        </p>
+        </p>&nbsp;	&nbsp;	&nbsp;	
         <!--</div>-->
     </div>
 </div>
 </div>
 <nav></nav>
+
+
+<ng-template #other_content>
+    <a class="navbar-item" routerLink="/login" (click)="toggleCollapse()">
+        Log-in
+    </a>
+ </ng-template>
