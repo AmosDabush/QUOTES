@@ -2,7 +2,7 @@
   <h3>{{ note.content }}</h3>
   <!--<hr>-->
   <span class="button is-small is-info" (click)='addHeartToNote(note.hearts)'>
-    Heart <i class="fa fa-heart"> {{ note.hearts || 0 }}</i>
+    Heart <i class="fas fa-heart"> {{ note.hearts || 0 }}</i>
   </span>
   <span class="button is-small is-danger" (click)='deleteNote(note?.id)'>Delete</span>
   <!--<p>This note has been hearted {{ note.hearts || 0 }} times.</p>-->

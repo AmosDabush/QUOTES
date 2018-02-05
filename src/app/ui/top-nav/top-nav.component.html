@@ -1,3 +1,4 @@
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">-->
 
 <div class="navbar  is-transparent">
     <div class="navbar-brand">
@@ -20,21 +21,21 @@
                 <nav-profile></nav-profile>
             </a>
             <div class="navbar-dropdown is-boxed">
-                <a class="navbar-item" routerLink="/userprofile1" (click)="toggleCollapse()">
-                Profile
+                <a class="fas fa-user navbar-item" routerLink="/userprofile1" (click)="toggleCollapse()">
+                &nbsp; Profile
                 </a>
-                <a class="navbar-item" routerLink="/myquotes" (click)="toggleCollapse()">
-                My-Quotes
+                <a class="fas fa-quote-right navbar-item" routerLink="/myquotes" (click)="toggleCollapse()">
+                &nbsp; My-Quotes
                 </a>
-                <a class="navbar-item " routerLink="/friends" (click)="toggleCollapse()">
-                friends-list
+                <a class="fas fa-users navbar-item " routerLink="/friends" (click)="toggleCollapse()">
+                &nbsp; friends-list 
                 </a>
-                <a class="navbar-item" routerLink="/feed" (click)="toggleCollapse()">
-                Feed
+                <a class="fab fa-delicious navbar-item" routerLink="/feed" (click)="toggleCollapse()">
+                &nbsp; Feed
                 </a>
                 <div id="authenticatedNav" *ngIf="auth.user | async as user;else other_content ">
-                    <a class="navbar-item" routerLink="/" (click)="logout()" style="color:red">
-                        Log-out
+                    <a class="fas fa-sign-out navbar-item" routerLink="/" (click)="logout()" style="color:red">
+                        &nbsp; Log-out
                     </a>
                 </div>
 
@@ -46,28 +47,28 @@
     <div class="navbar-item">
         <!--<div class="field is-grouped">-->
         <p class="control">
-            <a class="navbar-item" routerLink="/userprofile1" (click)="toggleCollapse()">
-            Profile
+            <a class="fas fa-user navbar-item" routerLink="/userprofile1" (click)="toggleCollapse()">
+            &nbsp; Profile
             </a>
         </p>
         <p class="control">
-            <a class="navbar-item" routerLink="/myquotes" (click)="toggleCollapse()">
-            My-Quotes
+            <a class="fas fa-quote-right navbar-item" routerLink="/myquotes" (click)="toggleCollapse()">
+            &nbsp; My-Quotes
             </a>
         </p>
         <p class="control">
-            <a class="navbar-item " routerLink="/friends" (click)="toggleCollapse()">
-            Friends-List
+            <a class="far fa-users navbar-item " routerLink="/friends" (click)="toggleCollapse()">
+            &nbsp; Friends-List
             </a>
         </p>
         <p class="control">
-            <a class="navbar-item" routerLink="/feed" (click)="toggleCollapse()">
-            Feed
+            <a class="fas fa-newspaperfas fa-delicious navbar-item" routerLink="/feed" (click)="toggleCollapse()">
+            &nbsp; Feed
             </a>
         </p>
         <p class="control">
-            <a class="navbar-item" routerLink="/" (click)="toggleCollapse()">
-            Home
+            <a class="fas fa-home navbar-item" routerLink="/" (click)="toggleCollapse()">
+            &nbsp; Home
             </a>
             <!--<a class="nav-item" routerLink="/items" (click)="toggleCollapse()">
                 To-Do List
@@ -90,7 +91,7 @@
 
 
 <ng-template #other_content>
-    <a class="navbar-item" routerLink="/login" (click)="toggleCollapse()">
-        Log-in
+    <a class="fas fa-sign-in navbar-item" routerLink="/login" (click)="toggleCollapse()">
+        &nbsp;Log-in
     </a>
  </ng-template>
