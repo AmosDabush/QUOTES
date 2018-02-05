@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+// import { ActivatedRoute} from '@angular/router';
 
 import { FeedService } from '../../feed/feed.service';
 
@@ -13,15 +13,17 @@ import { AppRoutingModule } from '../../app-routing.module';
     selector: 'note-detail',
     templateUrl: './note-detail.component.html',
     styleUrls: ['./note-detail.component.scss'],
+    host: {
+    '(window:resize)': 'onResize($event)'
+    },
 })
 export class NoteDetailComponent {
 
     @Input()
     note: Note;
     likeShowNum;
-    
+    mobile:boolean;
     constructor(private noteService: FeedService,
-        private route: ActivatedRoute,
     ) {this.likeShowNum=3}
 
     //add Heart To a Note (aka like)
@@ -32,6 +34,24 @@ export class NoteDetailComponent {
         } else {
             console.error('Note missing ID!');
         }
+    }
+    //use for changeing view if mobile or not
+    ngOnInit() {
+    if (window.innerWidth < 1022) { // 768px portrait
+        this.mobile = true;
+     }
+     else
+        this.mobile = false;
+    }
+
+    //use for changeing view if mobile or not 
+    onResize(event){
+        event.target.innerWidth;
+            if (window.innerWidth < 1022) { 
+        this.mobile = true;
+     }
+     else
+        this.mobile = false;
     }
 
     //add users uids and display names to note like list
@@ -82,6 +102,22 @@ export class NoteDetailComponent {
         }
     }
 
+        //show like list on mouse hover 
+    mouseEnter1(div: string) {
+        console.log(div)
+        var likes = document.getElementById(div);
+        if (typeof likes !== "undefined" && likes) {
+            likes.style.display = 'inline'
+        }
+    }
+    mouseLeave1(div: string) {
+        var likes = document.getElementById(div);
+        if (typeof likes !== "undefined" && likes) {
+            likes.style.display = 'none'
+
+        }
+    }
+
     //delete selected note
     deleteNote(id: string) {
         if (id && this.note.authorId)
@@ -89,5 +125,13 @@ export class NoteDetailComponent {
         else
             console.error('Note missing ID!');
     }
+
+    show = false;
+
+    toggleCollapse() {
+        this.show = !this.show;
+     }
+
+
 
 }

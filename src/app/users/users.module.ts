@@ -14,9 +14,14 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { Note } from '../feed/note-model';
 import { NoteDetailComponent } from './note-detail/note-detail.component';
 import { FeedService } from '../feed/feed.service';
+import { AppRoutingModule } from '../app-routing.module';
+// import { AppComponent } from '../';
+
 
 @NgModule({
   imports: [
+    // AppComponent,
+    AppRoutingModule,
     CommonModule,
     FormsModule,
     SharedModule,

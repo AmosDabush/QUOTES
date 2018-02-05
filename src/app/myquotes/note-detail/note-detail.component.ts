@@ -9,6 +9,9 @@ Component({
     selector: 'note-detail',
     templateUrl: './note-detail.component.html',
     styleUrls: ['./note-detail.component.scss'],
+    host: {
+    '(window:resize)': 'onResize($event)'
+    },
 })
 export class NoteDetailComponent {
 
@@ -16,7 +19,33 @@ export class NoteDetailComponent {
     Input()
     note: Note;
     likeShowNum;
+    mobile:boolean;
     constructor(private noteService: NoteService) {this.likeShowNum=3}
+
+    //use for changeing view if mobile or not
+    ngOnInit() {
+    if (window.innerWidth < 1022) { // 768px portrait
+        this.mobile = true;
+     }
+     else
+        this.mobile = false;
+    }
+
+    //use for changeing view if mobile or not 
+    onResize(event){
+        event.target.innerWidth;
+            if (window.innerWidth < 1022) { 
+        this.mobile = true;
+     }
+     else
+        this.mobile = false;
+    }
+
+
+
+
+
+
 
     //add Heart To a Note (aka like)
     addHeartToNote(val: number) {
@@ -75,7 +104,7 @@ export class NoteDetailComponent {
         }
     }
     mouseLeave(div: string) {
-        this.wait(300)
+        this.wait(100)
         var likes = document.getElementById(div);
         if (typeof likes !== "undefined" && likes) {
             likes.style.display = 'none'

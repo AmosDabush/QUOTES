@@ -29,3 +29,15 @@ i {
     height: 100px;
     overflow: scroll;
 }
+ 
+.show-large {
+  display: none;
+}
+@media only screen and (min-width: 1019px) {
+  .show-large {
+    display: block;
+  }
+  .show-mobile {
+    display: none;
+  }
+}

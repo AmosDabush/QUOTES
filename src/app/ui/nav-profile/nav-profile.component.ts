@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 
 import { AuthService } from '../../core/auth.service';
-
-import { UsersModule } from '../../users/users.module';
 import { UserService } from '../../users/user.service';
 import { UserDetailComponent } from '../../users/user-detail/user-detail.component';
 import { NotifyService } from '../../core/notify.service';

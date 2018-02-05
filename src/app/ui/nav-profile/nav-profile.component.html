@@ -14,11 +14,9 @@
 
 <!-- User logged in -->
 <ng-template #authenticated>
-  
     <div id="authenticatedNav" *ngIf="auth.user | async as user">
         <a id="navAuth" class="navbar-link">
-        <img class="card-img-top" [src]="user.photoURL" > &nbsp; {{ user.displayName }}
+         <img class="card-img-top" [src]="user.photoURL" > &nbsp; {{ user.displayName }}
         </a>
-      <!--</a>-->
     </div>
 </ng-template>

@@ -22,3 +22,15 @@ i {
 .card-img-top{
   border-radius: 35%;
 }
+
+.show-large {
+  display: none;
+}
+@media only screen and (min-width: 1019px) {
+  .show-large {
+    display: block;
+  }
+  .show-mobile {
+    display: none;
+  }
+}

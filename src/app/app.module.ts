@@ -53,6 +53,7 @@ import { PushNotificationsModule } from 'ng-push';
   providers: [],
   bootstrap: [
     AppComponent,
+    
   ],
 })
 export class AppModule { }

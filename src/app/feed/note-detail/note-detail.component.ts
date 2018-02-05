@@ -6,19 +6,46 @@ import {Note} from '../note-model';
 
 import {AppRoutingModule} from '../../app-routing.module';
 
-
+ 
 
 @Component({
     selector: 'note-detail',
     templateUrl: './note-detail.component.html',
     styleUrls: ['./note-detail.component.scss'],
+    host: {
+    '(window:resize)': 'onResize($event)'
+  }
 })
 export class NoteDetailComponent {
 
+
     @Input()
     note: Note;
+    mobile:boolean;
     likeShowNum ;
-    constructor(private noteService: FeedService) {this.likeShowNum=3;}
+    constructor(private noteService: FeedService) {
+        this.likeShowNum=3;
+    }
+     
+    //use for changeing view if mobile or not
+    ngOnInit() {
+    if (window.innerWidth < 1022) { // 768px portrait
+        this.mobile = true;
+     }
+     else
+        this.mobile = false;
+    }
+
+    //use for changeing view if mobile or not 
+    onResize(event){
+        event.target.innerWidth;
+            if (window.innerWidth < 1022) { 
+        this.mobile = true;
+     }
+     else
+        this.mobile = false;
+    }
+
     /*add +1 hart to a quote ,add Uid and Uname of the user for the Heart-list*/
     addHeartToNote(val: number) {
         if (this.note.id && this.note.authorId) {

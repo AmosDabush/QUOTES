@@ -10,21 +10,70 @@
 
     <h4 style="font-weight:bold;">{{ note.content }}</h4>
 
-    <div (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
-        <span class="button is-small is-info" (click)='addHeartToNote(note.hearts)'>
-          Heart  <i class="fa fa-heart"> {{ note.hearts || 0 }}</i> 
-        </span>
-        <div *ngIf="note.heartsListNames" >
-            <div id="{{note.id}}" style="overflow: scroll; display : none">
-                <span  *ngFor="let n of note.heartsListNames; let i = index; " style="display : -webkit-inline-box; ">  
-                      <div *ngIf="i==0">{{n}}</div>
-                      <div *ngIf="i==1">,{{n}},</div>
-                      <div *ngIf="i<this.likeShowNum-1 && i>1">{{n}},</div>
-                      <div *ngIf="i==this.likeShowNum-1 or ">{{n}}.</div>
-                      <div class="button is-small" (click)="this.likeShowNum =this.likeShowNum + 2" *ngIf="i==this.likeShowNum">{{note.hearts-i}} more...</div>
+        <div *ngIf="!this.mobile" class="navbar-menu" [ngClass]="{'is-active':show }">
+
+        <div class="field is-grouped">
+            <!--like button + hover list of like User Names-->
+            <span (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
+                    <span  class="navbar-item has-dropdown is-hoverable">
+                        <span class="button is-small is-info" (click)='addHeartToNote(note.hearts)'>
+                            Heart  <i class="fa fa-heart"> {{ note.hearts || 0 }}</i> 
+                        </span>
+                        <span class="navbar-dropdown is-boxed">                          
+                                <span *ngIf="note.heartsListNames && note.heartsList" >
+                                    <span id="{{note.id}}" style="overflow: scroll; display : none">
+                                        <span  *ngFor="let n of note.heartsList; let i = index; " style="display : -webkit-inline-box; ">  
+                                            <span *ngIf="i<this.likeShowNum" class="is-size-6 has-text-centered">        
+                                                <a class="navbar-item" routerLink="/users/{{n}}">
+                                                {{note.heartsListNames[i]}}
+                                                </a>
+                                            </span>
+                                            <span class="button is-small" (click)="this.likeShowNum =this.likeShowNum + 3" *ngIf="i==this.likeShowNum">
+                                                {{note.hearts-i}} more...
+                                            </span>
+                                        </span>
+                                    </span>
+                                </span>
+                        </span>
                 </span>
+            </span>
+        </div>    
+    </div>
+
+
+    <span *ngIf="this.mobile">                
+        <div (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
+            <span class="button is-small is-info" (click)='addHeartToNote(note.hearts)'>
+            Heart  <i class="fa fa-heart"> {{ note.hearts || 0 }}</i> 
+            </span>
+            <div *ngIf="note.heartsList" >
+                <div id="{{note.id}}" style="overflow: scroll; display : none">
+                    <span  *ngFor="let n of note.heartsList; let j = index; " style="display : -webkit-inline-box; ">  
+                        <div *ngIf="j==0">    
+                            <a routerLink="/users/{{n}}">
+                                {{note.heartsListNames[j]}}
+                            </a>
+                        </div>
+                        <div *ngIf="j==1">
+                            ,<a routerLink="/users/{{n}}">
+                                {{note.heartsListNames[j]}}
+                            </a>,
+                        </div>
+                        <div *ngIf="j<this.likeShowNum-1 && j>1">
+                            <a  routerLink="/users/{{n}}">
+                                {{note.heartsListNames[j]}}
+                            </a>,
+                        </div>
+                        <div *ngIf="j==this.likeShowNum-1  ">
+                            <a  routerLink="/users/{{n}}">
+                                {{note.heartsListNames[j]}}
+                            </a>.
+                        </div>
+                        <div class="button is-small" (click)="this.likeShowNum =this.likeShowNum + 2" *ngIf="j==this.likeShowNum">{{note.hearts-j}} more...</div>
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
+    </span>
 
 </div>

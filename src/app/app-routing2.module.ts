@@ -19,7 +19,7 @@ import { UserProfile1Component } from './ui/user-profile1/user-profile1.componen
 import { AuthGuard } from './core/auth.guard';
 import { CoreModule } from './core/core.module';
 
-const routes: Routes = [
+const routes2: Routes = [
   { path: '', component: ReadmePageComponent },
   { path: 'login', component: UserLoginComponent },
   // { path: 'items', component: ItemsListComponent, canActivate: [AuthGuard] },
@@ -35,9 +35,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes2)],
   exports: [RouterModule],
   providers: [AuthGuard],
 })
-export class AppRoutingModule { }
+export class AppRouting2Module { }
 // export const APP_ROUTER_PROVIDERS = [provideRoutes(routes)];

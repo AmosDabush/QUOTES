@@ -20,7 +20,16 @@
     <div *ngIf="auth.user | async as user">
         <div class="box">
             <h3> {{ user.displayName }}</h3>
-            <a routerLink="/uploads" title="Change profile picture"><img class="card-img-top ,box" [src]="user.photoURL" width="150"></a>
+            <div class="picbox">
+                <div class="itemsContainer" >
+                    <a href="#">
+                        <img id="picProf" class="picProf" [src]="user.photoURL" width="250" height="250">
+                    </a>
+                    <a routerLink="/uploads" title="Change profile picture">
+                        <div class="play" ><img src="../../assets/images/icons/camera.png" width="110" /> </div>
+                    </a>
+                </div>
+            </div>
             <div>
                 <button class="button is-danger is-small" (click)="logout()" title='LogOut'>Logout</button>
             </div>
@@ -35,7 +44,7 @@
 
             <div class="field is-grouped">
                 <span class="button is-small is-success" (click)='updateDicription(user.uid,dicription);' title='add your dicription'>Add Discription</span>&#160;
-                <p><textarea cols="20" rows="1" [(ngModel)]="dicription" placeholder="add your dicription"></textarea></p>
+                <p><textarea  class="textarea is-small is-success" cols="20" rows="1" [(ngModel)]="dicription" placeholder="add your dicription"></textarea></p>
             </div>
 
 

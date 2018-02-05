@@ -13,6 +13,8 @@ nav {
     color: gray;
     font-weight: normal;
     transition: color 0.3s ease;
+    text-align: right;
+
     &:hover {
       color: #1c90f3;
     }
@@ -24,4 +26,9 @@ nav {
 
 img[src=""] {
     display: none;
+}
+
+.control{
+
+  text-align: right;
 }

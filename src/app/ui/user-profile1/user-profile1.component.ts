@@ -11,7 +11,6 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators';
 
-import { UsersModule } from '../../users/users.module';
 import { UserService } from '../../users/user.service';
 import { UserDetailComponent } from '../../users/user-detail/user-detail.component';
 import { Note } from '../../notes/note-model';
@@ -45,7 +44,6 @@ export class UserProfile1Component {
         private afs: AngularFirestore,
         private router: Router,
         private userService: UserService,
-        private UsersModule: UsersModule,
         private notify: NotifyService,
          ) {
 
@@ -240,5 +238,23 @@ export class UserProfile1Component {
             console.error('User missing ID!');
         }
     }
+
+    //hover 
+    mouseEnter(div: string, div2: string) {
+        var likes = document.getElementById(div);
+        if (typeof likes !== "undefined" && likes) {
+            likes.style.display = 'inline-table'
+        }
+    }
+    mouseLeave(div: string) {
+        var likes = document.getElementById(div);
+        if (typeof likes !== "undefined" && likes) {
+            likes.style.display = 'none'
+
+        }
+    }
+
+
+
 
 }
