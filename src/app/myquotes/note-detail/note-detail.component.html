@@ -1,4 +1,5 @@
-
+  <!--<script defer src="https://use.fontawesome.com/releases/[VERSION]/js/all.js"></script>-->
+  <!--<script defer src="https://use.fontawesome.com/releases/[VERSION]/js/v4-shims.js"></script>-->
 
 <div>
     <div class="picbox">
@@ -20,7 +21,7 @@
             <span (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
                     <span  class="navbar-item has-dropdown is-hoverable">
                         <span class="button is-small is-info" (click)='addHeartToNote(note.hearts)'>
-                            Heart  <i class="fa fa-heart"> {{ note.hearts || 0 }}</i> 
+                            Heart  <i class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
                         </span>
                         <span class="navbar-dropdown is-boxed">                          
                                 <span *ngIf="note.heartsListNames && note.heartsList" >
@@ -51,7 +52,7 @@
         <span class="show-mobile  button is-small is-danger" (click)='deleteNote(note?.id)'>Delete</span>               
         <div (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)" >
             <span class="button is-small is-info" (click)='addHeartToNote(note.hearts)'>
-            Heart  <i class="fa fa-heart"> {{ note.hearts || 0 }}</i> 
+            Heart  <i class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
             </span> 
             <!--<p id="userslikethis"(click)='mouseEnter(note.id);userslikethis.style.display=none' (mouseleave)="mouseLeave(note.id)" >{{ note.hearts || 0 }} users like this</p>-->
             <div *ngIf="note.heartsList" >
