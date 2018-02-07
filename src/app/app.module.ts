@@ -21,7 +21,7 @@ import { FriendsModule } from './friends/users.module';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 export const firebaseConfig = environment.firebaseConfig;
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFirestoreModule,AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 //Desktop/Push Notifications Module
 import { PushNotificationsModule } from 'ng-push';
@@ -47,6 +47,7 @@ import { PushNotificationsModule } from 'ng-push';
     FriendsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     
   ],

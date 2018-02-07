@@ -34,8 +34,8 @@ import { AppRoutingModule } from '../app-routing.module';
     NoteDetailComponent,
   ],
   providers: [
-      UserService,
-      FeedService,
+    UserService,
+    FeedService,
   ],
   
 })

@@ -1,9 +1,10 @@
   <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">-->
-
 <div class="navbar  is-transparent">
     <div class="navbar-brand">
         <a class="navbar-item navbar-start" routerLink="/">&nbsp;	&nbsp;	
         <img src="assets\images\icons\PF-004.png" width="" height=""  alt="Quotes-Me app" style="display: grid"/> Quotes-Me
+        </a>
+        <a *ngIf="this.mobile" class="navbar-item" (click)=ShowMobSearch()>&nbsp;<i class="fas fa-search"></i>	&nbsp;	
         </a>
         <div class="navbar-burger burger is-boxed" (click)="toggleCollapse()" [ngClass]="{'is-active': show}"     >
         <span></span>
@@ -43,6 +44,50 @@
         </div>
     </div>
 </div>
+
+
+
+<form id='search1' class="navbar-item has-dropdown is-hoverable" *ngIf="!this.mobile">    
+ <!--Search-Start-->
+ <span  class="navbar-item has-dropdown is-hoverable">
+    <input id='inputSearch' class="input is-info searchBoxInput" placeholder="Serch User" type="text"  (keydown)="search($event)" autocomplete="off"  >
+    <span id="tt" class="navbar-dropdown is-boxed">                          
+        <span  *ngFor="let user of users; let i = index;" style="display : -webkit-inline-box; " (click)="resetForm('search1')">  
+            <a class="navbar-item searchBoxRes"  routerLink="/users/{{user.uid}}"  >
+                {{user.displayName}}
+            </a>
+        </span>
+    </span>
+</span>
+<!--Search-End-->
+</form>
+
+ <!--mobile-Search-Start-->
+
+
+<form id='searchBoxMobile' class="navbar-item has-dropdown" *ngIf="this.mobile" style="display:none" >    
+<div class="field">
+  <div class="control box is-grouped">
+    <input id='inputSearch' class="input is-info inputSearch"
+     placeholder="Serch User" type="text"  (keydown)="search($event)" autocomplete="off" >
+     <a *ngIf="this.mobile" (click)=ShowMobSearch()>&nbsp;&nbsp;<i class="fas fa fa-close"></i>&nbsp;&nbsp;</a>
+    <span  *ngFor="let user of users; let i = index;" style="display : block; " (click)="resetForm('searchBoxMobile')">  
+           <span *ngIf="i<5">    
+                <a class="navbar-item searchBoxRes"  routerLink="/users/{{user.uid}}"  >
+                    {{user.displayName}}
+                </a>
+            </span>
+    </span>
+  </div>
+</div>
+
+</form>
+
+<!--Search-End-->
+
+
+
+
 <div id="navbarExampleTransparentExample" class="navbar-menu navbar-end" [ngClass]="{'is-active':show }">
     <div class="navbar-item">
         <!--<div class="field is-grouped">-->
@@ -95,3 +140,7 @@
         &nbsp;Log-in
     </a>
  </ng-template>
+
+
+
+

@@ -1,19 +1,18 @@
-<form [formGroup]="userForm"  *ngIf="newUser"  (ngSubmit)="signup()">
+<form [formGroup]="userForm" class='userForm' *ngIf="newUser"  (ngSubmit)="signup()">
 
   <h3>New User Signup</h3>
   <p class="button is-small" (click)="toggleForm()">Already Registered?</p>
   <hr>
 
-  <label for="displayName">displayName</label>
-  <input type="displayName" id="displayName" class="input"
+  <br><label for="displayName">Display-Name</label><br>
+  <input size="40" type="displayName" id="displayName" class="input"
          formControlName="displayName" required >
 
   <div *ngIf="formErrors.displayName" class="notification is-danger">
     {{ formErrors.displayName }}
   </div>
 
-
-  <label for="email">Email</label>
+  <br><label for="email">Email</label><br>
   <input type="email" id="email" class="input"
          formControlName="email" required >
 
@@ -21,27 +20,28 @@
     {{ formErrors.email }}
   </div>
 
-  <label for="password">Password</label>
-  <input type="password" id="password" class="input"
+  <br><label for="password">Password</label><br>
+  <input  type="password" id="password" class="input"
          formControlName="password" required >
 
   <div *ngIf="formErrors.password" class="notification is-danger">
     {{ formErrors.password }}
   </div>
 
-  <div *ngIf="userForm.valid" class="notification is-success">Form is valid</div>
+  <div *ngIf="userForm.valid" class="notification is-success">Form is valid</div><br>
   <button type="submit" class="button" [disabled]="!userForm.valid">Submit</button>
 
 </form>
 
 
-<form [formGroup]="userForm"  *ngIf="!newUser"  (ngSubmit)="login()">
+<form class='userForm' [formGroup]="userForm"  *ngIf="!newUser"  (ngSubmit)="login()">
 
   <h3>Existing User Login</h3>
   <p class="btn button is-small" (click)="toggleForm()">New User?</p>
   <hr>
 
-  <label for="email">Email</label>
+  <br><label for="email">Email</label><br>
+
   <input type="email" id="email" class="input"
          formControlName="email" required >
 
@@ -49,7 +49,7 @@
     {{ formErrors.email }}
   </div>
 
-  <label for="password">Password</label>
+  <br><label for="password">Password</label><br>
   <input type="password" id="password" class="input"
          formControlName="password" required >
 
@@ -57,7 +57,7 @@
     {{ formErrors.password }}
   </div>
 
-  <button type="submit" class="button" [disabled]="!userForm.valid">Submit</button>
+  <br><button type="submit" class="button" [disabled]="!userForm.valid">Submit</button>
 
   <span *ngIf="userForm.valid" class="help is-success">Form Looks Valid</span>
 
