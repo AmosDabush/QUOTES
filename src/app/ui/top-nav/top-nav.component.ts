@@ -8,7 +8,7 @@ import { DomSanitizer,SafeUrl } from '@angular/platform-browser';
 import { NotifyService } from '../../core/notify.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-
+ 
 // import { User } /from './user-model';
 @Component({
   selector: 'top-nav',
