@@ -27,7 +27,19 @@ logout() {
 
 
 // open or close the mini profile component
-clear(){
+clear(div:string){
+     var divToclear =  document.getElementById(div);
+        if (typeof divToclear !== "undefined" && divToclear) { 
+            if(divToclear.style.display !== 'none'){
+                divToclear.style.display = 'none'
+              }
+            else {
+                divToclear.style.display = 'inline'
+            }
+      }
+}
+
+clear2(){
      var authenticatedWin =  document.getElementById('authenticated');
      var closeB = document.getElementById('closeB');
      var openB = document.getElementById('openB');

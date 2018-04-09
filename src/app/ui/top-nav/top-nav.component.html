@@ -1,59 +1,73 @@
-  <head>
 
-  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">-->
-  </head>
 <div class="navbar  is-transparent">
     <div class="navbar-brand">
-        <a class="navbar-item navbar-start" routerLink="/">&nbsp;	&nbsp;	
+        <a class="navbar-item navbar-start" routerLink="/">
         <img src="assets\images\icons\PF-004.png" width="" height=""  alt="Quotes-Me app" style="display: grid"/> Quotes-Me
         </a>
-        <a *ngIf="this.mobile" class="navbar-item" (click)=ShowMobSearch()>&nbsp;<i class="fas fa-search"></i>	&nbsp;	
+        <a *ngIf="this.mobile" class="navbar-item" (click)=ShowMobSearch()><i class="fas fa-search"></i>	
         </a>
-        <div class="navbar-burger burger is-boxed" (click)="toggleCollapse()" [ngClass]="{'is-active': show}"     >
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</div>
-<!-- This "nav-menu" is hidden on mobile -->
-<!-- Add the modifier "[ngClass]="{'is-active':show }" to display it on mobile -->
-<div class="navbar-menu">
-    <div class="navbar-start">
-        <div  class="navbar-item has-dropdown is-hoverable">
-            
-            <a id="navAuth" class="navbar-item navbar-start">
-                <nav-profile></nav-profile>
-            </a>
-            <div class="navbar-dropdown is-boxed">
-                <a class="fas fa-user navbar-item" routerLink="/userprofile1" (click)="toggleCollapse()">
-                &nbsp; Profile
-                </a>
-                <a class="fas fa-quote-right navbar-item" routerLink="/myquotes" (click)="toggleCollapse()">
-                &nbsp; My-Quotes
-                </a>
-                <a class="fas fa-users navbar-item " routerLink="/friends" (click)="toggleCollapse()">
-                &nbsp; friends-list 
-                </a>
-                <a class="fab fa-delicious navbar-item" routerLink="/feed" (click)="toggleCollapse()">
-                &nbsp; Feed
-                </a>
-                <div id="authenticatedNav" *ngIf="auth.user | async as user;else other_content ">
-                    <a class="fas fa-sign-out navbar-item" routerLink="/" (click)="logout()" style="color:red">
-                        &nbsp; Log-out
-                    </a>
-                </div>
 
+        <!-- This "nav-menu" is hidden on mobile -->
+        <!-- Add the modifier "[ngClass]="{'is-active':show }" to display it on mobile -->
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <div  class="navbar-item has-dropdown is-hoverable">
+                
+                    <a id="navAuth" class="navbar-item navbar-start">
+                        <nav-profile></nav-profile>
+                    </a>
+
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="fas fa-user navbar-item" routerLink="/userprofile1" (click)="toggleCollapse()">
+                        &nbsp; Profile
+                        </a>
+                        <a class="fas fa-quote-right navbar-item" routerLink="/myquotes" (click)="toggleCollapse()">
+                        &nbsp; My-Quotes
+                        </a>
+                        <a class="fas fa-users navbar-item " routerLink="/friends" (click)="toggleCollapse()">
+                        &nbsp; friends-list 
+                        </a>
+                        <a class="fab fa-delicious navbar-item" routerLink="/feed" (click)="toggleCollapse()">
+                        &nbsp; Feed
+                        </a>
+                        <div id="authenticatedNav" *ngIf="auth.user | async as user;else other_content ">
+                            <a class="fas fa-sign-out navbar-item" routerLink="/" (click)="logout()" style="color:red">
+                                &nbsp; Log-out
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+
+         <!--mini Profile toggle button-->
+        <div id="miniPButton" class="miniPButton" *ngIf="auth.user | async as user" style="display: none">
+            <div id="authenticatedNav" *ngIf="auth.user | async as user">
+                <a *ngIf="this.mobile" id="navAuth" class="navbar-item miniPButton" (click)="clear('miniPwarp');clear('miniPButton')">
+                    <img class="card-img-top" [src]="user.photoURL" >
+                </a>
+            </div>
+            <a  *ngIf="!this.mobile" id="miniPButton" class="navbar-item miniPButton" (click)="clear('miniPwarp');clear('miniPButton')" title="Open mini profile">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
+
+         <!--navbar-burger-->
+        <div class="navbar-burger burger is-boxed" (click)="toggleCollapse()" [ngClass]="{'is-active': show}"     >
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
 </div>
+
 
 
 
 <form id='search1' class="navbar-item has-dropdown is-hoverable" *ngIf="!this.mobile">    
  <!--Search-Start-->
  <span  class="navbar-item has-dropdown is-hoverable">
-    <input id='inputSearch' class="input is-info searchBoxInput" placeholder="Serch User" type="text"  (keydown)="search($event)" autocomplete="off"  >
+    <input id='inputSearch' class="input is-info searchBoxInput" placeholder="Search User" type="text"  (keydown)="search($event)" autocomplete="off"  >
     <span id="tt" class="navbar-dropdown is-boxed">                          
         <span  *ngFor="let user of users; let i = index;" style="display : -webkit-inline-box; " (click)="resetForm('search1')">  
             <a class="navbar-item searchBoxRes"  routerLink="/users/{{user.uid}}"  >

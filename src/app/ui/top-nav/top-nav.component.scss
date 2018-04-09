@@ -22,12 +22,19 @@ nav {
 }
 .card-img-top{
   border-radius: 45%;
+  max-height: 1.75rem;
 }
 
 img[src=""] {
     display: none;
 }
+.miniPButton{
+  margin: auto;
+  // width:auto;
+  height:auto;
+  
 
+}
 // .control{
 
 //   // text-align: right;

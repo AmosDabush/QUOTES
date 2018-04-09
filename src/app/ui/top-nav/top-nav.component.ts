@@ -112,8 +112,20 @@ resetForm(div:string) {
 }
 
   
+// open or close the mini profile component
+clear(div:string){
+     var divToclear =  document.getElementById(div);
+        if (typeof divToclear !== "undefined" && divToclear) { 
+            if(divToclear.style.display !== 'none'){
+                divToclear.style.display = 'none'
+              }
+            else {
+                divToclear.style.display = 'inline'
+            }
+      }
+}
 
-
+     // open or close the moibile search component (only in mobile view)
      ShowMobSearch(){
         this.showMobSearch = !this.showMobSearch;
         var x = document.getElementById("searchBoxMobile");
@@ -127,6 +139,8 @@ resetForm(div:string) {
     
         }
      }
+
+    //navbar-burger toggle Collapse menu
     toggleCollapse() {
         this.show = !this.show;
         var x = document.getElementById("searchBoxMobile");
