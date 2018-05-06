@@ -1,7 +1,7 @@
 <!--<p class= "is-size-4 has-text-centered">Quote-Me Feed</p>-->
 
 <div class='box'>
-  <input [(ngModel)]="content" placeholder="Add new quote" class="input">
+  <textarea rows="2" [(ngModel)]="content" placeholder="Add new quote" class="textarea is-small is-success"></textarea>
   <button class="button is-success" (click)="createNote()" [disabled]="content?.length < 2 || content?.length > 200">
     Add Quote
   </button>

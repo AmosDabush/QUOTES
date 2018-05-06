@@ -31,6 +31,8 @@ export class TopNavComponent  {
         endAt = new Subject();
         users;
         allusers;
+        notes;
+        allnotes;
         startobs = this.startAt.asObservable();
         endobs = this.endAt.asObservable();
         show = false;//hmborgar-menu
@@ -45,12 +47,21 @@ export class TopNavComponent  {
 
   ngOnInit() { 
     //search
+    this.getallNotes().subscribe((notes) => {
+      this.allnotes = notes;
+
+    })
     this.getallusers().subscribe((users) => {
       this.allusers = users;
     })
     Observable.combineLatest(this.startobs, this.endobs).subscribe((value) => {
       this.firequery(value[0], value[1]).subscribe((users) => {
         this.users = users;
+      })
+    })
+     Observable.combineLatest(this.startobs, this.endobs).subscribe((value) => {
+      this.firequery2(value[0], value[1]).subscribe((notes) => {
+        this.notes = notes;
       })
     })
     //window resize
@@ -74,7 +85,7 @@ export class TopNavComponent  {
 
 
 
-//serch
+//search
   search($event) {
     let q = $event.target.value;
     if (q != '') {
@@ -83,17 +94,22 @@ export class TopNavComponent  {
     }
     else {
       this.users = this.allusers;
+      this.notes = this.allnotes;
     }
   }
  
   firequery(start, end) {
     return this.afs.collection('users', ref => ref.limit(4).orderBy('displayName').startAt(start).endAt(end)).valueChanges();
   }
- 
+   firequery2(start, end) {
+    return this.afs.collection('notes', ref => ref.limit(4).orderBy('content').startAt(start).endAt(end)).valueChanges();
+  }
   getallusers() {
     return this.afs.collection('users', ref => ref.limit(5).orderBy('displayName')).valueChanges();
   }
-
+  getallNotes() {
+    return this.afs.collection('notes', ref => ref.limit(5).orderBy('content')).valueChanges();
+  }
 
 
 resetForm(div:string) {

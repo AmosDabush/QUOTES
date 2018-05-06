@@ -23,8 +23,8 @@ interface Friend {
 
 @Injectable()
 export class UserService {
-
   friendsCollection: AngularFirestoreCollection<Friend>;
+  friendsCollection2: AngularFirestoreCollection<Friend>;
   usersCollection: AngularFirestoreCollection<User>;
   userDocument:   AngularFirestoreDocument<Node>;
   notesCollection: AngularFirestoreCollection<Note>;
@@ -41,6 +41,8 @@ export class UserService {
     }
     else
         console.error("NULL ID")   
+
+    this.friendsCollection2 = this.afs.collection(`users/${this.currentUserUid}/friends2/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
 
     this.friendsCollection = this.afs.collection(`users/${this.currentUserUid}/friends/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
     this.usersCollection = this.afs.collection('users/', (ref) => ref);
@@ -90,6 +92,18 @@ export class UserService {
     });
   }
 
+//get Snapshots of all the current user friends
+  getSnapshotF2(): Observable<any[]> {
+    ['added', 'modified', 'removed']
+    this.friendsCollection2 = this.afs.collection(`users/${this.currentUserUid}/friends2/`);
+
+    return this.friendsCollection2.snapshotChanges().map((actions) => {
+      return actions.map((a) => {
+        const data = a.payload.doc.data() as any;
+        return { id: a.payload.doc.id,fid: data.id };
+      });
+    });
+  }
 
   getUser(id: string) {
     return this.afs.doc<User>(`users/${id}`);
@@ -114,6 +128,12 @@ export class UserService {
     };
      return this.friendsCollection.doc(fid).set(friend);
   }
-
+  
+  addFriend(fid: string) {
+       const friend = {
+       id:fid,
+    };
+     return this.friendsCollection2.doc(fid).set(friend);
+  }
 
 }

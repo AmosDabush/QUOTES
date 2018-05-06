@@ -9,7 +9,7 @@
         
 
    <!--<li class="friend" *ngIf="friend?.fid?.length; else notFriend"></li>-->
-            <div  *ngIf="( frindsList2.indexOf(user.uid) > -1 ); else notFriend">
+            <div  *ngIf="( followList2.indexOf(user.uid) > -1 ); else notFriend">
               <!--<h3>IS a FRIEND!!!!</h3>-->
                 <button id="unfollowB" class="button is-small is-danger" (click)="unFollow(user.uid);" >UnFollow</button>
             </div> 
@@ -19,6 +19,19 @@
             </ng-template>
             <button id="followT" class="button is-small is-success" (click)="followUser(user.uid)" style="display: none">Follow</button>
 
+
+
+
+            <!--//ADD FIREND-->
+            <div  *ngIf="( frindsList2.indexOf(user.uid) > -1 ); else notFriendR">
+              <!--<h3>IS a FRIEND!!!!</h3>-->
+                <button id="unFriendB" class="button is-small is-danger" (click)="unFriend(user.uid);" >UnFriend</button>
+            </div> 
+
+            <ng-template #notFriendR>
+              <button id="addFriendB" class="button is-small is-success" (click)="addFriend(user.uid)">Add Friend</button>
+            </ng-template>
+            <button id="addFriendT" class="button is-small is-success" (click)="addFriend(user.uid)" style="display: none">Add Friend</button>
     </div>
 
 

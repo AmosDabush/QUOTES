@@ -17,6 +17,7 @@ import { FeedModule } from './feed/notes.module';
 import { NotesPModule } from './myquotes/notes.module';
 import { UsersModule } from './users/users.module';
 import { FriendsModule } from './friends/users.module';
+import { Friends2Module } from './friends2/users.module';
 
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
@@ -45,6 +46,7 @@ import { PushNotificationsModule } from 'ng-push';
     NotesPModule,
     UsersModule,
     FriendsModule,
+    Friends2Module,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFirestoreModule.enablePersistence(),

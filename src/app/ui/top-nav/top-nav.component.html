@@ -69,11 +69,17 @@
  <span  class="navbar-item has-dropdown is-hoverable">
     <input id='inputSearch' class="input is-info searchBoxInput" placeholder="Search User" type="text"  (keydown)="search($event)" autocomplete="off"  >
     <span id="tt" class="navbar-dropdown is-boxed">                          
-        <span  *ngFor="let user of users; let i = index;" style="display : -webkit-inline-box; " (click)="resetForm('search1')">  
+        <span  *ngFor="let user of users; let i = index; " (click)="resetForm('search1')">  
             <a class="navbar-item searchBoxRes"  routerLink="/users/{{user.uid}}"  >
-                {{user.displayName}}
+                <p>{{user.displayName}}</p>
             </a>
         </span>
+         <span  *ngFor="let note of notes; let j = index;" (click)="resetForm('search1')">  
+            <a class="navbar-item searchBoxRes"  >
+                <p>{{note.content}}</p>
+            </a>
+        </span>
+
     </span>
 </span>
 <!--Search-End-->
