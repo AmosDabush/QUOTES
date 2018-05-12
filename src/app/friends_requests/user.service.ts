@@ -24,6 +24,9 @@ export class UserService {
     userDocument: AngularFirestoreDocument < Node > ;
     notesCollection: AngularFirestoreCollection < Note > ;
     friendsCollection: AngularFirestoreCollection < string > ;
+    friendsReqCollection: AngularFirestoreCollection < string > ;
+    confirmFriendsCollectionThis: AngularFirestoreCollection<Friend>;
+    confirmFriendsCollectionOther: AngularFirestoreCollection<Friend>;
     currentUserUid = "";
 
     constructor(private afs: AngularFirestore,
@@ -37,6 +40,8 @@ export class UserService {
 
         this.usersCollection = this.afs.collection('users/', (ref) => ref);
         this.friendsCollection = this.afs.collection(`users/${this.currentUserUid}/friends2/`, (ref) => ref.orderBy('time', 'desc') /*.limit()*/ );
+        this.friendsReqCollection = this.afs.collection(`users/${this.currentUserUid}/friendsRequests/`, (ref) => ref.orderBy('time', 'desc') /*.limit()*/ );
+
     }
 
     getData(): Observable < User[] > {
@@ -86,27 +91,13 @@ export class UserService {
         });
     }
 
-    //get Snapshots of all the current user friends
-    getSnapshotCF(): Observable < any[] > {
-        ['added', 'modified', 'removed']
-        this.friendsCollection = this.afs.collection(`users/${this.currentUserUid}/confirmedFriends/`);
 
-        return this.friendsCollection.snapshotChanges().map((actions) => {
-            return actions.map((a) => {
-                const data = a.payload.doc.data() as any;
-                return {
-                    id: a.payload.doc.id,
-                    fid: data.id
-                };
-            });
-        });
-    }
-    //get Snapshots of all the current awating friends ...
+    //get Snapshots of all the current user friends
     getSnapshotF(): Observable < any[] > {
         ['added', 'modified', 'removed']
-        this.friendsCollection = this.afs.collection(`users/${this.currentUserUid}/friends2/`);
+        this.friendsReqCollection = this.afs.collection(`users/${this.currentUserUid}/friendsRequests/`);
 
-        return this.friendsCollection.snapshotChanges().map((actions) => {
+        return this.friendsReqCollection.snapshotChanges().map((actions) => {
             return actions.map((a) => {
                 const data = a.payload.doc.data() as any;
                 return {
@@ -116,17 +107,14 @@ export class UserService {
             });
         });
     }
+
+
     getFriendReq(id: string) {
-        return this.afs.doc < Friend > (`users/${id}/friendsRequests/${this.currentUserUid}`);
+        return this.afs.doc < Friend > (`users/${id}/friends2/${this.currentUserUid}`);
     }
-    // getFriend(id: string) {
-    //     return this.afs.doc < Friend > (`users/${this.currentUserUid}/friendsRequests/${id}`);
-    // }
-
     getFriend(id: string) {
-        return this.afs.doc < Friend > (`users/${this.currentUserUid}/friends2/${id}`);
+        return this.afs.doc < Friend > (`users/${this.currentUserUid}/friendsRequests/${id}`);
     }
-
     getUser(id: string) {
         return this.afs.doc < User > (`users/${id}`);
     }
@@ -144,31 +132,51 @@ export class UserService {
     }
 
 
-    unFollow(id: string) {//cancel friend req from getter user
+    // unFollow(id: string) {//cancel friend req from getter user
+    //     return this.getFriend(id).delete(),this.getFriendReq(id).delete();
+
+    // }
+    
+    deleteFriendReq(id: string) {
         this.removeFriendReq(id);
         return this.getFriend(id).delete(),this.getFriendReq(id).delete();
 
     }
 
-    removeFriend(id: string){
-        return(
-               this.afs.doc < Friend > (`users/${this.currentUserUid}/confirmedFriends/${id}`).delete(),
-               this.afs.doc < Friend > (`users/${id}/confirmedFriends/${this.currentUserUid}`).delete()
-               );
-    }
+    confirmRequest(fid: string) {
+       this.removeFriendReq(fid);
+      
+       this.confirmFriendsCollectionThis = this.afs.collection(`users/${this.currentUserUid}/confirmedFriends/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
+       this.confirmFriendsCollectionOther = this.afs.collection(`users/${fid}/confirmedFriends/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
 
+       const friendThis = {
+       id:this.currentUserUid,
+        };
+
+       const friendOther = {
+       id:fid,
+      };
+     return (
+      this.afs.doc < Friend > (`users/${this.currentUserUid}/friendsRequests/${fid}`).delete(),
+      this.afs.doc < Friend > (`users/${fid}/friends2/${this.currentUserUid}`).delete(),
+      this.confirmFriendsCollectionThis.doc(fid).set(friendOther),
+      this.confirmFriendsCollectionOther.doc(this.currentUserUid).set(friendThis)
+
+     );
+  }
 
   removeFriendReq(fid: string) {
-        const CNote = this.getUser(fid)
+        const CNote = this.getUser(this.currentUserUid)
         CNote.valueChanges().take(1).forEach(n => {
             if (n.friendReq)
-                    n.friendReq.splice(n.friendReq.indexOf(this.currentUserUid),1);
-             this.updateUser(fid, {
+                    n.friendReq.splice(n.friendReq.indexOf(fid),1);
+             this.updateUser(this.currentUserUid, {
                 friendReq:n.friendReq
                 },);
             });
-            
+            // alert("!@#!@#")
     }
+
     // follow(content: string) {
     //   return this.friendsCollection.add(content);
     // }

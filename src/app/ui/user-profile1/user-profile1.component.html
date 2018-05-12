@@ -36,17 +36,19 @@
         </div>
         <div class="box">
             <p class="text-truncate">EMail: {{ user.email }}</p>
-            <p class="text-truncate">Discription: {{ user.discription }}</p>
-            <p class="text-truncate">Quotes:<a routerLink="/myquotes" title="open your quote collection"> My-Quotes</a></p>
-
-
-
-
             <div class="field is-grouped">
-                <span class="button is-small is-success" (click)='updateDicription(user.uid,dicription);' title='add your dicription'>Add Discription</span>&#160;
-                <p><textarea  class="textarea is-small is-success" cols="20" rows="1" [(ngModel)]="dicription" placeholder="add your dicription"></textarea></p>
+                <p class="text-truncate">Description: {{ user.discription }}</p>
+                <span id="edit" class="button is-small far fa-edit"(click)='editDescriptionToggler();' title='add/edit your description'>&#160;</span>
             </div>
 
+
+
+            <div id="addDescription" class="field is-grouped" style="display: none">
+                <p><textarea id="textarea" class="textarea is-small is-success" cols="20" rows="1" [(ngModel)]="dicription" placeholder="add your description"></textarea></p>
+                <span class="button is-small is-primary far fa-check-circle" (click)='updateDicription(user.uid,dicription);editDescriptionToggler();' title='add your dicription'></span>&#160;
+
+            </div>
+            <p class="text-truncate">Quotes:<a routerLink="/myquotes" title="open your quote collection"> My-Quotes</a></p>
 
         </div>
     </div>
@@ -78,13 +80,25 @@
     <option [value]="i" *ngFor="let i of hours">{{i}}:00</option>
       </select>
                     </div>
-                    <button class="button is-bold is-primary" (click)="addToList()">addToList</button>
+                    <button class="button is-bold is-primary" (click)="addToList()">Add to list</button>
                 </div>
             </div>
 
             <div *ngIf="auth.user | async as user">
-                <div *ngFor="let i of user.Notilist"> Every {{i}}
-                    <button class="button is-outlined is-danger is-rounded fa fa-times is-small" (click)="DelFromList(i)" title="Delete this date">Delete</button>
+                <div *ngFor="let i of user.Notilist"> 
+                    
+                    
+                    <div *ngIf="i[0] !='E' ; else EveryDay">
+                         Every {{i}}
+                        <button class="button   is-danger is-rounded fa fa-times is-small" (click)="DelFromList(i)" title="Delete this date">Delete</button>
+                    </div>
+                    <ng-template #EveryDay class="box">
+                        {{i}}
+                            <button class="button   is-danger is-rounded fa fa-times is-small" (click)="DelFromList(i)" title="Delete this date">Delete</button>
+                    </ng-template>
+
+
+                  
                 </div>
             </div>
         </div>

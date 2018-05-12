@@ -78,7 +78,7 @@ export class UserProfile1Component {
     }
     selectedDevice = 'two';
     hours = '00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23'.split(' ');
-    days = 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(' ');
+    days = 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday Every-Day'.split(' ');
 
     onChange(newValue, F) {
         if (F == 'H') {
@@ -91,15 +91,17 @@ export class UserProfile1Component {
     }
 
     updateDicription(uid: string, discription: string) {
-        if (this.user) {
-            if (discription == null) {
-                discription = ''
+        if((<HTMLInputElement>document.getElementById('textarea')).value!=""){
+            if (this.user) {
+                if (discription == null) {
+                    discription = ''
+                }
+                this.userService.updateUser(uid, {
+                    discription: discription
+                });
+            } else {
+                console.error('User missing ID!');
             }
-            this.userService.updateUser(uid, {
-                discription: discription
-            });
-        } else {
-            console.error('User missing ID!');
         }
     }
 
@@ -130,13 +132,26 @@ export class UserProfile1Component {
         return a > b ? 1 : (a < b ? -1 : 0);
     }
 
+    wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
+
+
     //add user to the right notification list
     addToList() {
+  
         if (this.user) {
             if (this.tmp.d == "" || this.tmp.h == "") {
                 alert('missing info')
                 return
             }
+        
+            
+            console.log(this.tmp.d)
             let Clist = (this.tmp.d) + '-' + this.tmp.h + ':00';
             let subList = [this.currentUserUid];
             const listRef = this.afs.doc < Nlist > (`notificationList/${Clist}`).valueChanges().take(1);
@@ -163,6 +178,7 @@ export class UserProfile1Component {
                 }
 
             });
+            
 
             //add to notificationList
             const UserlistRef = this.afs.doc < User > (`users/${this.currentUserUid}`).valueChanges().take(1);
@@ -192,6 +208,7 @@ export class UserProfile1Component {
             console.error('User missing ID!');
         }
     }
+
 
     //delete user from the selected notification list
     DelFromList(i) {
@@ -239,6 +256,13 @@ export class UserProfile1Component {
         }
     }
 
+
+
+
+
+
+
+
     //hover 
     mouseEnter(div: string, div2: string) {
         var likes = document.getElementById(div);
@@ -255,6 +279,19 @@ export class UserProfile1Component {
     }
 
 
+editDescriptionToggler(){
+        var addDescriptionDiv = document.getElementById("addDescription");
+        (<HTMLInputElement>document.getElementById('textarea')).value="";
+        if (typeof addDescriptionDiv !== "undefined" && addDescriptionDiv) {
+            
+                if(addDescriptionDiv.style.display == 'none')
+                    addDescriptionDiv.style.display = 'inline-flex';
+                else
+                    addDescriptionDiv.style.display = 'none';
+                    
+    }
 
+
+}
 
 }

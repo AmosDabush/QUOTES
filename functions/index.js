@@ -6,13 +6,41 @@ admin.initializeApp(functions.config().firebase);
 
 
 
+// send Fsm notification to users in the right notification list (Every Day)
+exports.notifyUser6 = functions.https.onRequest((req, res) => {
+    let d=new Date()
+    let currentHour = d.getHours()+3;
+    if (currentHour <10)currentHour = '0' + currentHour;
+    let currentDay = 'Every-Day';
+    let tmpArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
+    let currentList = currentDay + '-' + currentHour+':00';
+    console.log(currentList)
+    var contentD = "";
+    let tokens = "";
+    const db = admin.firestore()
+    let userRef = "";
+    // ref to the right notification list  
+    const notificationList = db.collection('notificationList').doc(currentList);
+    return notificationList.get()
+        .then(snapshot => snapshot.data())
+        .then(obj => {
+            obj.list.forEach(id => { //for each user in this notification list
+                console.log('notification list id:' + id);
+                userRef = db.collection('users').doc(id);
+                return new Promise(function() {
+                    updateLastQuote2(userRef);
+                });
+            });
+        })
+        .catch(err => console.log(err))
+});
 
 
 // send Fsm notification to users in the right notification list
 exports.notifyUser5 = functions.https.onRequest((req, res) => {
     let d=new Date()
-    let currentHour = d.getHours()+2;
+    let currentHour = d.getHours()+3;
     if (currentHour <10)currentHour = '0' + currentHour;
     let currentDay = d.getDay()+1;
     let tmpArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']

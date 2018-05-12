@@ -11,6 +11,7 @@ import { NotesPListComponent } from './myquotes/notes-list/notes-list.component'
 // import { FeedListComponent} from './feed/notes-list/notes-list.component';
 import { FriendsListComponent } from './friends/friends-list/friends-list.component';
 import { FriendsListComponent2 } from './friends2/friends-list/friends-list.component';
+import { FriendsRequestsListComponent } from './friends_requests/friends-list/friends-list.component';
 
 import { UserProfile1Component } from './ui/user-profile1/user-profile1.component';
 // import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'users/:id', component: UsersListComponent,  canActivate: [AuthGuard] },
   { path: 'friends', component: FriendsListComponent,  canActivate: [AuthGuard] },
   { path: 'friends2', component: FriendsListComponent2,  canActivate: [AuthGuard] },
+  { path: 'friends_requests', component: FriendsRequestsListComponent,  canActivate: [AuthGuard] },
   { path: 'userprofile1', component: UserProfile1Component,  canActivate: [AuthGuard] },
 
   // uploads 

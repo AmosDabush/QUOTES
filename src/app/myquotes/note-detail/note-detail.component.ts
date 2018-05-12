@@ -20,6 +20,8 @@ export class NoteDetailComponent {
     note: Note;
     likeShowNum;
     mobile:boolean;
+    editContent: string;
+
     constructor(private noteService: NoteService) {this.likeShowNum=3}
 
     //use for changeing view if mobile or not
@@ -29,6 +31,8 @@ export class NoteDetailComponent {
      }
      else
         this.mobile = false;
+
+    this.editContent=this.note.content   
     }
 
     //use for changeing view if mobile or not 
@@ -94,7 +98,41 @@ export class NoteDetailComponent {
     deleteNote(id: string) {
         this.noteService.deleteNote(id);
     }
+    
+    editNote() {
+        // this.noteService.updateNote2(id,data,nid);
+       if (this.note.id && this.note.authorId) {
+            console.log("this.note.authorId" + this.note.authorId)
 
+               this.noteService.updateNote2(this.note.id, {
+                  content: this.editContent
+                }, this.note.authorId);
+
+        } else {
+            console.error('Note missing ID!');
+        }
+    }
+
+
+    editToggle(){
+        var edit = document.getElementById('editText'+this.note.id);
+        var quoteText = document.getElementById('quoteText'+this.note.id);
+
+        if (typeof edit !== "undefined" && edit && typeof quoteText !== "undefined" && quoteText) {
+           if(edit.style.display=="none"){
+                edit.style.display = 'inline'
+                quoteText.style.display = 'none'
+        }
+           else{
+                edit.style.display = 'none'
+                quoteText.style.display = 'inline'
+
+            }
+        }
+      
+
+        
+    }
 
     //show like list while mouse hover 
     mouseEnter(div: string) {

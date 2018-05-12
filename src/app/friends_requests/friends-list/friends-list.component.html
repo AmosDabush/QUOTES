@@ -10,14 +10,8 @@
   </div>
 
 
-  <div *ngFor="let friend of confirmedFriends | async">   
-      <div  *ngFor="let user of users | async">
-          <div  *ngIf="(user.uid == friend.fid)">
-              <user-detail-2 class="box" [user]="user"><hr></user-detail-2>   
-          </div> 
-    </div> 
-  </div>
 
 
 
- <!--confirmedFriends-->
+
+ 

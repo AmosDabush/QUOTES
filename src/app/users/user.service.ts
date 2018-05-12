@@ -25,6 +25,9 @@ interface Friend {
 export class UserService {
   friendsCollection: AngularFirestoreCollection<Friend>;
   friendsCollection2: AngularFirestoreCollection<Friend>;
+  friendsReqCollection: AngularFirestoreCollection<Friend>; 
+  confirmFriendsCollectionThis: AngularFirestoreCollection<Friend>;
+  confirmFriendsCollectionOther: AngularFirestoreCollection<Friend>;
   usersCollection: AngularFirestoreCollection<User>;
   userDocument:   AngularFirestoreDocument<Node>;
   notesCollection: AngularFirestoreCollection<Note>;
@@ -43,6 +46,8 @@ export class UserService {
         console.error("NULL ID")   
 
     this.friendsCollection2 = this.afs.collection(`users/${this.currentUserUid}/friends2/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
+    // this.friendsReqCollection = this.afs.collection(`users/${this.currentUserUid}/friends2/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
+    this.friendsReqCollection = this.afs.collection(`users/${this.currentUserUid}/friendsRequests/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
 
     this.friendsCollection = this.afs.collection(`users/${this.currentUserUid}/friends/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
     this.usersCollection = this.afs.collection('users/', (ref) => ref);
@@ -91,6 +96,31 @@ export class UserService {
       });
     });
   }
+//get Snapshots of all the current user friends request
+  getSnapshotFR(): Observable<any[]> {
+    ['added', 'modified', 'removed']
+    this.friendsReqCollection = this.afs.collection(`users/${this.currentUserUid}/friendsRequests/`);
+
+    return this.friendsReqCollection.snapshotChanges().map((actions) => {
+      return actions.map((a) => {
+        const data = a.payload.doc.data() as any;
+        return { id: a.payload.doc.id,fid: data.id };
+      });
+    });
+  }
+
+  //get Snapshots of all the current user friends requests
+  getSnapshotCF(): Observable<any[]> {
+    ['added', 'modified', 'removed']
+    this.confirmFriendsCollectionThis = this.afs.collection(`users/${this.currentUserUid}/confirmedFriends/`);
+
+    return this.confirmFriendsCollectionThis.snapshotChanges().map((actions) => {
+      return actions.map((a) => {
+        const data = a.payload.doc.data() as any;
+        return { id: a.payload.doc.id,fid: data.id };
+      });
+    });
+  }
 
 //get Snapshots of all the current user friends
   getSnapshotF2(): Observable<any[]> {
@@ -130,10 +160,112 @@ export class UserService {
   }
   
   addFriend(fid: string) {
+       this.friendsReqCollection = this.afs.collection(`users/${fid}/friendsRequests/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
+           const friendReq = {
+       id:this.currentUserUid,
+    };
+
        const friend = {
        id:fid,
     };
-     return this.friendsCollection2.doc(fid).set(friend);
+    
+    this. addFriendReq(fid);
+
+     return this.friendsCollection2.doc(fid).set(friend),this.friendsReqCollection.doc(this.currentUserUid).set(friendReq);
   }
 
+
+
+
+    //add users uids and display names to note like list
+    addFriendReq(fid: string) {
+        const CNote = this.getUser(fid)
+        CNote.valueChanges().take(1).forEach(n => {
+            if (!n.friendReq )
+                this.updateUser(fid, {
+                friendReq:[this.currentUserUid]
+                },);
+            else if (n.friendReq)
+                if (n.friendReq.indexOf(this.currentUserUid) == -1 ) {
+                    n.friendReq.push(this.currentUserUid)
+                    this.updateUser(fid,{
+                        friendReq: n.friendReq,
+                    });
+                } else
+                    console.log('you allrady liked this quote')
+
+        });
+
+    }
+
+
+
+  removeFriendReq(fid: string) {
+        const CNote = this.getUser(fid)
+        CNote.valueChanges().take(1).forEach(n => {
+            if (n.friendReq)
+                    n.friendReq.splice(n.friendReq.indexOf(this.currentUserUid),1);
+             this.updateUser(fid, {
+                friendReq:n.friendReq
+                },);
+            });
+            
+            // alert("123")
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    confirmRequest(fid: string) {
+      //  this.removeFriend(fid)
+       this.confirmFriendsCollectionThis = this.afs.collection(`users/${this.currentUserUid}/confirmedFriends/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
+       this.confirmFriendsCollectionOther = this.afs.collection(`users/${fid}/confirmedFriends/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
+
+       const friendThis = {
+       id:this.currentUserUid,
+        };
+
+       const friendOther = {
+       id:fid,
+      };
+     return (
+      this.afs.doc < Friend > (`users/${this.currentUserUid}/friendsRequests/${fid}`).delete(),
+      this.afs.doc < Friend > (`users/${fid}/friends2/${this.currentUserUid}`).delete(),
+      this.confirmFriendsCollectionThis.doc(fid).set(friendOther),
+      this.confirmFriendsCollectionOther.doc(this.currentUserUid).set(friendThis)
+
+     );
+  }
+
+    removeFriend(id: string){
+        return(
+               this.afs.doc < Friend > (`users/${this.currentUserUid}/confirmedFriends/${id}`).delete(),
+               this.afs.doc < Friend > (`users/${id}/confirmedFriends/${this.currentUserUid}`).delete()
+               );
+    }
+
+  unFriend(id: string) {//cancel req
+        var follow =  document.getElementById('addFriendT');
+        if (typeof follow !== "undefined" && follow !== null) {follow.style.display = 'inline';}
+        var unfollow = document.getElementById('unFriendB');
+        if (typeof unfollow !== "undefined" && unfollow !== null) {unfollow.style.display = 'none';}
+        
+        return this.getFriend2(id).delete(),this.getFriendreq(id).delete();
+  }
+  getFriend2(id: string) {
+      return this.afs.doc<Friend>(`users/${this.currentUserUid}/friends2/${id}`);
+    }
+  getFriendreq(id: string) {
+      return this.afs.doc<Friend>(`users/${id}/friendsRequests/${this.currentUserUid}`);
+    }
+  
 }

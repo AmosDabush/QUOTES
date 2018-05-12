@@ -13,18 +13,40 @@
         </a>
         <p style="display:block;">{{ note.time | date: 'medium' }}</p>
     </div>
-    <h4 style="font-weight:bold;">{{ note.content }}</h4>
-            
-            
+    <h4 id="quoteText{{note.id}}" style="font-weight:bold;">{{ note.content }}</h4>
+<div  id="editText{{note.id}}" style="display: none">
+    <div  class='' >
+        <textarea rows="2" [(ngModel)]="editContent" value="123" class="textarea is-small is-success"></textarea>
+            <button class="button is-small is-success is-rounded is-outlined" (click)="editNote()" [disabled]="editContent?.length < 2 || editContent?.length > 200|| note.content ==editContent">
+               OK
+            </button>
+            <button class="button is-small is-warning is-rounded is-outlined" (click)="editContent =  '' " [disabled]="editContent?.length ==0">
+               clear
+            </button>
+            <button class="button is-small is-danger is-rounded is-outlined" (click)="editToggle();editContent =  note.content ">
+               cancel
+            </button>
+    </div>    
+            </div>    
+    
 
     <div *ngIf="!this.mobile" class="navbar-menu" [ngClass]="{'is-active':show }">
 
         <div class="field is-grouped">
-            <span class="button is-small is-danger" (click)='deleteNote(note?.id)'>Delete</span> 
+            <span class="button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span> 
+
+            
+            <span class="button is-small is-primary  " (click)='editToggle()'>Edit</span> 
+           
+      
+
+
+
+
             <!--like button + hover list of like User Names-->
             <span (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
                     <span  class="navbar-item has-dropdown is-hoverable">
-                        <span class="button is-small is-info" (click)='addHeartToNote(note.hearts)'>
+                        <span class="button is-small is-info  " (click)='addHeartToNote(note.hearts)'>
                             Heart  <i class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
                         </span>
                         <span class="navbar-dropdown is-boxed">                          
@@ -53,9 +75,11 @@
 
 
     <span *ngIf="this.mobile" class="field is-grouped">  
-        <span class="show-mobile  button is-small is-danger" (click)='deleteNote(note?.id)'>Delete</span>               
+        <span class="show-mobile  button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span> 
+                    <span class="button is-small is-danger  " (click)='editToggle()'>Edit</span> 
+              
         <div (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)" >
-            <span class="button is-small is-info" (click)='addHeartToNote(note.hearts)'>
+            <span class="button is-small is-info  " (click)='addHeartToNote(note.hearts)'>
             Heart  <i class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
             </span> 
             <!--<p id="userslikethis"(click)='mouseEnter(note.id);userslikethis.style.display=none' (mouseleave)="mouseLeave(note.id)" >{{ note.hearts || 0 }} users like this</p>-->

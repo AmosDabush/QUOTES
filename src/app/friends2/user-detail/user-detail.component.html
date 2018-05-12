@@ -1,14 +1,15 @@
 <div>
-    <div class="box">
+    <div class="box">    
     <a routerLink="/users/{{user.uid}}">
-      <h3> {{ user.displayName }}</h3>
+      <h5> {{ user.displayName }} (Awaiting Confirmation)</h5>
       <img class="card-img-top ,box" [src]="user.photoURL" width="70">
     </a>
     <!--<p class="text-truncate">UID: {{ user.uid }}</p>-->
-    <p class="text-truncate">EMail: {{ user.email }}</p>
-    <p class="text-truncate">Discription: {{ user.discription }}</p>
-
-    <button class="button is-small is-danger" (click)="UnfollowUser(user.uid)" >UnFriend</button>
+    <!--<p class="text-truncate">EMail: {{ user.email }}</p>-->
+    <!--<p class="text-truncate">Description: {{ user.discription }}</p>-->
+    
+    <button title="Request Status: Awaiting Confirmation" class="button is-small is-danger  " (click)="UnfollowUser(user.uid)" >Cancel Request</button>
+      <!--<h4 class="text-truncate">Request Status: Awaiting Confirmation</h4>-->
 
     </div>
 </div>

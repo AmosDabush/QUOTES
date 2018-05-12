@@ -23,7 +23,7 @@
             <!--like button + hover list of like User Names-->
             <span (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
                     <span  class="navbar-item has-dropdown is-hoverable">
-                        <span class="button is-small is-info" (click)='addHeartToNote(note.hearts)'>
+                        <span class="button is-small is-info  " (click)='addHeartToNote(note.hearts)'>
                             Heart  <i class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
                         </span>
                         <span class="navbar-dropdown is-boxed">                          
@@ -50,7 +50,7 @@
 
     <span *ngIf="this.mobile">                
         <div (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
-            <span class="button is-small is-info" (click)='addHeartToNote(note.hearts)'>
+            <span class="button is-small is-info  " (click)='addHeartToNote(note.hearts)'>
             Heart  <i class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
             </span>
             <div *ngIf="note.heartsList" >

@@ -46,6 +46,7 @@ export class UserFormComponent implements OnInit {
 
   toggleForm() {
     this.newUser = !this.newUser;
+    this.buildForm();
   }
 
   signup() {
@@ -62,22 +63,39 @@ export class UserFormComponent implements OnInit {
   }
 
   buildForm() {
-    this.userForm = this.fb.group({
-      'email': ['', [
-        Validators.required,
-        Validators.email,
-      ]],
-      'password': ['', [
-        Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
-        Validators.minLength(8),
-        Validators.maxLength(25),
-      ]],
-      'displayName': ['', [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(20),
-      ]],
-    });
+    if(this.newUser){
+    
+          this.userForm = this.fb.group({
+            'email': ['', [
+              Validators.required,
+              Validators.email,
+            ]],
+            'password': ['', [
+              Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
+              Validators.minLength(8),
+              Validators.maxLength(25),
+            ]],
+            'displayName': ['', [
+              Validators.required,
+              Validators.minLength(6),
+              Validators.maxLength(20),
+            ]],
+          });
+      }
+      else{
+          this.userForm = this.fb.group({
+            'email': ['', [
+              Validators.required,
+              Validators.email,
+            ]],
+            'password': ['', [
+              Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
+              Validators.minLength(8),
+              Validators.maxLength(25),
+            ]],
+     
+          });
+      }
 
     this.userForm.valueChanges.subscribe((data) => this.onValueChanged(data));
     this.onValueChanged(); // reset validation messages

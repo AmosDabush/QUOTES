@@ -5,7 +5,7 @@
         <img class="card-img-top ,box" [src]="user.photoURL" width="70">
         <p class="text-truncate">UID: {{ user.uid }}</p>
         <p class="text-truncate">EMail: {{ user.email }}</p>
-        <p class="text-truncate">Discription: {{ user.discription }}</p>
+        <p class="text-truncate">Description: {{ user.discription }}</p>
         
 
    <!--<li class="friend" *ngIf="friend?.fid?.length; else notFriend"></li>-->
@@ -25,13 +25,36 @@
             <!--//ADD FIREND-->
             <div  *ngIf="( frindsList2.indexOf(user.uid) > -1 ); else notFriendR">
               <!--<h3>IS a FRIEND!!!!</h3>-->
-                <button id="unFriendB" class="button is-small is-danger" (click)="unFriend(user.uid);" >UnFriend</button>
+                <button title="Request Sent: Awaiting Confirmation" id="unFriendB" class="button is-small is-danger" (click)="unFriend(user.uid);" >Cancel Request</button>
+                <!--<h4 class="text-truncate">Request sent,Awaiting Confirmation...</h4>-->
             </div> 
 
             <ng-template #notFriendR>
+              <div  *ngIf="( frindsReqList.indexOf(user.uid) > -1 );else notFriendR2">
+                <button title="Request Sent: Awaiting Confirmation" id="ConfirmReq" class="button is-small is-info" (click)="confirmRequest(user.uid);" >Confirm Request</button>
+              </div>         
+            </ng-template>
+            
+            
+            <button id="addFriendH" class="button is-small is-success" (click)="addFriend(user.uid)" style="display: none">Add Friend</button>
+                             <button title="Remove This Friend" id="RemoveFriendH" class="button is-small is-danger" (click)="removeFriend(user.uid);" style="display: none" >Remove Friend</button>
+
+       
+                <!--<div  *ngIf="( ConfirmedFrindsList.indexOf(user.uid) > -1 );">
+                    <button title="Request Sent: Awaiting Confirmation" id="ConfirmReq" class="button is-small is-info" (click)="confirmRequest(user.uid);unFriend(user.uid);" >confirm0000edFrinds</button>
+                </div>  -->
+
+            <ng-template #notFriendR2>
+              
+                <div  *ngIf="( ConfirmedFrindsList.indexOf(user.uid) > -1 );else notFriendR3">
+                    <button title="Remove This Friend" id="RemoveFriend" class="button is-small is-danger" (click)="removeFriend(user.uid);" >Remove Friend</button>
+                </div>            
+             </ng-template>
+
+              <ng-template #notFriendR3>
+              
               <button id="addFriendB" class="button is-small is-success" (click)="addFriend(user.uid)">Add Friend</button>
             </ng-template>
-            <button id="addFriendT" class="button is-small is-success" (click)="addFriend(user.uid)" style="display: none">Add Friend</button>
     </div>
 
 
@@ -39,12 +62,12 @@
 
 <!--<div class="button">
   <span class="button is-small is-danger" (click)='updateEmail(newEmail);'>Add Email </span>
-<p><textarea cols="90" rows="1"  [(ngModel)] = "newEmail" placeholder=" add here your new dicription..."></textarea></p>
+<p><textarea cols="90" rows="1"  [(ngModel)] = "newEmail" placeholder=" add here your new description..."></textarea></p>
 </div>-->
 
 
 <!--<div class="button">
-  <span class="button is-small is-danger" (click)='updateDicription(value);'>Add Discription </span>
+  <span class="button is-small is-danger" (click)='updateDicription(value);'>Add Description </span>
 <p><textarea cols="90" rows="1"  [(ngModel)] = "value" placeholder=" add here your new dicription..."></textarea></p>
 </div>-->
 

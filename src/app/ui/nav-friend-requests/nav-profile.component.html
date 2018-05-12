@@ -1,0 +1,31 @@
+
+<div class="" >
+  <div *ngIf="auth.user | async; then authenticated else guest">
+          <!-- template will replace this div -->
+  </div>
+</div>
+
+<!-- User NOT logged in -->
+<ng-template #guest class="box">
+     <a class="navbar-link">
+        0
+    </a>
+</ng-template>
+
+<!-- User logged in -->
+<ng-template #authenticated>
+    <div id="authenticatedNav" *ngIf="auth.user | async as user">
+         <div  *ngIf="( user.friendReq);">
+                      <div  *ngIf="( user.friendReq.length>0);">
+
+            <span id="navAuth2" class="miniPButton button far fa-user is-info is-small is-rounded  " style="font-feature-settings: bold" routerLink="/friends_requests" (click)="toggleCollapse()">
+                    +{{ user.friendReq.length }}
+            </span>&nbsp;&nbsp;
+        </div>          
+        </div>  
+    </div>
+
+
+    
+      
+</ng-template>

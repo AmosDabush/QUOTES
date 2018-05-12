@@ -29,6 +29,7 @@ interface NewUser {
 @Injectable()
 export class FeedService {
     user;
+    uname;
     userIds;
     currentUserUid = "";
     currentUserName = "";
@@ -39,6 +40,7 @@ export class FeedService {
     noteDocument: AngularFirestoreDocument < Node > ;
     usersCollection: AngularFirestoreCollection < User > ;
     userDocument: AngularFirestoreDocument < Node > ;
+    user1: AngularFirestoreDocument < User > ;
 
     constructor(private afs: AngularFirestore,
         public auth: AuthService,
@@ -57,6 +59,7 @@ export class FeedService {
 
         this.notesCollection = this.afs.collection(`users/${this.currentUserUid}/notes/`, (ref) => ref.orderBy('time', 'asc') /*.limit()*/ );
         this.usersCollection = this.afs.collection('users/', (ref) => ref);
+        this.user1= this.afs.doc(`users/${this.currentUserUid}`);
 
 
     }
@@ -136,8 +139,34 @@ export class FeedService {
         return (this.currentUserUid);
     }
 
+  getSnapshotU2(): Observable < User > {
+        ['added', 'modified', 'removed']
+            return this.user1.snapshotChanges().map((a) => {
+                const data = a.payload.data() as User;
+                console.log(data.uid);
+                return {
+                    id: a.payload.id,
+                    email: data.email,
+                    photoURL: data.photoURL,
+                    displayName: data.displayName,
+                    discription: data.discription,
+                    uid: data.uid
+                };
+            });
+    }
     getCurrentName(): String {
-        return (this.currentUserName);
+        let name;
+        if(this.currentUserName==""){
+            let  user = this.getSnapshotU2()
+            user.forEach(a => {
+                    if (a.displayName)
+                        this.uname=a.displayName.toString()
+                        localStorage.setItem('tmpdisplayName', this.uname);
+            });
+        }
+        name=localStorage.tmpdisplayName
+        localStorage.removeItem('tmpdisplayName');
+        return (this.currentUserName||name);
     }
 
     /*create new note call this.createNote with the right prameters*/

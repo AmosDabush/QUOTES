@@ -6,9 +6,8 @@ import { SharedModule } from '../shared/shared.module';
 
 import { UserService } from './user.service';
 
-import { FriendsListComponent2 } from './friends-list/friends-list.component';
+import { FriendsRequestsListComponent } from './friends-list/friends-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { UserDetail2Component } from './user-detail-2/user-detail.component';
 
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
@@ -27,9 +26,8 @@ import { AppRoutingModule } from '../app-routing.module';
     
   ],
   declarations: [
-    FriendsListComponent2,
+    FriendsRequestsListComponent,
     UserDetailComponent,
-    UserDetail2Component,
   ],
   providers: [
       UserService,
@@ -37,4 +35,4 @@ import { AppRoutingModule } from '../app-routing.module';
   ],
   
 })
-export class Friends2Module { }
+export class FriendsRequestsModule { }

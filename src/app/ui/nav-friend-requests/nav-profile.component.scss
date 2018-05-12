@@ -1,0 +1,35 @@
+nav {
+  border-bottom: 1px solid #E4E4E4;
+  box-shadow: 0 0 4px rgba(0,0,0,.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+  padding: 0 5vw;
+  padding-right: 60px;
+  // display: -webkit-inline-box;
+  margin: auto;
+  width: 99%;
+    // padding: 10px;
+
+  navbar-item {
+    color: gray;
+    font-weight: normal;
+    transition: color 0.3s ease;
+    &:hover {
+      color: #1c90f3;
+    }
+  }
+}
+.card-img-top{
+  border-radius: 100%;
+  display: inherit;
+}
+
+img[src=""] {
+    display: none;
+}
+
+
+.authenticated{
+  border-radius: 45%;
+  display: -webkit-inline-box;
+}
+

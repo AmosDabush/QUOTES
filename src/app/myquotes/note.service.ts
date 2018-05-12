@@ -18,7 +18,7 @@ interface NewNote {
     time: number;
 }
 interface NewUser {
-    uid: string;
+    // uid: string;
     email ? : string | null;
     photoURL ? : string;
     displayName ? : string;
@@ -29,12 +29,14 @@ interface NewUser {
 @Injectable()
 export class NoteService {
     user;
+    uname;
     userIds;
     currentUserUid = ""
     currentUserName = ""
     currentUserPhotoURL = ""
     notesCollection: AngularFirestoreCollection < Note > ;
     noteDocument: AngularFirestoreDocument < Node > ;
+    user1: AngularFirestoreDocument < User > ;
     usersCollection: AngularFirestoreCollection < User > ;
     userDocument: AngularFirestoreDocument < Node > ;
 
@@ -55,6 +57,7 @@ export class NoteService {
 
         this.notesCollection = this.afs.collection(`users/${this.currentUserUid}/notes/`, (ref) => ref.orderBy('time', 'desc') /*.limit()*/ );
         this.usersCollection = this.afs.collection('users/', (ref) => ref);
+        this.user1= this.afs.doc(`users/${this.currentUserUid}`);
 
     }
 
@@ -157,8 +160,33 @@ export class NoteService {
         return (this.currentUserUid);
     }
 
-    getCurrentName(): String {
-        return (this.currentUserName);
+        getSnapshotU2(): Observable < User > {
+        ['added', 'modified', 'removed']
+            return this.user1.snapshotChanges().map((a) => {
+                const data = a.payload.data() as User;
+                console.log(data.uid);
+                return {
+                    id: a.payload.id,
+                    email: data.email,
+                    photoURL: data.photoURL,
+                    displayName: data.displayName,
+                    discription: data.discription,
+                    uid: data.uid
+                };
+            });
     }
-
+    getCurrentName(): String {
+        let name;
+        if(this.currentUserName==""){
+            let  user = this.getSnapshotU2()
+            user.forEach(a => {
+                    if (a.displayName)
+                        this.uname=a.displayName.toString()
+                        localStorage.setItem('tmpdisplayName', this.uname);
+            });
+        }
+        name=localStorage.tmpdisplayName
+        localStorage.removeItem('tmpdisplayName');
+        return (this.currentUserName||name);
+    }
 }

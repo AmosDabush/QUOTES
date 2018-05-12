@@ -21,15 +21,13 @@ import { AppRoutingModule } from '../../app-routing.module';
   templateUrl: './friends-list.component.html',
   styleUrls: ['./friends-list.component.scss'],
 })
-export class FriendsListComponent2 implements OnInit {
+export class FriendsRequestsListComponent implements OnInit {
 
   users: Observable<User[]>;
   content: string;
   notes: Observable<Note[]>;
-  user: Observable<User | null>;
+    user: Observable<User | null>;
   friends:Observable<Friend[]>;
-  confirmedFriends:Observable<Friend[]>;
-
   constructor(private userService: UserService,
               public auth: AuthService,
               private afAuth: AngularFireAuth,
@@ -40,7 +38,6 @@ export class FriendsListComponent2 implements OnInit {
   ngOnInit() {
     this.users = this.userService.getSnapshot();
     this.friends =this.userService.getSnapshotF();
-    this.confirmedFriends =this.userService.getSnapshotCF();
 
     this.user = this.afAuth.authState
       .switchMap((user) => {

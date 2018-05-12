@@ -142,12 +142,12 @@ export class AuthService {
             email: user.email || null,
             displayName: user.displayName || 'nameless user',
             photoURL: user.photoURL || 'https://png.icons8.com/puffin-bird/win10/1600',
-            discription: "a place for a aowesome dicription...",
+            discription: "add your description here.",
         };
         const dataUpdate: User = {
             uid: user.uid,
             email: user.email || null,
-            displayName: user.displayName || 'nameless user',
+            // displayName: user.displayName || 'nameless user',
             // photoURL: user.photoURL || 'https://png.icons8.com/puffin-bird/win10/1600',
 
         };
@@ -180,7 +180,7 @@ export class AuthService {
             email: user.email || null,
             displayName: displayName || 'nameless user',
             photoURL: user.photoURL || 'https://png.icons8.com/puffin-bird/win10/1600',
-            discription: "a place for a aowesome dicription...",
+            discription: "add your description here.",
         };
         const dataUpdate: User = {
             uid: user.uid,
