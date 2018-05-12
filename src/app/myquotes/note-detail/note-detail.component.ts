@@ -129,9 +129,7 @@ export class NoteDetailComponent {
 
             }
         }
-      
-
-        
+     
     }
 
     //show like list while mouse hover 

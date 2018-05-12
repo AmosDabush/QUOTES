@@ -129,6 +129,13 @@ export class FeedService {
         });
     }
 
+    getNote2(id: string, uid: string) {
+        return this.afs.doc < Note > (`users/${uid}/notes/${id}`);
+    }
+
+    updateNote2(id: string, data: Partial < Note > , uid: string) {
+        return this.getNote2(id, uid).update(data);
+    }
 
     //get specific note by uid and note id
     getNote(id: string, uid: string) {

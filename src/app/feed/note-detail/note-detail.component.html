@@ -7,19 +7,62 @@
 
 <div>
     <div class="picbox">
-
-        <a routerLink="/users/{{note.authorId}}">
-            <img class="card-img-top" [src]="note.authorPhotoURL" width=50px>
-            <p style="font-weight:bolder;display:-webkit-inline-flex;">{{ note.authorName }} </p>
-        </a>
+            <span *ngIf="note.authorId==currentUserUid; else otherUsers" class="navbar-menu" [ngClass]="{'is-active':show }">
+                <a routerLink="/userprofile1">
+                    <img class="card-img-top" [src]="note.authorPhotoURL" width=50px>
+                    <p style="font-weight:bolder;display:-webkit-inline-flex;">{{ note.authorName }} </p>
+                </a>
+            </span>
+            <ng-template #otherUsers>
+                <a routerLink="/users/{{note.authorId}}">
+                    <img class="card-img-top" [src]="note.authorPhotoURL" width=50px>
+                    <p style="font-weight:bolder;display:-webkit-inline-flex;">{{ note.authorName }} </p>
+                </a>
+            </ng-template>
         <p style="display:block;">{{ note.time | date: 'medium' }}</p>
     </div>
 
-    <h4 style="font-weight:bold;">{{ note.content }}</h4>
+        <h4 id="quoteText{{note.id}}" style="font-weight:bold;">{{ note.content }}</h4>
+    <div  id="editText{{note.id}}" style="display: none">
+    <div  class='' >
+        <textarea rows="2" [(ngModel)]="editContent" value="123" class="textarea is-small is-success"></textarea>
+            <button class="button is-small is-success is-rounded is-outlined" (click)="editNote()" [disabled]="editContent?.length < 2 || editContent?.length > 200|| note.content ==editContent">
+               OK
+            </button>
+            <button class="button is-small is-warning is-rounded is-outlined" (click)="editContent =  '' " [disabled]="editContent?.length ==0">
+               clear
+            </button>
+            <button class="button is-small is-danger is-rounded is-outlined" (click)="editToggle();editContent =  note.content ">
+               cancel
+            </button>
+            </div>    
+            </div>    
+
 
         <div *ngIf="!this.mobile" class="navbar-menu" [ngClass]="{'is-active':show }">
+            
+
+
+
 
         <div class="field is-grouped">
+            <div *ngIf="note.authorId==currentUserUid" class="navbar-menu" [ngClass]="{'is-active':show }">
+       <span class="button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span> 
+
+            
+            <span class="button is-small is-primary  " (click)='editToggle()'>Edit</span> 
+
+
+
+                
+            </div>
+
+
+
+
+
+
+
             <!--like button + hover list of like User Names-->
             <span (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
                     <span  class="navbar-item has-dropdown is-hoverable">
