@@ -110,7 +110,8 @@ export class NoteService {
                     time: data.time,
                     authorId: data.authorId,
                     authorName: data.authorName,
-                    authorPhotoURL: data.authorPhotoURL
+                    authorPhotoURL: data.authorPhotoURL,
+                    settings: data.settings
                 };
             });
         });

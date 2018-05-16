@@ -1,5 +1,29 @@
 <!--<p class= "is-size-4 has-text-centered">Quote-Me Feed</p>-->
 
+<div>
+    <div *ngIf="auth.user | async; then authenticated else guest">
+        <!-- template will replace this div --><p>123123123</p>
+    </div>
+</div>
+
+<!-- User NOT logged in -->
+<ng-template #guest class="box">
+    <h3> GUEST</h3>
+    <p class="card-text">Login to get started...</p>
+    <button class="button" routerLink="/login">Login</button>
+</ng-template>
+
+
+<!-- User logged in -->
+<ng-template #authenticated>
+    <div *ngIf="auth.user | async as user">
+      <p>{{user.friendsList}}</p><p>123123123</p><p>123123123</p><p>123123123</p>
+ 
+
+
+
+
+
 <div class='box'>
   <textarea rows="2" [(ngModel)]="content" placeholder="Add new quote" class="textarea is-small is-success  "></textarea>
   <button class="button is-success" (click)="createNote()" [disabled]="content?.length < 2 || content?.length > 200">
@@ -8,14 +32,60 @@
 </div>
 
 <div  *ngFor="let notes of noteslist2 ">
-    <div  class="box" *ngFor="let note of (notes | async)">
-        <note-detail [note]="note"><hr></note-detail><br> 
-    </div>
+    <span *ngFor="let note of (notes | async)">
+      <div *ngIf="(note.settings=='friends'|| note.settings=='ff')">
+        
+
+        <div *ngIf="user.friendsList.indexOf(note.authorId) != -1">
+          <div class="box"> {{note.settings}} 
+            
+                    <div *ngIf="this.doubleChackList.indexOf(note.id) == -1">
+                        {{addToDoubleChackList(note.id)}}
+                    </div>
+            <note-detail [note]="note"><hr></note-detail><br> 
+          </div>
+        </div>
+
+
+
+      </div>
+    </span>
 </div>
+
+
+<div  *ngFor="let notes of noteslist2 ">
+    <span *ngFor="let note of (notes | async)">
+      <div *ngIf="(note.settings=='followers'|| note.settings=='ff')">
+        
+                    <div *ngIf="this.doubleChackList.indexOf(note.id) == -1">
+                        {{addToDoubleChackList(note.id)}}
+                    </div>
+        <div *ngIf="user.followList.indexOf(note.id) == -1">
+          <div class="box"> {{note.settings}}
+            <note-detail [note]="note"><hr></note-detail><br> 
+          </div>
+        </div>
+
+
+
+      </div>
+    </span>
+</div>
+
+
+<span  *ngFor="let notes of noteslist2 ">
+    <span *ngFor="let note of (notes | async)">
+                          <div class="box" *ngIf="this.doubleChackList.indexOf(note.id) == -1">
+                          <note-detail  [note]="note"><hr></note-detail><br> 
+                    </div>
+                                                   
+
+    </span>
+</span>
 <br>
 
-
-
+   </div>
+</ng-template>
 
 
 

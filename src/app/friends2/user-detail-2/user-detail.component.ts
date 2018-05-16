@@ -56,6 +56,7 @@ export class UserDetail2Component {
     removeFriend(id: string) {
         console.log('-friend :' + id)
         this.userService.removeFriend(id);
+        this.userService.removeFromFriendsList(id);
     }
 
 }

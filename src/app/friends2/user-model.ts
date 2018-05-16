@@ -5,4 +5,5 @@ export interface User {
   displayName?: string;
   discription?: string;
   friendReq?:string[];
+  friendsList?:string[];
 }

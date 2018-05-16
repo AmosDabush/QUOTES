@@ -4,4 +4,6 @@ export interface User {
   photoURL?: string;
   displayName?: string;
   discription?: string;
+  followList?:string[];
+  friendsList?:string[];
 }

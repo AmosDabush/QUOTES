@@ -1,22 +1,190 @@
 <head>
-  <!--<script defer src="https://use.fontawesome.com/releases/[VERSION]/js/all.js"></script>-->
-  <!--<script defer src="https://use.fontawesome.com/releases/[VERSION]/js/v4-shims.js"></script>-->
-  <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/all.js"></script>
-  <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/v4-shims.js"></script>
+    <!--<script defer src="https://use.fontawesome.com/releases/[VERSION]/js/all.js"></script>-->
+    <!--<script defer src="https://use.fontawesome.com/releases/[VERSION]/js/v4-shims.js"></script>-->
+    <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/all.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/v4-shims.js"></script>
 </head>
 
 <div>
-    <div class="picbox">
-        <a routerLink="/users/{{note.authorId}}">
-            <img class="card-img-top" [src]="note.authorPhotoURL" width=50px>
-            <p style="font-weight:bolder;display:-webkit-inline-flex;">{{ note.authorName }} </p>
-        </a>
-        <p style="display:block;">{{ note.time | date: 'medium' }}</p>
+
+
+
+    <nav class="level">
+        <!-- Left side -->
+        <div class="level-left">
+            <div class="level-item">
+
+                <div *ngIf="!this.mobile">
+                    <div class="picbox">
+                        <a routerLink="/users/{{note.authorId}}">
+                            <img class="card-img-top" [src]="note.authorPhotoURL" width=50px>
+                            <p style="font-weight:bolder;display:-webkit-inline-flex;">{{ note.authorName }} </p>
+                        </a>
+                        <p style="display:block;">{{ note.time | date: 'medium' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right side -->
+        <div class="level-right">
+            <div *ngIf="!this.mobile">
+
+
+
+                <p class="level-item "><a class="button button2  ">
+                <span class="settings " >
+                    <span  class=" navbar-item has-dropdown is-hoverable is-outlined is-rounded"  (mouseenter)="settingsOpenCheck()" (mouseleave)="setSettings(note.id,note.authorId)"  >
+                        <span class=" is-outlined is-rounded" >
+                            
+                            <i class="fas fa-cogs" title="change your privacy settings" ></i> 
+                        </span>
+                        <span class="navbar-dropdown is-boxed " style="margin-left: -60px;  text-align: left;" >                  
+
+                      
+                                    <span id="a{{note.id}} ">
+                                 
+                                 
+                                        <p>
+                                            <label class="container">Private
+                                                <input  id="private_checkbox{{note.id}}" type="checkbox" (click)="settingsCheck(1);" name="radio">
+                                                <span class="checkmark is-pulled-right">
+                                                </span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label class="container" >Public
+                                                <input id="public_checkbox{{note.id}}" type="checkbox" name="radio" (click)="settingsCheck(2);" >
+                                                <span class="checkmark">
+                                                </span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label class="container">Friends
+                                                <input id="friends_checkbox{{note.id}}" type="checkbox" name="radio" (click)="settingsCheck(3);">
+                                                <span class="checkmark">
+                                                </span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label class="container">Followers
+                                                <input type="checkbox" id="followers_checkbox{{note.id}}" name="radio" (click)="settingsCheck(4);" >
+                                                <span class="checkmark">
+                                                </span>
+                                            </label>
+                                        </p>                                             
+                                </span>
+                        </span>
+                </span>
+            </span>    
+    </a></p>
+            </div>
+            <!--//END !MOBILE settings-->
+
+        </div>
+
+    </nav>
+
+
+
+    <div *ngIf="this.mobile">
+
+                      <div class="picbox2">
+                        <a routerLink="/users/{{note.authorId}}">
+                            <img class="card-img-top" [src]="note.authorPhotoURL" width=50px>
+                            <p style="font-weight:bolder;display:-webkit-inline-flex;">{{ note.authorName }} </p>
+                        </a>
+                        <p style="display:block;">{{ note.time | date: 'medium' }}</p>
+                    </div>
+                    <br>
+<a class="button button2 is-pulled-right ">
+                <span class="" >
+                    <span  class="settingsMobile is-pulled-right navbar-item has-dropdown is-hoverable is-outlined is-rounded"  (click)="toogleMobSettings()"   >
+                        <span class=" is-outlined is-rounded" >
+                            
+                            <i id="iconSettings{{note.id}}" class="fas fa-cogs" title="change your privacy settings"  ></i> 
+                        </span>
+                     
+                </span>
+            </span>    
+    </a>
+
+
+<a id="settingsBoxMobile{{note.id}}" class="button button2 is-pulled-right settingsBoxMobile " style="display: none"  (mouseleave)="toogleMobSettings()">
+
+                        <span class="box navbar-dropdown is-boxed " style="margin-left: -60px;  text-align: left; " >                  
+
+                                 <p><i id="i" class="settingsBoxMobileClose fas fa-close button is-small is-rounded is-danger is-pulled-right" title="change your privacy settings"(click)="toogleMobSettings()"  ></i></p>
+
+                                    <span id="a{{note.id}} ">
+                                 
+                                 
+                                        <p>
+                                            <label class="container">Private
+                                                <input  id="private_checkbox{{note.id}}" type="checkbox" (click)="settingsCheck(1);" name="radio">
+                                                <span class="checkmark is-pulled-right">
+                                                </span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label class="container" >Public
+                                                <input id="public_checkbox{{note.id}}" type="checkbox" name="radio" (click)="settingsCheck(2);" >
+                                                <span class="checkmark">
+                                                </span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label class="container">Friends
+                                                <input id="friends_checkbox{{note.id}}" type="checkbox" name="radio" (click)="settingsCheck(3);">
+                                                <span class="checkmark">
+                                                </span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label class="container">Followers
+                                                <input type="checkbox" id="followers_checkbox{{note.id}}" name="radio" (click)="settingsCheck(4);" >
+                                                <span class="checkmark">
+                                                </span>
+                                            </label>
+                                        </p>                                             
+                                </span>
+                        </span>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
+
+
+
+
+<!--////////////////////////////////////////////-->
+
+
+
+
+
+
+
+
+
+
+
+
     <h4 id="quoteText{{note.id}}" style="font-weight:bold;">{{ note.content }}</h4>
-<div  id="editText{{note.id}}" style="display: none">
-    <div  class='' >
-        <textarea rows="2" [(ngModel)]="editContent" value="123" class="textarea is-small is-success"></textarea>
+    <div id="editText{{note.id}}" style="display: none">
+        <div class=''>
+            <textarea rows="2" [(ngModel)]="editContent" value="123" class="textarea is-small is-success"></textarea>
             <button class="button is-small is-success is-rounded is-outlined" (click)="editNote()" [disabled]="editContent?.length < 2 || editContent?.length > 200|| note.content ==editContent">
                OK
             </button>
@@ -26,25 +194,25 @@
             <button class="button is-small is-danger is-rounded is-outlined" (click)="editToggle();editContent =  note.content ">
                cancel
             </button>
-    </div>    
-            </div>    
-    
+        </div>
+    </div>
+
 
     <div *ngIf="!this.mobile" class="navbar-menu" [ngClass]="{'is-active':show }">
 
         <div class="field is-grouped">
-            <span class="button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span> 
+            <span class="button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span>
 
-            
-            <span class="button is-small is-primary  " (click)='editToggle()'>Edit</span> 
-           
-      
+
+            <span class="button is-small is-primary  " (click)='editToggle()'>Edit</span>
+
+
 
 
 
 
             <!--like button + hover list of like User Names-->
-            <span (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
+                <span (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
                     <span  class="navbar-item has-dropdown is-hoverable">
                         <span class="button is-small is-info  " (click)='addHeartToNote(note.hearts)'>
                             Heart  <i class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
@@ -65,9 +233,9 @@
                                     </span>
                                 </span>
                         </span>
-                </span>
+                    </span>
             </span>
-        </div>    
+        </div>
     </div>
 
 
@@ -75,17 +243,17 @@
 
 
     <span *ngIf="this.mobile" class="field is-grouped">  
-        <span class="show-mobile  button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span> 
-                    <span class="button is-small is-danger  " (click)='editToggle()'>Edit</span> 
-              
-        <div (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)" >
-            <span class="button is-small is-info  " (click)='addHeartToNote(note.hearts)'>
+        <span class="show-mobile  button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span>
+            <span class="button is-small is-primary" (click)='editToggle()'>Edit</span>
+
+    <div (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
+        <span class="button is-small is-info  " (click)='addHeartToNote(note.hearts)'>
             Heart  <i class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
-            </span> 
-            <!--<p id="userslikethis"(click)='mouseEnter(note.id);userslikethis.style.display=none' (mouseleave)="mouseLeave(note.id)" >{{ note.hearts || 0 }} users like this</p>-->
-            <div *ngIf="note.heartsList" >
-                <div id="{{note.id}}" style="display : none">
-                    <span  *ngFor="let n of note.heartsList; let j = index; " style="display : -webkit-inline-box; ">  
+            </span>
+        <!--<p id="userslikethis"(click)='mouseEnter(note.id);userslikethis.style.display=none' (mouseleave)="mouseLeave(note.id)" >{{ note.hearts || 0 }} users like this</p>-->
+        <div *ngIf="note.heartsList">
+            <div id="{{note.id}}" style="display : none">
+                <span *ngFor="let n of note.heartsList; let j = index; " style="display : -webkit-inline-box; ">  
                         <div *ngIf="j==0">    
                             <a routerLink="/users/{{n}}">
                                 {{note.heartsListNames[j]}}
@@ -108,9 +276,9 @@
                         </div>
                         <div class="button is-small" (click)="this.likeShowNum =this.likeShowNum + 2" *ngIf="j==this.likeShowNum">{{note.hearts-j}} more...</div>
                     </span>
-                </div>
             </div>
         </div>
+    </div>
     </span>
 
 </div>

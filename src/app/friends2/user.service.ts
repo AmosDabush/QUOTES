@@ -169,6 +169,31 @@ export class UserService {
             });
             
     }
+
+
+
+  //remove Friend uid frome current user.friendsList 
+  removeFromFriendsList(fid: string) {
+        const CurrentFriend = this.getUser(this.currentUserUid )
+        const CurrentUser = this.getUser(this.currentUserUid)
+
+        CurrentUser.valueChanges().take(1).forEach(n => {
+            if (n.friendsList)
+                    n.friendsList.splice(n.friendsList.indexOf(fid),1);
+             this.updateUser(this.currentUserUid, {
+                friendsList:n.friendsList
+                },);
+            });
+
+        CurrentUser.valueChanges().take(1).forEach(n => {
+            if (n.friendsList)
+                    n.friendsList.splice(n.friendsList.indexOf(this.currentUserUid),1);
+             this.updateUser(fid, {
+                friendsList:n.friendsList
+                },);
+            });
+    }
+
     // follow(content: string) {
     //   return this.friendsCollection.add(content);
     // }

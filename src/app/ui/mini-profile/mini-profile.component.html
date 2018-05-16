@@ -24,7 +24,7 @@
           <h3 class="title is-5 is-bold">Hello, {{ user.displayName }}</h3>
           <img class="card-img-top" [src]="user.photoURL" width=50px>
         </a>
-        <p class="text-truncate">email: {{ user.email }}</p>
+        <div *ngIf="(user.email!=null);else unknownMail">         <p class="text-truncate">EMail: {{ user.email }}</p>     </div>     <ng-template #unknownMail>               <p class="text-truncate">EMail: Unknown</p>      </ng-template>
         <p class="text-truncate">Quotes:<a routerLink="/myquotes" title="open your quote collection"> My-Quotes</a></p>
 
         <button class="button is-small is-danger   " (click)="logout();">Logout</button>

@@ -7,5 +7,6 @@ export interface Note {
   authorName?:string;
   authorPhotoURL?:string;
   heartsList?:Array<String>,
-  heartsListNames?:Array<String>
+  heartsListNames?:Array<String>,
+  settings?:string,
 }

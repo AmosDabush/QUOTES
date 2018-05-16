@@ -7,7 +7,7 @@
 
 <div>
     <div class="picbox">
-            <span *ngIf="note.authorId==currentUserUid; else otherUsers" class="navbar-menu" [ngClass]="{'is-active':show }">
+            <span *ngIf="note.authorId==currentUserUid; else otherUsers"  [ngClass]="{'is-active':show }">
                 <a routerLink="/userprofile1">
                     <img class="card-img-top" [src]="note.authorPhotoURL" width=50px>
                     <p style="font-weight:bolder;display:-webkit-inline-flex;">{{ note.authorName }} </p>
@@ -39,29 +39,13 @@
             </div>    
 
 
-        <div *ngIf="!this.mobile" class="navbar-menu" [ngClass]="{'is-active':show }">
-            
-
-
-
-
+    <div *ngIf="!this.mobile" class="navbar-menu" [ngClass]="{'is-active':show }">
         <div class="field is-grouped">
+
             <div *ngIf="note.authorId==currentUserUid" class="navbar-menu" [ngClass]="{'is-active':show }">
-       <span class="button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span> 
-
-            
-            <span class="button is-small is-primary  " (click)='editToggle()'>Edit</span> 
-
-
-
-                
+                <span class="button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span> 
+                <span class="button is-small is-primary  " (click)='editToggle()'>Edit</span>      
             </div>
-
-
-
-
-
-
 
             <!--like button + hover list of like User Names-->
             <span (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
@@ -91,7 +75,15 @@
     </div>
 
 
-    <span *ngIf="this.mobile">                
+    <span *ngIf="this.mobile">        
+                   
+        <div class="field is-grouped">
+
+            <div *ngIf="note.authorId==currentUserUid"  [ngClass]="{'is-active':show }">
+                <span class="button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span> 
+                <span class="button is-small is-primary  " (click)='editToggle()'>Edit</span>      
+            </div>
+        
         <div (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
             <span class="button is-small is-info  " (click)='addHeartToNote(note.hearts)'>
             Heart  <i class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
@@ -123,6 +115,7 @@
                     </span>
                 </div>
             </div>
+        </div>
         </div>
     </span>
 

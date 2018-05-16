@@ -152,12 +152,7 @@ export class UserService {
     return this.getUser(id).delete();
   }
 
-  follow(fid: string) {
-       const friend = {
-       id:fid,
-    };
-     return this.friendsCollection.doc(fid).set(friend);
-  }
+
   
   addFriend(fid: string) {
        this.friendsReqCollection = this.afs.collection(`users/${fid}/friendsRequests/`, (ref) => ref.orderBy('time', 'desc')/*.limit()*/ );
@@ -177,7 +172,7 @@ export class UserService {
 
 
 
-    //add users uids and display names to note like list
+    //add Friend uid to current user.FriendReq list
     addFriendReq(fid: string) {
         const CNote = this.getUser(fid)
         CNote.valueChanges().take(1).forEach(n => {
@@ -199,8 +194,8 @@ export class UserService {
     }
 
 
-
-  removeFriendReq(fid: string) {
+  //remove Friend uid frome current user.FriendReq list
+  removeFriendReq(fid: string) { 
         const CNote = this.getUser(fid)
         CNote.valueChanges().take(1).forEach(n => {
             if (n.friendReq)
@@ -209,10 +204,134 @@ export class UserService {
                 friendReq:n.friendReq
                 },);
             });
-            
-            // alert("123")
+    }
+  
+  removeFriendReqSelf(fid: string) { 
+        const CNote = this.getUser(this.currentUserUid)
+        CNote.valueChanges().take(1).forEach(n => {
+            if (n.friendReq)
+                    n.friendReq.splice(n.friendReq.indexOf(fid),1);
+             this.updateUser(this.currentUserUid, {
+                friendReq:n.friendReq
+                },);
+            });
+    }
+
+
+
+
+  follow(fid: string) {
+       const friend = {
+       id:fid,
+    };
+     this.addToFollowList(fid);
+     return this.friendsCollection.doc(fid).set(friend);
+  }
+
+
+
+
+
+    //add Friend uid to current user.FriendReq list
+    addToFollowList(fid: string) {
+        const CNote = this.getUser(this.currentUserUid )
+        CNote.valueChanges().take(1).forEach(n => {
+            if (!n.followList ) 
+                this.updateUser(this.currentUserUid, {
+                followList:[fid]
+                },);
+            else if (n.followList)
+                if (n.followList.indexOf(fid) == -1 ) {
+                    n.followList.push(fid)
+                    this.updateUser(this.currentUserUid,{
+                        followList: n.followList,
+                    });
+                } else
+                    console.log('you allrady liked this quote')
+
+        });
 
     }
+
+
+  //remove Friend uid frome current user.FriendReq list
+  removeFromFollowList(fid: string) {
+        const CNote = this.getUser(this.currentUserUid)
+        CNote.valueChanges().take(1).forEach(n => {
+            if (n.followList)
+                    n.followList.splice(n.followList.indexOf(fid),1);
+             this.updateUser(this.currentUserUid, {
+                followList:n.followList
+                },);
+            });
+    }
+
+
+
+    //add Friend uid to current user.friendsList 
+    addToFriendsList(fid: string) {
+        const CurrentUser = this.getUser(this.currentUserUid )
+        const CurrentFriend = this.getUser(this.currentUserUid )
+
+        CurrentUser.valueChanges().take(1).forEach(n => {
+            if (!n.friendsList ) 
+                this.updateUser(this.currentUserUid, {
+                friendsList:[fid]
+                },);
+            else if (n.friendsList)
+                if (n.friendsList.indexOf(fid) == -1 ) {
+                    n.friendsList.push(fid)
+                    this.updateUser(this.currentUserUid,{
+                        friendsList: n.friendsList,
+                    });
+                } else
+                    console.log('you  are allrady Friends')
+
+        });
+
+        CurrentFriend.valueChanges().take(1).forEach(n => {
+            if (!n.friendsList ) 
+                this.updateUser(fid, {
+                friendsList:[this.currentUserUid]
+                },);
+            else if (n.friendsList)
+                if (n.friendsList.indexOf(this.currentUserUid) == -1 ) {
+                    n.friendsList.push(this.currentUserUid)
+                    this.updateUser(fid,{
+                        friendsList: n.friendsList,
+                    });
+                } else
+                    console.log('you  are allrady Friends')
+
+        });
+
+
+    }
+
+
+  //remove Friend uid frome current user.friendsList 
+  removeFromFriendsList(fid: string) {
+        const CurrentFriend = this.getUser(this.currentUserUid )
+        const CurrentUser = this.getUser(this.currentUserUid)
+
+        CurrentUser.valueChanges().take(1).forEach(n => {
+            if (n.friendsList)
+                    n.friendsList.splice(n.friendsList.indexOf(fid),1);
+             this.updateUser(this.currentUserUid, {
+                friendsList:n.friendsList
+                },);
+            });
+
+        CurrentUser.valueChanges().take(1).forEach(n => {
+            if (n.friendsList)
+                    n.friendsList.splice(n.friendsList.indexOf(this.currentUserUid),1);
+             this.updateUser(fid, {
+                friendsList:n.friendsList
+                },);
+            });
+    }
+
+
 
 
 
@@ -237,6 +356,8 @@ export class UserService {
        const friendOther = {
        id:fid,
       };
+      this.addToFriendsList(fid);
+      this.removeFriendReqSelf(fid);
      return (
       this.afs.doc < Friend > (`users/${this.currentUserUid}/friendsRequests/${fid}`).delete(),
       this.afs.doc < Friend > (`users/${fid}/friends2/${this.currentUserUid}`).delete(),
@@ -246,10 +367,11 @@ export class UserService {
      );
   }
 
-    removeFriend(id: string){
+    removeFriend(fid: string){
+        this.removeFromFriendsList(fid)
         return(
-               this.afs.doc < Friend > (`users/${this.currentUserUid}/confirmedFriends/${id}`).delete(),
-               this.afs.doc < Friend > (`users/${id}/confirmedFriends/${this.currentUserUid}`).delete()
+               this.afs.doc < Friend > (`users/${this.currentUserUid}/confirmedFriends/${fid}`).delete(),
+               this.afs.doc < Friend > (`users/${fid}/confirmedFriends/${this.currentUserUid}`).delete()
                );
     }
 

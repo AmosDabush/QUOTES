@@ -4,6 +4,8 @@ import { FeedService } from '../feed.service';
 
 import { Note } from '../note-model';
 
+import {User} from '../../users/user-model';
+
 import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from '../../core/auth.service';
@@ -17,21 +19,23 @@ import { AppRoutingModule } from '../../app-routing.module';
   styleUrls: ['./notes-list.component.scss'],
 })
 export class FeedListComponent implements OnInit {
-
+  doubleChackList: string[];
   notes: Observable<Note[]>;
   content: string;
   users:  Observable<User[]>;
   noteslist: Array<Note>;
   notes2: Observable<Note[]>;
   noteslist2: Array<Observable<Note[]>>;
-
-  constructor(private noteService: FeedService) { }
+  user:Observable<User>;
+  constructor(private noteService: FeedService,
+              public auth: AuthService,
+  ) { }
   //init
   ngOnInit() {
     this.notes = this.noteService.getSnapshot();
     this.noteslist2=new Array<Observable<Note[]>>();
     this.users = this.noteService.getSnapshotU();
-
+    this.doubleChackList=[];
     this.users.forEach(uesr => {
      uesr.forEach(userProp => {
       //  console.log('userProp : '+ userProp.displayName , userProp.uid)
@@ -46,5 +50,26 @@ export class FeedListComponent implements OnInit {
     this.noteService.create(this.content);
     this.content = '';
   }
+ 
+//  checkIfFriends(uid:string):boolean{
+//    let user=this.noteService.getUser(uid)
+   
+//    console.log("123")
+//    return true;
+//  }
 
+addToDoubleChackList(id:string){
+  if( this.doubleChackList.indexOf(id) == -1 )
+     
+     setTimeout(()=> {
+     this.doubleChackList.push(id);;
+}, 0);
+     
+    
+  else
+  console.log("allredy in list !@#!@#")
+  console.log('doubleChackList = '+this.doubleChackList)
+
+}
+ 
 }

@@ -8,5 +8,5 @@ export interface Note {
   authorPhotoURL?:string;
   heartsList?:Array<String>
   heartsListNames?:Array<String>
-  
+  settings?:string;
 }

@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="box">
-            <p class="text-truncate">EMail: {{ user.email }}</p>
+            <div *ngIf="(user.email!=null);else unknownMail">         <p class="text-truncate">EMail: {{ user.email }}</p>     </div>     <ng-template #unknownMail>               <p class="text-truncate">EMail: Unknown</p>      </ng-template>
             <div class="field is-grouped">
                 <p class="text-truncate">Description: {{ user.discription }}</p>
                 <span id="edit" class="button is-small far fa-edit"(click)='editDescriptionToggler();' title='add/edit your description'>&#160;</span>
@@ -80,7 +80,7 @@
     <option [value]="i" *ngFor="let i of hours">{{i}}:00</option>
       </select>
                     </div>
-                    <button class="button is-bold is-primary" (click)="addToList()">Add to list</button>
+                    <button class="button is-bold is-primary " (click)="addToList()">Add to list</button>
                 </div>
             </div>
 
@@ -90,11 +90,11 @@
                     
                     <div *ngIf="i[0] !='E' ; else EveryDay">
                          Every {{i}}
-                        <button class="button   is-danger is-rounded fa fa-times is-small" (click)="DelFromList(i)" title="Delete this date">Delete</button>
+                        <button class="button   is-danger is-rounded fa fa-times is-small is-outlined" (click)="DelFromList(i)" title="Delete this date">Delete</button>
                     </div>
                     <ng-template #EveryDay class="box">
                         {{i}}
-                            <button class="button   is-danger is-rounded fa fa-times is-small" (click)="DelFromList(i)" title="Delete this date">Delete</button>
+                            <button class="button   is-danger is-rounded fa fa-times is-small is-outlined" (click)="DelFromList(i)" title="Delete this date">Delete</button>
                     </ng-template>
 
 

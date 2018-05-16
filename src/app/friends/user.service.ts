@@ -120,15 +120,32 @@ export class UserService {
         return this.getUser(id).update(data);
     }
 
+    //delete user by id 
     deleteUser(id: string) {
         return this.getUser(id).delete();
     }
 
-
+    //unFollow user by id 
     unFollow(id: string) {
+        this.removeFromFollowList(id);
         return this.getFriend(id).delete();
 
     }
+    //remove the following user uid from the current user.followList
+    removeFromFollowList(fid: string) {
+        const CNote = this.getUser(this.currentUserUid)
+        CNote.valueChanges().take(1).forEach(n => {
+            if (n.followList)
+                    n.followList.splice(n.followList.indexOf(fid),1);
+             this.updateUser(this.currentUserUid, {
+                followList:n.followList
+                },);
+            });
+    }
+
+
+
+
 
     // follow(content: string) {
     //   return this.friendsCollection.add(content);

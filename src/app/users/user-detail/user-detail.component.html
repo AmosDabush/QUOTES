@@ -4,7 +4,7 @@
         <h3> {{ user.displayName }}</h3>
         <img class="card-img-top ,box" [src]="user.photoURL" width="70">
         <p class="text-truncate">UID: {{ user.uid }}</p>
-        <p class="text-truncate">EMail: {{ user.email }}</p>
+        <div *ngIf="(user.email!=null);else unknownMail">         <p class="text-truncate">EMail: {{ user.email }}</p>     </div>     <ng-template #unknownMail>               <p class="text-truncate">EMail: Unknown</p>      </ng-template>
         <p class="text-truncate">Description: {{ user.discription }}</p>
         
 

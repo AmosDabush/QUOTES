@@ -170,7 +170,7 @@ unFollow(id: string) {
         if (typeof follow !== "undefined" && follow !== null) {follow.style.display = 'inline';}
         var unfollow = document.getElementById('unfollowB');
         if (typeof unfollow !== "undefined" && unfollow !== null) {unfollow.style.display = 'none';}
-
+        this.userService.removeFromFollowList(id)
         return this.getFriend(id).delete();
   }
 
