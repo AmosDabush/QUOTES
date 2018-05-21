@@ -121,20 +121,48 @@ export class NoteService {
         return this.afs.doc < Note > (`users/${this.currentUserUid}/notes/${id}`);
     }
 
+    // /*create new note call this.createNote with the right prameters*/
+    // create(content: string) {
+    //     const itemsRef = < any > this.afs.doc(`users/${this.currentUserUid}`).valueChanges();
+
+    //     return itemsRef
+    //         .take(1)
+    //         .toPromise().then((data) => {
+    //             this.createNote(data.photoURL, data.displayName, content)
+    //         });
+    // }
+
+
+    // /*create new note*/
+    // createNote(PhotoURL, displayName, content: string) {
+    //     const note = {
+    //         content,
+    //         hearts: 0,
+    //         time: new Date().getTime(),
+    //         authorName: displayName,
+    //         authorId: this.currentUserUid,
+    //         authorPhotoURL: PhotoURL,
+    //         heartsList: [],
+
+    //     };
+    //     return this.notesCollection.add(note);
+    // }
+
     /*create new note call this.createNote with the right prameters*/
-    create(content: string) {
+    create(content: string,settings?:string) {
         const itemsRef = < any > this.afs.doc(`users/${this.currentUserUid}`).valueChanges();
 
         return itemsRef
             .take(1)
             .toPromise().then((data) => {
-                this.createNote(data.photoURL, data.displayName, content)
+                this.createNote(data.photoURL, data.displayName, content,settings)
             });
     }
 
 
     /*create new note*/
-    createNote(PhotoURL, displayName, content: string) {
+    createNote(PhotoURL, displayName, content: string,settings?:string) {
+        this.notesCollection = this.afs.collection(`users/${this.currentUserUid}/notes/`, (ref) => ref.orderBy('time', 'desc') /*.limit()*/ );
         const note = {
             content,
             hearts: 0,
@@ -142,11 +170,13 @@ export class NoteService {
             authorName: displayName,
             authorId: this.currentUserUid,
             authorPhotoURL: PhotoURL,
-            heartsList: [],
-
+            settings:settings||'public'
         };
+        // console.log(this.getValueFromObservable())     
         return this.notesCollection.add(note);
     }
+
+
 
     updateNote(id: string, data: Partial < Note > ) {
         return this.getNote(id).update(data);

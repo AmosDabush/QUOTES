@@ -44,7 +44,7 @@
             </div>
         </div>
 
-                     <a id="navAuth2" class="navbar-item navbar-start">
+                     <a id="navAuth2" class="navAuth2 navbar-item navbar-start">
                         <nav-friend-requests></nav-friend-requests>
                     </a>
 
@@ -130,50 +130,76 @@
                 &nbsp; Friend Req
             </a>
         </p>-->
-        <p class="control">
-            <a class="fas fa-user navbar-item" routerLink="/userprofile1" (click)="toggleCollapse()">
-            &nbsp; Profile
-            </a>
-        </p>
-        <p class="control">
-            <a class="fas fa-quote-right navbar-item" routerLink="/myquotes" (click)="toggleCollapse()">
-            &nbsp; My-Quotes
-            </a>
-        </p>
-        <p class="control">
-            <a class="far fa-users navbar-item " routerLink="/friends2" (click)="toggleCollapse()">
-                 &nbsp; Friends
-            </a>
-        </p>
-        <p class="control">
-            <a class="far fa-binoculars navbar-item " routerLink="/friends" (click)="toggleCollapse()">
-                &nbsp; Following
-            </a>
-        </p>
-        <p class="control">
-            <a class="fas fa-newspaperfas fa-delicious navbar-item" routerLink="/feed" (click)="toggleCollapse()">
-            &nbsp; Feed
-            </a>
-        </p>
-        <p class="control">
-            <a class="fas fa-home navbar-item" routerLink="/" (click)="toggleCollapse()">
-            &nbsp; Home
-            </a>
-            <!--<a class="nav-item" routerLink="/items" (click)="toggleCollapse()">
-                To-Do List
-                </a>-->
-            <!--<a class="nav-item" routerLink="/users" (click)="toggleCollapse()">
-                Users-list
-                </a>-->
-            <!--<a class="nav-item" routerLink="/notes" (click)="toggleCollapse()">
-                anonymous-Quotes
-                </a>-->
-            <!--<a class="navbar-item" routerLink="/login" (click)="toggleCollapse()">
-                Login
-                </a>-->
-        </p>	
+
+
+
+        <!--<span *ngIf="!this.mobile &&!this.small">-->
+            <p class="control">
+                <a *ngIf="!this.small" class="fas fa-newspaperfas fa-delicious navbar-item" routerLink="/feed" (click)="toggleCollapse()"  title="Feed">
+                &nbsp; Feed
+                </a>
+                <a *ngIf="this.small" class="fas fa-newspaperfas fa-delicious navbar-item" routerLink="/feed" (click)="toggleCollapse()"  title="Feed">
+                &nbsp;
+                </a>
+            </p>
+            <p class="control">
+                <a *ngIf="!this.small" class="far fa-binoculars navbar-item " routerLink="/friends" (click)="toggleCollapse()"  title="Following">
+                    &nbsp; Following
+                </a>
+                <a *ngIf="this.small" class="far fa-binoculars navbar-item " routerLink="/friends" (click)="toggleCollapse()"  title="Following">
+                    &nbsp; 
+                </a>
+            </p>
+            <p class="control">
+                <a *ngIf="!this.small"class="far fa-users navbar-item " routerLink="/friends2" (click)="toggleCollapse()"  title="Friends">
+                    &nbsp; Friends
+                </a>
+                <a *ngIf="this.small"class="far fa-users navbar-item " routerLink="/friends2" (click)="toggleCollapse()"  title="Friends">
+                    &nbsp; 
+                </a>
+            </p>
+            <p class="control">
+                <a *ngIf="!this.small" class="fas fa-quote-right navbar-item" routerLink="/myquotes" (click)="toggleCollapse()"  title="My-Quotes">
+                &nbsp; My-Quotes
+                </a>                
+                <a *ngIf="this.small" class="fas fa-quote-right navbar-item" routerLink="/myquotes" (click)="toggleCollapse()"  title="My-Quotes">
+                &nbsp;
+                </a>
+            </p>
+            <p class="control">
+                <a *ngIf="!this.small" class="fas fa-user navbar-item" routerLink="/userprofile1" (click)="toggleCollapse()" title="Profile">
+                &nbsp; Profile
+                </a>
+                <a *ngIf="this.small" class="fas fa-user navbar-item" routerLink="/userprofile1" (click)="toggleCollapse()" title="Profile">
+                &nbsp;
+                </a>
+            </p>
+            <p class="control">
+                <a *ngIf="!this.small" class="fas fa-home navbar-item" routerLink="/" (click)="toggleCollapse()" title="Home">
+                &nbsp;Home
+                </a>
+                <a *ngIf="this.small" class="fas fa-home navbar-item" routerLink="/" (click)="toggleCollapse()" title="Home">
+                </a>
+                <!--<a class="nav-item" routerLink="/items" (click)="toggleCollapse()">
+                    To-Do List
+                    </a>-->
+                <!--<a class="nav-item" routerLink="/users" (click)="toggleCollapse()">
+                    Users-list
+                    </a>-->
+                <!--<a class="nav-item" routerLink="/notes" (click)="toggleCollapse()">
+                    anonymous-Quotes
+                    </a>-->
+                <!--<a class="navbar-item" routerLink="/login" (click)="toggleCollapse()">
+                    Login
+                    </a>-->
+            </p>	
+        <!--</span>-->
+
         <!--</div>-->
     </div>
+
+
+
 </div>
 </div>
 <nav></nav>

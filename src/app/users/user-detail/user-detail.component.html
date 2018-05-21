@@ -7,7 +7,8 @@
         <div *ngIf="(user.email!=null);else unknownMail">         <p class="text-truncate">EMail: {{ user.email }}</p>     </div>     <ng-template #unknownMail>               <p class="text-truncate">EMail: Unknown</p>      </ng-template>
         <p class="text-truncate">Description: {{ user.discription }}</p>
         
-
+<span *ngIf="user.uid!=this.currentUserUid">
+  <!--<span>-->
    <!--<li class="friend" *ngIf="friend?.fid?.length; else notFriend"></li>-->
             <div  *ngIf="( followList2.indexOf(user.uid) > -1 ); else notFriend">
               <!--<h3>IS a FRIEND!!!!</h3>-->
@@ -55,6 +56,7 @@
               
               <button id="addFriendB" class="button is-small is-success" (click)="addFriend(user.uid)">Add Friend</button>
             </ng-template>
+      </span>
     </div>
 
 

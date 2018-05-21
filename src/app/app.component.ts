@@ -6,6 +6,7 @@ import './utils/rxjs.operators';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
+import { Router, NavigationEnd } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit {
   startobs = this.startAt.asObservable();
   endobs = this.endAt.asObservable();
 
-  constructor(public msg: MessagingService, public auth: AuthService,private afs: AngularFirestore) { }
+  constructor(public msg: MessagingService, public auth: AuthService,private afs: AngularFirestore,private router: Router) { }
 
   ngOnInit() { 
     this.auth.user
@@ -48,6 +49,13 @@ export class AppComponent implements OnInit {
       })
     })
 
+    //scroll To top in router events
+    this.router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0)
+        });
   }//ngOnInit
 
   search($event) {

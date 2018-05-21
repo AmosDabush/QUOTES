@@ -35,13 +35,13 @@ export class FeedService {
     currentUserName = "";
     currentUserPhotoURL = ""
     ppp: any;
-
+    notesCollectionU: AngularFirestoreCollection < Note > ;
     notesCollection: AngularFirestoreCollection < Note > ;
     noteDocument: AngularFirestoreDocument < Node > ;
     usersCollection: AngularFirestoreCollection < User > ;
-    userDocument: AngularFirestoreDocument < Node > ;
+    userDocument: AngularFirestoreDocument < Note > ;
     user1: AngularFirestoreDocument < User > ;
-
+    note1:AngularFirestoreDocument < Node > 
     constructor(private afs: AngularFirestore,
         public auth: AuthService,
         private userService: UserService,
@@ -57,14 +57,36 @@ export class FeedService {
         } else
             console.error("NULL ID")
 
-        this.notesCollection = this.afs.collection(`users/${this.currentUserUid}/notes/`, (ref) => ref.orderBy('time', 'asc') /*.limit()*/ );
+        // this.notesCollection = this.afs.collection(`users/${this.currentUserUid}/notes/`, (ref) => ref.orderBy('time', 'desc') );
+        this.notesCollectionU = this.afs.collection(`users/${this.currentUserUid}/notes/`, (ref) => ref.orderBy('time', 'desc').limit(1) );
+
         this.usersCollection = this.afs.collection('users/', (ref) => ref);
         this.user1= this.afs.doc(`users/${this.currentUserUid}`);
-
+        this.note1;
 
     }
 
+    getSnapshotU1(): Observable < User > {
+        ['added', 'modified', 'removed']
 
+                        console.log('data.displayName')
+
+        return this.user1.snapshotChanges().map((a) => {
+                const data = a.payload.data() as User;
+                return {
+                    id: a.payload.id,
+                    email: data.email,
+                    photoURL: data.photoURL,
+                    displayName: data.displayName,
+                    discription: data.discription,
+                    uid: data.uid,
+                    friendsList:data.friendsList||[],
+                    followList:data.followList||[],
+
+                };
+        });
+
+    }
     /*get snapshotChanges for all necessary users for the current feed*/
 
     getSnapshotU(): Observable < User[] > {
@@ -92,20 +114,50 @@ export class FeedService {
 
     getSnapshot(): Observable < Note[] > {
         ['added', 'modified', 'removed']
-        return this.notesCollection.snapshotChanges().map((actions) => {
+        return this.notesCollectionU.snapshotChanges().map((actions) => {
             return actions.map((a) => {
                 const data = a.payload.doc.data() as Note;
                 return {
                     id: a.payload.doc.id,
                     content: data.content,
                     hearts: data.hearts,
-                    time: data.time
+                    heartsList: data.heartsList,
+                    heartsListNames: data.heartsListNames,
+                    time: data.time,
+                    authorId: data.authorId,
+                    authorName: data.authorName,
+                    authorPhotoURL: data.authorPhotoURL,
+                    settings:data.settings
                 };
             });
         });
     }
 
+    /*get snapshotChanges for all necessary notes for the current feed*/
+    getSnapshotN1(uid: string,nid: string): Observable < Note > {
+        ['added', 'modified', 'removed']
+        this.note1 = this.afs.doc(`users/${uid}/notes/${nid}`);
+        this.note1 = this.afs.doc(`/users/K91tLU7SLEeexdsW2LmGDOFrRaa2/notes/tcQnw8DJi0xuDCYztIh2`);
 
+
+        // let i=0;
+        return this.note1.snapshotChanges().map((a) => {
+                const data = a.payload.data() as Note;
+                return {
+                    id: a.payload.id,
+                    content: data.content,
+                    hearts: data.hearts,
+                    heartsList: data.heartsList,
+                    heartsListNames: data.heartsListNames,
+                    time: data.time,
+                    authorId: data.authorId,
+                    authorName: data.authorName,
+                    authorPhotoURL: data.authorPhotoURL,
+                    settings:data.settings
+                };
+            });
+        
+    }
     /*get snapshotChanges for all necessary notes for the current feed*/
     getSnapshotN(uid: string): Observable < Note[] > {
         ['added', 'modified', 'removed']
@@ -141,7 +193,7 @@ export class FeedService {
     updateNote2(id: string, data: Partial < Note > , uid: string) {
         return this.getNote2(id, uid).update(data);
     }
-
+    
     //get specific note by uid and note id
     getNote(id: string, uid: string) {
         return this.afs.doc < Note > (`users/${uid}/notes/${id}`);
@@ -182,19 +234,19 @@ export class FeedService {
     }
 
     /*create new note call this.createNote with the right prameters*/
-    create(content: string) {
+    create(content: string,settings?:string) {
         const itemsRef = < any > this.afs.doc(`users/${this.currentUserUid}`).valueChanges();
 
         return itemsRef
             .take(1)
             .toPromise().then((data) => {
-                this.createNote(data.photoURL, data.displayName, content)
+                this.createNote(data.photoURL, data.displayName, content,settings)
             });
     }
 
 
     /*create new note*/
-    createNote(PhotoURL, displayName, content: string) {
+    createNote(PhotoURL, displayName, content: string,settings?:string) {
         this.notesCollection = this.afs.collection(`users/${this.currentUserUid}/notes/`, (ref) => ref.orderBy('time', 'desc') /*.limit()*/ );
         const note = {
             content,
@@ -203,6 +255,7 @@ export class FeedService {
             authorName: displayName,
             authorId: this.currentUserUid,
             authorPhotoURL: PhotoURL,
+            settings:settings||'public'
         };
         // console.log(this.getValueFromObservable())     
         return this.notesCollection.add(note);
@@ -211,6 +264,7 @@ export class FeedService {
     updateNote(id: string, data: Partial < Note > , uid: string) {
         return this.getNote(id, uid).update(data);
     }
+    
 
     deleteNote(id: string, uid: string) {
         return this.getNote(id, uid).delete();
@@ -229,6 +283,15 @@ export class FeedService {
         )
 
     }
+
+
+
+
+
+
+
+
+
 
 
 }

@@ -7,6 +7,8 @@ import { Note } from '../../feed/note-model';
 
 import { AppRoutingModule } from '../../app-routing.module';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+
 
 
 @Component({
@@ -23,8 +25,15 @@ export class NoteDetailComponent {
     note: Note;
     likeShowNum;
     mobile:boolean;
-    constructor(private noteService: FeedService,
-    ) {this.likeShowNum=3}
+    currentUserUid="";
+
+    constructor(private noteService: FeedService, private afAuth: AngularFireAuth) {
+        this.likeShowNum=3;
+        if (this.afAuth.auth.currentUser) {
+            this.currentUserUid = this.afAuth.auth.currentUser.uid;
+        } else
+            console.error("NULL ID")
+    }
 
     //add Heart To a Note (aka like)
     addHeartToNote(val: number) {
@@ -72,7 +81,7 @@ export class NoteDetailComponent {
                     heartsListNames: [CName]
                 }, authorId);
             else if (n.heartsList)
-                if (n.heartsList.indexOf(CUid) == -1 && n.heartsListNames.indexOf(CName) == -1) {
+                if (n.heartsList.indexOf(CUid) == -1 || n.heartsListNames.indexOf(CName) == -1) {
                     n.heartsList.push(CUid)
                     n.heartsListNames.push(CName)
                     this.noteService.updateNote(Nid, {

@@ -1,9 +1,113 @@
 <!--<h1>My-Quotes</h1>-->
 <div class='box'>
 <textarea rows="2" [(ngModel)]="content" placeholder="Add new quote" class="textarea is-small is-success"></textarea>
-<button class="button is-success" (click)="createNote()" [disabled]="content?.length < 2 || content?.length > 200">
+<button class="button is-success" (click)="createNote();closeMobSettings()" [disabled]="content?.length < 2 || content?.length > 200">
   Add Quote
-</button></div>
+</button>
+
+
+<!--//START !MOBILE settings-->
+            <div *ngIf="!this.mobile">
+                    <a class="button button2 is-pulled-right iconSettings2 ">
+                    <span  class=" navbar-item has-dropdown is-hoverable is-outlined is-rounded"   >
+                        <span class=" is-outlined is-rounded" >        
+                            <i class=" fas fa-cogs" title="change your privacy settings" ></i> 
+                        </span>
+                        <span class="navbar-dropdown is-boxed " style="margin-left: -60px;  text-align: left;" >                            
+                                    <span id="a ">                           
+                                        <p>
+                                            <label class="container">Private
+                                                <input  id="private_checkbox" type="checkbox" (click)="settingsCheck(1);" name="radio">
+                                                <span class="checkmark is-pulled-right">
+                                                </span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label class="container" >Public
+                                                <input id="public_checkbox" type="checkbox" name="radio" (click)="settingsCheck(2);" >
+                                                <span class="checkmark">
+                                                </span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label class="container">Friends
+                                                <input id="friends_checkbox" type="checkbox" name="radio" (click)="settingsCheck(3);">
+                                                <span class="checkmark">
+                                                </span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label class="container">Followers
+                                                <input type="checkbox" id="followers_checkbox" name="radio" (click)="settingsCheck(4);" >
+                                                <span class="checkmark">
+                                                </span>
+                                            </label>
+                                        </p>                                             
+                                </span>
+                        </span>
+                    </span>
+                </a>
+            </div>
+<!--//END !MOBILE settings-->
+
+<!--//START MOBILE settings-->
+        <span class="  " id="a" *ngIf="this.mobile">
+                <a class="button button2 is-pulled-right ">
+                            <span class="" >
+                                <span  class="settingsMobile is-pulled-right navbar-item has-dropdown is-hoverable is-outlined is-rounded"  (click)="toogleMobSettings()"   >
+                                        <i id="iconSettings" class=" iconSettings fas fa-cogs" title="change your privacy settings"  ></i> 
+                            </span>
+                        </span>    
+                </a>
+                <a id="settingsBoxMobile"  class="button button2 is-pulled-right settingsBoxMobile " style="display: none"  >
+                    <span class="box navbar-dropdown is-boxed " style="margin-left: -60px;  text-align: left; " >                  
+                            <p><i id="i" class="settingsBoxMobileClose fas fa-close button is-small is-rounded is-danger is-pulled-right" title="change your privacy settings"(click)="toogleMobSettings()"  ></i></p>
+                                <span id="a ">
+                                    <p>
+                                        <label class="container">Private
+                                            <input  id="private_checkbox" type="checkbox" (click)="settingsCheck(1);" name="radio">
+                                            <span class="checkmark is-pulled-right">
+                                            </span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label class="container" >Public
+                                            <input id="public_checkbox" type="checkbox" name="radio" (click)="settingsCheck(2);" >
+                                            <span class="checkmark">
+                                            </span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label class="container">Friends
+                                            <input id="friends_checkbox" type="checkbox" name="radio" (click)="settingsCheck(3);">
+                                            <span class="checkmark">
+                                            </span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label class="container">Followers
+                                            <input type="checkbox" id="followers_checkbox" name="radio" (click)="settingsCheck(4);" >
+                                            <span class="checkmark">
+                                            </span>
+                                        </label>
+                                    </p>                                             
+                            </span>
+                    </span>
+                </a>
+            </span>  
+            <!--//END MOBILE settings-->
+
+
+
+
+
+
+
+
+
+
+
+</div>
 
 <div  class="box" *ngFor="let note of notes | async">
   <note-detail [note]="note"><hr></note-detail>   

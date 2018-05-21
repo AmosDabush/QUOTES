@@ -4,6 +4,9 @@ import { NoteService } from '../note.service';
 
 import { Note } from '../note-model';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+
+
 @
 Component({
     selector: 'note-detail',
@@ -22,8 +25,15 @@ export class NoteDetailComponent {
     mobile:boolean;
     editContent: string;
     elementHtml;
+    currentUserUid="";
 
-    constructor(private noteService: NoteService) {this.likeShowNum=3}
+        constructor(private noteService: NoteService, private afAuth: AngularFireAuth) {
+        this.likeShowNum=3;
+        if (this.afAuth.auth.currentUser) {
+            this.currentUserUid = this.afAuth.auth.currentUser.uid;
+        } else
+            console.error("NULL ID")
+    }
 
     //use for changeing view if mobile or not
     ngOnInit() {
@@ -206,20 +216,23 @@ settingsOpenCheck() {
          
     }
 
-    toogleMobSettings(){
-        let MobSettings=<HTMLInputElement>document.getElementById("settingsBoxMobile"+this.note.id);
-        if(MobSettings){
-            if(MobSettings.style.display=='none'){
-                MobSettings.style.display='inline-flex'
+toogleMobSettings(){
+        var nid = this.note.id;
+        var name = 'nid';
+        var MobSettings = window[name];
+        window[name]=<HTMLInputElement>document.getElementById("settingsBoxMobile"+this.note.id);
+        if(window[name]){
+            if(window[name].style.display=='none'){
+                window[name].style.display='inline-flex'
                 this.settingsOpenCheck();
             }
             else {
-                MobSettings.style.display='none'
+                window[name].style.display='none'
                 this.setSettings(this.note.id,this.note.authorId);
         }
     }
 
-    }
+}
 
 /////////////////////////////////////------------------------------------------------------------------------------------
 
@@ -254,7 +267,7 @@ settingsOpenCheck() {
                     heartsListNames: [CName]
                 }, authorId);
             else if (n.heartsList)
-                if (n.heartsList.indexOf(CUid) == -1 && n.heartsListNames.indexOf(CName) == -1) {
+                if (n.heartsList.indexOf(CUid) == -1 || n.heartsListNames.indexOf(CName) == -1) {
                     n.heartsList.push(CUid)
                     n.heartsListNames.push(CName)
                     this.noteService.updateNote2(Nid, {

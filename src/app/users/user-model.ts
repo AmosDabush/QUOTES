@@ -7,4 +7,5 @@ export interface User {
   friendReq?:string[];
   followList?:string[];
   friendsList?:string[];
+  
 }

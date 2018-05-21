@@ -11,6 +11,7 @@ import { FeedListComponent } from './notes-list/notes-list.component';
 import { NoteDetailComponent } from './note-detail/note-detail.component';
 
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import {OrderByPipe} from "./orderby.pipe"
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
   declarations: [
     FeedListComponent,
     NoteDetailComponent,
+    OrderByPipe
   ],
   providers: [FeedService],
 })

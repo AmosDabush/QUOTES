@@ -4,7 +4,7 @@ i {
 
 }
 
-.button {
+.button { 
   border-radius: 0;
   margin: 10px 5px;
   text-transform: uppercase;
@@ -13,6 +13,12 @@ i {
 .button2 {
   border: 0;
 
+}
+
+.checkS{
+    margin-top: 10px;
+    margin-left: -7px !important;
+    position: absolute;
 }
 .settings {
     margin-top: -65px;
@@ -25,6 +31,7 @@ i {
 .settingsBoxMobile {
     margin-top: -35px;
     margin-right: -60px;
+    z-index: 1000;
 }
 .settingsBoxMobileClose {
     margin-top: -5px;

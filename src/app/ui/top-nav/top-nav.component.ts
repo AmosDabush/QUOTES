@@ -23,6 +23,8 @@ export class TopNavComponent  {
     // usersCollection: AngularFirestoreCollection < User > ;
         userDocument: AngularFirestoreDocument < Node > ;
         mobile:boolean;
+        small:boolean;
+
         currentUserUid = "";
         currentUserName = "";
         currentUserPhotoURL;
@@ -70,17 +72,30 @@ export class TopNavComponent  {
      }
      else
         this.mobile = false;
-    
+        //window resize (small)
+    if (window.innerWidth < 1222) { // 768px portrait
+        this.small = true;
+     }
+     else
+        this.small = false;
   }//ngOnInit
 
     //use for changeing view if mobile or not 
     onResize(event){
         event.target.innerWidth;
-            if (window.innerWidth < 1022) { 
+      if (window.innerWidth < 1022) { 
         this.mobile = true;
+        
+     }
+     else{
+        this.mobile = false;
+      }
+
+     if (window.innerWidth < 1222 && window.innerWidth > 1022) { 
+        this.small = true;
      }
      else
-        this.mobile = false;
+        this.small = false;
     }
 
 

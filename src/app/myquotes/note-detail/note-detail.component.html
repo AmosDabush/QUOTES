@@ -99,7 +99,7 @@
                     <br>
 <a class="button button2 is-pulled-right ">
                 <span class="" >
-                    <span  class="settingsMobile is-pulled-right navbar-item has-dropdown is-hoverable is-outlined is-rounded"  (click)="toogleMobSettings()"   >
+                    <span  class="settingsMobile is-pulled-right navbar-item has-dropdown is-hoverable is-outlined is-rounded"  (click)="toogleMobSettings(note.id)"   >
                         <span class=" is-outlined is-rounded" >
                             
                             <i id="iconSettings{{note.id}}" class="fas fa-cogs" title="change your privacy settings"  ></i> 
@@ -110,11 +110,11 @@
     </a>
 
 
-<a id="settingsBoxMobile{{note.id}}" class="button button2 is-pulled-right settingsBoxMobile " style="display: none"  (mouseleave)="toogleMobSettings()">
+<a id="settingsBoxMobile{{note.id}}" class="button button2 is-pulled-right settingsBoxMobile " style="display: none" >
 
                         <span class="box navbar-dropdown is-boxed " style="margin-left: -60px;  text-align: left; " >                  
 
-                                 <p><i id="i" class="settingsBoxMobileClose fas fa-close button is-small is-rounded is-danger is-pulled-right" title="change your privacy settings"(click)="toogleMobSettings()"  ></i></p>
+                                 <p><i id="i" class="settingsBoxMobileClose fas fa-close button is-small is-rounded is-danger is-pulled-right" title="change your privacy settings"(click)="toogleMobSettings(note.id)"  ></i></p>
 
                                     <span id="a{{note.id}} ">
                                  
@@ -214,9 +214,23 @@
             <!--like button + hover list of like User Names-->
                 <span (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
                     <span  class="navbar-item has-dropdown is-hoverable">
-                        <span class="button is-small is-info  " (click)='addHeartToNote(note.hearts)'>
-                            Heart  <i class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
+                          <span *ngIf="note.heartsList;else noHeartList">
+                                <span *ngIf="note.heartsList.indexOf(this.currentUserUid) != -1;else notInList" class="is-small is-info  " (click)='addHeartToNote(note.hearts)'>
+                                       <span class="button is-small is-info  " (click)='addHeartToNote(note.hearts)'>
+                                            Heart <i   class="far fa-heart"> {{ note.hearts || 0 }}</i>
+                                        </span>  <i  class="far fa-check-circle  is-small is-info  checkS " title="you allredy liked this"> </i>
+                                </span>
+                                <ng-template #notInList>
+                                        <span class="button is-small is-info is-outlined " (click)='addHeartToNote(note.hearts)'>
+                                            Heart  <i   class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
+                                        </span>
+                                </ng-template>
                         </span>
+                        <ng-template #noHeartList>
+                                 <span class="button is-small is-info  is-outlined " (click)='addHeartToNote(note.hearts)'>
+                                            Heart  <i   class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
+                                 </span>
+                        </ng-template>
                         <span class="navbar-dropdown is-boxed">                          
                                 <span *ngIf="note.heartsListNames && note.heartsList" >
                                     <span id="{{note.id}}" style="overflow: scroll; display : none">
@@ -247,9 +261,23 @@
             <span class="button is-small is-primary" (click)='editToggle()'>Edit</span>
 
     <div (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
-        <span class="button is-small is-info  " (click)='addHeartToNote(note.hearts)'>
-            Heart  <i class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
-            </span>
+         <span *ngIf="note.heartsList;else noHeartList">
+                                <span *ngIf="note.heartsList.indexOf(this.currentUserUid) != -1;else notInList" class="is-small is-info  " (click)='addHeartToNote(note.hearts)'>
+                                       <span class="button is-small is-info  " (click)='addHeartToNote(note.hearts)'>
+                                            Heart <i   class="fas fa-heart"> {{ note.hearts || 0 }}</i>
+                                        </span>  <i  class="fas fa-check-circle  is-small is-info checkS" title="you allredy liked this"> </i>
+                                </span>
+                                <ng-template #notInList>
+                                        <span class="button is-small is-info is-outlined  " (click)='addHeartToNote(note.hearts)'>
+                                            Heart  <i   class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
+                                        </span>
+                                </ng-template>
+                        </span>
+                        <ng-template #noHeartList>
+                                 <span class="button is-small is-info is-outlined " (click)='addHeartToNote(note.hearts)'>
+                                            Heart  <i   class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
+                                 </span>
+                        </ng-template>
         <!--<p id="userslikethis"(click)='mouseEnter(note.id);userslikethis.style.display=none' (mouseleave)="mouseLeave(note.id)" >{{ note.hearts || 0 }} users like this</p>-->
         <div *ngIf="note.heartsList">
             <div id="{{note.id}}" style="display : none">

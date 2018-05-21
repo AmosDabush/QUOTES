@@ -2,7 +2,7 @@
 
 <div>
     <div *ngIf="auth.user | async; then authenticated else guest">
-        <!-- template will replace this div --><p>123123123</p>
+        <!-- template will replace this div -->
     </div>
 </div>
 
@@ -16,76 +16,210 @@
 
 <!-- User logged in -->
 <ng-template #authenticated>
-    <div *ngIf="auth.user | async as user">
-      <p>{{user.friendsList}}</p><p>123123123</p><p>123123123</p><p>123123123</p>
+  <div *ngIf="auth.user | async as user">
  
 
+    <div class='box'>
+      <textarea rows="2" [(ngModel)]="content" placeholder="Add new quote" class="textarea is-small is-success  "></textarea>
+      <button class="button is-success" (click)="createNote();closeMobSettings()" [disabled]="content?.length < 2 || content?.length > 200">
+        Add Quote
+      </button>
+
+<!--//START !MOBILE settings-->
+            <div *ngIf="!this.mobile">
+                    <a class="button button2 is-pulled-right iconSettings2 ">
+                    <span  class=" navbar-item has-dropdown is-hoverable is-outlined is-rounded"   >
+                        <span class=" is-outlined is-rounded" >        
+                            <i class=" fas fa-cogs" title="change your privacy settings" ></i> 
+                        </span>
+                        <span class="navbar-dropdown is-boxed " style="margin-left: -60px;  text-align: left;" >                            
+                                    <span id="a ">                           
+                                        <p>
+                                            <label class="container">Private
+                                                <input  id="private_checkbox" type="checkbox" (click)="settingsCheck(1);" name="radio">
+                                                <span class="checkmark is-pulled-right">
+                                                </span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label class="container" >Public
+                                                <input id="public_checkbox" type="checkbox" name="radio" (click)="settingsCheck(2);" >
+                                                <span class="checkmark">
+                                                </span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label class="container">Friends
+                                                <input id="friends_checkbox" type="checkbox" name="radio" (click)="settingsCheck(3);">
+                                                <span class="checkmark">
+                                                </span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label class="container">Followers
+                                                <input type="checkbox" id="followers_checkbox" name="radio" (click)="settingsCheck(4);" >
+                                                <span class="checkmark">
+                                                </span>
+                                            </label>
+                                        </p>                                             
+                                </span>
+                        </span>
+                    </span>
+                </a>
+            </div>
+<!--//END !MOBILE settings-->
+
+<!--//START MOBILE settings-->
+        <span class="  " id="a" *ngIf="this.mobile">
+                <a class="button button2 is-pulled-right ">
+                            <span class="" >
+                                <span  class="settingsMobile is-pulled-right navbar-item has-dropdown is-hoverable is-outlined is-rounded"  (click)="toogleMobSettings()"   >
+                                        <i id="iconSettings" class=" iconSettings fas fa-cogs" title="change your privacy settings"  ></i> 
+                            </span>
+                        </span>    
+                </a>
+                <a id="settingsBoxMobile"  class="button button2 is-pulled-right settingsBoxMobile " style="display: none"  >
+                    <span class="box navbar-dropdown is-boxed " style="margin-left: -60px;  text-align: left; " >                  
+                            <p><i id="i" class="settingsBoxMobileClose fas fa-close button is-small is-rounded is-danger is-pulled-right" title="change your privacy settings"(click)="toogleMobSettings()"  ></i></p>
+                                <span id="a ">
+                                    <p>
+                                        <label class="container">Private
+                                            <input  id="private_checkbox" type="checkbox" (click)="settingsCheck(1);" name="radio">
+                                            <span class="checkmark is-pulled-right">
+                                            </span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label class="container" >Public
+                                            <input id="public_checkbox" type="checkbox" name="radio" (click)="settingsCheck(2);" >
+                                            <span class="checkmark">
+                                            </span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label class="container">Friends
+                                            <input id="friends_checkbox" type="checkbox" name="radio" (click)="settingsCheck(3);">
+                                            <span class="checkmark">
+                                            </span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label class="container">Followers
+                                            <input type="checkbox" id="followers_checkbox" name="radio" (click)="settingsCheck(4);" >
+                                            <span class="checkmark">
+                                            </span>
+                                        </label>
+                                    </p>                                             
+                            </span>
+                    </span>
+                </a>
+            </span>  
+            <!--//END MOBILE settings-->
+
+    </div>
+
+  
 
 
 
 
-<div class='box'>
-  <textarea rows="2" [(ngModel)]="content" placeholder="Add new quote" class="textarea is-small is-success  "></textarea>
-  <button class="button is-success" (click)="createNote()" [disabled]="content?.length < 2 || content?.length > 200">
-    Add Quote
-  </button>
-</div>
 
-<div  *ngFor="let notes of noteslist2 ">
-    <span *ngFor="let note of (notes | async)">
-      <div *ngIf="(note.settings=='friends'|| note.settings=='ff')">
-        
 
-        <div *ngIf="user.friendsList.indexOf(note.authorId) != -1">
-          <div class="box"> {{note.settings}} 
+      <!-- current user notes -->
+        <div  class="box" *ngFor="let note of notes2 | async">
+            <note-detail [note]="note"><hr></note-detail>   
+        </div>
+
+
+
+
+<!--<hr><h1>friends</h1><hr>-->
+
+      <!-- FriendList -->
+      <!--<span  *ngFor="let notes of noteslist2Friends ">
+          <span *ngFor="let note of (notes | async)">
+
+            <div *ngIf="(!note.settings || note.settings=='friends' || note.settings=='public' || note.settings=='ff');else FollowerAndFriend">
+                <div class="box" >{{note.settings}} 
+                    <note-detail  [note]="note"><hr></note-detail><br> 
+                </div>
+            </div>
             
-                    <div *ngIf="this.doubleChackList.indexOf(note.id) == -1">
-                        {{addToDoubleChackList(note.id)}}
+            <ng-template #FollowerAndFriend>
+                <div *ngIf="(note.settings=='followers') && (user.followList.indexOf(note.authorId) != -1)">
+                    <div class="box" >{{note.settings}} 
+                        <note-detail  [note]="note"><hr></note-detail><br> 
                     </div>
-            <note-detail [note]="note"><hr></note-detail><br> 
-          </div>
-        </div>
+                </div>
+            </ng-template>
 
+          </span>
+      </span>-->
 
+         <span *ngFor="let note of (combineLatestFriends )">
+            <div *ngIf="(!note.settings || note.settings=='friends' || note.settings=='public' || note.settings=='ff');else FollowerAndFriend">
+                <div class="box" >
+                    <note-detail  [note]="note"><hr></note-detail><br> 
+                </div>
+            </div>
 
-      </div>
-    </span>
-</div>
-
-
-<div  *ngFor="let notes of noteslist2 ">
-    <span *ngFor="let note of (notes | async)">
-      <div *ngIf="(note.settings=='followers'|| note.settings=='ff')">
-        
-                    <div *ngIf="this.doubleChackList.indexOf(note.id) == -1">
-                        {{addToDoubleChackList(note.id)}}
+            <ng-template #FollowerAndFriend>
+                <div *ngIf="(note.settings=='followers') && (user.followList.indexOf(note.authorId) != -1)">
+                    <div class="box" >
+                        <note-detail  [note]="note"><hr></note-detail><br> 
                     </div>
-        <div *ngIf="user.followList.indexOf(note.id) == -1">
-          <div class="box"> {{note.settings}}
-            <note-detail [note]="note"><hr></note-detail><br> 
-          </div>
-        </div>
+                </div>
+            </ng-template>
 
+          </span>
 
+<!--<hr><h1>follow</h1><hr>-->
 
-      </div>
-    </span>
-</div>
+      <!-- followList (user in FollowList && not in FriendList) -->
 
+      <!--<span  *ngFor="let notes of noteslist2Followers ">
+          <span *ngFor="let note of (notes | async)">
+            <div *ngIf="(!note.settings || note.settings=='followers' || note.settings=='public' || note.settings=='ff')">
+                <div class="box" >{{note.settings}} 
+                    <note-detail  [note]="note"><hr></note-detail><br> 
+                </div>
+            </div>
+          </span>
+      </span>-->
 
-<span  *ngFor="let notes of noteslist2 ">
-    <span *ngFor="let note of (notes | async)">
-                          <div class="box" *ngIf="this.doubleChackList.indexOf(note.id) == -1">
-                          <note-detail  [note]="note"><hr></note-detail><br> 
-                    </div>
-                                                   
+          <span *ngFor="let note of (combineLatestFollowers )">
+            <div *ngIf="(!note.settings || note.settings=='followers' || note.settings=='public' || note.settings=='ff')">
+                <div class="box" >
+                    <note-detail  [note]="note"><hr></note-detail><br> 
+                </div>
+            </div>
+          </span>
 
-    </span>
-</span>
-<br>
+<!--<hr><h1>public</h1><hr>-->
 
-   </div>
+      <!--  public (user not in FollowList &&  FriendList) -->
+      <!--<span  *ngFor="let notes of noteslist2 ">
+          <span *ngFor="let note of (notes | async)">
+              <div class="box" *ngIf="(note.settings=='public' ||!note.settings)">{{note.settings}} 
+                <note-detail  [note]="note"><hr></note-detail><br> 
+              </div>
+          </span>
+      </span>-->
+
+          <span *ngFor="let note of (combineLatestPublic )"> 
+              <div class="box" *ngIf="(note.settings=='public' ||!note.settings)">
+                    <note-detail  [note]="note"><hr></note-detail><br> 
+                </div>
+          </span>
+
+      <br>
+  </div>
+
 </ng-template>
+
+
+
+
 
 
 
