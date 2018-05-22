@@ -78,7 +78,7 @@ export class UserService {
       return actions.map((a) => {
         const data = a.payload.doc.data() as Note;
         
-        return { id: a.payload.doc.id, content: data.content, hearts: data.hearts, heartsList: data.heartsList,heartsListNames: data.heartsListNames,
+        return { id: a.payload.doc.id, content: data.content, hearts: data.hearts, heartsList: data.heartsList,heartsListNames: data.heartsListNames,settings: data.settings,
           time: data.time,authorId:data.authorId ,authorName:data.authorName,authorPhotoURL:data.authorPhotoURL};
       });
     });
