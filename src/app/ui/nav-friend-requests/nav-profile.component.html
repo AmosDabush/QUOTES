@@ -18,7 +18,7 @@
          <div  *ngIf="( user.friendReq);">
                       <div  *ngIf="( user.friendReq.length>0);">
 
-            <span id="navAuth2" class="miniPButton button far fa-user is-info is-small is-rounded  " style="font-feature-settings: bold" routerLink="/friends_requests" (click)="toggleCollapse()">
+            <span id="navAuth2" class="miniPButton button far fa-user is-info is-small is-rounded  " style="font-feature-settings: bold" routerLink="/friends_requests" >
                     +{{ user.friendReq.length }}
             </span>&nbsp;&nbsp;
         </div>          

@@ -27,6 +27,8 @@ logout() {
      }
     }
     
-
+toggleCollapse(){
+  console.log("toggle")
+}
 
 }

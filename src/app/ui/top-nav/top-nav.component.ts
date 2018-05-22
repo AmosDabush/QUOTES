@@ -73,7 +73,7 @@ export class TopNavComponent  {
      else
         this.mobile = false;
         //window resize (small)
-    if (window.innerWidth < 1222) { // 768px portrait
+    if (window.innerWidth < 1222 && window.innerWidth > 1022) { // 768px portrait
         this.small = true;
      }
      else
