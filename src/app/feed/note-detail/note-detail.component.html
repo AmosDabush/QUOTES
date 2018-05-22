@@ -16,7 +16,11 @@
 
                 <div *ngIf="!this.mobile">
                     <div class="picbox">
-                        <a routerLink="/users/{{note.authorId}}">
+                        <a *ngIf="note.authorId==currentUserUid;" routerLink="/userprofile1">
+                            <img class="card-img-top" [src]="note.authorPhotoURL" width=50px>
+                            <p style="font-weight:bolder;display:-webkit-inline-flex;">{{ note.authorName }} </p>
+                        </a>
+                        <a *ngIf="note.authorId!=currentUserUid;" routerLink="/users/{{note.authorId}}">
                             <img class="card-img-top" [src]="note.authorPhotoURL" width=50px>
                             <p style="font-weight:bolder;display:-webkit-inline-flex;">{{ note.authorName }} </p>
                         </a>

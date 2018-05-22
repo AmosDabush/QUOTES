@@ -164,10 +164,13 @@
             </div>
 
             <ng-template #FollowerAndFriend>
+
+                <div *ngIf="(user.followList)">
                 <div *ngIf="(note.settings=='followers') && (user.followList.indexOf(note.authorId) != -1)">
                     <div class="box" >
                         <note-detail  [note]="note"><hr></note-detail><br> 
                     </div>
+                </div>
                 </div>
             </ng-template>
 
