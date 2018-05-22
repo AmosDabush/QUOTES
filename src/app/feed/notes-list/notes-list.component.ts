@@ -83,12 +83,12 @@ export class FeedListComponent implements OnInit {
      //------------------friends----------------------
       this.user.forEach(userProp => {
       //  console.log('userProp : '+ userProp.displayName , userProp.uid)
-          console.log(userProp.friendsList);
+        //   console.log(userProp.friendsList);
           if(userProp.friendsList)
           // userProp.friendsList.sort(function(a, b){return 0.5 - Math.random() })
           userProp.friendsList
           .forEach(fid => {
-            console.log(fid)
+            // console.log(fid)
                    this.notes=this.noteService.getSnapshotN(fid);
                    this.noteslist2Friends.push(this.notes);
           });
@@ -98,9 +98,9 @@ export class FeedListComponent implements OnInit {
       // Destructure the values to combine a single array.
         this.combineLatestFriends=[];
         this.combinedTmp2=[];
-                console.log('this.combineLatestFriends=[];')
+                // console.log('this.combineLatestFriends=[];')
 
-    console.log(Note.length)
+    // console.log(Note.length)
     for(let i=0;i<Note.length;i++){
     this.combinedTmp2 =this.combinedTmp2.concat(Note[i]);
     }    
@@ -110,7 +110,7 @@ export class FeedListComponent implements OnInit {
 // Subscribe to the latest stream that contains both California and Colorado.
 this.combineLatestFriendsObs.subscribe((result) => {
     result.forEach(quote => {
-        console.log(quote)
+        // console.log(quote)
         this.combineLatestFriends.push(quote);
     });
 })
@@ -121,7 +121,7 @@ this.combineLatestFriendsObs.subscribe((result) => {
           // userProp.followList.sort(function(a, b){return 0.5 - Math.random() })  //<-------= random
           userProp.followList
           .forEach(fid => {
-            console.log(fid)
+            // console.log(fid)
             if(userProp.friendsList)
               if(userProp.friendsList.indexOf(fid)==-1 ){
                     this.notes=this.noteService.getSnapshotN(fid);
@@ -136,7 +136,7 @@ this.combineLatestFollowersObs = Rx.Observable.combineLatest(this.noteslist2Foll
     // Destructure the values to combine a single array.
         this.combineLatestFollowers=[];
         this.combinedTmp=[];
-    console.log(Note.length)
+    // console.log(Note.length)
     for(let i=0;i<Note.length;i++){
     this.combinedTmp =this.combinedTmp.concat(Note[i]);
     }    
@@ -146,7 +146,7 @@ this.combineLatestFollowersObs = Rx.Observable.combineLatest(this.noteslist2Foll
 // Subscribe to the latest stream that contains both California and Colorado.
 this.combineLatestFollowersObs.subscribe((result) => {
     result.forEach(quote => {
-        console.log(quote)
+        // console.log(quote)
         this.combineLatestFollowers.push(quote);
     });
 })
@@ -168,7 +168,7 @@ this.combineLatestFollowersObs.subscribe((result) => {
               // Destructure the values to combine a single array.
                   this.combineLatestPublic=[];
                   this.combinedTmp3=[];
-              console.log(Note.length)
+            //   console.log(Note.length)
               for(let i=0;i<Note.length;i++){
               this.combinedTmp3 =this.combinedTmp3.concat(Note[i]);
               }    
@@ -178,7 +178,7 @@ this.combineLatestFollowersObs.subscribe((result) => {
           // Subscribe to the latest stream that contains both California and Colorado.
           this.combineLatestPublicObs.subscribe((result) => {
               result.forEach(quote => {
-                  console.log(quote)
+                //   console.log(quote)
                   this.combineLatestPublic.push(quote);
               });
           })
