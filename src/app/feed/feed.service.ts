@@ -68,9 +68,6 @@ export class FeedService {
 
     getSnapshotU1(): Observable < User > {
         ['added', 'modified', 'removed']
-
-                        console.log('data.displayName')
-
         return this.user1.snapshotChanges().map((a) => {
                 const data = a.payload.data() as User;
                 return {
