@@ -135,12 +135,12 @@ export class AuthService {
         const userRef: AngularFirestoreDocument < User > = this.afs.doc(`users/${user.uid}`);
         const userRefC = this.afs.doc(`users/${user.uid}`).valueChanges();
 
-
+        let str= user.email || 'nameless user'
 
         const data: User = {
             uid: user.uid,
             email: user.email || null,
-            displayName: user.displayName || 'nameless user',
+            displayName: user.displayName || str.slice(0,str.lastIndexOf('@')) || 'nameless user',
             photoURL: user.photoURL || 'https://png.icons8.com/puffin-bird/win10/1600',
             discription: "add your description here.",
         };
@@ -173,19 +173,19 @@ export class AuthService {
         const userRef: AngularFirestoreDocument < User > = this.afs.doc(`users/${user.uid}`);
         const userRefC = this.afs.doc(`users/${user.uid}`).valueChanges();
 
-
+        let str= user.email || 'nameless user'
 
         const data: User = {
             uid: user.uid,
             email: user.email || null,
-            displayName: displayName || 'nameless user',
+            displayName: user.displayName || str.slice(0,str.lastIndexOf('@'))|| 'nameless user',
             photoURL: user.photoURL || 'https://png.icons8.com/puffin-bird/win10/1600',
             discription: "add your description here.",
         };
         const dataUpdate: User = {
             uid: user.uid,
             email: user.email || null,
-            displayName: displayName || 'nameless user',
+            // displayName: displayName ||  str.slice(0,str.lastIndexOf('@')),
             // photoURL: user.photoURL || 'https://png.icons8.com/puffin-bird/win10/1600',
 
         };
