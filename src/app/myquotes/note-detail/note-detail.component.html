@@ -257,8 +257,7 @@
 
 
     <span *ngIf="this.mobile" class="field is-grouped">  
-        <span class="show-mobile  button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span>
-            <span class="button is-small is-primary" (click)='editToggle()'>Edit</span>
+    
 
     <div (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
          <span *ngIf="note.heartsList;else noHeartList">
@@ -279,8 +278,10 @@
                                  </span>
                         </ng-template>
         <!--<p id="userslikethis"(click)='mouseEnter(note.id);userslikethis.style.display=none' (mouseleave)="mouseLeave(note.id)" >{{ note.hearts || 0 }} users like this</p>-->
-        <div *ngIf="note.heartsList">
-            <div id="{{note.id}}" style="display : none">
+        <a  id="{{note.id}}"  class="likeBoxMobile" *ngIf="note.heartsList">
+            <div class="box" >
+                <p><i id="i2" class="likeBoxMobileClose fas fa-close button is-small is-rounded is-danger is-pulled-right" title="change your privacy settings"(click)="mouseLeave(note.id)" ></i></p>
+
                 <span *ngFor="let n of note.heartsList; let j = index; " style="display : -webkit-inline-box; ">  
                         <div *ngIf="j==0">    
                             <a routerLink="/users/{{n}}">
@@ -305,8 +306,10 @@
                         <div class="button is-small" (click)="this.likeShowNum =this.likeShowNum + 2" *ngIf="j==this.likeShowNum">{{note.hearts-j}} more...</div>
                     </span>
             </div>
-        </div>
+        </a>
     </div>
+        <span class="button is-small is-primary" (click)='editToggle()'>Edit</span>
+        <span class="show-mobile  button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span>
     </span>
 
 </div>

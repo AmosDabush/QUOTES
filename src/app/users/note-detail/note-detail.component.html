@@ -83,8 +83,10 @@
                                             Heart  <i   class="fas fa-heart"> {{ note.hearts || 0 }}</i> 
                                  </span>
                         </ng-template>
-            <div *ngIf="note.heartsList" >
-                <div id="{{note.id}}" style="overflow: scroll; display : none">
+      <a  id="{{note.id}}"  class="likeBoxMobile" *ngIf="note.heartsList">
+            <div class="box" >
+                <p><i id="i2" class="likeBoxMobileClose fas fa-close button is-small is-rounded is-danger is-pulled-right" title="change your privacy settings"(click)="mouseLeave(note.id)" ></i></p>
+
                     <span  *ngFor="let n of note.heartsList; let j = index; " style="display : -webkit-inline-box; ">  
                         <div *ngIf="j==0">    
                             <a routerLink="/users/{{n}}">
@@ -113,7 +115,7 @@
                         <div class="button is-small" (click)="this.likeShowNum =this.likeShowNum + 2" *ngIf="j==this.likeShowNum">{{note.hearts-j}} more...</div>
                     </span>
                 </div>
-            </div>
+            </a>
         </div>
     </span>
 

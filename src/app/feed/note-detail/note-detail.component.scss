@@ -33,6 +33,20 @@ i {
     margin-right: -15px;
     width: 0px
 }
+
+.likeBoxMobile {
+    margin-top: 38px;
+    margin-left: -108px;
+    z-index: 1000;
+    position: absolute;
+    display: none;
+    width: 327px;
+}
+.likeBoxMobileClose {
+    margin-top: -17px;
+    margin-right: -17px;
+    width: 0px
+}
 .picbox{
   // display:-webkit-inline-box;
   // border-radius: 15;
@@ -53,8 +67,8 @@ i {
 }
 
 .checkS{
-    margin-top: 10px;
-    margin-left: -7px !important;
+    margin-top: -2px;
+    margin-left: -105px !important;
     position: absolute;
 }
 
