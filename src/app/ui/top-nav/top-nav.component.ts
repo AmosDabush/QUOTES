@@ -49,10 +49,10 @@ export class TopNavComponent  {
 
   ngOnInit() { 
     //search
-    this.getallNotes().subscribe((notes) => {
-      this.allnotes = notes;
+    // this.getallNotes().subscribe((notes) => {
+    //   this.allnotes = notes;
 
-    })
+    // })
     this.getallusers().subscribe((users) => {
       this.allusers = users;
     })
@@ -61,11 +61,11 @@ export class TopNavComponent  {
         this.users = users;
       })
     })
-     Observable.combineLatest(this.startobs, this.endobs).subscribe((value) => {
-      this.firequery2(value[0], value[1]).subscribe((notes) => {
-        this.notes = notes;
-      })
-    })
+    //  Observable.combineLatest(this.startobs, this.endobs).subscribe((value) => {
+    //   this.firequery2(value[0], value[1]).subscribe((notes) => {
+    //     this.notes = notes;
+    //   })
+    // })
     //window resize
     if (window.innerWidth < 1022) { // 768px portrait
         this.mobile = true;
@@ -109,22 +109,22 @@ export class TopNavComponent  {
     }
     else {
       this.users = this.allusers;
-      this.notes = this.allnotes;
+      // this.notes = this.allnotes;
     }
   }
  
   firequery(start, end) {
     return this.afs.collection('users', ref => ref.limit(4).orderBy('displayName').startAt(start).endAt(end)).valueChanges();
   }
-   firequery2(start, end) {
-    return this.afs.collection('notes', ref => ref.limit(4).orderBy('content').startAt(start).endAt(end)).valueChanges();
-  }
+  //  firequery2(start, end) {
+  //   return this.afs.collection('notes', ref => ref.limit(4).orderBy('content').startAt(start).endAt(end)).valueChanges();
+  // }
   getallusers() {
     return this.afs.collection('users', ref => ref.limit(5).orderBy('displayName')).valueChanges();
   }
-  getallNotes() {
-    return this.afs.collection('notes', ref => ref.limit(5).orderBy('content')).valueChanges();
-  }
+  // getallNotes() {
+  //   return this.afs.collection('users', ref => ref.limit(5).orderBy('content')).valueChanges();
+  // }
 
 
 resetForm(div:string) {

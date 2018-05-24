@@ -6,10 +6,14 @@
 </div>
 
 <!-- User NOT logged in -->
-<ng-template #guest class="box">
+<ng-template #guest class="">
+    <div class="box">
+
   <h3>Hello, GUEST</h3>
-  <p class="card-text">Login to get started...</p>
-  <button class="button" routerLink="/login">Login</button>
+  <p class="card-text">Login or Signin to get started...</p>
+      <button  class="button  is-small is-outlined is-success" routerLink="/login1/log">Login</button>
+      <button class="button  is-small is-outlined is-primary" routerLink="/signin/sign">Signin</button>
+    </div>
 </ng-template>
 
 <!-- User logged in -->

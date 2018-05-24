@@ -57,5 +57,8 @@ export class UserLoginComponent {
 
     // this.router.navigate(['/feed']);
   }
+  
 
 }
+
+

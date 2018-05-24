@@ -1,7 +1,7 @@
 <form [formGroup]="userForm" class='userForm' *ngIf="newUser"  (ngSubmit)="signup()">
 
   <h3>New User Signup</h3>
-  <p class="button is-small" (click)="toggleForm()">Already Registered?</p>
+  <p class="button is-small is-outlined" (click)="toggleForm()">Already Registered?</p>
   <hr>
 
   <br><label for="displayName">Display-Name</label><br>
@@ -29,7 +29,7 @@
   </div>
 
   <div *ngIf="userForm.valid" class="notification is-success">Form is valid</div><br>
-  <button type="submit" class="button" [disabled]="!userForm.valid">Submit</button>
+  <button type="submit" class="button is-success is-outlined" [disabled]="!userForm.valid">Submit</button>
 
 </form>
 
@@ -57,7 +57,7 @@
     {{ formErrors.password }}
   </div>
 
-  <br><button type="submit" class="button" [disabled]="!userForm.valid">Submit</button>
+  <br><button type="submit" class="button  is-success is-outlined " [disabled]="!userForm.valid">Submit</button>
 
   <span *ngIf="userForm.valid" class="help is-success">Form Looks Valid</span>
 

@@ -193,10 +193,7 @@
     <div *ngIf="!this.mobile" class="navbar-menu" [ngClass]="{'is-active':show }">
 
         <div class="field is-grouped">
-                    <span *ngIf="note.authorId==currentUserUid;"  [ngClass]="{'is-active':show }">
-                        <span class="button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span>
-                        <span class="button is-small is-primary  " (click)='editToggle()'>Edit</span>
-                    </span>
+             
 
             <!--like button + hover list of like User Names-->
                 <span (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
@@ -238,6 +235,10 @@
                                 </span>
                         </span>
                     </span>
+            </span>
+            <span *ngIf="note.authorId==currentUserUid;"  [ngClass]="{'is-active':show }">
+                <span class="button is-small is-primary  " (click)='editToggle()'>Edit</span>
+                <span class="button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span>
             </span>
         </div>
     </div>

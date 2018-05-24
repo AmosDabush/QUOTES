@@ -201,10 +201,8 @@
     <div *ngIf="!this.mobile" class="navbar-menu" [ngClass]="{'is-active':show }">
 
         <div class="field is-grouped">
-            <span class="button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span>
 
 
-            <span class="button is-small is-primary  " (click)='editToggle()'>Edit</span>
 
 
 
@@ -249,6 +247,9 @@
                         </span>
                     </span>
             </span>
+            
+            <span class="button is-small is-primary  " (click)='editToggle()'>Edit</span>
+            <span class="button is-small is-danger  " (click)='deleteNote(note?.id)'>Delete</span>
         </div>
     </div>
 

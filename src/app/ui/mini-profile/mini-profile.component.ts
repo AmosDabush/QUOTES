@@ -5,6 +5,7 @@ import { UserService } from '../../users/user.service';
 import { UserDetailComponent } from '../../users/user-detail/user-detail.component';
 import { NotifyService } from '../../core/notify.service';
 
+import { UserFormComponent} from '../../ui/user-form/user-form.component'
 
 
 @Component({
@@ -15,7 +16,7 @@ import { NotifyService } from '../../core/notify.service';
 export class UserProfileComponent {
 
   constructor(public auth: AuthService,
-          private notify: NotifyService) { }
+          private notify: NotifyService,) { }
 
 logout() {
   var res = confirm("are you sure you want to logout?");

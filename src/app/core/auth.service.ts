@@ -91,7 +91,7 @@ export class AuthService {
         return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
             .then((user) => {
                 this.notify.update('Welcome to Quote-Me!!', 'success');
-                return this.updateUserData2(user,displayName); // if using firestore
+                return this.updateUserData2(user,displayName),this.router.navigate(['/feed']);// if using firestore
             })
             .catch((error) => this.handleError(error));
     }
@@ -101,7 +101,7 @@ export class AuthService {
             .then((user) => {
                 this.notify.update('Welcome to Quote-Me!!', 'success')
                 // return this.updateUserData(user); // if using firestore
-                return this.updateUserData(user); // if using firestore
+                return this.updateUserData(user),this.router.navigate(['/feed']); // if using firestore
 
             })
             .catch((error) => this.handleError(error));

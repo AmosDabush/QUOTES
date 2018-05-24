@@ -1,7 +1,7 @@
 
 <div class="navbar  is-transparent">
     <div class="navbar-brand">
-        <a class="navbar-item navbar-start" routerLink="/">
+        <a class="navbar-item navbar-start" routerLink="/about">
         <img src="assets\images\icons\PF-004.png" width="" height=""  alt="Quotes-Me app" style="display: grid"/> Quotes-Me
         </a>
         <a *ngIf="this.mobile" class="navbar-item" (click)=ShowMobSearch()><i class="fas fa-search"></i>	
@@ -86,8 +86,8 @@
             </a>
         </span>
          <span  *ngFor="let note of notes; let j = index;" (click)="resetForm('search1')">  
-            <a class="navbar-item searchBoxRes"  >
-                <p>{{note.content}}</p>
+            <a class="navbar-item searchBoxRes" routerLink="/users/{{user.uid}}" >
+                <p>{{note.content}}{{note.id}}</p>
             </a>
         </span>
 
@@ -175,10 +175,10 @@
                 </a>
             </p>
             <p class="control">
-                <a *ngIf="!this.small" class="fas fa-home navbar-item" routerLink="/" (click)="toggleCollapse()" title="Home">
+                <a *ngIf="!this.small" class="fas fa-home navbar-item" routerLink="/about" (click)="toggleCollapse()" title="Home">
                 &nbsp;Home
                 </a>
-                <a *ngIf="this.small" class="fas fa-home navbar-item" routerLink="/" (click)="toggleCollapse()" title="Home">
+                <a *ngIf="this.small" class="fas fa-home navbar-item" routerLink="/about" (click)="toggleCollapse()" title="Home">
                 </a>
                 <!--<a class="nav-item" routerLink="/items" (click)="toggleCollapse()">
                     To-Do List

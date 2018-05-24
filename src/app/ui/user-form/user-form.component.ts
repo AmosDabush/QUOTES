@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from '../../core/auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 type UserFields = 'email' | 'password'| 'displayName';
 type FormErrors = { [u in UserFields]: string };
@@ -14,7 +16,7 @@ type FormErrors = { [u in UserFields]: string };
 export class UserFormComponent implements OnInit {
 
   userForm: FormGroup;
-  newUser = true; // to toggle login or signup form
+  newUser = false; // to toggle login or signup form
   passReset = false; // set to true when password reset is triggered
   formErrors: FormErrors = {
     'displayName': '',
@@ -38,10 +40,22 @@ export class UserFormComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder, private auth: AuthService) { }
+  constructor(private fb: FormBuilder, private auth: AuthService,private route: ActivatedRoute,
+private router: Router) { }
 
   ngOnInit() {
     this.buildForm();
+      this.route.params.subscribe(params => {        
+     if(params['mod'])
+      if(params['mod']=='log'){
+        this.newUser = false;
+          this.buildForm();
+    }
+      else if(params['mod']=='sign'){
+        this.newUser = true;
+          this.buildForm();
+    }
+    });
   }
 
   toggleForm() {
@@ -55,6 +69,7 @@ export class UserFormComponent implements OnInit {
 
   login() {
     this.auth.emailLogin(this.userForm.value['email'], this.userForm.value['password']);
+    this.afterSignIn();
   }
 
   resetPassword() {
@@ -123,4 +138,22 @@ export class UserFormComponent implements OnInit {
       }
     }
   }
+
+
+
+    private afterSignIn() {
+    // Do after login stuff here, such router redirects, toast messages, etc.
+    
+    setTimeout(() => 
+{
+    this.router.navigate(['feed']);
+    
+},
+550);
+
+    // this.router.navigate(['/feed']);
+  }
+
+
+
 }

@@ -22,8 +22,12 @@ import { AuthGuard } from './core/auth.guard';
 import { CoreModule } from './core/core.module';
 
 const routes: Routes = [
-  { path: '', component: ReadmePageComponent },
+  { path: 'about', component: ReadmePageComponent },
+  { path: '', component: FeedListComponent,  canActivate: [AuthGuard] },
   { path: 'login', component: UserLoginComponent },
+  { path: 'login1/:mod', component: UserLoginComponent },
+  { path: 'signin/:mod', component: UserLoginComponent },
+
   // { path: 'items', component: ItemsListComponent, canActivate: [AuthGuard] },
   { path: 'notes', component: NotesListComponent,  canActivate: [AuthGuard] },
   { path: 'feed', component: FeedListComponent,  canActivate: [AuthGuard] },
