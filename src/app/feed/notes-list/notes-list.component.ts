@@ -175,14 +175,17 @@ this.combineLatestFollowersObs.subscribe((result) => {
               // return Rx.Observable.of( this.combinedTmp2.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}) );
               return Rx.Observable.of( this.combinedTmp3.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}) );
           })
-          // Subscribe to the latest stream that contains both California and Colorado.
+       // Subscribe to the latest stream that contains both California and Colorado.
           this.combineLatestPublicObs.subscribe((result) => {
               result.forEach(quote => {
                 //   console.log(quote)
                   this.combineLatestPublic.push(quote);
               });
-          })
+          }).unsusubscribe();
     }); 
+
+   
+
 });
 
 
