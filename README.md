@@ -2,10 +2,10 @@
 # Quote-Me - Web App
 a (small) social network for sharing quotes
 
-The developed system is an application that will be a small social network for sharing quotes.
-The system will allow each user to upload and share quotations with other users according to his preferences, and to define certain times or events in which he will be presented with a quote that suits him according to his personal preferences.
-A user will be able to search for users and quotes from other users repositories, add other users to following list or send a friend request to other users.
-Tracking other users will help to get to know their character through their quotes.
+The developed system is an application that will be a small social network for sharing quotes.<br />
+The system will allow each user to upload and share quotations with other users according to his preferences, and to define certain times or events in which he will be presented with a quote that suits him according to his personal preferences.<br />
+A user will be able to search for users and quotes from other users repositories, add other users to following list or send a friend request to other users.<br />
+Tracking other users will help to get to know their character through their quotes.<br />
 and many more fichers...
 - [Live Demo](https://quote-me-d966f.firebaseapp.com/)
 
