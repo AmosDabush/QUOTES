@@ -28,7 +28,7 @@
     "core-js": "^2.5.1",
     "firebase": "^4.8.0",
     "firebase-admin": "^5.8.2",
-    "firebase-functions": "^0.8.1",
+    "firebase-functions": "^1.0.4",
     "ng-push": "^0.2.1",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.18"

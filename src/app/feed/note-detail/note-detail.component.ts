@@ -273,6 +273,8 @@ closeMobSettings(){
     //addHeartToNote sub-method
     addToHeartlist(Nid, authorId, val) {
         //add to notificationList
+                             console.log("awewdwadawd!!!")
+
         // const CNote = this.afs.doc<Note>(`users/'${authorId}'/notes/'${Nid}'`).valueChanges().take(1);
         const CNote = this.noteService.getNote(Nid, authorId)
         const CUid = this.noteService.getCurrentUid();
@@ -303,6 +305,37 @@ closeMobSettings(){
 
     }
 
+    //addHeartToNote sub-method
+    removeHeart(Nid, authorId, val) {
+                     console.log("removeHeartremoveHeartremoveHeartremoveHeart!!!")
+        //add to notificationList
+        // const CNote = this.afs.doc<Note>(`users/'${authorId}'/notes/'${Nid}'`).valueChanges().take(1);
+        const CNote = this.noteService.getNote(Nid, authorId)
+        const CUid = this.noteService.getCurrentUid();
+        const CName = this.noteService.getCurrentName();
+        let subList2 = [CUid];
+        CNote.valueChanges().take(1).forEach(n => {
+          
+            if (!n.heartsList || !n.heartsListNames)
+             console.log("not in list!!!")
+            else if (n.heartsList)
+                // if (n.heartsList.indexOf(CUid) == -1 || n.heartsListNames.indexOf(CName) == -1)
+                 {
+                    n.heartsList.splice(n.heartsList.indexOf(CUid), 1);             
+                    n.heartsListNames.splice(n.heartsListNames.indexOf(CName), 1);             
+                    // n.heartsList.push(CUid)
+                    // n.heartsListNames.push(CName)
+                    this.noteService.updateNote(Nid, {
+                        hearts: val-1,
+                        heartsList: n.heartsList,
+                        heartsListNames: n.heartsListNames
+                    }, authorId);
+                } else
+                    console.log('you allrady liked this quote')
+
+        });
+
+    }
 
     //delete note by id 
     deleteNote(id: string) {

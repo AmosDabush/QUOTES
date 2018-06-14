@@ -3,6 +3,8 @@
     <!--<script defer src="https://use.fontawesome.com/releases/[VERSION]/js/v4-shims.js"></script>-->
     <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/all.js"></script>
     <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/v4-shims.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+
 </head>
 
 <div>
@@ -188,7 +190,7 @@
             <button class="button is-small is-success is-rounded is-outlined" (click)="editNote()" [disabled]="editContent?.length < 2 || editContent?.length > 200|| note.content ==editContent">
                OK
             </button>
-            <button class="button is-small is-warning is-rounded is-outlined" (click)="editContent =  '' " [disabled]="editContent?.length ==0">
+            <button class="button is-small is-black is-rounded is-outlined" (click)="editContent =  '' " [disabled]="editContent?.length ==0">
                clear
             </button>
             <button class="button is-small is-danger is-rounded is-outlined" (click)="editToggle();editContent =  note.content ">

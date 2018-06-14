@@ -35,19 +35,28 @@
             </div>
         </div>
         <div class="box">
-            <div *ngIf="(user.email!=null);else unknownMail">         <p class="text-truncate">EMail: {{ user.email }}</p>     </div>     <ng-template #unknownMail>               <p class="text-truncate">EMail: Unknown</p>      </ng-template>
+            <div *ngIf="(user.email!=null);else unknownMail">         
+                <p class="text-truncate">EMail: {{ user.email }}</p>     
+            </div>   
+            <ng-template #unknownMail>              
+                <p class="text-truncate">EMail: Unknown</p>    
+            </ng-template>
             <div class="field is-grouped">
                 <p class="text-truncate">Description: {{ user.discription }}</p>
-                <span id="edit" class="button is-small far fa-edit"(click)='editDescriptionToggler();' title='add/edit your description'>&#160;</span>
+                <span id="edit" class="button is-small far fa-edit"(click)='editDescriptionToggler();dicription=user.discription;' title='add/edit your description'>
+                &#160;</span>
             </div>
-
-
 
             <div id="addDescription" class="field is-grouped" style="display: none">
-                <p><textarea id="textarea" class="textarea is-small is-success" cols="20" rows="1" [(ngModel)]="dicription" placeholder="add your description"></textarea></p>
-                <span class="button is-small is-primary far fa-check-circle" (click)='updateDicription(user.uid,dicription);editDescriptionToggler();' title='add your dicription'></span>&#160;
+                <textarea id="textarea" class="textarea is-small is-primary" cols="50" rows="2" [(ngModel)]="dicription" ></textarea>                
+        
+                <div>
+                    <span class="button is-small is-danger far fa-close" (click)='dicription=user.discription;editDescriptionToggler();' title='cancel'></span>
+                    <span class="button is-small is-success far fa-check" (click)='updateDicription(user.uid,dicription);editDescriptionToggler();' title='add your dicription'></span>
 
+                </div>
             </div>
+            
             <p class="text-truncate">Quotes:<a routerLink="/myquotes" title="open your quote collection"> My-Quotes</a></p>
 
         </div>
@@ -90,7 +99,7 @@
                     
                     <div *ngIf="i[0] !='E' ; else EveryDay">
                          Every {{i}}
-                        <button class="button   is-danger is-rounded fa fa-times is-small is-outlined" (click)="DelFromList(i)" title="Delete this date">Delete</button>
+                        <button class="button is-danger is-rounded fa fa-times is-small is-outlined" (click)="DelFromList(i)" title="Delete this date">Delete</button>
                     </div>
                     <ng-template #EveryDay class="box">
                         {{i}}

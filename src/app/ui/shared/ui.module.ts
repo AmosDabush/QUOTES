@@ -11,6 +11,8 @@ import { NavFriendComponent } from '../nav-friend-requests/nav-profile.component
 
 import { UserProfileComponent } from '../mini-profile/mini-profile.component';
 import { UserProfile1Component } from '../user-profile1/user-profile1.component';
+import { AddonComponent } from '../addon/addon.component';
+
 import { UserFormComponent } from '../user-form/user-form.component';
 import { TopNavComponent } from '../top-nav/top-nav.component';
 import { FooterNavComponent } from '../footer-nav/footer-nav.component';
@@ -35,6 +37,7 @@ import { NotificationMessageComponent } from '../notification-message/notificati
     NavFriendComponent,
     UserProfileComponent,
     UserProfile1Component,
+    AddonComponent,
     TopNavComponent,
     FooterNavComponent,
     UserFormComponent,
@@ -46,6 +49,7 @@ import { NotificationMessageComponent } from '../notification-message/notificati
     FooterNavComponent,
     UserProfileComponent,
     UserProfile1Component,
+    AddonComponent,
     NotificationMessageComponent,
 
   ],

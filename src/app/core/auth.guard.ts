@@ -1,3 +1,9 @@
+/*prevent users from accessing areas that they’re not allowed to access
+  *angular/router
+  *auth.service
+*/
+
+
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 

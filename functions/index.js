@@ -1,12 +1,93 @@
+/* 
+functions/index.js
+firebase cloud functions uses to send notifications by fcm 
+main functions:
+notifyUser5 - send notifications to users by date and time collections.
+evry huor get the right list and send norifications to the users in thet list.
+app- windows AddON function get id with parmas then send notification to user. 
+appN - windows AddON  login func  
+get key with parmas then get uid and send the uid as http res to the add-on.
+*/ 
+
+
+
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
     let tmpArry = [];
 
 
+//-----------------------------------
+const express = require('express');
+// const cors = require('cors');
+const app = express();
 
 
-// send Fsm notification to users in the right notification list (Every Day)
+/*windows AddON func (get id with parmas then send notification to user )*/
+app.get('/:id', (req, res) =>{
+    const db = admin.firestore()
+    userRef = db.collection('users').doc(req.params.id);
+
+        return new Promise(function() {
+        updateLastQuote2(userRef);
+        })
+        .catch(err => console.log(err))
+    });
+exports.app = functions.https.onRequest(app);
+const appN = express();
+
+/*windows AddON  login func  
+(get key with parmas then get uid and send the uid as http res to the add-on )*/
+
+appN.get('/:id', (req, res) =>{
+    const db = admin.firestore()
+    console.log(req.params.id);
+    user = db.collection('WinAddOn').doc(req.params.id);
+
+    console.log(user.get())
+     user.get()
+  .then((docSnapshot) => {
+    if (docSnapshot.exists) 
+     {
+     user.get()
+        .then(snapshot => snapshot.data())
+        .then(obj => {
+            // obj.forEach(id => { //for each user in this notification list
+                console.log('notification list id:' + obj);
+                console.log('Loged-In !!!')
+                console.log(obj);
+                console.log(obj.pass);
+                console.log(obj.id);
+                res.status(200).send(obj.id);
+        })
+        .catch(err => console.log(err))
+     }
+     else{
+         console.log('not loged in')
+     res.status(400).send('err');
+        return;
+    }
+ });
+    });
+exports.appN = functions.https.onRequest(appN);
+
+
+
+
+// send notification to user by id (win addon function)
+function notifyApp(id)  {
+    const db = admin.firestore()
+    let userRef = "";
+    console.log('send notification to  userid:' + id);
+    userRef = db.collection('users').doc(id);
+    return new Promise(function() {
+        updateLastQuote2(userRef);
+        })
+        .catch(err => console.log(err))
+};
+
+
+// send Fsm noti fication to users in the right notification list (Every Day)
 exports.notifyUser6 = functions.https.onRequest((req, res) => {
     let d=new Date()
     let currentHour = d.getHours()+3;
@@ -40,11 +121,11 @@ exports.notifyUser6 = functions.https.onRequest((req, res) => {
 // send Fsm notification to users in the right notification list
 exports.notifyUser5 = functions.https.onRequest((req, res) => {
     let d=new Date()
-    let currentHour = d.getHours()+3;
+    d.setTime(d.getTime() + (+3*60*60*1000)); 
+    let currentHour = d.getHours();
     if (currentHour <10)currentHour = '0' + currentHour;
     let currentDay = d.getDay()+1;
     let tmpArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-
     let currentList = tmpArr[currentDay-1] + '-' + currentHour+':00';
     console.log(currentList)
     var contentD = "";
@@ -86,13 +167,20 @@ function updateLastQuote2(userRef) {
             const usersRef = db.collection('users'); //all users ref
             usersRef.get().then((querySnapshot) => {
                 querySnapshot.forEach((otherUser) => { //for each user from all users
-                    let userQuotes = db.collection('users').doc(otherUser.id).collection('notes') //.orderBy('random')//.limit(1);
+                    let userQuotes = db.collection('users').doc(otherUser.id).collection('notes');
                     return userQuotes.get().then((querySnapshot) => {
+                    
                         querySnapshot.forEach((doc) => {
-                            tmpArry.push(doc.data().content);
+                        if(!doc.data().settings){
                             return new Promise(function() {
-                                updateLastQuote(doc.data().content, userRef);
+                                tmpArry.push(doc.data().content);
                             });
+                        }
+                        else if(doc.data().settings=='public'){
+                            return new Promise(function() {
+                                    tmpArry.push(doc.data().content);
+                                });
+                        }
 
                         });
                     });
@@ -100,11 +188,66 @@ function updateLastQuote2(userRef) {
                     
             });
             return new Promise(function() {
-                notifyUserT(userRef);
+                notifyUserT2(userRef);
             });
         })
         .catch(err => console.log(err))
 }
+
+// get users tokens and send notifications payload
+function notifyUserT2(userRef) {
+    console.log("notifyUserT userRef.id:" + userRef.id);
+    let tokens = "";
+    // get users tokens and send notifications
+    return userRef.get()
+        .then(snapshot => snapshot.data())
+        .then(user => {
+            tokens = user.fcmTokens ? Object.keys(user.fcmTokens) : []
+            if (!tokens.length) {
+                throw new Error('User: +' + user.displayName + '-' + id + ' does not have any tokens!')
+            }
+            var rand = tmpArry[Math.floor(Math.random() * tmpArry.length)];       
+   
+            if(typeof(rand)!='string'){
+                updateLastQuote2(userRef)//fix if tmp arry is still empty
+            }else{
+                let payload = {
+                    notification: {
+                        title: 'Quote-Me!',
+                        // body: str.slice(0, str.lastIndexOf('#'))+"\n by: "+ str.slice( str.lastIndexOf('#')+1,str.length)  ,
+                        body: rand,
+                        click_action: "https://quote-me-d966f.firebaseapp.com/",
+                        icon: './assets/images/icons/PF-004.png',
+                        // "sound": "default",
+                        // "color": "#53c4bc",
+                        // subtitle:  "123123",
+                        //  msg: "texte",        
+                    }
+                }
+                return admin.messaging().sendToDevice(tokens, payload)
+        }
+        })
+        .catch(err => console.log(err))
+};
+
+// Teest!!!!!!!!!!!!!!!!!!!!!!!
+exports.notifyUser7 = functions.https.onRequest((req, res) => {
+    console.log(req)
+    const db = admin.firestore()
+    let userRef = "";
+
+    id='K91tLU7SLEeexdsW2LmGDOFrRaa2'
+    console.log('notification list id:' + id);
+    userRef = db.collection('users').doc(id);
+    return new Promise(function() {
+        updateLastQuote2(userRef);
+        })
+        .catch(err => console.log(err))
+});
+
+
+
+//===============================================================================================
 
 
 // get users tokens and send notifications payload
@@ -121,14 +264,20 @@ function notifyUserT(userRef) {
             }
             var rand = tmpArry[Math.floor(Math.random() * tmpArry.length)];       
             // Message details for end user
+            let str=user.lastNotifyQuote;
+            str.slice(0, str.lastIndexOf('#')) 
             let payload = {
                 notification: {
                     title: 'Quote-Me!',
-                    body: `${user.lastNotifyQuote}`,
-                    // body: `${rand}`,
+                    // body: str.slice(0, str.lastIndexOf('#'))+"\n by: "+ str.slice( str.lastIndexOf('#')+1,str.length)  ,
+                    body: rand[0]  ,
                     click_action: "https://quote-me-d966f.firebaseapp.com/",
                     // "sound": "default",
                     // "color": "#53c4bc",
+                    subtitle:  "123123",
+                     msg: "texte",
+                   
+
                     icon: './assets/images/icons/PF-004.png'
                 }
             }
@@ -136,10 +285,6 @@ function notifyUserT(userRef) {
         })
         .catch(err => console.log(err))
 };
-
-
-
-//===============================================================================================
 
 
 exports.notifyUser2 = functions.firestore

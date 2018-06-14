@@ -29,7 +29,8 @@ export class FriendsListComponent2 implements OnInit {
   user: Observable<User | null>;
   friends:Observable<Friend[]>;
   confirmedFriends:Observable<Friend[]>;
-
+  empty1=true;
+  empty2=true;
   constructor(private userService: UserService,
               public auth: AuthService,
               private afAuth: AngularFireAuth,
@@ -41,7 +42,18 @@ export class FriendsListComponent2 implements OnInit {
     this.users = this.userService.getSnapshot();
     this.friends =this.userService.getSnapshotF();
     this.confirmedFriends =this.userService.getSnapshotCF();
-
+   this.confirmedFriends.forEach(friend => {
+      if(friend[0])
+        this.empty1=false
+        else
+        this.empty1=true;
+    });
+    this.friends.forEach(friend => {
+      if(friend[0])
+        this.empty2=false
+        else
+        this.empty2=true;
+    });
     this.user = this.afAuth.authState
       .switchMap((user) => {
         if (user) {

@@ -1,9 +1,9 @@
 <form [formGroup]="userForm" class='userForm' *ngIf="newUser"  (ngSubmit)="signup()">
 
-  <h3>New User Signup</h3>
-  <p class="button is-small is-outlined" (click)="toggleForm()">Already Registered?</p>
+  <p class="button is-small is-dark is-outlined" (click)="toggleForm()">Already Registered?</p>
   <hr>
 
+  <h3>New User Signup</h3>
   <br><label for="displayName">Display-Name</label><br>
   <input size="40" type="displayName" id="displayName" class="input"
          formControlName="displayName" required >
@@ -35,10 +35,10 @@
 
 
 <form class='userForm' [formGroup]="userForm"  *ngIf="!newUser"  (ngSubmit)="login()">
+  <p class="btn button is-dark is-small is-outlined" (click)="toggleForm()">New User?</p>
+  <hr>
 
   <h3>Existing User Login</h3>
-  <p class="btn button is-small" (click)="toggleForm()">New User?</p>
-  <hr>
 
   <br><label for="email">Email</label><br>
 

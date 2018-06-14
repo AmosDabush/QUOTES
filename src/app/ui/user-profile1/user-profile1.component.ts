@@ -281,7 +281,7 @@ export class UserProfile1Component {
 
 editDescriptionToggler(){
         var addDescriptionDiv = document.getElementById("addDescription");
-        (<HTMLInputElement>document.getElementById('textarea')).value="";
+        // (<HTMLInputElement>document.getElementById('textarea')).value="";
         if (typeof addDescriptionDiv !== "undefined" && addDescriptionDiv) {
             
                 if(addDescriptionDiv.style.display == 'none')

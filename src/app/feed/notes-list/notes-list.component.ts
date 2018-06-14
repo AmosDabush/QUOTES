@@ -50,7 +50,7 @@ export class FeedListComponent implements OnInit {
   user:Observable<User>;
   mobile:boolean;
   settingsCreate:string;
-
+  rand:boolean
   constructor(private noteService: FeedService,
               public auth: AuthService,
   ) { }
@@ -78,7 +78,12 @@ export class FeedListComponent implements OnInit {
     this.combineLatestFriends=new Array<Note>();
     this.combineLatestFollowers=new Array<Note>();
     this.combineLatestPublic=new Array<Note>();
-
+    
+    localStorage.feedRand++;
+    if(localStorage.rand=='false')
+    this.rand=false
+    else if(localStorage.rand=='true'&&localStorage.feedRand>1)
+    this.rand=true
 
      //------------------friends----------------------
       this.user.forEach(userProp => {
@@ -104,7 +109,12 @@ export class FeedListComponent implements OnInit {
     for(let i=0;i<Note.length;i++){
     this.combinedTmp2 =this.combinedTmp2.concat(Note[i]);
     }    
-    return Rx.Observable.of( this.combinedTmp2.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}) );
+    // return Rx.Observable.of( this.combinedTmp2.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}) );
+    if(this.rand)
+        return Rx.Observable.of( this.combinedTmp2.slice().sort(function(a, b){return 0.5 - Math.random() }));
+    else{
+        return Rx.Observable.of( this.combinedTmp2.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}));
+    }
 })
 
 // Subscribe to the latest stream that contains both California and Colorado.
@@ -140,7 +150,12 @@ this.combineLatestFollowersObs = Rx.Observable.combineLatest(this.noteslist2Foll
     for(let i=0;i<Note.length;i++){
     this.combinedTmp =this.combinedTmp.concat(Note[i]);
     }    
-    return Rx.Observable.of( this.combinedTmp.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}) );
+    // return Rx.Observable.of( this.combinedTmp.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}) );
+    if(this.rand)
+        return Rx.Observable.of( this.combinedTmp.slice().sort(function(a, b){return 0.5 - Math.random() }));
+    else{
+        return Rx.Observable.of( this.combinedTmp.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}));
+    }
 })
 
 // Subscribe to the latest stream that contains both California and Colorado.
@@ -171,20 +186,28 @@ this.combineLatestFollowersObs.subscribe((result) => {
             //   console.log(Note.length)
               for(let i=0;i<Note.length;i++){
               this.combinedTmp3 =this.combinedTmp3.concat(Note[i]);
-              }    
-              // return Rx.Observable.of( this.combinedTmp2.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}) );
-              return Rx.Observable.of( this.combinedTmp3.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}) );
+            }    
+            if(this.rand)
+                return Rx.Observable.of( this.combinedTmp3.slice().sort(function(a, b){return 0.5 - Math.random() }));
+            else{
+                return Rx.Observable.of( this.combinedTmp3.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}));
+            }
           })
        // Subscribe to the latest stream that contains both California and Colorado.
+    //    if(this.combineLatestPublicObs.susubscribe)this.combineLatestPublicObs.unsusubscribe();
+
           this.combineLatestPublicObs.subscribe((result) => {
               result.forEach(quote => {
                 //   console.log(quote)
                   this.combineLatestPublic.push(quote);
               });
-          }).unsusubscribe();
-    }); 
+          });
+        //   if(this.combineLatestPublicObs)this.combineLatestPublicObs.unsusubscribe();
 
-   
+    }); 
+// this.combineLatestFriendsObs.unsusubscribe();
+// this.combineLatestFollowersObs.unsusubscribe();
+ 
 
 });
 
@@ -229,6 +252,17 @@ this.combineLatestFollowersObs.subscribe((result) => {
     this.content = '';
     this.settingsCreate="public";
     this.initSettings();
+  }
+   //create new Note
+  sortToggle() {
+    if(localStorage.rand=='true'&&localStorage.feedRand>1){
+     localStorage.rand= 'false'
+    }
+    else if(localStorage.rand=='false'){
+     localStorage.rand= 'true'
+     
+    }
+     this.ngOnInit();
   }
  
 

@@ -19,9 +19,9 @@
 <!-- User logged in -->
 <ng-template #authenticated>
   <div class="box">
-      <div class="level-right"  >
-        <button id='closeB' class="delete button is-small is-danger level-item" (click)="clear('miniPwarp');clear('miniPButton')"></button>
-      </div>
+      <span class="level-right"  >
+        <button id='closeB' class="delete button is-small is-danger level-item is-pulled-right" (click)="clear('miniPwarp');clear('miniPButton')"></button>
+      </span>
       <!--<button id='openB' class="button is-small is-warning" (click)="clear()" style="display: none">Open Mini Profile</button>-->
       <div id="authenticated" *ngIf="auth.user | async as user">
         <a routerLink="/userprofile1" title="open profile page">

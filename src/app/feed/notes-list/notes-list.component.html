@@ -25,6 +25,7 @@
         Add Quote
       </button>
 
+
 <!--//START !MOBILE settings-->
             <div *ngIf="!this.mobile">
                     <a class="button button2  iconSettings2 ">
@@ -119,7 +120,13 @@
     </div>
 
   
-
+        
+      <button *ngIf="rand" id='time' class="button is-small" (click)="sortToggle()">
+        order by time
+      </button>
+        <button *ngIf="!rand"  id='random' class="button is-small" (click)="sortToggle()">
+        order by random
+      </button>
 
 
 

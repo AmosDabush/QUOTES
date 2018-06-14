@@ -1,0 +1,42 @@
+
+<div class="box">
+    <div *ngIf="auth.user | async; then authenticated else guest">
+        <!-- template will replace this div -->
+    </div>
+</div>
+
+<!-- User NOT logged in -->
+<ng-template #guest class="box">
+    <h3> GUEST</h3>
+    <p class="card-text">Login to get started...</p>
+    <button class="button" routerLink="/login">Login</button>
+</ng-template>
+
+<!-- User logged in -->
+<ng-template #authenticated>
+    <div *ngIf="auth.user | async as user">
+        <div class="box"  style="text-align:center;">
+            <span *ngIf="user.addOnKey else firstKey">
+                <div  style="text-align:center;">
+                    <!--<h2 class="text-truncate">add-on Key: {{ user.addOnKey }} </h2>-->
+                    <h1 class="heading">add-on Key: <a class="box1" (click)="copyMessage(user.addOnKey)" title='Copy to clipbord'>{{ user.addOnKey }}</a>
+                    <span id="edit" class="button  far fa-copy is-info" (click)="copyMessage(user.addOnKey)" title='Copy to clipbord'>
+                    &#160;</span></h1>           
+
+                </div>
+                    <button class="button is-bold is-primary is-center is-rounded keygen" (click)="addKey(user.addOnKey);">Generate new key</button>
+            </span>
+        </div>
+    
+        <div class="box" style="text-align:center;">
+                <!--<h2 class="text-truncate">download:</h2>-->
+                <a class="button is-bold is-success is-rounded " href="https://firebasestorage.googleapis.com/v0/b/quote-me-d966f.appspot.com/o/uploads%2Fquoteme.zip?alt=media&token=b9b2d520-50c5-483c-8443-1c28409de318">download </a>
+        </div>
+    
+    </div>
+</ng-template>
+
+<!-- User first key -->
+<ng-template #firstKey class="box" >
+         <button class="button is-bold is-primary is-center is-rounded keygen" (click)="addKey();">Generate key</button>
+</ng-template>

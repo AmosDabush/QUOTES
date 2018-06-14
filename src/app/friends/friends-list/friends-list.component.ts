@@ -22,7 +22,7 @@ import { AppRoutingModule } from '../../app-routing.module';
   styleUrls: ['./friends-list.component.scss'],
 })
 export class FriendsListComponent implements OnInit {
-
+  empty=true;
   users: Observable<User[]>;
   content: string;
   notes: Observable<Note[]>;
@@ -38,6 +38,15 @@ export class FriendsListComponent implements OnInit {
   ngOnInit() {
     this.users = this.userService.getSnapshot();
     this.friends =this.userService.getSnapshotF();
+
+    this.friends.forEach(friend => {
+      if(friend[0])
+        this.empty=false
+        else
+        this.empty=true;
+    });
+
+
 
     this.user = this.afAuth.authState
       .switchMap((user) => {

@@ -63,7 +63,10 @@ export class FeedService {
         this.usersCollection = this.afs.collection('users/', (ref) => ref);
         this.user1= this.afs.doc(`users/${this.currentUserUid}`);
         this.note1;
+        localStorage.feedRand=0;
+        localStorage.rand='true';
 
+        console.log(localStorage.feedRand)
     }
 
     getSnapshotU1(): Observable < User > {

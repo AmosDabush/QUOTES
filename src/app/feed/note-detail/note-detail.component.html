@@ -3,6 +3,8 @@
 <head>
     <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/all.js"></script>
     <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/v4-shims.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+
 </head>
 
 <div>
@@ -180,7 +182,7 @@
             <button class="button is-small is-success is-rounded is-outlined" (click)="editNote()" [disabled]="editContent?.length < 2 || editContent?.length > 200|| note.content ==editContent">
                OK
             </button>
-            <button class="button is-small is-warning is-rounded is-outlined" (click)="editContent =  '' " [disabled]="editContent?.length ==0">
+            <button class="button is-small is-black is-rounded is-outlined" (click)="editContent =  '' " [disabled]="editContent?.length ==0">
                clear
             </button>
             <button class="button is-small is-danger is-rounded is-outlined" (click)="editToggle();editContent =  note.content ">
@@ -199,10 +201,10 @@
                 <span (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
                     <span  class="navbar-item has-dropdown is-hoverable">
                         <span *ngIf="note.heartsList;else noHeartList">
-                                <span *ngIf="note.heartsList.indexOf(this.currentUserUid) != -1;else notInList" class="is-small is-info  " (click)='addHeartToNote(note.hearts)'>
-                                       <span class="button is-small is-info  " (click)='addHeartToNote(note.hearts)'>
+                                <span *ngIf="note.heartsList.indexOf(this.currentUserUid) != -1;else notInList" class="is-small is-info  " >
+                                       <span class="button is-small is-info  " >
                                             Heart <i   class="fas fa-heart"> {{ note.hearts || 0 }}</i>
-                                        </span>  <i  class="fas fa-check-circle  is-small is-info checkS" title="you allredy liked this"> </i>
+                                        </span>  <i  class="fas fa-check-circle  is-small is-info checkS" (click)="removeHeart(note.id, note.authorId, note.hearts)" title="you allredy liked this"> </i>
                                 </span>
                                 <ng-template #notInList>
                                         <span class="button is-small is-info  is-outlined " (click)='addHeartToNote(note.hearts)'>
@@ -253,10 +255,10 @@
 
     <div (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
                  <span  *ngIf="note.heartsList;else noHeartList">
-                                <span *ngIf="note.heartsList.indexOf(this.currentUserUid) != -1;else notInList" class="is-small is-info  " (click)='addHeartToNote(note.hearts)'>
-                                       <span class="button is-small is-info  " (click)='addHeartToNote(note.hearts)'>
+                                <span *ngIf="note.heartsList.indexOf(this.currentUserUid) != -1;else notInList" class="is-small is-info  ">
+                                       <span class="button is-small is-info  ">
                                             Heart <i   class="fas fa-heart"> {{ note.hearts || 0 }}</i>
-                                        </span>  <i  class="fas fa-check-circle  is-small is-info checkS" title="you allredy liked this"> </i>
+                                        </span>  <i  class=" fas fa-check-circle  is-small is-info checkS" title="you allredy liked this" (click)="removeHeart(note.id, note.authorId, note.hearts)"> </i>
                                 </span>
                                 <ng-template #notInList>
                                         <span class="button is-small is-info is-outlined  " (click)='addHeartToNote(note.hearts)'>

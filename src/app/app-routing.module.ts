@@ -14,6 +14,8 @@ import { FriendsListComponent2 } from './friends2/friends-list/friends-list.comp
 import { FriendsRequestsListComponent } from './friends_requests/friends-list/friends-list.component';
 
 import { UserProfile1Component } from './ui/user-profile1/user-profile1.component';
+import { AddonComponent } from './ui/addon/addon.component';
+
 // import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
 // import { UsersListComponent } from './users/user-list/users-list.component';
 
@@ -37,6 +39,7 @@ const routes: Routes = [
   { path: 'friends2', component: FriendsListComponent2,  canActivate: [AuthGuard] },
   { path: 'friends_requests', component: FriendsRequestsListComponent,  canActivate: [AuthGuard] },
   { path: 'userprofile1', component: UserProfile1Component,  canActivate: [AuthGuard] },
+  { path: 'addon', component: AddonComponent,  canActivate: [AuthGuard] },
 
   // uploads 
   { path: 'uploads', loadChildren: './uploads/shared/upload.module#UploadModule', canActivate: [AuthGuard] },
