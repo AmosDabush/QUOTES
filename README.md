@@ -12,9 +12,9 @@ and many more fichers...
 
 ## Table of Contents (main components only)
 
-addon - py addon for windows. 
-functions - firebase cloud functions.
-src/app/core - core services (notificatins, auth , authgurd).
+-addon - py addon for windows. 
+-functions - firebase cloud functions.
+-src/app/core - core services (notificatins, auth , authgurd).
 src/app/feed - feed component.
 src/app/friends - following component.
 src/app/friends_requests - friends requests component.
