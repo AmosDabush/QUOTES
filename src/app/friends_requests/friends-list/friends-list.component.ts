@@ -1,4 +1,6 @@
-/*will show the friend req */
+/*will show the friend req 
+main func: ngOnInit() 
+*/
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';

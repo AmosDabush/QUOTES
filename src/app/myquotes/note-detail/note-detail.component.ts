@@ -1,9 +1,12 @@
+ /*gets the note details and sets how the quote will be displayed
+ -edit
+ -change settings 
+ -likes
+ -remove
+ */
 import { Component, Input } from '@angular/core';
-
 import { NoteService } from '../note.service';
-
 import { Note } from '../note-model';
-
 import { AngularFireAuth } from 'angularfire2/auth';
 
 

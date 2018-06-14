@@ -1,4 +1,6 @@
-/*get snaps and manage all user and quotes in the feed*/
+/*get snaps from all user (friends,following,all user) and all their quotations
+ *manage all user and quotes in the feed
+ */
 
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection,AngularFirestoreDocument} from 'angularfire2/firestore';

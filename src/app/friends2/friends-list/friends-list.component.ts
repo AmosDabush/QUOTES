@@ -1,4 +1,6 @@
-/* Manage the list of friends and the friend requests.*/
+/* Manage the list of friends and the friend requests.
+main func: ngOnInit() 
+*/
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 

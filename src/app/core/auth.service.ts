@@ -1,3 +1,9 @@
+/*firebase AuthService 
+*signin 
+*login
+*sets the user datiales
+*/
+
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,7 +14,6 @@ import { NotifyService } from './notify.service';
 
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators';
-
 
 
 interface User {

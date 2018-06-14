@@ -1,5 +1,9 @@
-/*gets the note details and sets how the quote will be displayed*/
-
+/*gets the note details and sets how the quote will be displayed
+ *-edit
+ *-change settings 
+ *-likes
+ *-remove
+ */
 import {Component,Input} from '@angular/core';
 import {FeedService} from '../feed.service';
 import {Note} from '../note-model';

@@ -1,5 +1,6 @@
 /*
-mange and sets the order of the quotes in the feed(friends,followers,public)
+ *mange and sets the order of the quotes in the feed(friends,followers,public)
+ *main func: ngOnInit() will init the feed list 
 */ 
 import { Component, OnInit } from '@angular/core';
 import { FeedService } from '../feed.service';

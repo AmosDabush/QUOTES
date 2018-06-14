@@ -1,11 +1,11 @@
+/*
+mange and sets the order of the quotes in the feed(friends,followers,public)
+main func: ngOnInit() will init the quote list 
+*/ 
 import { Component, OnInit } from '@angular/core';
-
 import { NoteService } from '../note.service';
-
 import { Note } from '../note-model';
-
 import { Observable } from 'rxjs/Observable';
-
 import { AuthService } from '../../core/auth.service';
 
 @Component({

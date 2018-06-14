@@ -1,3 +1,4 @@
+//*fcm helper get tokens and receive firebase cloud messages
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
