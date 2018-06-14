@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+/*get snaps from db and mange the users in the friend req list*/
 
+import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
-
 import { User } from './user-model';
 import { Note } from '../feed/note-model'
 import { Friend } from './friend-model';

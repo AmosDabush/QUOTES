@@ -1,3 +1,4 @@
+/* responsible for managing users, access to db (pulling users and the details needed to display) and adding / removing user.*/
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';

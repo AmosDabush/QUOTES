@@ -1,11 +1,8 @@
+/* responsible for the details and characteristics of each user waiting for approval to be displayed.*/
 import { Component, Input } from '@angular/core';
-
 import { Injectable } from '@angular/core';
-
 import { UserService } from '../user.service';
-
 import { User } from '../user-model';
-
 import { AppRoutingModule } from '../../app-routing.module';
 @Component({
     selector: 'user-detail',

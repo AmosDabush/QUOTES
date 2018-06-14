@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
+/*get snaps and manage all user and quotes in the feed*/
 
+import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection,AngularFirestoreDocument} from 'angularfire2/firestore';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {Note} from './note-model';
 import {UserService} from '../users/user.service';
 import {User} from '../users/user-model';
-
 import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators';
 import {AuthService} from '../core/auth.service';
@@ -283,15 +283,5 @@ export class FeedService {
         )
 
     }
-
-
-
-
-
-
-
-
-
-
 
 }

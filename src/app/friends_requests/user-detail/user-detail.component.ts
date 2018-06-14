@@ -1,11 +1,8 @@
+/* used to mange the friend req list and accept or cancel req*/
 import { Component, Input } from '@angular/core';
-
 import { Injectable } from '@angular/core';
-
 import { UserService } from '../user.service';
-
 import { User } from '../user-model';
-
 import { AppRoutingModule } from '../../app-routing.module';
 @Component({
     selector: 'user-detail',
@@ -34,7 +31,6 @@ export class UserDetailComponent {
         }
     }
 
-
     updateEmail(dis: string) {
         if (this.user.uid) {
             if (dis == null) {
@@ -48,16 +44,11 @@ export class UserDetailComponent {
         }
     }
 
-
     deleteUser(id: string) {
         this.userService.deleteUser(id);
     }
 
-    // UnfollowUser(id: string) {
-    //     console.log('-friend :' + id)
-    //     this.userService.unFollow(id);
-    // }
-    
+
     DeleteFriendReq(id: string) {
         console.log('-friend :' + id)
         this.userService.deleteFriendReq(id);

@@ -1,3 +1,4 @@
+/* Manage the list of following and the friend requests.*/
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 

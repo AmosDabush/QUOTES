@@ -1,12 +1,10 @@
+/*get snaps from db and mange the users in the friend req list*/
 import { Injectable } from '@angular/core';
-
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
-
 import { User } from './user-model';
 import { Note } from '../feed/note-model'
 import { Friend } from './friend-model';
-
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 interface NewUser {
@@ -175,7 +173,6 @@ export class UserService {
                 friendReq:n.friendReq
                 },);
             });
-            // alert("!@#!@#")
     }
 
 
@@ -242,17 +239,5 @@ export class UserService {
                 },);
             });
     }
-
-
-
-
-
-
-
-
-
-    // follow(content: string) {
-    //   return this.friendsCollection.add(content);
-    // }
 
 }

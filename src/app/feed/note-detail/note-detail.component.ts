@@ -1,11 +1,9 @@
+/*gets the note details and sets how the quote will be displayed*/
+
 import {Component,Input} from '@angular/core';
-
 import {FeedService} from '../feed.service';
-
 import {Note} from '../note-model';
-
 import {AppRoutingModule} from '../../app-routing.module';
-
 import { AngularFireAuth } from 'angularfire2/auth';
 
 
@@ -247,16 +245,6 @@ closeMobSettings(){
                 window[name].style.display='none'
                 }
     }
-
-/////////////////////////////////////------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
 
 
     /*add +1 hart to a quote ,add Uid and Uname of the user for the Heart-list*/

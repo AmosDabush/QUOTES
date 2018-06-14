@@ -1,17 +1,13 @@
+/*
+mange and sets the order of the quotes in the feed(friends,followers,public)
+*/ 
 import { Component, OnInit } from '@angular/core';
-
 import { FeedService } from '../feed.service';
-
 import { Note } from '../note-model';
-
 import {User} from '../../users/user-model';
-
 import { Observable } from 'rxjs/Observable';
-
 import { AuthService } from '../../core/auth.service';
-
 import { AppRoutingModule } from '../../app-routing.module';
-
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import * as Rx from 'rxjs';
 
@@ -210,18 +206,6 @@ this.combineLatestFollowersObs.subscribe((result) => {
  
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
