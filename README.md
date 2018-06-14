@@ -12,14 +12,14 @@ and many more fichers...
 
 ## Table of Contents (main components only)
 
--addon - py addon for windows. 
--functions - firebase cloud functions.
--src/app/core - core services (notificatins, auth , authgurd).
-src/app/feed - feed component.
-src/app/friends - following component.
-src/app/friends_requests - friends requests component.
-src/app/friends2 - friends component.
-src/app/myquots - myquotes component.
-src/app/myquots - user profile component
-src/app/ui - all ui component (navigation bars, profile, addon page etc...)
+addon - py addon for windows. <br />
+functions - firebase cloud functions.<br />
+src/app/core - core services (notificatins, auth , authgurd).<br />
+src/app/feed - feed component.<br />
+src/app/friends - following component.<br />
+src/app/friends_requests - friends requests component.<br />
+src/app/friends2 - friends component.<br />
+src/app/myquots - myquotes component.<br />
+src/app/myquots - user profile component<br />
+src/app/ui - all ui component (navigation bars, profile, addon page etc...)<br />
 
