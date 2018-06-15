@@ -1,12 +1,19 @@
+/*user- list UserDetailComponent
+ * responsible for the details and characteristics of each user waiting for approval to be displayed.
+ * -confirm friend request
+ * -delete friend request
+ * -send friend Requests
+ * -remove friend
+ * -follow
+ * -unFollow
+ * -...
+ * */
 import { Component,Input,OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-
-
 import { UserService } from '../user.service';
-
 import { User } from '../user-model';
 import { Friend } from '../friend-model';
 
@@ -59,13 +66,10 @@ export class UserDetailComponent {
     this.friends2 =this.userService.getSnapshotF2();
     this.friendsReq =this.userService.getSnapshotFR();
     this.confirmedFrinds = this.userService.getSnapshotCF();
-
-
     this.followList=new Array<String>();
     this.firndReqArr=new Array<String>();
     this.frindsList=new Array<String>();
     this.ConfirmedFrindsList=new Array<String>();
-
     this.followList2=this.friendC();
     this.frindsList2=this.friendC2();
     this.frindsReqList=this.friendReq();
@@ -154,8 +158,6 @@ friendC2():Array<String>{
         // console.log('+friend :'+id )
         this.userService.follow(id);
   }
-
-
 
 
 //get followon

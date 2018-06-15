@@ -1,4 +1,4 @@
-/*FriendsModule*/
+/*FollowingModule*/
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { UserService } from './user.service';
 
-import { FriendsListComponent } from './friends-list/friends-list.component';
+import { FollowingListComponent } from './following-list/following-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -27,7 +27,7 @@ import { AppRoutingModule } from '../app-routing.module';
     
   ],
   declarations: [
-    FriendsListComponent,
+    FollowingListComponent,
     UserDetailComponent,
   ],
   providers: [
@@ -36,4 +36,4 @@ import { AppRoutingModule } from '../app-routing.module';
   ],
   
 })
-export class FriendsModule { }
+export class FollowingModule { }

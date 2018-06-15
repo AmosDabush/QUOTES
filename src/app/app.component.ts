@@ -1,4 +1,7 @@
-
+/*main AppComponent (app-root).
+ *main AppComponent 
+ *init core service Router,MessagingService,search
+ */
 import { Component, OnInit } from '@angular/core';
 import { MessagingService } from './core/messaging.service'
 import { AuthService } from './core/auth.service';

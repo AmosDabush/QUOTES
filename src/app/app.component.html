@@ -1,21 +1,17 @@
-
-   <head>
+<head>
      
- <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/all.js"></script>
-  <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/v4-shims.js"></script>  </head>
+<script defer src="https://use.fontawesome.com/releases/[VERSION]/js/all.js"></script>
+<script defer src="https://use.fontawesome.com/releases/[VERSION]/js/v4-shims.js"></script>  </head>
 
 <div id="wrapper">
   <top-nav></top-nav>
-
   <div class="content columns">
     <aside class="column is-2 is-offset-1">
       <mini-profile></mini-profile >
-      <!--<notes-list2></notes-list2>-->
     </aside>
-    
+    <!--fcmNotification(in-app)-->
     <main class="column is-8">
       <notification-message></notification-message>
-
       <div id='fcmNotification' *ngIf="msg.currentMessage | async as message" class="notification  slideInRight">
           <button id='closeB' class="delete button is-small is-danger " (click)="msg.clear()" style="display: inline-flex"></button>
           <h3>{{ message.notification.title }}</h3>
@@ -23,7 +19,6 @@
           <h1>   {{ message.notification.body }}</h1>
           
       </div>
-
       <router-outlet></router-outlet>
       <footer-nav> </footer-nav>
     </main>

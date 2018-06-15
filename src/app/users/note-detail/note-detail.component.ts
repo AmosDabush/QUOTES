@@ -1,12 +1,13 @@
+/*/users - note detail component 
+ *gets the note details and sets how the quote will be displayed 
+ *-likes(hearts)
+ *
+ */
 import { Component, Input } from '@angular/core';
 // import { ActivatedRoute} from '@angular/router';
-
 import { FeedService } from '../../feed/feed.service';
-
 import { Note } from '../../feed/note-model';
-
 import { AppRoutingModule } from '../../app-routing.module';
-
 import { AngularFireAuth } from 'angularfire2/auth';
 
 

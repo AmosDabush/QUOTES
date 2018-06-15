@@ -28,7 +28,7 @@
                         <a class="fas fa-quote-right navbar-item" routerLink="/myquotes" (click)="toggleCollapse()">
                         &nbsp; My-Quotes
                         </a>
-                        <a class="fas fa-binoculars navbar-item " routerLink="/friends" (click)="toggleCollapse()">
+                        <a class="fas fa-binoculars navbar-item " routerLink="/following" (click)="toggleCollapse()">
                         &nbsp; Following 
                         </a>
                         <a class="fas fa-users navbar-item " routerLink="/friends2" (click)="toggleCollapse()">
@@ -153,10 +153,10 @@
                 </a>
             </p>
             <p class="control">
-                <a *ngIf="!this.small" class="far fa-binoculars navbar-item " routerLink="/friends" (click)="toggleCollapse()"  title="Following">
+                <a *ngIf="!this.small" class="far fa-binoculars navbar-item " routerLink="/following" (click)="toggleCollapse()"  title="Following">
                     &nbsp; Following
                 </a>
-                <a *ngIf="this.small" class="far fa-binoculars navbar-item " routerLink="/friends" (click)="toggleCollapse()"  title="Following">
+                <a *ngIf="this.small" class="far fa-binoculars navbar-item " routerLink="/following" (click)="toggleCollapse()"  title="Following">
                     &nbsp; 
                 </a>
             </p>

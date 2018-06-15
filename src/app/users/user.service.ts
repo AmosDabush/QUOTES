@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
+/*UserService
+  *display other user profiles
+  *get user snap and then the user quots
+  */
 
+import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
-
 import { User } from './user-model';
 import { Note } from '../feed/note-model'
-
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 

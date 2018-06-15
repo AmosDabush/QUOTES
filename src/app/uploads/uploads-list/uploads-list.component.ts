@@ -1,4 +1,4 @@
-//init the page
+//init the page(profile picture changer).
 
 import { Component, OnInit } from '@angular/core';
 import { UploadService } from '../shared/upload.service';

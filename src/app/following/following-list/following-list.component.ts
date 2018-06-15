@@ -19,11 +19,11 @@ import { AuthService } from '../../core/auth.service';
 import { AppRoutingModule } from '../../app-routing.module';
 
 @Component({
-  selector: 'friends-list',
-  templateUrl: './friends-list.component.html',
-  styleUrls: ['./friends-list.component.scss'],
+  selector: 'following-list',
+  templateUrl: './following-list.component.html',
+  styleUrls: ['./following-list.component.scss'],
 })
-export class FriendsListComponent implements OnInit {
+export class FollowingListComponent implements OnInit {
   empty=true;
   users: Observable<User[]>;
   content: string;

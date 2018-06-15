@@ -1,61 +1,58 @@
-import { Injectable } from '@angular/core';
+// import { Injectable } from '@angular/core';
+// import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+// import { Note } from './note-model';
+// import { Observable } from 'rxjs/Observable';
+// import { map } from 'rxjs/operators';
 
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+// interface NewNote {
+//   content: string;
+//   hearts: 0;
+//   time: number;
+// }
 
-import { Note } from './note-model';
+// @Injectable()
+// export class NoteService {
 
-import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
+//   notesCollection: AngularFirestoreCollection<Note>;
+//   noteDocument:   AngularFirestoreDocument<Node>;
 
-interface NewNote {
-  content: string;
-  hearts: 0;
-  time: number;
-}
+//   constructor(private afs: AngularFirestore) {
+//     //this.notesCollection = this.afs.collection('notes', (ref) => ref.orderBy('time', 'desc').limit(0));
+//     this.notesCollection = this.afs.collection('notes', (ref) => ref.orderBy('time', 'desc'));
+//   }
 
-@Injectable()
-export class NoteService {
+//   getData(): Observable<Note[]> {
+//     return this.notesCollection.valueChanges();
+//   }
 
-  notesCollection: AngularFirestoreCollection<Note>;
-  noteDocument:   AngularFirestoreDocument<Node>;
+//   getSnapshot(): Observable<Note[]> {
+//     // ['added', 'modified', 'removed']
+//     return this.notesCollection.snapshotChanges().map((actions) => {
+//       return actions.map((a) => {
+//         const data = a.payload.doc.data() as Note;
+//         return { id: a.payload.doc.id, content: data.content, hearts: data.hearts, time: data.time };
+//       });
+//     });
+//   }
 
-  constructor(private afs: AngularFirestore) {
-    //this.notesCollection = this.afs.collection('notes', (ref) => ref.orderBy('time', 'desc').limit(0));
-    this.notesCollection = this.afs.collection('notes', (ref) => ref.orderBy('time', 'desc'));
-  }
+//   getNote(id: string) {
+//     return this.afs.doc<Note>(`notes/${id}`);
+//   }
 
-  getData(): Observable<Note[]> {
-    return this.notesCollection.valueChanges();
-  }
+//   create(content: string) {
+//     const note = {
+//       content,
+//       hearts: 0,
+//       time: new Date().getTime(),
+//     };
+//     return this.notesCollection.add(note);
+//   }
 
-  getSnapshot(): Observable<Note[]> {
-    // ['added', 'modified', 'removed']
-    return this.notesCollection.snapshotChanges().map((actions) => {
-      return actions.map((a) => {
-        const data = a.payload.doc.data() as Note;
-        return { id: a.payload.doc.id, content: data.content, hearts: data.hearts, time: data.time };
-      });
-    });
-  }
+//   updateNote(id: string, data: Partial<Note>) {
+//     return this.getNote(id).update(data);
+//   }
 
-  getNote(id: string) {
-    return this.afs.doc<Note>(`notes/${id}`);
-  }
-
-  create(content: string) {
-    const note = {
-      content,
-      hearts: 0,
-      time: new Date().getTime(),
-    };
-    return this.notesCollection.add(note);
-  }
-
-  updateNote(id: string, data: Partial<Note>) {
-    return this.getNote(id).update(data);
-  }
-
-  deleteNote(id: string) {
-    return this.getNote(id).delete();
-  }
-}
+//   deleteNote(id: string) {
+//     return this.getNote(id).delete();
+//   }
+// }

@@ -1,5 +1,5 @@
+/*MessagingService spec*/
 import { TestBed, inject } from '@angular/core/testing';
-
 import { MessagingService } from './messaging.service';
 
 describe('MessagingService', () => {

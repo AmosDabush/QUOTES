@@ -1,14 +1,15 @@
+/*UsersListComponent
+get user details
+get user quotes
+*/
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { UserService } from '../user.service';
-
 import { Friend } from '../friend-model';
 import { User } from '../user-model';
 import { Note } from '../../feed/note-model';
 import { NoteDetailComponent } from '../../feed/note-detail/note-detail.component';
 import { FeedService } from '../../feed/feed.service';
-
 import { Observable } from 'rxjs/Observable';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
