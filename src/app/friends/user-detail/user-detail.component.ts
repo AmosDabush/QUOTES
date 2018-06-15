@@ -1,4 +1,8 @@
-/* responsible for the details and characteristics of each user waiting for approval to be displayed.*/
+/* following list UserDetailComponent
+ * responsible for the details and characteristics of each user waiting for approval to be displayed.
+ * -remove user from lis
+ * */
+
 import { Component, Input } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { UserService } from '../user.service';

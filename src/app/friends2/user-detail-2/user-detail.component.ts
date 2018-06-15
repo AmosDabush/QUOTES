@@ -1,5 +1,8 @@
-/* used to manage the wating friend req list and accept or cancel req*/
-
+/* friend list UserDetail2Component
+ * responsible for the details and characteristics of each user waiting for approval to be displayed.
+ * -remove user request from list.
+ * -accept request.
+ * */
 import { Component, Input } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { UserService } from '../user.service';

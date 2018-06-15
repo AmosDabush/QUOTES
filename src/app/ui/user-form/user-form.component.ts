@@ -1,3 +1,11 @@
+/*signin and login forms (check inputs and Passwords)
+ *toggle login or signup
+ *password reset
+ *signin
+ *login
+*/
+
+
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 

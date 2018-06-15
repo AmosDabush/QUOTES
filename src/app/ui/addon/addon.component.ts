@@ -1,16 +1,17 @@
+/*windows addon page
+genrate key
+download
+info
+ */
 import { Component } from '@angular/core';
-
 import { AuthService } from '../../core/auth.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators';
-
 import { UserService } from '../../users/user.service';
 import { UserDetailComponent } from '../../users/user-detail/user-detail.component';
 import { Note } from '../../notes/note-model';

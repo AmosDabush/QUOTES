@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+//init the page
 
+import { Component, OnInit } from '@angular/core';
 import { UploadService } from '../shared/upload.service';
 import { Upload } from '../shared/upload';
-
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -13,12 +13,12 @@ import { Observable } from 'rxjs/Observable';
 export class UploadsListComponent implements OnInit {
 
   uploads: Observable<Upload[]>;
-  showSpinner = true;
+  // showSpinner = true;
 
   constructor(private upSvc: UploadService) { }
 
   ngOnInit() {
-    this.uploads = this.upSvc.getUploads();
-    this.uploads.subscribe(() => this.showSpinner = false);
+    // this.uploads = this.upSvc.getUploads();
+    //  this.showSpinner = false;
   }
 }

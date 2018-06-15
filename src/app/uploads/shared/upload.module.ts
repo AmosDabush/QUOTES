@@ -11,7 +11,7 @@ import { UploadService } from './upload.service';
 import { UploadFormComponent } from '../upload-form/upload-form.component';
 import { UploadsListComponent } from '../uploads-list/uploads-list.component';
 import { UploadDetailComponent } from '../upload-detail/upload-detail.component';
-
+ 
 const routes: Routes = [
   { path: '', component: UploadsListComponent },
 ];

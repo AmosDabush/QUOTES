@@ -1,7 +1,8 @@
+// change profile picture 
+//upload pic to db and set as new profile picture
+
 import { Component } from '@angular/core';
-
 import { UploadService } from '../shared/upload.service';
-
 import { Upload } from '../shared/upload';
 
 @Component({

@@ -1,3 +1,6 @@
+/* user login component
+ * Social Login
+*/
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -36,26 +39,21 @@ export class UserLoginComponent {
       .then(() => this.afterSignIn());
   }
 
-  /// Anonymous Sign In
-
+  /// Anonymous Sign In [Disabled]
   signInAnonymously() {
     this.auth.anonymousLogin()
       .then(() => this.afterSignIn());
   }
 
-  /// Shared
-
+  /// Shared 
   private afterSignIn() {
     // Do after login stuff here, such router redirects, toast messages, etc.
-    
     setTimeout(() => 
 {
     this.router.navigate(['feed']);
     
 },
 550);
-
-    // this.router.navigate(['/feed']);
   }
   
 

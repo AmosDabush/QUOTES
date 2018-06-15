@@ -1,3 +1,8 @@
+/*top-nav-navbar
+app nvigator
+friend requst notification (on navbar)
+search users and quots
+ */
 import { Component } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';

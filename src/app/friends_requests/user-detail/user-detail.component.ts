@@ -1,4 +1,9 @@
-/* used to mange the friend req list and accept or cancel req*/
+/* friends-requests list UserDetailComponent
+ * responsible for the details and characteristics of each user waiting for approval to be displayed.
+ * -confirm request
+ * -delete request
+ * -remove user from list
+ * */
 import { Component, Input } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { UserService } from '../user.service';

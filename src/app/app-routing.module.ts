@@ -12,10 +12,10 @@ import { NotesPListComponent } from './myquotes/notes-list/notes-list.component'
 import { FriendsListComponent } from './friends/friends-list/friends-list.component';
 import { FriendsListComponent2 } from './friends2/friends-list/friends-list.component';
 import { FriendsRequestsListComponent } from './friends_requests/friends-list/friends-list.component';
-
+ 
 import { UserProfile1Component } from './ui/user-profile1/user-profile1.component';
 import { AddonComponent } from './ui/addon/addon.component';
-
+ 
 // import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
 // import { UsersListComponent } from './users/user-list/users-list.component';
 

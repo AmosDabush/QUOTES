@@ -1,7 +1,8 @@
-/*gets the note details and sets how the quote will be displayed
+/*feed note detail component 
+ *gets the note details and sets how the quote will be displayed
  *-edit
  *-change settings 
- *-likes
+ *-likes(hearts)
  *-remove
  */
 import {Component,Input} from '@angular/core';

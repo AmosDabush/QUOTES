@@ -1,4 +1,5 @@
-/* Manage the list of following and the friend requests.*/
+/* FollowingListComponent(following)
+ * Manage the following user list.*/
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 

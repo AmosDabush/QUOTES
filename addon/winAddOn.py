@@ -1,10 +1,18 @@
+"""
+# windows addon - add a system notification tesk with quotes from quote-me
+# to windows tesk-scheduler with schtasks.
+# login with key (key is genrated form the site).
+# options for any custom time,date and intrvel time and more trigger options.
+# page 1 - login.
+# page 2 - tesk maneger.
+# page 3 - help and info.
+"""  
+
 from tkinter import *
 import pickle
 import os
 import urllib.request
 from pathlib import Path
-
-
 try:
     import tkinter as tk
     from tkinter import ttk
@@ -12,18 +20,9 @@ except ImportError:
     import Tkinter as tk
     import ttk
 from tkinter import messagebox
-# import tkcalendar
 from tkcalendar import DateEntry
-# taskName="pythTestTesk3"
-# id='K91tLU7SLEeexdsW2LmGDOFrRaa2'
-key=''
-# delete='SchTasks /Delete /TN '+taskName+' /F'
-# url_app="https://us-central1-quote-me-d966f.cloudfunctions.net/app/"+id
-# url_appN="https://us-central1-quote-me-d966f.cloudfunctions.net/appN/"+key
-id=""
-# print(url_appN)
-# cmd='SchTasks /Create /SC DAILY /TN '+taskName+' /TR "powershell -windowstyle hidden  Invoke-WebRequest -Uri '+url_app+' -TimeoutSec 1"  /ST 09:33 /F'
-# print(cmd)
+
+
 
 
 

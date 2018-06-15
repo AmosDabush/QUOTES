@@ -1,4 +1,5 @@
-/*get snaps from all user (friends,following,all user) and all their quotations
+/*FeedService
+ *get snapshots from all user (friends,following,all user) and all their quotations.
  *manage all user and quotes in the feed
  */
 

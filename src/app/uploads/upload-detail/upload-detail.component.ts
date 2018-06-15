@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
-
 import { UploadService } from '../shared/upload.service';
-
 import { Upload } from '../shared/upload';
 
 @Component({

@@ -1,8 +1,9 @@
- /*gets the note details and sets how the quote will be displayed
- -edit
- -change settings 
- -likes
- -remove
+/*my quotes note detail component 
+ *gets the note details and sets how the quote will be displayed
+ *-edit
+ *-change settings 
+ *-likes(hearts)
+ *-remove
  */
 import { Component, Input } from '@angular/core';
 import { NoteService } from '../note.service';

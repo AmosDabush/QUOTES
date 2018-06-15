@@ -1,5 +1,5 @@
+//friend req notification on the nav bar 
 import { Component } from '@angular/core';
-
 import { AuthService } from '../../core/auth.service';
 import { UserService } from '../../users/user.service';
 import { UserDetailComponent } from '../../users/user-detail/user-detail.component';

@@ -1,3 +1,4 @@
+//in app notification component
 import { Component, ViewEncapsulation } from '@angular/core';
 
 import { NotifyService } from '../../core/notify.service';
