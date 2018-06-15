@@ -14,7 +14,7 @@ import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators';
 import { UserService } from '../../users/user.service';
 import { UserDetailComponent } from '../../users/user-detail/user-detail.component';
-import { Note } from '../../notes/note-model';
+import { Note } from '../../feed/note-model';
 import { NotifyService } from '../../core/notify.service';
 
 interface User {

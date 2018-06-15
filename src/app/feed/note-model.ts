@@ -4,7 +4,7 @@ export interface Note {
   id?: string;
   time: number;
   authorId?:string;
-  authorName?:string;
+  authorName:string;
   authorPhotoURL?:string;
   heartsList?:Array<String>
   heartsListNames?:Array<String>

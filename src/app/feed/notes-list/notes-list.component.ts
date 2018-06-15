@@ -23,7 +23,6 @@ import * as Rx from 'rxjs';
 export class FeedListComponent implements OnInit {
   doubleChackList: string[];
     doubleChackList2: string[];
-
   notes: Observable<Note[]>;
   content: string;
   users:  Observable<User[]>;
@@ -48,9 +47,13 @@ export class FeedListComponent implements OnInit {
   mobile:boolean;
   settingsCreate:string;
   rand:boolean
+   i=0
   constructor(private noteService: FeedService,
               public auth: AuthService,
-  ) { }
+              
+  ) {
+
+ }
   //init
   ngOnInit() {
     
@@ -70,8 +73,6 @@ export class FeedListComponent implements OnInit {
     this.combinedTmp=[];
     this.combinedTmp2=[];
     this.combinedTmp3=[];
-
-
     this.combineLatestFriends=new Array<Note>();
     this.combineLatestFollowers=new Array<Note>();
     this.combineLatestPublic=new Array<Note>();
@@ -79,7 +80,7 @@ export class FeedListComponent implements OnInit {
     localStorage.feedRand++;
     if(localStorage.rand=='false')
     this.rand=false
-    else if(localStorage.rand=='true'&&localStorage.feedRand>1)
+    else if(localStorage.rand=='true')
     this.rand=true
 
      //------------------friends----------------------
@@ -107,8 +108,9 @@ export class FeedListComponent implements OnInit {
     this.combinedTmp2 =this.combinedTmp2.concat(Note[i]);
     }    
     // return Rx.Observable.of( this.combinedTmp2.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}) );
-    if(this.rand)
-        return Rx.Observable.of( this.combinedTmp2.slice().sort(function(a, b){return 0.5 - Math.random() }));
+    if(!this.rand)
+        return Rx.Observable.of( this.combinedTmp2.slice().sort(function(a, b){return a.authorName>b.authorName ? -1 : 1;}));
+        // return Rx.Observable.of( this.combinedTmp2.slice().sort(function(a, b){return 0.5 - Math.random() }));
     else{
         return Rx.Observable.of( this.combinedTmp2.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}));
     }
@@ -148,8 +150,8 @@ this.combineLatestFollowersObs = Rx.Observable.combineLatest(this.noteslist2Foll
     this.combinedTmp =this.combinedTmp.concat(Note[i]);
     }    
     // return Rx.Observable.of( this.combinedTmp.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}) );
-    if(this.rand)
-        return Rx.Observable.of( this.combinedTmp.slice().sort(function(a, b){return 0.5 - Math.random() }));
+    if(!this.rand)
+        return Rx.Observable.of( this.combinedTmp.slice().sort(function(a, b){return a.authorName>b.authorName ? -1 : 1;}));
     else{
         return Rx.Observable.of( this.combinedTmp.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}));
     }
@@ -184,8 +186,10 @@ this.combineLatestFollowersObs.subscribe((result) => {
               for(let i=0;i<Note.length;i++){
               this.combinedTmp3 =this.combinedTmp3.concat(Note[i]);
             }    
-            if(this.rand)
-                return Rx.Observable.of( this.combinedTmp3.slice().sort(function(a, b){return 0.5 - Math.random() }));
+    
+            if(!this.rand ){  
+                 return Rx.Observable.of( this.combinedTmp3.slice().sort(function(a, b){return a.authorName>b.authorName ? -1 : 1;}));
+                 }
             else{
                 return Rx.Observable.of( this.combinedTmp3.slice().sort(function (a, b) {return a.time> b.time ? -1 : 1;}));
             }
@@ -238,9 +242,9 @@ this.combineLatestFollowersObs.subscribe((result) => {
     this.settingsCreate="public";
     this.initSettings();
   }
-   //create new Note
+
   sortToggle() {
-    if(localStorage.rand=='true'&&localStorage.feedRand>1){
+    if(localStorage.rand=='true'){
      localStorage.rand= 'false'
     }
     else if(localStorage.rand=='false'){
