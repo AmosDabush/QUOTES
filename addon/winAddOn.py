@@ -1,3 +1,12 @@
+"""
+# windows addon - add a system notification tesk with quotes from quote-me
+# to windows tesk-scheduler with schtasks.
+# login with key (key is genrated form the site).
+# options for any custom time,date and intrvel time and more trigger options.
+# page 1 - login.
+# page 2 - tesk maneger.
+# page 3 - help and info.
+"""  
 from tkinter import *
 import pickle
 import os
@@ -14,11 +23,6 @@ except ImportError:
 from tkinter import messagebox
 # import tkcalendar
 from tkcalendar import DateEntry
-key=''
-id=""
-
-
-
 
 class SampleApp(tk.Tk):
     key=""
@@ -762,8 +766,6 @@ class PageUacErr(tk.Frame):
             ttk.Button(self, text="exit",command=master.destroy).pack()
             page_2_label = tk.Label(self, bg="#FFFFFF", text="").pack()
             page_2_label = tk.Label(self, bg="#FFFFFF", text="").pack()
-
-
 
 
 if __name__ == "__main__":
