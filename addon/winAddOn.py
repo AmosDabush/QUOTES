@@ -1,18 +1,10 @@
-"""
-# windows addon - add a system notification tesk with quotes from quote-me
-# to windows tesk-scheduler with schtasks.
-# login with key (key is genrated form the site).
-# options for any custom time,date and intrvel time and more trigger options.
-# page 1 - login.
-# page 2 - tesk maneger.
-# page 3 - help and info.
-"""  
-
 from tkinter import *
 import pickle
 import os
 import urllib.request
 from pathlib import Path
+import ctypes
+
 try:
     import tkinter as tk
     from tkinter import ttk
@@ -20,8 +12,10 @@ except ImportError:
     import Tkinter as tk
     import ttk
 from tkinter import messagebox
+# import tkcalendar
 from tkcalendar import DateEntry
-
+key=''
+id=""
 
 
 
@@ -32,9 +26,11 @@ class SampleApp(tk.Tk):
         tk.Tk.__init__(self)
         self._frame = None
         self.switch_frame(StartPage)
-
-
-
+        print(ctypes.windll.shell32.IsUserAnAdmin())
+        if(ctypes.windll.shell32.IsUserAnAdmin()==0):
+            messagebox.showinfo("missing info", "Please run this app as administrator")
+            self.switch_frame(PageUacErr)
+            # return
     def switch_frame(self, frame_class):
         """Destroys current frame and replaces it with a new one."""
         new_frame = frame_class(self)
@@ -151,7 +147,6 @@ class PageOne(tk.Frame):
               b = pickle.load(fp)
               print(b)
             os.system(cmd1)
-            # messagebox.showinfo("missing info", "The scheduled task "+tn+" has successfully been created")
             task1Input.delete(0, "end")  # delete all the text in the entry
             task1Input.insert(0, '')  # Insert blank for user input
             print(cmd1)
@@ -210,7 +205,6 @@ class PageOne(tk.Frame):
                 messagebox.showinfo("missing info", "Please select right idle time (number)")
                 return
             cmd1 = 'SchTasks /Create  /SC ONIDLE /TN ' + tn + ' /TR "powershell -windowstyle hidden Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1" /I ' +h+ ' /F'
-            # cmd1 = 'SchTasks /Create /SC DAILY /TN ' + taskName + ' /TR "powershell -windowstyle hidden  Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1"  /ST  ' +h+':'+m+ ' /F'
             print(cmd1)
             print("-= start =-")
             l = tn
@@ -240,6 +234,77 @@ class PageOne(tk.Frame):
             messagebox.showinfo("Success", tn+" added to task scheduler")
             print("-= end =-")
 
+        def create_task_logon():
+                tn=task1Input_logon.get().replace(" ", "")
+                if (tn=='Entertaskname...' or tn==''):
+                    messagebox.showinfo("missing info", "Please select task name")
+                    return
+                cmd1 = 'SchTasks /Create  /SC ONLOGON /TN ' + tn + ' /TR "powershell -windowstyle hidden Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1" /F'
+                print(cmd1)
+                print("-= start =-")
+                l = tn
+                with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
+                    unpickler = pickle.Unpickler(fp)
+                    try:
+                        b = unpickler.load()
+                    except EOFError:
+                        b = list()  # task file is empty
+
+                    if any(tn in s for s in b):
+                        print(tn+" is allrady in list")
+                    else:
+                        b.append(l)
+                        b.sort()
+                        cbremove['values']= b
+                with open("qmtasks.txt", "wb") as fp:  # Pickling
+                    b.sort()
+                    pickle.dump(b, fp)
+                with open("qmtasks.txt", "rb") as fp:  # Unpickling
+                  b = pickle.load(fp)
+                  print(b)
+                os.system(cmd1)
+                task1Input_logon.delete(0, "end")  # delete all the text in the entry
+                task1Input_logon.insert(0, '')  # Insert blank for user input
+                print(cmd1)
+                messagebox.showinfo("Success", tn+" added to task scheduler")
+                print("-= end =-")
+        def create_task_sys():
+                tn=task1Input_sysstart.get().replace(" ", "")
+                if (tn=='Entertaskname...' or tn==''):
+                    messagebox.showinfo("missing info", "Please select task name")
+                    return
+
+                cmd1 = 'SchTasks /Create  /SC ONSTART /TN ' + tn + ' /TR "powershell -windowstyle hidden Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1" /F'
+                print(cmd1)
+                print("-= start =-")
+                l = tn
+                with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
+                    unpickler = pickle.Unpickler(fp)
+                    try:
+                        b = unpickler.load()
+                    except EOFError:
+                        b = list()  # task file is empty
+
+                    if any(tn in s for s in b):
+                        print(tn+" is allrady in list")
+                    else:
+                        b.append(l)
+                        b.sort()
+                        cbremove['values']= b
+                with open("qmtasks.txt", "wb") as fp:  # Pickling
+                    b.sort()
+                    pickle.dump(b, fp)
+                with open("qmtasks.txt", "rb") as fp:  # Unpickling
+                  b = pickle.load(fp)
+                  print(b)
+                os.system(cmd1)
+                task1Input_sysstart.delete(0, "end")  # delete all the text in the entry
+                task1Input_sysstart.insert(0, '')  # Insert blank for user input
+                print(cmd1)
+                messagebox.showinfo("Success", tn+" added to task scheduler")
+                print("-= end =-")
+
+
         def create_task_monthly():
             tn=task1Input_monthly.get().replace(" ", "")
             h= cb_monthly.get()
@@ -258,7 +323,6 @@ class PageOne(tk.Frame):
             if (cb2_monthly.current() == -1 or int(m)<0 or int(m)>59):
                 messagebox.showinfo("missing info", "Please select right minute")
                 return
-            # cmd1 = 'SchTasks /Create /SC DAILY /TN ' + taskName + ' /TR "powershell -windowstyle hidden  Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1"  /ST  ' +h+':'+m+ ' /F'
             cmd1 = 'SchTasks /Create /SC MONTHLY /D '+d+' /TN ' + taskName + ' /TR "powershell -windowstyle hidden  Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1" /ST  ' +h+':'+m+ ' /F'
 
             print(cmd1)
@@ -308,8 +372,6 @@ class PageOne(tk.Frame):
             if (cb2_weekly.current() == -1 or int(m)<0 or int(m)>59):
                 messagebox.showinfo("missing info", "Please select right minute")
                 return
-            # cmd1 = 'SchTasks /Create /SC DAILY /TN ' + taskName + ' /TR "powershell -windowstyle hidden  Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1"  /ST  ' +h+':'+m+ ' /F'
-            # cmd1 = 'SchTasks /Create /SC MONTHLY /D  /TN ' + taskName + ' /TR "powershell -windowstyle hidden  Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1" /ST  ' +h+':'+m+ ' /F'
             cmd1 = 'SchTasks /Create /SC WEEKLY /D '+d+' /TN  ' + taskName + ' /TR "powershell -windowstyle hidden  Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1" /ST  ' +h+':'+m+ ' /F'
             print(cmd1)
             print("-= start WEEKLY =-")
@@ -422,6 +484,29 @@ class PageOne(tk.Frame):
                 task1Input_weekly.insert(0, 'Enter task name...')
                 task1Input_weekly.config(fg='grey')
 
+        def on_entry_click6(event):
+            """function that gets called whenever entry is clicked"""
+            if task1Input_logon.get() == 'Enter task name...':
+                task1Input_logon.delete(0, "end")  # delete all the text in the entry
+                task1Input_logon.insert(0, '')  # Insert blank for user input
+                task1Input_logon.config(fg='black')
+
+        def on_entry_click7(event):
+            """function that gets called whenever entry is clicked"""
+            if task1Input_monthly.get() == 'Enter task name...':
+                task1Input_sysstart.delete(0, "end")  # delete all the text in the entry
+                task1Input_sysstart.insert(0, '')  # Insert blank for user input
+                task1Input_sysstart.config(fg='black')
+
+        def on_focusout6(event):
+                if task1Input_logon.get() == "":
+                    task1Input_logon.insert(0, 'Enter task name...')
+                    task1Input_logon.config(fg='grey')
+
+        def on_focusout7(event):
+                if task1Input_sysstart.get() == "":
+                    task1Input_sysstart.insert(0, 'Enter task name...')
+                    task1Input_sysstart.config(fg='grey')
 # /**------------= entry clicks functions END =--------------*/
         def print_sel():
             print("name: ")
@@ -573,7 +658,33 @@ class PageOne(tk.Frame):
         cb_idle.grid(row=5,sticky=W, pady=4, padx=4,column=2)
         ttk.Button(self, text="Add", command=create_task_idle).grid(row=5, column=3, sticky=W, pady=4, padx=4)
 # ----------otion5 end ---------
-# ----------= otion6 START - remove-task test  =---------
+
+
+# ----------otion6 start logon by idle time  ---------
+        Label(self, text="logon notification:", bg="#FFFFFF").grid(sticky=W, row=6, column=0)
+        # task name input
+        task1Input_logon = Entry(self)
+        task1Input_logon.insert(0, 'Enter task name...')
+        task1Input_logon.bind('<FocusIn>', on_entry_click6)
+        task1Input_logon.bind('<FocusOut>', on_focusout6)
+        task1Input_logon.config(fg='grey')
+        task1Input_logon.grid(row=6, column=1, sticky=W, pady=4, padx=4)
+        ttk.Button(self, text="Add", command=create_task_logon).grid(row=6, column=2, sticky=W, pady=4, padx=4)
+# ----------otion6 end ---------
+
+# ----------otion7 start at system startup by idle time  ---------
+        Label(self, text="system startup notification:", bg="#FFFFFF").grid(sticky=W, row=7, column=0)
+        # task name input
+        task1Input_sysstart = Entry(self)
+        task1Input_sysstart.insert(0, 'Enter task name...')
+        task1Input_sysstart.bind('<FocusIn>', on_entry_click7)
+        task1Input_sysstart.bind('<FocusOut>', on_focusout7)
+        task1Input_sysstart.config(fg='grey')
+        task1Input_sysstart.grid(row=7, column=1, sticky=W, pady=4, padx=4)
+        ttk.Button(self, text="Add", command=create_task_sys).grid(row=7, column=2, sticky=W, pady=4, padx=4)
+# ----------otion7 end ---------
+
+# ----------= otion8 START - remove-task test  =---------
 
         my_file = Path("qmtasks.txt")
         if not my_file.is_file():
@@ -598,32 +709,16 @@ class PageOne(tk.Frame):
         cbremove['values'] = tasks
         cbremove.grid(row=8,sticky=W, column=1)
         ttk.Button(self, text="remove-task",command=remove_task).grid(row=8, column=2, sticky=W, pady=4,padx=4)
-# ----------= otion5 END - remove-task test  =---------
+# ----------= otion8 END - remove-task test  =---------
 
         ttk.Button(self, text="Log-Out",command=lambda: master.switch_frame(StartPage)).grid(row=16, column=0, sticky=W, pady=4,padx=4)
         ttk.Button(self, text="help?",command=lambda: master.switch_frame(PageTwo)).grid(row=16, column=4, sticky=E, pady=4,padx=4)
-
         ttk.Button(self, text="exit",command=master.destroy).grid(row=16, column=5, sticky=W, pady=4,padx=4)
 
-
-
-# -------------= tests START =------------------------
         taskName = "pythTestTesk3"
-        id = 'K91tLU7SLEeexdsW2LmGDOFrRaa2'
-        delete = 'SchTasks /Delete /TN ' + taskName + ' /F'
         url_app = "https://us-central1-quote-me-d966f.cloudfunctions.net/app/" + PageOne.PageOneKey
-        cmd = 'SchTasks /Create /SC DAILY /TN ' + taskName + ' /TR "powershell -windowstyle hidden  Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1"  /ST 09:33 /F'
-        cmd = 'SchTasks /Create  /SC ONIDLE /TN ' + taskName + ' /TR "powershell -windowstyle hidden  Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1" /I 10 /F'
-        cmd=  "SCHTASKS	/Create /S ABC /U domain /P password /SC MINUTE /MO 5 /TN accountant /TR calc.exe /ST 12:00 /ET 14:00 /SD 06/06/2026 /ED 06/06/2026 /RU runasuser /RP userpassword"
-        # by date and time cmd
         cmd = 'SchTasks /Create /SC ONCE /TN ' + taskName + ' /TR "powershell -windowstyle hidden  Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1"  /ST 09:33  /SD 06/06/2026 /F'
-        # cmd = 'SchTasks /Create /SC DAILY /TN ' + taskName + ' /TR "powershell -windowstyle hidden  Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1"  /ST 09:33 /F'
-        # cmd = 'schtasks /Create /S system /RU RLWA32 /RP adminpassword  /SC ONSTART /TR FullPathToProgram /TN TaskName '
-        # cmd = 'SchTasks /Create /SC ONLOGON /TN ' + taskName + ' /TR "powershell -windowstyle hidden  Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1"  /F'
-        # cmd=   "schtasks /Create  /TR executable.exe //TN name /SC ONLOGON"
         print(cmd)
-# -------------= tests END=------------------------
-
 
 # task maneger
 class PageTwo(tk.Frame):
@@ -639,22 +734,36 @@ class PageTwo(tk.Frame):
                                  command=lambda: master.switch_frame(StartPage))
         page_2_label.pack(side="top", fill="x")
         page_2_label2.pack(side="top", fill="y")
+        tk.Label(self, bg="#FFFFFF", text="You can get login key trow the site").pack()
+        tk.Label(self, bg="#FFFFFF", text="").pack()
         tk.Label(self, bg="#FFFFFF", text="option 1 : once by date and time").pack()
         tk.Label(self, bg="#FFFFFF", text="option 2 : Monthly by day (1-31) and time").pack()
         tk.Label(self, bg="#FFFFFF", text="option 3 : Weekly by day (week-days) and time").pack()
         tk.Label(self, bg="#FFFFFF", text="option 4 : Daily by time").pack()
         tk.Label(self, bg="#FFFFFF", text="option 5 : Idle while pc is in idle mode by idle time").pack()
         tk.Label(self, bg="#FFFFFF", text="option 6 : logon (in windows logon)").pack()
-        tk.Label(self, bg="#FFFFFF", text="option 7 : Remove task by task name").pack()
+        tk.Label(self, bg="#FFFFFF", text="option 7 : system startup (in windows startup)").pack()
+        tk.Label(self, bg="#FFFFFF", text="option 8 : Remove task by task name").pack()
         tk.Label(self, bg="#FFFFFF", text="").pack()
         tk.Label(self, bg="#FFFFFF", text="Created by Amos Dabush 2018").pack()
+        tk.Label(self, bg="#FFFFFF", text="https://quote-me-d966f.firebaseapp.com/").pack()
         tk.Label(self, bg="#FFFFFF", text="").pack()
+
         start_button.pack()
         tk.Label(self, bg="#FFFFFF", text="").pack()
 
+class PageUacErr(tk.Frame):
+        def __init__(self, master):
+            tk.Frame.__init__(self, master, bg="#FFFFFF")
+            page_3_label = tk.Label(self, bg="#FFFFFF", text="").pack()
+            page_2_label = tk.Label(self, bg="#FFFFFF", text="You most run this app as administrator!!!").pack()
+            page_2_label = tk.Label(self, bg="#FFFFFF",
+                                    text="Please exit and run again with administrator privilages... ").pack()
+            ttk.Button(self, text="exit",command=master.destroy).pack()
+            page_2_label = tk.Label(self, bg="#FFFFFF", text="").pack()
+            page_2_label = tk.Label(self, bg="#FFFFFF", text="").pack()
 
 
-# ////////////////////////////////////////
 
 
 if __name__ == "__main__":
