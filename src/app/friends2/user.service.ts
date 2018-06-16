@@ -194,8 +194,4 @@ export class UserService {
             });
     }
 
-    // follow(content: string) {
-    //   return this.friendsCollection.add(content);
-    // }
-
 }

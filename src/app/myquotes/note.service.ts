@@ -1,5 +1,14 @@
 /*get snaps of all quotes from the corrent user and manage all user and quotes*/
-
+/*my quotes note service  
+ *gets the note details and pass to note detail component
+ *cnanges in the db
+    *-update
+        *-edit
+        *-change settings 
+        *-likes(hearts)
+    *-remove
+    *-create
+ */
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
