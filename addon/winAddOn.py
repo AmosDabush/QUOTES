@@ -112,7 +112,11 @@ class PageOne(tk.Frame):
             os.system(cmd)
             print(cmd)
             print("-= end =-")
-    
+            
+     # open microsoft windows taskschd
+        def taskschd():
+            os.system("start " + '%windir%/system32/taskschd.msc')
+
     # ------- create_task function switch ------------
 
         # option 1 : once by date and time
@@ -134,7 +138,7 @@ class PageOne(tk.Frame):
             print(cmd1)
             print("-= start =-")
             l = tn
-            with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
+            with open("qmtasks.pk1", "rb") as fp:  # Unpickling+append new task
                 unpickler = pickle.Unpickler(fp)
                 try:
                     b = unpickler.load()
@@ -148,10 +152,10 @@ class PageOne(tk.Frame):
                     b.sort()
                     cbremove['values']= b
 
-            with open("qmtasks.txt", "wb") as fp:  # Pickling
+            with open("qmtasks.pk1", "wb") as fp:  # Pickling
                 b.sort()
                 pickle.dump(b, fp)
-            with open("qmtasks.txt", "rb") as fp:  # Unpickling
+            with open("qmtasks.pk1", "rb") as fp:  # Unpickling
               b = pickle.load(fp)
               print(b)
             os.system(cmd1)
@@ -184,7 +188,7 @@ class PageOne(tk.Frame):
             print(cmd1)
             print("-= start =-")
             l = tn
-            with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
+            with open("qmtasks.pk1", "rb") as fp:  # Unpickling+append new task
                 unpickler = pickle.Unpickler(fp)
                 try:
                     b = unpickler.load()
@@ -197,10 +201,10 @@ class PageOne(tk.Frame):
                     b.append(l)
                     b.sort()
                     cbremove['values']= b
-            with open("qmtasks.txt", "wb") as fp:  # Pickling
+            with open("qmtasks.pk1", "wb") as fp:  # Pickling
                 b.sort()
                 pickle.dump(b, fp)
-            with open("qmtasks.txt", "rb") as fp:  # Unpickling
+            with open("qmtasks.pk1", "rb") as fp:  # Unpickling
               b = pickle.load(fp)
               print(b)
             os.system(cmd1)
@@ -232,7 +236,7 @@ class PageOne(tk.Frame):
             print(cmd1)
             print("-= start WEEKLY =-")
             l = tn
-            with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
+            with open("qmtasks.pk1", "rb") as fp:  # Unpickling+append new task
                 unpickler = pickle.Unpickler(fp)
                 try:
                     b = unpickler.load()
@@ -245,10 +249,10 @@ class PageOne(tk.Frame):
                     b.append(l)
                     b.sort()
                     cbremove['values']= b
-            with open("qmtasks.txt", "wb") as fp:  # Pickling
+            with open("qmtasks.pk1", "wb") as fp:  # Pickling
                 b.sort()
                 pickle.dump(b, fp)
-            with open("qmtasks.txt", "rb") as fp:  # Unpickling
+            with open("qmtasks.pk1", "rb") as fp:  # Unpickling
               b = pickle.load(fp)
               print(b)
             os.system(cmd1)
@@ -275,7 +279,7 @@ class PageOne(tk.Frame):
             print(cmd1)
             print("-= start =-")
             l = tn
-            with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
+            with open("qmtasks.pk1", "rb") as fp:  # Unpickling+append new task
                 unpickler = pickle.Unpickler(fp)
                 try:
                     b = unpickler.load()
@@ -287,10 +291,10 @@ class PageOne(tk.Frame):
                     b.append(l)
                     b.sort()
                     cbremove['values']= b
-            with open("qmtasks.txt", "wb") as fp:  # Pickling
+            with open("qmtasks.pk1", "wb") as fp:  # Pickling
                 b.sort()
                 pickle.dump(b, fp)
-            with open("qmtasks.txt", "rb") as fp:  # Unpickling
+            with open("qmtasks.pk1", "rb") as fp:  # Unpickling
               b = pickle.load(fp)
               print(b)
             os.system(cmd1)
@@ -313,7 +317,7 @@ class PageOne(tk.Frame):
             print(cmd1)
             print("-= start =-")
             l = tn
-            with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
+            with open("qmtasks.pk1", "rb") as fp:  # Unpickling+append new task
                 unpickler = pickle.Unpickler(fp)
                 try:
                     b = unpickler.load()
@@ -326,10 +330,10 @@ class PageOne(tk.Frame):
                     b.append(l)
                     b.sort()
                     cbremove['values']= b
-            with open("qmtasks.txt", "wb") as fp:  # Pickling
+            with open("qmtasks.pk1", "wb") as fp:  # Pickling
                 b.sort()
                 pickle.dump(b, fp)
-            with open("qmtasks.txt", "rb") as fp:  # Unpickling
+            with open("qmtasks.pk1", "rb") as fp:  # Unpickling
               b = pickle.load(fp)
               print(b)
             os.system(cmd1)
@@ -348,7 +352,7 @@ class PageOne(tk.Frame):
                 print(cmd1)
                 print("-= start =-")
                 l = tn
-                with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
+                with open("qmtasks.pk1", "rb") as fp:  # Unpickling+append new task
                     unpickler = pickle.Unpickler(fp)
                     try:
                         b = unpickler.load()
@@ -361,10 +365,10 @@ class PageOne(tk.Frame):
                         b.append(l)
                         b.sort()
                         cbremove['values']= b
-                with open("qmtasks.txt", "wb") as fp:  # Pickling
+                with open("qmtasks.pk1", "wb") as fp:  # Pickling
                     b.sort()
                     pickle.dump(b, fp)
-                with open("qmtasks.txt", "rb") as fp:  # Unpickling
+                with open("qmtasks.pk1", "rb") as fp:  # Unpickling
                   b = pickle.load(fp)
                   print(b)
                 os.system(cmd1)
@@ -384,7 +388,7 @@ class PageOne(tk.Frame):
                 print(cmd1)
                 print("-= start =-")
                 l = tn
-                with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
+                with open("qmtasks.pk1", "rb") as fp:  # Unpickling+append new task
                     unpickler = pickle.Unpickler(fp)
                     try:
                         b = unpickler.load()
@@ -397,10 +401,10 @@ class PageOne(tk.Frame):
                         b.append(l)
                         b.sort()
                         cbremove['values']= b
-                with open("qmtasks.txt", "wb") as fp:  # Pickling
+                with open("qmtasks.pk1", "wb") as fp:  # Pickling
                     b.sort()
                     pickle.dump(b, fp)
-                with open("qmtasks.txt", "rb") as fp:  # Unpickling
+                with open("qmtasks.pk1", "rb") as fp:  # Unpickling
                   b = pickle.load(fp)
                   print(b)
                 os.system(cmd1)
@@ -414,7 +418,7 @@ class PageOne(tk.Frame):
             tn=cbremove.get()
             delete = 'SchTasks /Delete /TN ' + tn + ' /F'
             print("-=remove_task start =-")
-            with open("qmtasks.txt", "rb") as fp:  # Unpickling
+            with open("qmtasks.pk1", "rb") as fp:  # Unpickling
                 unpickler = pickle.Unpickler(fp)
                 try:
                     b = unpickler.load()
@@ -422,7 +426,7 @@ class PageOne(tk.Frame):
                 except EOFError:
                     b = list()  # or whatever you want
                 print(b)
-            with open("qmtasks.txt", "wb") as fp:  # Unpickling
+            with open("qmtasks.pk1", "wb") as fp:  # Unpickling
                 try:
                     b.sort()
                     pickle.dump(b, fp)
@@ -690,13 +694,13 @@ class PageOne(tk.Frame):
 
     # ----------= otion8 START - remove-task test  =---------
 
-        my_file = Path("qmtasks.txt")
+        my_file = Path("qmtasks.pk1")
         if not my_file.is_file():
             print("exist")
-            with open("qmtasks.txt", "w+") as fp:  # Unpickling
+            with open("qmtasks.pk1", "w+") as fp:  # Unpickling
                 unpickler = pickle.Unpickler(fp)
 
-        with open("qmtasks.txt", "rb") as fp:  # Unpickling
+        with open("qmtasks.pk1", "rb") as fp:  # Unpickling
 
             unpickler = pickle.Unpickler(fp)
             try:
@@ -718,6 +722,7 @@ class PageOne(tk.Frame):
         ttk.Button(self, text="Log-Out",command=lambda: master.switch_frame(StartPage)).grid(row=16, column=0, sticky=W, pady=4,padx=4)
         ttk.Button(self, text="help?",command=lambda: master.switch_frame(PageTwo)).grid(row=16, column=4, sticky=E, pady=4,padx=4)
         ttk.Button(self, text="exit",command=master.destroy).grid(row=16, column=5, sticky=W, pady=4,padx=4)
+        tk.Button(self, text="Open Windows taskschd",command=taskschd, bg='#FFFFFF',fg="blue").grid(row=15, column=0, sticky=W, pady=4,padx=4)
 
         taskName = "pythTestTesk3"
         url_app = "https://us-central1-quote-me-d966f.cloudfunctions.net/app/" + PageOne.PageOneKey
