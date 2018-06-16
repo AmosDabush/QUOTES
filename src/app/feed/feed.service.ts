@@ -1,6 +1,15 @@
 /*FeedService
  *get snapshots from all user (friends,following,all user) and all their quotations.
  *manage all user and quotes in the feed
+ *gets the quotes details and pass to note detail component
+ *cnanges in the db
+    *-update
+        *-edit
+        *-change settings 
+        *-likes(hearts)
+    *-remove
+    *-create
+    
  */
 
 import {Injectable} from '@angular/core';
