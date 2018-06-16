@@ -128,9 +128,7 @@ export class UserService {
 
     //unFollow user by id 
     unFollow(id: string) {
-        this.removeFromFollowList(id);
-        return this.getFriend(id).delete();
-
+        return this.removeFromFollowList(id),this.getFriend(id).delete();
     }
     //remove the following user uid from the current user.followList
     removeFromFollowList(fid: string) {

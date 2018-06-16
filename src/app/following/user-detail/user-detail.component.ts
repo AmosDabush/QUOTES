@@ -6,6 +6,7 @@
 import { Component, Input } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { UserService } from '../user.service';
+import { FollowingListComponent } from '../following-list/following-list.component';
 import { User } from '../user-model';
 import { AppRoutingModule } from '../../app-routing.module';
 @Component({
@@ -19,7 +20,7 @@ export class UserDetailComponent {
     @Input()
     user: User;
 
-    constructor(private userService: UserService) {}
+    constructor(private userService: UserService,private flist:FollowingListComponent) {}
 
     
     updateDicription(dis: string) {
@@ -55,8 +56,9 @@ export class UserDetailComponent {
     }
 
     UnfollowUser(id: string) {
-        console.log('-friend :' + id)
         this.userService.unFollow(id);
+        this.flist.ngOnInit()
+
     }
 
 }

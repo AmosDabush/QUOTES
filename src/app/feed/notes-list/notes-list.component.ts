@@ -187,7 +187,8 @@ this.combineLatestFollowersObs.subscribe((result) => {
               this.combinedTmp3 =this.combinedTmp3.concat(Note[i]);
             }    
     
-            if(!this.rand ){  
+            if(!this.rand ){
+        
                  return Rx.Observable.of( this.combinedTmp3.slice().sort(function(a, b){return a.authorName>b.authorName ? -1 : 1;}));
                  }
             else{
