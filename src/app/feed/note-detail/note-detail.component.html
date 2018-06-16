@@ -1,16 +1,10 @@
-
-
+<!--note-detail.component.html  - will mange quotes details-->
 <head>
     <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/all.js"></script>
     <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/v4-shims.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
-
 </head>
-
 <div>
-
-
-
     <nav class="level">
         <!-- Left side -->
         <div class="level-left">
@@ -159,22 +153,6 @@
 
     </div>
 
-
-
-
-<!--////////////////////////////////////////////-->
-
-
-
-
-
-
-
-
-
-
-
-
     <h4 id="quoteText{{note.id}}" style="font-weight:bold;">{{ note.content }}</h4>
     <div id="editText{{note.id}}" style="display: none">
         <div class=''>
@@ -196,7 +174,6 @@
 
         <div class="field is-grouped">
              
-
             <!--like button + hover list of like User Names-->
                 <span (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
                     <span  class="navbar-item has-dropdown is-hoverable">
@@ -245,13 +222,7 @@
         </div>
     </div>
 
-
-
-
-
     <span *ngIf="this.mobile" class="field is-grouped">  
-
-    
 
     <div (mouseenter)="mouseEnter(note.id) " (mouseleave)="mouseLeave(note.id)">
                  <span  *ngIf="note.heartsList;else noHeartList">

@@ -259,28 +259,6 @@ export class UserProfile1Component {
     }
 
 
-
-
-
-
-
-
-    //hover 
-    mouseEnter(div: string, div2: string) {
-        var likes = document.getElementById(div);
-        if (typeof likes !== "undefined" && likes) {
-            likes.style.display = 'inline-table'
-        }
-    }
-    mouseLeave(div: string) {
-        var likes = document.getElementById(div);
-        if (typeof likes !== "undefined" && likes) {
-            likes.style.display = 'none'
-
-        }
-    }
-
-
 editDescriptionToggler(){
         var addDescriptionDiv = document.getElementById("addDescription");
         // (<HTMLInputElement>document.getElementById('textarea')).value="";

@@ -1,4 +1,4 @@
-
+<!-- FollowingListComponent - Manage the following user list.-->
   <div *ngFor="let friend of friends | async">   
       <div  *ngFor="let user of users | async">
           <div  *ngIf="(user.uid == friend.fid)">

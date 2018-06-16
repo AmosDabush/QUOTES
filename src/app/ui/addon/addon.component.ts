@@ -1,7 +1,7 @@
 /*windows addon page
-genrate key
-download
-info
+ -genrate key
+ -download
+ -info
  */
 import { Component } from '@angular/core';
 import { AuthService } from '../../core/auth.service';
@@ -136,6 +136,16 @@ copyMessage(val: string){
     document.execCommand('copy');
     document.body.removeChild(selBox);
   }
+infoToggle(){
+        var info = document.getElementById('info');
+        if (typeof info !== "undefined" && info) {
+            if (info.style.display !== 'none') {
+                info.style.display = 'none'
+            } else {
+                info.style.display = 'inline'  
+            }
+        }
+    }
 
 
 }

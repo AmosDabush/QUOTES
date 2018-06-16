@@ -1,3 +1,10 @@
+<!--/*signin and login forms (check inputs and Passwords)
+ *toggle login or signup
+ *password reset
+ *signin
+ *login
+*/-->
+
 <form [formGroup]="userForm" class='userForm' *ngIf="newUser"  (ngSubmit)="signup()">
 
   <p class="button is-small is-dark is-outlined" (click)="toggleForm()">Already Registered?</p>

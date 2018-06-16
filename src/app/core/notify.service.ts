@@ -1,4 +1,8 @@
-/*in app notifications*/
+/*NotifyService : in app notifications: 
+  *red error messages
+  *yellow info messages
+  *green success messages
+*/
 
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';

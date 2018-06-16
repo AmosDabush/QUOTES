@@ -11,10 +11,23 @@
 
 }
 
-.box {
-    // background-image: url("PFHD.jpg");
-    // background-attachment: local,fixed; 
-    // border-radius: 5px;
-    // margin-top: 5px;
+.box2 {
+    text-align: center;
+    text-shadow: 1px 1px black;
+    text-decoration: bold;
+    background-image: url(""),url("PFHD.jpg");
+    background-attachment: local,fixed;
+    background-repeat: no-repeat,no-repeat;
+    background-clip: border-box,border-box;    
+    border-radius: 15px;
+    margin-top: 5px;
+    z-index: 1000;
 
 }
+
+h5{ 
+    color:black;
+    text-align: center;  
+    background-color: snow;
+    opacity: 0.5;
+    }

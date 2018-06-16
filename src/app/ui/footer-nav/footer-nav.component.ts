@@ -1,4 +1,4 @@
-// footer-nav
+// footer-nav - info in each page
 import { Component } from '@angular/core';
 
 @Component({

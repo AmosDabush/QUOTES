@@ -1,11 +1,12 @@
 /*functions/index.js
  *firebase cloud functions uses to send notifications by fcm 
  *main functions:
- *notifyUser5 - send notifications to users by date and time collections.
- *evry huor get the right list and send norifications to the users in thet list.
- *app- windows AddON function get id with parmas then send notification to user. 
- *appN - windows AddON  login func  
- *get key with parmas then get uid and send the uid as http res to the add-on. 
+ *  -notifyUser5 - send notifications to users in the right day and time collections.
+ *  -notifyUser5 - send notifications every-day to users in time collections.
+ *  -evry huor get the right list and send norifications to the users in thet list.
+ *  -app- windows AddON function get id with parmas then send notification to user. 
+ *  -appN - windows AddON  login func  
+ *          get key with parmas then get uid and send the uid as http res to the add-on. 
  */ 
 
 

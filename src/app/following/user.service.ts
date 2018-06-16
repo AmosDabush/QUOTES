@@ -1,4 +1,7 @@
-/* responsible for managing users, access to db (pulling users and the details needed to display) and adding / removing user.*/
+/*following UserService 
+ *responsible for managing users
+ *access to db (pulling users and the details needed to display) 
+ *adding and removing users.*/
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
@@ -141,13 +144,5 @@ export class UserService {
                 },);
             });
     }
-
-
-
-
-
-    // follow(content: string) {
-    //   return this.friendsCollection.add(content);
-    // }
 
 }

@@ -1,3 +1,4 @@
+/*user model*/
 interface User {
   uid: string;
   email?: string | null;

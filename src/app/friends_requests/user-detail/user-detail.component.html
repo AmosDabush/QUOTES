@@ -1,3 +1,4 @@
+ <!--friends-requests list UserDetailComponent-->
 <div>
     <div class="box">    
     <a routerLink="/users/{{user.uid}}">
@@ -5,12 +6,9 @@
       <img class="card-img-top ,box" [src]="user.photoURL" width="70">
     </a>
     <!--<p class="text-truncate">UID: {{ user.uid }}</p>-->
-
     <div *ngIf="(user.email!=null);else unknownMail">         <p class="text-truncate">EMail: {{ user.email }}</p>     </div>     <ng-template #unknownMail>               <p class="text-truncate">EMail: Unknown</p>      </ng-template>
     <!--<p class="text-truncate">Description: {{ user.discription }}</p>-->
-    
     <button title="Request Status: Awaiting Confirmation" class="button is-small is-danger  " (click)="DeleteFriendReq(user.uid)" >Delete Request</button>
-      <!--<h4 class="text-truncate">Request Status: Awaiting Confirmation</h4>-->
     <button title="Request Sent: Awaiting Confirmation" id="ConfirmReq" class="button is-small is-info  " (click)="confirmRequest(user.uid);" >Confirm Request</button>
 
     </div>

@@ -1,3 +1,8 @@
+// this service worker is disabled do to bug in last firebase update
+// shold be anabled in next versions....
+
+
+
 // /**
 //  * @license
 //  * Copyright Google Inc. All Rights Reserved.

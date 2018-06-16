@@ -1,6 +1,6 @@
 /*mini profile
-show user pic and info
-logout button
+ -show user pic and info
+ -logout button
  */
 import { Component } from '@angular/core';
 import { AuthService } from '../../core/auth.service';

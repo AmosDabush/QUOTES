@@ -1,3 +1,9 @@
+/*upload-service
+  -upload 
+  -delete
+  -get
+*/
+
 import { Injectable } from '@angular/core';
 import { Upload } from './upload';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';

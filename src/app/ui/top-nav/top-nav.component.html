@@ -1,4 +1,8 @@
-
+<!--/*top-nav-navbar
+app nvigator
+friend requst notification (on navbar)
+search users and quotes
+ */-->
 <div class="navbar  is-transparent">
     <div class="navbar-brand">
         <a class="navbar-item navbar-start" routerLink="/about">
@@ -6,7 +10,6 @@
         </a>
         <a *ngIf="this.mobile" class="navbar-item" (click)=ShowMobSearch()><i class="fas fa-search"></i>	
         </a>
-
 
         <!-- This "nav-menu" is hidden on mobile -->
         <!-- Add the modifier "[ngClass]="{'is-active':show }" to display it on mobile -->
@@ -48,12 +51,9 @@
             </div>
         </div>
 
-                     <a id="navAuth2" class="navAuth2 navbar-item navbar-start">
-                        <nav-friend-requests></nav-friend-requests>
-                    </a>
-
-
- 
+        <a id="navAuth2" class="navAuth2 navbar-item navbar-start">
+            <nav-friend-requests></nav-friend-requests>
+        </a>
 
          <!--mini Profile toggle button-->
         <div id="miniPButton" class="miniPButton" *ngIf="auth.user | async as user" style="display: none">
@@ -75,9 +75,6 @@
         </div>
 
 </div>
-
-
-
 
 <form id='search1' class="navbar-item has-dropdown is-hoverable" *ngIf="!this.mobile">    
  <!--Search-Start-->
@@ -128,14 +125,6 @@
 
 <div id="navbarExampleTransparentExample" class="navbar-menu navbar-end" [ngClass]="{'is-active':show }">
     <div class="navbar-item">
-        <!--<div class="field is-grouped">-->
-        <!--<p class="control">
-            <a class="far fa-users navbar-item " routerLink="/friends_requests" (click)="toggleCollapse()">
-                &nbsp; Friend Req
-            </a>
-        </p>-->
-
-
 
         <!--<span *ngIf="!this.mobile &&!this.small">-->
             <p class="control">

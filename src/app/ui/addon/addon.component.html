@@ -30,13 +30,20 @@
     
         <div class="box" style="text-align:center;">
                 <!--<h2 class="text-truncate">download:</h2>-->
-                <a class="button is-bold is-success is-rounded " href="https://firebasestorage.googleapis.com/v0/b/quote-me-d966f.appspot.com/o/uploads%2Fquote-me-addon.zip?alt=media&token=1a614a39-29d6-4325-bc71-0313134eaa06">download </a>
+                <a class="button is-bold is-success is-rounded "
+                 href="https://firebasestorage.googleapis.com/v0/b/quote-me-d966f.appspot.com/o/uploads%2Fquote-me%20addon.zip?alt=media&token=b78ad17d-a058-4ee5-aa17-81c06c074161">
+                 download 
+                 </a>
         </div>     
-        <div class="box" style="text-align:center;">
-                <h2 class="text-truncate">info:</h2>
-                <h3> windows addon - add a system notification tesk with quotes from quote-me to windows tesk-scheduler.</h3>
-                <h3> login with key (key is genrated through the site).</h3>
-                <h3> options for any custom time,date and intrvel time and more trigger options.</h3>                         
+        <div  class="box" style="text-align:center;">
+                <span class="button is-info text-truncate" (click)=infoToggle()>information:</span>
+                <span id="info" class="" style="text-align:center; display: none">
+                    <h3> windows addon - add a system notification tesk with quotes from quote-me to windows tesk-scheduler.</h3>
+                    <h3> login with key (key is genrated through the site).</h3>
+                    <h3> options for any custom time,date and intrvel time and more trigger options.</h3>    
+                    <span class="button text-truncate fa fa-close" (click)=infoToggle()>close info</span>
+                </span>      
+               
         </div>
     
     </div>

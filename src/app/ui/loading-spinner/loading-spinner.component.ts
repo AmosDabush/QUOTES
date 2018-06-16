@@ -1,4 +1,4 @@
-/*anice spinner animation */
+/*a nice spinner animation used in loading time */
 import { Component } from '@angular/core';
 @Component({
   selector: 'loading-spinner',

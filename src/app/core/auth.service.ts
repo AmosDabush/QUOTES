@@ -2,6 +2,7 @@
 *signin 
 *login
 *sets the user datiales
+*create ref to user in firestore db
 */
 
 import { Injectable } from '@angular/core';
