@@ -24,6 +24,7 @@ from tkinter import messagebox
 # import tkcalendar
 from tkcalendar import DateEntry
 
+# --------------root - class  SampleApp----------------------------------
 class SampleApp(tk.Tk):
     key=""
     def __init__(self):
@@ -45,7 +46,7 @@ class SampleApp(tk.Tk):
 
 
 
-# login page
+# --------------login page - class StartPage----------------------------------
 class StartPage(tk.Frame):
     def __init__(self, master):
 
@@ -101,7 +102,7 @@ class StartPage(tk.Frame):
         # ttk.Button(self, text="page one",command=lambda: master.switch_frame(PageOne)).grid(row=15, column=0, sticky=W, pady=4,padx=4)
         ttk.Button(self, text="help?",command=lambda: master.switch_frame(PageTwo)).grid(row=15, column=1, sticky=W, pady=4,padx=30)
 
-# main page
+# --------------main page - class PageOne----------
 class PageOne(tk.Frame):
     PageOneKey="0"
     def __init__(self, master):
@@ -111,7 +112,10 @@ class PageOne(tk.Frame):
             os.system(cmd)
             print(cmd)
             print("-= end =-")
+    
+    # ------- create_task function switch ------------
 
+        # option 1 : once by date and time
         def create_task_once(taskname,date,hour,minute):
             tn=taskname.replace(" ", "")
             d=str(date).replace("-", "/")
@@ -156,159 +160,7 @@ class PageOne(tk.Frame):
             print(cmd1)
             messagebox.showinfo("Success", tn+" added to task scheduler")
             print("-= end =-")
-
-        def create_task_daily():
-            tn=task1Input_daily.get().replace(" ", "")
-            h= cb_daily.get()
-            m= cb2_daily.get()
-            if (tn=='Entertaskname...' or tn==''):
-                messagebox.showinfo("missing info", "Please select task name")
-                return
-            if (cb_daily.current()== -1 or int(h)<0 or int(h)>23):
-                messagebox.showinfo("missing info", "Please select right hour")
-                return
-            if (cb2_daily.current() == -1 or int(m)<0 or int(m)>59):
-                messagebox.showinfo("missing info", "Please select right minute")
-                return
-            cmd1 = 'SchTasks /Create /SC DAILY /TN ' + taskName + ' /TR "powershell -windowstyle hidden  Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1"  /ST  ' +h+':'+m+ ' /F'
-            print(cmd1)
-            print("-= start =-")
-            l = tn
-            with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
-                unpickler = pickle.Unpickler(fp)
-                try:
-                    b = unpickler.load()
-                except EOFError:
-                    b = list()  # task file is empty
-                if any(tn in s for s in b):
-                    print(tn+" is allrady in list")
-                else:
-                    b.append(l)
-                    b.sort()
-                    cbremove['values']= b
-            with open("qmtasks.txt", "wb") as fp:  # Pickling
-                b.sort()
-                pickle.dump(b, fp)
-            with open("qmtasks.txt", "rb") as fp:  # Unpickling
-              b = pickle.load(fp)
-              print(b)
-            os.system(cmd1)
-            task1Input_daily.delete(0, "end")  # delete all the text in the entry
-            task1Input_daily.insert(0, '')  # Insert blank for user input
-            print(cmd1)
-            messagebox.showinfo("Success", tn+" added to task scheduler")
-            print("-= end =-")
-
-        def create_task_idle():
-            tn=task1Input_idle.get().replace(" ", "")
-            h= cb_idle.get()
-            if (tn=='Entertaskname...' or tn==''):
-                messagebox.showinfo("missing info", "Please select task name")
-                return
-            if ( cb_idle.current()== -1 or int(h)<0 or int(h)>23):
-                messagebox.showinfo("missing info", "Please select right idle time (number)")
-                return
-            cmd1 = 'SchTasks /Create  /SC ONIDLE /TN ' + tn + ' /TR "powershell -windowstyle hidden Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1" /I ' +h+ ' /F'
-            print(cmd1)
-            print("-= start =-")
-            l = tn
-            with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
-                unpickler = pickle.Unpickler(fp)
-                try:
-                    b = unpickler.load()
-                except EOFError:
-                    b = list()  # task file is empty
-
-                if any(tn in s for s in b):
-                    print(tn+" is allrady in list")
-                else:
-                    b.append(l)
-                    b.sort()
-                    cbremove['values']= b
-            with open("qmtasks.txt", "wb") as fp:  # Pickling
-                b.sort()
-                pickle.dump(b, fp)
-            with open("qmtasks.txt", "rb") as fp:  # Unpickling
-              b = pickle.load(fp)
-              print(b)
-            os.system(cmd1)
-            task1Input_idle.delete(0, "end")  # delete all the text in the entry
-            task1Input_idle.insert(0, '')  # Insert blank for user input
-            print(cmd1)
-            messagebox.showinfo("Success", tn+" added to task scheduler")
-            print("-= end =-")
-
-        def create_task_logon():
-                tn=task1Input_logon.get().replace(" ", "")
-                if (tn=='Entertaskname...' or tn==''):
-                    messagebox.showinfo("missing info", "Please select task name")
-                    return
-                cmd1 = 'SchTasks /Create  /SC ONLOGON /TN ' + tn + ' /TR "powershell -windowstyle hidden Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1" /F'
-                print(cmd1)
-                print("-= start =-")
-                l = tn
-                with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
-                    unpickler = pickle.Unpickler(fp)
-                    try:
-                        b = unpickler.load()
-                    except EOFError:
-                        b = list()  # task file is empty
-
-                    if any(tn in s for s in b):
-                        print(tn+" is allrady in list")
-                    else:
-                        b.append(l)
-                        b.sort()
-                        cbremove['values']= b
-                with open("qmtasks.txt", "wb") as fp:  # Pickling
-                    b.sort()
-                    pickle.dump(b, fp)
-                with open("qmtasks.txt", "rb") as fp:  # Unpickling
-                  b = pickle.load(fp)
-                  print(b)
-                os.system(cmd1)
-                task1Input_logon.delete(0, "end")  # delete all the text in the entry
-                task1Input_logon.insert(0, '')  # Insert blank for user input
-                print(cmd1)
-                messagebox.showinfo("Success", tn+" added to task scheduler")
-                print("-= end =-")
-        def create_task_sys():
-                tn=task1Input_sysstart.get().replace(" ", "")
-                if (tn=='Entertaskname...' or tn==''):
-                    messagebox.showinfo("missing info", "Please select task name")
-                    return
-
-                cmd1 = 'SchTasks /Create  /SC ONSTART /TN ' + tn + ' /TR "powershell -windowstyle hidden Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1" /F'
-                print(cmd1)
-                print("-= start =-")
-                l = tn
-                with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
-                    unpickler = pickle.Unpickler(fp)
-                    try:
-                        b = unpickler.load()
-                    except EOFError:
-                        b = list()  # task file is empty
-
-                    if any(tn in s for s in b):
-                        print(tn+" is allrady in list")
-                    else:
-                        b.append(l)
-                        b.sort()
-                        cbremove['values']= b
-                with open("qmtasks.txt", "wb") as fp:  # Pickling
-                    b.sort()
-                    pickle.dump(b, fp)
-                with open("qmtasks.txt", "rb") as fp:  # Unpickling
-                  b = pickle.load(fp)
-                  print(b)
-                os.system(cmd1)
-                task1Input_sysstart.delete(0, "end")  # delete all the text in the entry
-                task1Input_sysstart.insert(0, '')  # Insert blank for user input
-                print(cmd1)
-                messagebox.showinfo("Success", tn+" added to task scheduler")
-                print("-= end =-")
-
-
+        # option 2 : Monthly by time
         def create_task_monthly():
             tn=task1Input_monthly.get().replace(" ", "")
             h= cb_monthly.get()
@@ -357,7 +209,7 @@ class PageOne(tk.Frame):
             print(cmd1)
             messagebox.showinfo("Success", tn+" added to task scheduler")
             print("-= end =-")
-
+        # option 3 : weekly by time and day
         def create_task_weekly():
             tn=task1Input_weekly.get().replace(" ", "")
             h= cb_weekly.get()
@@ -405,8 +257,159 @@ class PageOne(tk.Frame):
             print(cmd1)
             messagebox.showinfo("Success", tn+" added to task scheduler")
             print("-= end =-")
+        # option 4 : Daily by time
+        def create_task_daily():
+            tn=task1Input_daily.get().replace(" ", "")
+            h= cb_daily.get()
+            m= cb2_daily.get()
+            if (tn=='Entertaskname...' or tn==''):
+                messagebox.showinfo("missing info", "Please select task name")
+                return
+            if (cb_daily.current()== -1 or int(h)<0 or int(h)>23):
+                messagebox.showinfo("missing info", "Please select right hour")
+                return
+            if (cb2_daily.current() == -1 or int(m)<0 or int(m)>59):
+                messagebox.showinfo("missing info", "Please select right minute")
+                return
+            cmd1 = 'SchTasks /Create /SC DAILY /TN ' + taskName + ' /TR "powershell -windowstyle hidden  Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1"  /ST  ' +h+':'+m+ ' /F'
+            print(cmd1)
+            print("-= start =-")
+            l = tn
+            with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
+                unpickler = pickle.Unpickler(fp)
+                try:
+                    b = unpickler.load()
+                except EOFError:
+                    b = list()  # task file is empty
+                if any(tn in s for s in b):
+                    print(tn+" is allrady in list")
+                else:
+                    b.append(l)
+                    b.sort()
+                    cbremove['values']= b
+            with open("qmtasks.txt", "wb") as fp:  # Pickling
+                b.sort()
+                pickle.dump(b, fp)
+            with open("qmtasks.txt", "rb") as fp:  # Unpickling
+              b = pickle.load(fp)
+              print(b)
+            os.system(cmd1)
+            task1Input_daily.delete(0, "end")  # delete all the text in the entry
+            task1Input_daily.insert(0, '')  # Insert blank for user input
+            print(cmd1)
+            messagebox.showinfo("Success", tn+" added to task scheduler")
+            print("-= end =-")
+         # option 5 : idle time        
+        def create_task_idle():
+            tn=task1Input_idle.get().replace(" ", "")
+            h= cb_idle.get()
+            if (tn=='Entertaskname...' or tn==''):
+                messagebox.showinfo("missing info", "Please select task name")
+                return
+            if ( cb_idle.current()== -1 or int(h)<0 or int(h)>23):
+                messagebox.showinfo("missing info", "Please select right idle time (number)")
+                return
+            cmd1 = 'SchTasks /Create  /SC ONIDLE /TN ' + tn + ' /TR "powershell -windowstyle hidden Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1" /I ' +h+ ' /F'
+            print(cmd1)
+            print("-= start =-")
+            l = tn
+            with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
+                unpickler = pickle.Unpickler(fp)
+                try:
+                    b = unpickler.load()
+                except EOFError:
+                    b = list()  # task file is empty
 
+                if any(tn in s for s in b):
+                    print(tn+" is allrady in list")
+                else:
+                    b.append(l)
+                    b.sort()
+                    cbremove['values']= b
+            with open("qmtasks.txt", "wb") as fp:  # Pickling
+                b.sort()
+                pickle.dump(b, fp)
+            with open("qmtasks.txt", "rb") as fp:  # Unpickling
+              b = pickle.load(fp)
+              print(b)
+            os.system(cmd1)
+            task1Input_idle.delete(0, "end")  # delete all the text in the entry
+            task1Input_idle.insert(0, '')  # Insert blank for user input
+            print(cmd1)
+            messagebox.showinfo("Success", tn+" added to task scheduler")
+            print("-= end =-")
+        # option 6 : logon (in windows logon)    
+        def create_task_logon():
+                tn=task1Input_logon.get().replace(" ", "")
+                if (tn=='Entertaskname...' or tn==''):
+                    messagebox.showinfo("missing info", "Please select task name")
+                    return
+                cmd1 = 'SchTasks /Create  /SC ONLOGON /TN ' + tn + ' /TR "powershell -windowstyle hidden Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1" /F'
+                print(cmd1)
+                print("-= start =-")
+                l = tn
+                with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
+                    unpickler = pickle.Unpickler(fp)
+                    try:
+                        b = unpickler.load()
+                    except EOFError:
+                        b = list()  # task file is empty
 
+                    if any(tn in s for s in b):
+                        print(tn+" is allrady in list")
+                    else:
+                        b.append(l)
+                        b.sort()
+                        cbremove['values']= b
+                with open("qmtasks.txt", "wb") as fp:  # Pickling
+                    b.sort()
+                    pickle.dump(b, fp)
+                with open("qmtasks.txt", "rb") as fp:  # Unpickling
+                  b = pickle.load(fp)
+                  print(b)
+                os.system(cmd1)
+                task1Input_logon.delete(0, "end")  # delete all the text in the entry
+                task1Input_logon.insert(0, '')  # Insert blank for user input
+                print(cmd1)
+                messagebox.showinfo("Success", tn+" added to task scheduler")
+                print("-= end =-") 
+        # option 7 : system startup (in windows startup)
+        def create_task_sys():
+                tn=task1Input_sysstart.get().replace(" ", "")
+                if (tn=='Entertaskname...' or tn==''):
+                    messagebox.showinfo("missing info", "Please select task name")
+                    return
+
+                cmd1 = 'SchTasks /Create  /SC ONSTART /TN ' + tn + ' /TR "powershell -windowstyle hidden Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1" /F'
+                print(cmd1)
+                print("-= start =-")
+                l = tn
+                with open("qmtasks.txt", "rb") as fp:  # Unpickling+append new task
+                    unpickler = pickle.Unpickler(fp)
+                    try:
+                        b = unpickler.load()
+                    except EOFError:
+                        b = list()  # task file is empty
+
+                    if any(tn in s for s in b):
+                        print(tn+" is allrady in list")
+                    else:
+                        b.append(l)
+                        b.sort()
+                        cbremove['values']= b
+                with open("qmtasks.txt", "wb") as fp:  # Pickling
+                    b.sort()
+                    pickle.dump(b, fp)
+                with open("qmtasks.txt", "rb") as fp:  # Unpickling
+                  b = pickle.load(fp)
+                  print(b)
+                os.system(cmd1)
+                task1Input_sysstart.delete(0, "end")  # delete all the text in the entry
+                task1Input_sysstart.insert(0, '')  # Insert blank for user input
+                print(cmd1)
+                messagebox.showinfo("Success", tn+" added to task scheduler")
+                print("-= end =-")
+        # option 8 : Remove task by task name
         def remove_task():
             tn=cbremove.get()
             delete = 'SchTasks /Delete /TN ' + tn + ' /F'
@@ -430,13 +433,12 @@ class PageOne(tk.Frame):
                    print("EOFError")  # or whatever you want
                 print(b)
 
-
-
             os.system(delete)
             print(delete)
             print("-= remove_task end =-")
+    # ------- create_task function switch ------------
 
-# /**------------= entry clicks functions START =--------------*/
+    # /**------------= entry clicks switch functions -=START=-  =--------------*/
         def on_entry_click(event):
             """function that gets called whenever entry is clicked"""
             if task1Input.get() == 'Enter task name...':
@@ -511,7 +513,11 @@ class PageOne(tk.Frame):
                 if task1Input_sysstart.get() == "":
                     task1Input_sysstart.insert(0, 'Enter task name...')
                     task1Input_sysstart.config(fg='grey')
-# /**------------= entry clicks functions END =--------------*/
+    # /**------------= entry clicks functions -=END=-  =--------------*/
+
+    # ----------otion1 start once by date and time  ---------
+        
+        # print option 1 combobox selections
         def print_sel():
             print("name: ")
             print(task1Input.get())
@@ -522,12 +528,10 @@ class PageOne(tk.Frame):
             print("minute: ")
             print(cb2.get())
             create_task_once(task1Input.get(),cal.get_date(), cb.get(), cb2.get())
-
         tk.Frame.__init__(self, master,bg="#FFFFFF")
         # headline
         Label(self, text="Quote-Me Add-On" , fg="#0080FF",bg="#FFFFFF").grid(row=0, column=2, sticky=E, pady=4,padx=4)
 
-# ----------otion1 start once by date and time  ---------
 
         Label(self, text="One time notifications by date:",bg="#FFFFFF").grid(sticky=W,row=1, column=0)
         # task name input
@@ -548,7 +552,6 @@ class PageOne(tk.Frame):
         l1=['00','01','02','03','04','05','06','07','08','09']
         l2=["%d" % (i) for i in range(10,24)]
         cb['values']=l1+l2
-        # ["%d" % (i) for i in range(10,24)]
         cb.grid(row=1,sticky=W, pady=4, padx=4, column=3)
         cb2 = ttk.Combobox(self, textvariable=StringVar(), height=9)
         cb2.set('select Minute')
@@ -556,11 +559,10 @@ class PageOne(tk.Frame):
         cb2['values'] = l1+["%d" %(i) for i in range(10,60)]
         cb2.grid(row=1, column=4, sticky=W, pady=4, padx=4)
         ttk.Button(self, text="Add", command=print_sel).grid( row=1, column=5, sticky=W, pady=4, padx=4)
-        # cb.bind('<<ComboboxSelected>>', foo)  # binding of user selection with a custom callback
-# ----------otion1 end ---------
+    # ----------otion1 end ---------
 
 
-# ----------otion2 start MONTHLY   ---------
+    # ----------otion2 start MONTHLY   ---------
         Label(self, text="Monthly notification:",bg="#FFFFFF").grid(row=2, column=0,sticky=W)
         # task name input
         task1Input_monthly = Entry(self)
@@ -576,7 +578,6 @@ class PageOne(tk.Frame):
         l1 = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09']
         l2 = ["%d" % (i) for i in range(10, 24)]
         cb_monthly['values'] = l1 + l2
-        # ["%d" % (i) for i in range(10,24)]
         cb_monthly.grid(row=2,sticky=W, pady=4, padx=4, column=3)
         cb2_monthly = ttk.Combobox(self, textvariable=StringVar(), height=9)
         cb2_monthly.set('select Minute')
@@ -588,10 +589,9 @@ class PageOne(tk.Frame):
         cb3_monthly['values'] = ["%d" % (i) for i in range(1, 32)]
         cb3_monthly.grid(row=2, column=2, sticky=W, pady=4, padx=4)
         ttk.Button(self, text="Add", command=create_task_monthly).grid(row=2, column=5, sticky=W, pady=4, padx=4)
-        # cb.bind('<<ComboboxSelected>>', foo)  # binding of user selection with a custom callback
-# ----------otion2 end ---------
+    # ----------otion2 end ---------
 
-# ----------otion3 start weekly   ---------
+    # ----------otion3 start weekly   ---------
         Label(self, text="Weekly notification:",bg="#FFFFFF").grid(sticky=W,row=3, column=0)
         # task name input
         task1Input_weekly = Entry(self)
@@ -618,9 +618,9 @@ class PageOne(tk.Frame):
         cb3_weekly['values'] = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
         cb3_weekly.grid(row=3, column=2, sticky=W, pady=4, padx=4)
         ttk.Button(self, text="Add", command=create_task_weekly).grid(row=3, column=5, sticky=W, pady=4, padx=4)
-# ----------otion3 end ---------
+    # ----------otion3 end ---------
 
-# ----------otion4 start daily by time  ---------
+    # ----------otion4 start daily by time  ---------
         Label(self, text="Daily notification:",bg="#FFFFFF").grid(sticky=W,row=4, column=0)
         # task name input
         task1Input_daily = Entry(self)
@@ -642,9 +642,9 @@ class PageOne(tk.Frame):
         cb2_daily['values'] = l1 + ["%d" % (i) for i in range(10, 60)]
         cb2_daily.grid(row=4, column=3, sticky=W, pady=4, padx=4)
         ttk.Button(self, text="Add", command=create_task_daily).grid(row=4, column=4, sticky=W, pady=4, padx=4)
-# ----------otion4 end ---------
+    # ----------otion4 end ---------
 
-# ----------otion5 start idle by idle time  ---------
+    # ----------otion5 start idle by idle time  ---------
         Label(self, text="Idle notification:",bg="#FFFFFF").grid(sticky=W,row=5, column=0)
         # task name input
         task1Input_idle = Entry(self)
@@ -661,10 +661,10 @@ class PageOne(tk.Frame):
         cb_idle['values'] = l2
         cb_idle.grid(row=5,sticky=W, pady=4, padx=4,column=2)
         ttk.Button(self, text="Add", command=create_task_idle).grid(row=5, column=3, sticky=W, pady=4, padx=4)
-# ----------otion5 end ---------
+    # ----------otion5 end ---------
 
 
-# ----------otion6 start logon by idle time  ---------
+    # ----------otion6 start logon by idle time  ---------
         Label(self, text="logon notification:", bg="#FFFFFF").grid(sticky=W, row=6, column=0)
         # task name input
         task1Input_logon = Entry(self)
@@ -674,9 +674,9 @@ class PageOne(tk.Frame):
         task1Input_logon.config(fg='grey')
         task1Input_logon.grid(row=6, column=1, sticky=W, pady=4, padx=4)
         ttk.Button(self, text="Add", command=create_task_logon).grid(row=6, column=2, sticky=W, pady=4, padx=4)
-# ----------otion6 end ---------
+    # ----------otion6 end ---------
 
-# ----------otion7 start at system startup by idle time  ---------
+    # ----------otion7 start at system startup by idle time  ---------
         Label(self, text="system startup notification:", bg="#FFFFFF").grid(sticky=W, row=7, column=0)
         # task name input
         task1Input_sysstart = Entry(self)
@@ -686,9 +686,9 @@ class PageOne(tk.Frame):
         task1Input_sysstart.config(fg='grey')
         task1Input_sysstart.grid(row=7, column=1, sticky=W, pady=4, padx=4)
         ttk.Button(self, text="Add", command=create_task_sys).grid(row=7, column=2, sticky=W, pady=4, padx=4)
-# ----------otion7 end ---------
+    # ----------otion7 end ---------
 
-# ----------= otion8 START - remove-task test  =---------
+    # ----------= otion8 START - remove-task test  =---------
 
         my_file = Path("qmtasks.txt")
         if not my_file.is_file():
@@ -713,7 +713,7 @@ class PageOne(tk.Frame):
         cbremove['values'] = tasks
         cbremove.grid(row=8,sticky=W, column=1)
         ttk.Button(self, text="remove-task",command=remove_task).grid(row=8, column=2, sticky=W, pady=4,padx=4)
-# ----------= otion8 END - remove-task test  =---------
+    # ----------= otion8 END - remove-task test  =---------
 
         ttk.Button(self, text="Log-Out",command=lambda: master.switch_frame(StartPage)).grid(row=16, column=0, sticky=W, pady=4,padx=4)
         ttk.Button(self, text="help?",command=lambda: master.switch_frame(PageTwo)).grid(row=16, column=4, sticky=E, pady=4,padx=4)
@@ -724,7 +724,7 @@ class PageOne(tk.Frame):
         cmd = 'SchTasks /Create /SC ONCE /TN ' + taskName + ' /TR "powershell -windowstyle hidden  Invoke-WebRequest -Uri ' + url_app + ' -TimeoutSec 1"  /ST 09:33  /SD 06/06/2026 /F'
         print(cmd)
 
-# task maneger
+#-------------------------------class PageTwo---------------------
 class PageTwo(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master,bg="#FFFFFF")
@@ -756,6 +756,7 @@ class PageTwo(tk.Frame):
         start_button.pack()
         tk.Label(self, bg="#FFFFFF", text="").pack()
 
+#-------------------------------class PageUacErr - if not run as admin-----
 class PageUacErr(tk.Frame):
         def __init__(self, master):
             tk.Frame.__init__(self, master, bg="#FFFFFF")
@@ -767,10 +768,10 @@ class PageUacErr(tk.Frame):
             page_2_label = tk.Label(self, bg="#FFFFFF", text="").pack()
             page_2_label = tk.Label(self, bg="#FFFFFF", text="").pack()
 
+#-------------------------------__main__-----
 
 if __name__ == "__main__":
     app = SampleApp()
     app.title("Quote-Me Notification Add-On")
     # app.iconbitmap(r'qm.ico')
-
     app.mainloop()
